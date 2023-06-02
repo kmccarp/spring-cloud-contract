@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2013-2020 the original author or authors.
  *
@@ -16,6 +15,9 @@
  */
 
 // tag::class[]
+
+
+
 import java.util.function.Supplier;
 
 import org.springframework.cloud.contract.spec.Contract;
@@ -38,11 +40,11 @@ class contract_xml implements Supplier<Contract> {
 					h.contentType(h.applicationXml());
 				});
 				r.body("<test>\n" + "<duck type='xtype'>123</duck>\n" + "<alpha>abc</alpha>\n" + "<list>\n"
-						+ "<elem>abc</elem>\n" + "<elem>def</elem>\n" + "<elem>ghi</elem>\n" + "</list>\n"
-						+ "<number>123</number>\n" + "<aBoolean>true</aBoolean>\n" + "<date>2017-01-01</date>\n"
-						+ "<dateTime>2017-01-01T01:23:45</dateTime>\n" + "<time>01:02:34</time>\n"
-						+ "<valueWithoutAMatcher>foo</valueWithoutAMatcher>\n" + "<key><complex>foo</complex></key>\n"
-						+ "</test>");
+			+ "<elem>abc</elem>\n" + "<elem>def</elem>\n" + "<elem>ghi</elem>\n" + "</list>\n"
+			+ "<number>123</number>\n" + "<aBoolean>true</aBoolean>\n" + "<date>2017-01-01</date>\n"
+			+ "<dateTime>2017-01-01T01:23:45</dateTime>\n" + "<time>01:02:34</time>\n"
+			+ "<valueWithoutAMatcher>foo</valueWithoutAMatcher>\n" + "<key><complex>foo</complex></key>\n"
+			+ "</test>");
 				r.bodyMatchers(m -> {
 					m.xPath("/test/duck/text()", m.byRegex("[0-9]{3}"));
 					m.xPath("/test/duck/text()", m.byCommand("equals($it)"));
@@ -59,7 +61,7 @@ class contract_xml implements Supplier<Contract> {
 				});
 			});
 		});
-	};
+	}
 
 }
 // end::class[]

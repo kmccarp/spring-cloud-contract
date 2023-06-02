@@ -55,7 +55,7 @@ public class BaseClassMapping {
 		}
 		BaseClassMapping that = (BaseClassMapping) o;
 		if (this.contractPackageRegex != null ? !this.contractPackageRegex.equals(that.contractPackageRegex)
-				: that.contractPackageRegex != null) {
+	: that.contractPackageRegex != null) {
 			return false;
 		}
 		return this.baseClassFQN != null ? this.baseClassFQN.equals(that.baseClassFQN) : that.baseClassFQN == null;
@@ -72,7 +72,7 @@ public class BaseClassMapping {
 	@Override
 	public String toString() {
 		return "BaseClassMapping{" + "contractPackageRegex='" + this.contractPackageRegex + '\'' + ", baseClassFQN='"
-				+ this.baseClassFQN + '\'' + '}';
+	+ this.baseClassFQN + '\'' + '}';
 	}
 
 }

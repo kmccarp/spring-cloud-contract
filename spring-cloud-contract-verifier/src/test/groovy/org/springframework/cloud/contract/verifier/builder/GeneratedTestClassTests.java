@@ -41,27 +41,27 @@ public class GeneratedTestClassTests {
 
 	// @formatter:off
 	String contract = "org.springframework.cloud.contract.spec.Contract.make {\n"
-			+ " name \"foo\"\n"
-			+ " request {\n"
-			+ "  method 'PUT'\n"
-			+ "  url 'url'\n"
-			+ "  headers {\n"
-			+ "    header('foo', 'bar')\n"
-			+ "  }\n"
-			+ "  body (\n"
-			+ "    [\"foo1\":\"bar1\"]\n"
-			+ "  )\n"
-			+ " }\n"
-			+ " response {\n"
-			+ "  status OK()\n"
-			+ "  headers {\n"
-			+ "    header('foo2', 'bar2')\n"
-			+ "  }\n"
-			+ "  body (\n"
-			+ "    [\"foo3\":\"bar3\"]\n"
-			+ "  )\n"
-			+ " }\n"
-			+ "}";
++ " name \"foo\"\n"
++ " request {\n"
++ "  method 'PUT'\n"
++ "  url 'url'\n"
++ "  headers {\n"
++ "    header('foo', 'bar')\n"
++ "  }\n"
++ "  body (\n"
++ "    [\"foo1\":\"bar1\"]\n"
++ "  )\n"
++ " }\n"
++ " response {\n"
++ "  status OK()\n"
++ "  headers {\n"
++ "    header('foo2', 'bar2')\n"
++ "  }\n"
++ "  body (\n"
++ "    [\"foo3\":\"bar3\"]\n"
++ "  )\n"
++ " }\n"
++ "}";
 	// @formatter:on
 
 	// @formatter:off
@@ -134,7 +134,7 @@ public class GeneratedTestClassTests {
 		ContractVerifierConfigProperties configProperties = new ContractVerifierConfigProperties();
 		configProperties.setTestFramework(TestFramework.JUNIT);
 		Collection<ContractMetadata> contracts = Collections.singletonList(
-				new ContractMetadata(this.file.toPath(), true, 1, 2, convertAsCollection(new File("/"), this.file)));
+	new ContractMetadata(this.file.toPath(), true, 1, 2, convertAsCollection(new File("/"), this.file)));
 		String includedDirectoryRelativePath = "some/path";
 		String convertedClassName = "fooBar";
 		String packageName = "test";
@@ -143,7 +143,7 @@ public class GeneratedTestClassTests {
 
 		// when
 		String builtClass = generator.buildClass(configProperties, contracts, includedDirectoryRelativePath,
-				new SingleTestGenerator.GeneratedClassData(convertedClassName, packageName, classPath));
+	new SingleTestGenerator.GeneratedClassData(convertedClassName, packageName, classPath));
 
 		// then
 		BDDAssertions.then(builtClass).isEqualTo(this.expectedTest);

@@ -85,7 +85,7 @@ public class StubConfiguration {
 			stubsVersion = splitPath.length >= 3 ? splitPath[2] : DEFAULT_VERSION;
 			stubsClassifier = splitPath.length >= 4 ? splitPath[3] : defaultClassifier;
 		}
-		return new String[] { stubsGroupId, stubsArtifactId, stubsVersion, stubsClassifier };
+		return new String[]{stubsGroupId, stubsArtifactId, stubsVersion, stubsClassifier};
 	}
 
 	private boolean isDefined() {
@@ -100,8 +100,8 @@ public class StubConfiguration {
 		if (!isDefined()) {
 			return "";
 		}
-		return StringUtils.arrayToDelimitedString(new String[] { nullCheck(this.groupId), nullCheck(this.artifactId),
-				nullCheck(this.version), nullCheck(this.classifier) }, STUB_COLON_DELIMITER);
+		return StringUtils.arrayToDelimitedString(new String[]{nullCheck(this.groupId), nullCheck(this.artifactId),
+	nullCheck(this.version), nullCheck(this.classifier)}, STUB_COLON_DELIMITER);
 	}
 
 	private String nullCheck(String value) {
@@ -208,9 +208,9 @@ public class StubConfiguration {
 		String[] splitString = ivyNotation.split(":");
 		if (splitString.length == 1) {
 			// assuming that ivy notation represents artifactId only
-			return new String[] { null, splitString[0] };
+			return new String[]{null, splitString[0]};
 		}
-		return new String[] { splitString[0], splitString[1] };
+		return new String[]{splitString[0], splitString[1]};
 	}
 
 	@Override

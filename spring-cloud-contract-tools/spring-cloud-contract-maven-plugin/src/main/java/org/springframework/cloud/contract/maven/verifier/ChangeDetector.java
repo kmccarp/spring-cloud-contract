@@ -30,7 +30,7 @@ final class ChangeDetector {
 	}
 
 	static boolean inputFilesChangeDetected(File contractsDirectory, MojoExecution mojoExecution, MavenSession session)
-			throws MojoExecutionException {
+throws MojoExecutionException {
 		if (session.getGoals().contains("clean")) {
 			return true;
 		}

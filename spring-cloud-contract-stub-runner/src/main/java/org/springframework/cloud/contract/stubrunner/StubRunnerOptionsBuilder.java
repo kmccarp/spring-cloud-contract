@@ -201,7 +201,7 @@ public class StubRunnerOptionsBuilder {
 		this.mappingsOutputFolder = options.getMappingsOutputFolder();
 		this.stubConfigurations = options.dependencies != null ? options.dependencies : new ArrayList<>();
 		this.stubIdsToPortMapping = options.stubIdsToPortMapping != null ? options.stubIdsToPortMapping
-				: new LinkedHashMap<>();
+	: new LinkedHashMap<>();
 		this.deleteStubsAfterTest = options.isDeleteStubsAfterTest();
 		this.generateStubs = options.isGenerateStubs();
 		this.failOnNoStubs = options.isFailOnNoStubs();
@@ -248,10 +248,10 @@ public class StubRunnerOptionsBuilder {
 
 	public StubRunnerOptions build() {
 		return new StubRunnerOptions(this.minPortValue, this.maxPortValue, this.stubRepositoryRoot, this.stubsMode,
-				this.stubsClassifier, buildDependencies(), this.stubIdsToPortMapping, this.username, this.password,
-				this.stubRunnerProxyOptions, this.stubsPerConsumer, this.consumerName, this.mappingsOutputFolder,
-				this.deleteStubsAfterTest, this.generateStubs, this.failOnNoStubs, this.properties,
-				this.httpServerStubConfigurer, this.serverId);
+	this.stubsClassifier, buildDependencies(), this.stubIdsToPortMapping, this.username, this.password,
+	this.stubRunnerProxyOptions, this.stubsPerConsumer, this.consumerName, this.mappingsOutputFolder,
+	this.deleteStubsAfterTest, this.generateStubs, this.failOnNoStubs, this.properties,
+	this.httpServerStubConfigurer, this.serverId);
 	}
 
 	private Collection<StubConfiguration> buildDependencies() {

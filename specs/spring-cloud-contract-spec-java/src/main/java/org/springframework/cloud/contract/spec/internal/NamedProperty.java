@@ -52,7 +52,7 @@ public class NamedProperty {
 
 	public NamedProperty(Map<String, DslProperty> namedMap) {
 		this(asDslProperty(value(namedMap, NAME)), asDslProperty(value(namedMap, CONTENT)),
-				asDslProperty(value(namedMap, CONTENT_TYPE)));
+	asDslProperty(value(namedMap, CONTENT_TYPE)));
 	}
 
 	private static DslProperty value(Map<String, DslProperty> namedMap, String key) {
@@ -109,7 +109,7 @@ public class NamedProperty {
 		}
 		NamedProperty that = (NamedProperty) o;
 		return Objects.equals(name, that.name) && Objects.equals(value, that.value)
-				&& Objects.equals(contentType, that.contentType);
+	&& Objects.equals(contentType, that.contentType);
 	}
 
 	@Override

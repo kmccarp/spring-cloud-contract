@@ -61,8 +61,8 @@ public class RabbitManager {
 	}
 
 	@RabbitListener(bindings = @QueueBinding(value = @Queue,
-			exchange = @Exchange(value = "input", durable = "true", autoDelete = "false", type = "topic"),
-			key = "event"))
+exchange = @Exchange(value = "input", durable = "true", autoDelete = "false", type = "topic"),
+key = "event"))
 	// Workaround for https://github.com/spring-projects/spring-amqp/issues/1285
 	// public void newBook(Book book, @Headers Map<String, String> headers) {
 	public void newBook(Book book, @Header("amqp_replyTo") String replyTo) {
@@ -72,8 +72,8 @@ public class RabbitManager {
 	}
 
 	@RabbitListener(bindings = @QueueBinding(value = @Queue,
-			exchange = @Exchange(value = "input", durable = "true", autoDelete = "false", type = "topic"),
-			key = "event2"))
+exchange = @Exchange(value = "input", durable = "true", autoDelete = "false", type = "topic"),
+key = "event2"))
 	// Workaround for https://github.com/spring-projects/spring-amqp/issues/1285
 	// public void newBook2(Book book, @Headers Map<String, String> headers) {
 	public void newBook2(Book book, @Header("amqp_replyTo") String replyTo) {

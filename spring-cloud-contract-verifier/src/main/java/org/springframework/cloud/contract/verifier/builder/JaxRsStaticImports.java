@@ -26,7 +26,7 @@ class JaxRsStaticImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "javax.ws.rs.client.Entity.*" };
+	private static final String[] IMPORTS = {"javax.ws.rs.client.Entity.*"};
 
 	JaxRsStaticImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

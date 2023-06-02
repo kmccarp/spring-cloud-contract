@@ -59,7 +59,7 @@ class CompositeStubDownloader implements StubDownloader {
 		this.stubRunnerOptions = stubRunnerOptions;
 		if (log.isDebugEnabled()) {
 			log.debug("Registered following stub downloaders "
-					+ this.builders.stream().map(b -> b.getClass().getName()).collect(Collectors.toList()));
+		+ this.builders.stream().map(b -> b.getClass().getName()).collect(Collectors.toList()));
 		}
 	}
 
@@ -72,8 +72,8 @@ class CompositeStubDownloader implements StubDownloader {
 		log.warn("No matching stubs or contracts were found");
 		if (this.stubRunnerOptions.isFailOnNoStubs()) {
 			throw new IllegalArgumentException(
-					"No stubs or contracts were found for [" + stubConfiguration.toColonSeparatedDependencyNotation()
-							+ "] and the switch to fail on no stubs was set.");
+		"No stubs or contracts were found for [" + stubConfiguration.toColonSeparatedDependencyNotation()
+	+ "] and the switch to fail on no stubs was set.");
 		}
 		return null;
 	}
@@ -91,14 +91,14 @@ class CompositeStubDownloader implements StubDownloader {
 			if (entry != null) {
 				if (log.isDebugEnabled()) {
 					log.debug("Found a matching entry [" + entry + "] by stub downloader ["
-							+ downloader.getClass().getName() + "]");
+				+ downloader.getClass().getName() + "]");
 				}
 				return entry;
 			}
 			else {
 				log.warn("Stub Downloader [" + downloader.getClass().getName() + "] " + "failed to find an entry for ["
-						+ stubConfiguration.toColonSeparatedDependencyNotation() + "]. "
-						+ "Will proceed to the next one");
+			+ stubConfiguration.toColonSeparatedDependencyNotation() + "]. "
+			+ "Will proceed to the next one");
 			}
 		}
 		return null;

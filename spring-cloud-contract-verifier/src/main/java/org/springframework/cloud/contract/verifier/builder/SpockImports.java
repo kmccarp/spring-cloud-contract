@@ -26,7 +26,7 @@ class SpockImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "spock.lang.Specification" };
+	private static final String[] IMPORTS = {"spock.lang.Specification"};
 
 	SpockImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

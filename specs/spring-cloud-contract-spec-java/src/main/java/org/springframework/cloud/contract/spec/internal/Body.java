@@ -36,7 +36,7 @@ public class Body extends DslProperty {
 
 	public Body(List<DslProperty> bodyAsList) {
 		super(bodyAsList.stream().map(DslProperty::getClientValue).collect(Collectors.toList()),
-				bodyAsList.stream().map(DslProperty::getServerValue).collect(Collectors.toList()));
+	bodyAsList.stream().map(DslProperty::getServerValue).collect(Collectors.toList()));
 	}
 
 	public Body(Object value) {

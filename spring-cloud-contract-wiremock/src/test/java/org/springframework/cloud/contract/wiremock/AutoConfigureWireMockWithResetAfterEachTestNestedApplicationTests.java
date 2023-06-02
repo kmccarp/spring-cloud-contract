@@ -32,10 +32,8 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-@SpringBootTest(classes = WiremockTestsApplication.class,
-		properties = { "app.baseUrl=http://localhost:${wiremock.server.port}",
-				"wiremock.reset-mappings-after-each-test=true" },
-		webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = WiremockTestsApplication.class,properties = {"app.baseUrl=http://localhost:${wiremock.server.port}",
+				"wiremock.reset-mappings-after-each-test=true"},webEnvironment = WebEnvironment.NONE)
 @AutoConfigureWireMock(port = 0)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AutoConfigureWireMockWithResetAfterEachTestNestedApplicationTests {
@@ -50,10 +48,10 @@ class AutoConfigureWireMockWithResetAfterEachTestNestedApplicationTests {
 	@Order(1)
 	void outerTest() {
 		this.wireMockServer
-				.givenThat(WireMock.get("/should_register_mapping").willReturn(WireMock.aResponse().withBody("bar")));
+	.givenThat(WireMock.get("/should_register_mapping").willReturn(WireMock.aResponse().withBody("bar")));
 
 		String result = new RestTemplate().getForObject("http://" + this.hostname + "/should_register_mapping",
-				String.class);
+	String.class);
 
 		then(result).isEqualTo("bar");
 	}
@@ -65,7 +63,7 @@ class AutoConfigureWireMockWithResetAfterEachTestNestedApplicationTests {
 		@Order(2)
 		void innerOne() {
 			String result = new RestTemplate().getForObject("http://" + hostname + "/should_register_mapping",
-					String.class);
+		String.class);
 
 			// taken from test/resources/mappings/resource-without-content-type.json
 			then(result).isEqualTo("Hello World");
@@ -75,10 +73,10 @@ class AutoConfigureWireMockWithResetAfterEachTestNestedApplicationTests {
 		@Order(3)
 		void innerTwo() {
 			WireMock.givenThat(
-					WireMock.get("/should_register_mapping").willReturn(WireMock.aResponse().withBody("bar")));
+		WireMock.get("/should_register_mapping").willReturn(WireMock.aResponse().withBody("bar")));
 
 			String result = new RestTemplate().getForObject("http://" + hostname + "/should_register_mapping",
-					String.class);
+		String.class);
 
 			then(result).isEqualTo("bar");
 		}

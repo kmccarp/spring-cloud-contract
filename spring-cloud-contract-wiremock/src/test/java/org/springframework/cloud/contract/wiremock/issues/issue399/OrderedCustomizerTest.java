@@ -49,7 +49,7 @@ public class OrderedCustomizerTest {
 	public void should_not_fail_when_ordered_customizer_added_interceptor_to_rest_template() {
 		stubFor(get(urlEqualTo("/some-url")).willReturn(aResponse().withStatus(200).withBody("Yeah!")));
 		RestTemplateClient client = new RestTemplateClient(
-				this.restTemplateBuilder.rootUri("http://localhost:" + this.port));
+	this.restTemplateBuilder.rootUri("http://localhost:" + this.port));
 
 		String body = client.get();
 

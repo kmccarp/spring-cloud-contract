@@ -42,8 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 // issue 1541
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestConfiguration.class,
-		properties = "base-url=http://localhost:${wiremock.server.port}")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestConfiguration.class,properties = "base-url=http://localhost:${wiremock.server.port}")
 @AutoConfigureWireMock(port = 0)
 @Import(ExtraConfig.class)
 public class AutoConfigureWireMockAdditionalImportTests {
@@ -55,7 +54,7 @@ public class AutoConfigureWireMockAdditionalImportTests {
 
 	@Nested
 	@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestConfiguration.class,
-			properties = "base-url=http://localhost:${wiremock.server.port}")
+properties = "base-url=http://localhost:${wiremock.server.port}")
 	@AutoConfigureWireMock(port = 0)
 	class SecondControllerTest {
 
@@ -63,12 +62,12 @@ public class AutoConfigureWireMockAdditionalImportTests {
 		void test(@Autowired WebTestClient webTestClient) {
 			// arrange
 			WireMock.stubFor(WireMock.get(WireMock.urlMatching("/find-all")).willReturn(
-					ResponseDefinitionBuilder.okForJson(Collections.singletonList(new TestItem("my-name")))));
+		ResponseDefinitionBuilder.okForJson(Collections.singletonList(new TestItem("my-name")))));
 
 			// act
 			List<TestItem> responseBody = webTestClient.get().uri("find-all").exchange().expectStatus()
-					.is2xxSuccessful().expectBody(new ParameterizedTypeReference<List<TestItem>>() {
-					}).returnResult().getResponseBody();
+		.is2xxSuccessful().expectBody(new ParameterizedTypeReference<List<TestItem>>() {
+			}).returnResult().getResponseBody();
 
 			// assert
 			Assertions.assertThat(responseBody.get(0).getName()).isEqualTo("my-name");
@@ -116,8 +115,8 @@ class TestController {
 	public Mono<List<TestItem>> findAll() {
 		System.out.println("Will send a request to [" + this.baseUrl + "] HASH [" + this.hashCode() + "]");
 		return webClient.get().uri(baseUrl + "/find-all").retrieve()
-				.bodyToMono(new ParameterizedTypeReference<List<TestItem>>() {
-				});
+	.bodyToMono(new ParameterizedTypeReference<List<TestItem>>() {
+	});
 	}
 
 }

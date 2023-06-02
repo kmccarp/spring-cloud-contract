@@ -144,7 +144,7 @@ abstract class BaseWireMockStubStrategy {
 				return WRAPPER + val + WRAPPER;
 			}
 			else if (val instanceof String && processor.containsTemplateEntry((String) val)
-					&& template.escapedBody().equals(val)) {
+		&& template.escapedBody().equals(val)) {
 				return template.escapedBody();
 			}
 			return val;
@@ -184,7 +184,7 @@ abstract class BaseWireMockStubStrategy {
 	 */
 	String parseBody(GString value, ContentType contentType) {
 		Object processedValue = extractValue(value, contentType,
-				(o) -> o instanceof DslProperty ? ((DslProperty<?>) o).getClientValue() : o);
+	(o) -> o instanceof DslProperty ? ((DslProperty<?>) o).getClientValue() : o);
 		if (processedValue instanceof GString) {
 			return parseBody(processedValue.toString(), contentType);
 		}
@@ -202,7 +202,7 @@ abstract class BaseWireMockStubStrategy {
 		try {
 			if (value instanceof Map) {
 				Object convertedMap = MapConverter.transformValues(value,
-						(v) -> v instanceof GString ? ((GString) v).toString() : v);
+			(v) -> v instanceof GString ? ((GString) v).toString() : v);
 				String jsonOutput = new ObjectMapper().writeValueAsString(convertedMap);
 				return jsonOutput.replaceAll("\\\\\\\\\\\\", "\\\\");
 			}

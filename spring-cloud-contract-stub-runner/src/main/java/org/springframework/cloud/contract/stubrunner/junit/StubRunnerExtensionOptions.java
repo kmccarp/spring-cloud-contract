@@ -182,6 +182,6 @@ interface StubRunnerExtensionOptions {
 	 * @return the stub runner extension
 	 */
 	StubRunnerExtension withHttpServerStubConfigurer(
-			Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer);
+Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer);
 
 }

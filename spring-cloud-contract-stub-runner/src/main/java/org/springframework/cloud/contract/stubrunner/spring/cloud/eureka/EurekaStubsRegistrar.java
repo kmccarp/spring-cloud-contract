@@ -75,9 +75,9 @@ public class EurekaStubsRegistrar implements StubsRegistrar {
 	private final ApplicationContext context;
 
 	public EurekaStubsRegistrar(StubRunning stubRunning, ServiceRegistry<EurekaRegistration> serviceRegistry,
-			StubMapperProperties stubMapperProperties, InetUtils inetUtils,
-			EurekaInstanceConfigBean eurekaInstanceConfigBean, EurekaClientConfigBean eurekaClientConfigBean,
-			ApplicationContext context) {
+StubMapperProperties stubMapperProperties, InetUtils inetUtils,
+EurekaInstanceConfigBean eurekaInstanceConfigBean, EurekaClientConfigBean eurekaClientConfigBean,
+ApplicationContext context) {
 		this.stubRunning = stubRunning;
 		this.stubMapperProperties = stubMapperProperties;
 		this.serviceRegistry = serviceRegistry;
@@ -93,17 +93,17 @@ public class EurekaStubsRegistrar implements StubsRegistrar {
 		for (Map.Entry<StubConfiguration, Integer> entry : activeStubs.entrySet()) {
 			EurekaInstanceConfigBean instance = registration(entry);
 			log.info("Will register stub in Eureka " + "[" + instance.getAppname() + ", " + instance.getHostname()
-					+ ", " + instance.getNonSecurePort() + ", " + instance.getInstanceId() + "]");
+		+ ", " + instance.getNonSecurePort() + ", " + instance.getInstanceId() + "]");
 			InstanceInfo instanceInfo = new InstanceInfoFactory().create(instance);
 			ApplicationInfoManager applicationInfoManager = new ApplicationInfoManager(instance, instanceInfo);
 			AbstractDiscoveryClientOptionalArgs<?> args = args();
 			TransportClientFactories<?> transportClientFactories = transportClientFactories();
 			EurekaClient client = new CloudEurekaClient(applicationInfoManager, this.eurekaClientConfigBean,
-					transportClientFactories, args, this.context);
+		transportClientFactories, args, this.context);
 			EurekaRegistration registration = EurekaRegistration.builder(instance)
-					.with(this.eurekaClientConfigBean, this.context).with(client).build();
+		.with(this.eurekaClientConfigBean, this.context).with(client).build();
 			EurekaHealthCheckHandler eurekaHealthCheckHandler = new EurekaHealthCheckHandler(
-					StatusAggregator.getDefault());
+		StatusAggregator.getDefault());
 			eurekaHealthCheckHandler.setApplicationContext(context);
 			eurekaHealthCheckHandler.afterPropertiesSet();
 			registration.setHealthCheckHandler(new SimpleObjectProvider<>(eurekaHealthCheckHandler));
@@ -111,11 +111,11 @@ public class EurekaStubsRegistrar implements StubsRegistrar {
 			try {
 				this.serviceRegistry.register(registration);
 				log.info("Successfully registered stub " + "[" + entry.getKey().toColonSeparatedDependencyNotation()
-						+ "] in Service Discovery");
+			+ "] in Service Discovery");
 			}
 			catch (Exception e) {
 				log.warn("Exception occurred while trying to register a stub ["
-						+ entry.getKey().toColonSeparatedDependencyNotation() + "] in Service Discovery", e);
+			+ entry.getKey().toColonSeparatedDependencyNotation() + "] in Service Discovery", e);
 			}
 		}
 	}
@@ -165,7 +165,7 @@ public class EurekaStubsRegistrar implements StubsRegistrar {
 
 	private String name(StubConfiguration stubConfiguration) {
 		String resolvedName = this.stubMapperProperties
-				.fromIvyNotationToId(stubConfiguration.toColonSeparatedDependencyNotation());
+	.fromIvyNotationToId(stubConfiguration.toColonSeparatedDependencyNotation());
 		if (StringUtils.hasText(resolvedName)) {
 			return resolvedName;
 		}

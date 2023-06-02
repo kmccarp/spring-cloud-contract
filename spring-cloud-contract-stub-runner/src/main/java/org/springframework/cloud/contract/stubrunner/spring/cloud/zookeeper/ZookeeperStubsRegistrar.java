@@ -57,7 +57,7 @@ public class ZookeeperStubsRegistrar implements StubsRegistrar {
 	private final List<ServiceDiscovery> discoveryList = new LinkedList<>();
 
 	public ZookeeperStubsRegistrar(StubRunning stubRunning, CuratorFramework curatorFramework,
-			StubMapperProperties stubMapperProperties, ZookeeperDiscoveryProperties zookeeperDiscoveryProperties) {
+StubMapperProperties stubMapperProperties, ZookeeperDiscoveryProperties zookeeperDiscoveryProperties) {
 		this.stubRunning = stubRunning;
 		this.curatorFramework = curatorFramework;
 		this.stubMapperProperties = stubMapperProperties;
@@ -75,12 +75,12 @@ public class ZookeeperStubsRegistrar implements StubsRegistrar {
 				serviceDiscovery.start();
 				if (log.isDebugEnabled()) {
 					log.debug("Successfully registered stub [" + entry.getKey().toColonSeparatedDependencyNotation()
-							+ "] in Service Discovery");
+				+ "] in Service Discovery");
 				}
 			}
 			catch (Exception e) {
 				log.warn("Exception occurred while trying to register a stub ["
-						+ entry.getKey().toColonSeparatedDependencyNotation() + "] in Service Discovery", e);
+			+ entry.getKey().toColonSeparatedDependencyNotation() + "] in Service Discovery", e);
 			}
 		}
 	}
@@ -88,7 +88,7 @@ public class ZookeeperStubsRegistrar implements StubsRegistrar {
 	protected ServiceInstance serviceInstance(StubConfiguration stubConfiguration, int port) {
 		try {
 			return ServiceInstance.builder().uriSpec(new UriSpec(this.zookeeperDiscoveryProperties.getUriSpec()))
-					.address("localhost").port(port).name(name(stubConfiguration)).build();
+		.address("localhost").port(port).name(name(stubConfiguration)).build();
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -97,7 +97,7 @@ public class ZookeeperStubsRegistrar implements StubsRegistrar {
 
 	private String name(StubConfiguration stubConfiguration) {
 		String resolvedName = this.stubMapperProperties
-				.fromIvyNotationToId(stubConfiguration.toColonSeparatedDependencyNotation());
+	.fromIvyNotationToId(stubConfiguration.toColonSeparatedDependencyNotation());
 		if (StringUtils.hasText(resolvedName)) {
 			return resolvedName;
 		}
@@ -106,7 +106,7 @@ public class ZookeeperStubsRegistrar implements StubsRegistrar {
 
 	protected ServiceDiscovery serviceDiscovery(ServiceInstance serviceInstance) {
 		return ServiceDiscoveryBuilder.builder(Void.class).basePath(this.zookeeperDiscoveryProperties.getRoot())
-				.client(this.curatorFramework).thisInstance(serviceInstance).build();
+	.client(this.curatorFramework).thisInstance(serviceInstance).build();
 	}
 
 	@Override

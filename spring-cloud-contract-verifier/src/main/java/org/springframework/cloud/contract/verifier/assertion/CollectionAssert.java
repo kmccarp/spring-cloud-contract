@@ -114,7 +114,7 @@ public class CollectionAssert<ELEMENT> extends IterableAssert<ELEMENT> {
 		int flattenedSize = flattenedSize(0, this.actual);
 		if (!(flattenedSize >= lowerBound && flattenedSize <= higherBound)) {
 			failWithMessage("The flattened size <%s> is not between <%s> and <%s>", flattenedSize, lowerBound,
-					higherBound);
+		higherBound);
 		}
 		return this;
 	}

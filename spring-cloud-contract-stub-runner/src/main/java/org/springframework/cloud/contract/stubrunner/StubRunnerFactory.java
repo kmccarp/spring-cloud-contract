@@ -56,7 +56,7 @@ class StubRunnerFactory {
 	private final MessageVerifierSender<?> contractVerifierMessaging;
 
 	StubRunnerFactory(StubRunnerOptions stubRunnerOptions, StubDownloader stubDownloader,
-			MessageVerifierSender<?> contractVerifierMessaging) {
+MessageVerifierSender<?> contractVerifierMessaging) {
 		this.stubRunnerOptions = stubRunnerOptions;
 		this.stubDownloader = stubDownloader;
 		this.contractVerifierMessaging = contractVerifierMessaging;
@@ -68,14 +68,14 @@ class StubRunnerFactory {
 		}
 		if (this.stubRunnerOptions.getDependencies().isEmpty()) {
 			log.warn("No stubs to download have been passed. Most likely you have forgotten to pass "
-					+ "them either via annotation or a property");
+		+ "them either via annotation or a property");
 		}
 		Collection<StubRunner> result = new ArrayList<>();
 		for (StubConfiguration stubsConfiguration : this.stubRunnerOptions.getDependencies()) {
 			Map.Entry<StubConfiguration, File> entry = this.stubDownloader.downloadAndUnpackStubJar(stubsConfiguration);
 			if (log.isDebugEnabled()) {
 				log.debug(
-						"For stub configuration [" + stubsConfiguration + "] the downloaded entry is [" + entry + "]");
+			"For stub configuration [" + stubsConfiguration + "] the downloaded entry is [" + entry + "]");
 			}
 			if (entry != null) {
 				Path path = resolvePath(entry.getValue());
@@ -83,7 +83,7 @@ class StubRunnerFactory {
 				if (this.stubRunnerOptions.isGenerateStubs()) {
 					if (log.isDebugEnabled()) {
 						log.debug(
-								"Flag to generate stubs at runtime was switched on. Will remove the current mappings and will generate new ones.");
+					"Flag to generate stubs at runtime was switched on. Will remove the current mappings and will generate new ones.");
 					}
 					generateMappingsAtRuntime(path);
 				}
@@ -132,7 +132,7 @@ class StubRunnerFactory {
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 					File potentialStubMapping = file.toFile();
 					Collection<StubGenerator> stubGenerators = this.provider
-							.allOrDefault(new DslToWireMockClientConverter());
+				.allOrDefault(new DslToWireMockClientConverter());
 					if (stubGenerators.stream().anyMatch(s -> s.canReadStubMapping(potentialStubMapping))) {
 						if (log.isDebugEnabled()) {
 							log.debug("Deleting file [" + file.toString() + "] since it contains a valid mapping.");
@@ -156,8 +156,8 @@ class StubRunnerFactory {
 	private void generateNewMappings(Path path) {
 		File unpackedLocation = path.toFile();
 		RecursiveFilesConverter converter = new RecursiveFilesConverter(
-				subfolderIfPresent(unpackedLocation, "mappings"), subfolderIfPresent(unpackedLocation, "contracts"),
-				new ArrayList<>(), ".*", false);
+	subfolderIfPresent(unpackedLocation, "mappings"), subfolderIfPresent(unpackedLocation, "contracts"),
+	new ArrayList<>(), ".*", false);
 		converter.processFiles();
 	}
 
@@ -177,9 +177,9 @@ class StubRunnerFactory {
 	}
 
 	private StubRunner createStubRunner(File unzippedStubsDir, StubConfiguration stubsConfiguration,
-			StubRunnerOptions stubRunnerOptions) {
+StubRunnerOptions stubRunnerOptions) {
 		return new StubRunner(stubRunnerOptions, unzippedStubsDir.getPath(), stubsConfiguration,
-				this.contractVerifierMessaging);
+	this.contractVerifierMessaging);
 	}
 
 }

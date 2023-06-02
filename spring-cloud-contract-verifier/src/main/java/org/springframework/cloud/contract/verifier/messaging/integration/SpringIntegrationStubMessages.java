@@ -33,8 +33,7 @@ import org.springframework.messaging.PollableChannel;
 /**
  * @author Marcin Grzejszczak
  */
-public class SpringIntegrationStubMessages
-		implements MessageVerifierSender<Message<?>>, MessageVerifierReceiver<Message<?>> {
+public class SpringIntegrationStubMessagesimplements MessageVerifierSender<Message<?>>, MessageVerifierReceiver<Message<?>> {
 
 	private static final Log log = LogFactory.getLog(SpringIntegrationStubMessages.class);
 
@@ -59,7 +58,7 @@ public class SpringIntegrationStubMessages
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to send a message [" + message + "] "
-					+ "to a channel with name [" + destination + "]", e);
+		+ "to a channel with name [" + destination + "]", e);
 			throw e;
 		}
 	}
@@ -72,7 +71,7 @@ public class SpringIntegrationStubMessages
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to read a message from " + " a channel with name [" + destination
-					+ "]", e);
+		+ "]", e);
 			throw new IllegalStateException(e);
 		}
 	}

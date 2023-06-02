@@ -36,8 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = WiremockTestsApplication.class,
-		properties = "app.baseUrl=http://localhost:${wiremock.server.port}", webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = WiremockTestsApplication.class,properties = "app.baseUrl=http://localhost:${wiremock.server.port}", webEnvironment = WebEnvironment.NONE)
 @AutoConfigureWireMock(port = 0)
 public class AutoConfigureWireMockRandomPortApplicationTests {
 
@@ -53,7 +52,7 @@ public class AutoConfigureWireMockRandomPortApplicationTests {
 		WireMock.verify(0, RequestPatternBuilder.allRequests());
 
 		stubFor(get(urlEqualTo("/test"))
-				.willReturn(aResponse().withHeader("Content-Type", "text/plain").withBody("Hello World!")));
+	.willReturn(aResponse().withHeader("Content-Type", "text/plain").withBody("Hello World!")));
 		assertThat(this.service.go()).isEqualTo("Hello World!");
 
 		wireMockServer.verify(1, RequestPatternBuilder.allRequests());

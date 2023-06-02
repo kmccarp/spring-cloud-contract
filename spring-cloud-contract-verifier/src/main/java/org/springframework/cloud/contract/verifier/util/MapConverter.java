@@ -107,7 +107,7 @@ public class MapConverter {
 	 * @return the transformed structure
 	 */
 	public static Object transformValues(Object value, Function<Object, ?> function,
-			Function<String, Object> parsingFunction) {
+Function<String, Object> parsingFunction) {
 		if (value instanceof String) {
 			try {
 				Object parsed = parsingFunction.apply((String) value);
@@ -127,7 +127,7 @@ public class MapConverter {
 		}
 		else if (value instanceof Collection) {
 			return ((Collection) value).stream().map((v) -> transformValues(v, function, parsingFunction))
-					.collect(Collectors.toList());
+		.collect(Collectors.toList());
 		}
 		return transformValue(function, value, parsingFunction);
 	}
@@ -137,7 +137,7 @@ public class MapConverter {
 	 * access exception will occur at runtime.
 	 */
 	protected static Object transformValue(Function<Object, ?> function, Object value,
-			Function<String, Object> parsingFunction) {
+Function<String, Object> parsingFunction) {
 		return extractValue(value, (val) -> {
 			Object newValue = function.apply(val);
 			if (newValue instanceof Map || newValue instanceof List || newValue instanceof String && val != null) {
@@ -157,7 +157,7 @@ public class MapConverter {
 	}
 
 	private static Map<?, ?> convert(Map<?, ?> map, Function<Object, ?> function,
-			Function<String, Object> parsingFunction) {
+Function<String, Object> parsingFunction) {
 		Map<Object, Object> convertedMap = new LinkedHashMap<>();
 		for (Map.Entry<?, ?> entry : map.entrySet()) {
 			convertedMap.put(entry.getKey(), transformValues(entry.getValue(), function, parsingFunction));
@@ -174,32 +174,32 @@ public class MapConverter {
 	 * provided object.
 	 */
 	public static Object getClientOrServerSideValues(Object json, boolean clientSide,
-			Function<String, Object> parsingFunction) {
+Function<String, Object> parsingFunction) {
 		return transformValues(json, val -> {
 			if (val instanceof DslProperty) {
 				DslProperty<?> dslProperty = ((DslProperty<?>) val);
 				return clientSide
-						? getClientOrServerSideValues(dslProperty.getClientValue(), clientSide, parsingFunction)
-						: getClientOrServerSideValues(dslProperty.getServerValue(), clientSide, parsingFunction);
+			? getClientOrServerSideValues(dslProperty.getClientValue(), clientSide, parsingFunction)
+			: getClientOrServerSideValues(dslProperty.getServerValue(), clientSide, parsingFunction);
 			}
 			else if (val instanceof GString) {
 				ContentType type = new MapConverter().templateProcessor.containsJsonPathTemplateEntry(
-						ContentUtils.extractValueForGString((GString) val, ContentUtils.GET_TEST_SIDE).toString())
-								? ContentType.TEXT : null;
+			ContentUtils.extractValueForGString((GString) val, ContentUtils.GET_TEST_SIDE).toString())
+			? ContentType.TEXT : null;
 				return ContentUtils.extractValue((GString) val, type, (v) -> {
 					if (v instanceof DslProperty) {
 						return clientSide
-								? getClientOrServerSideValues(((DslProperty<?>) v).getClientValue(), clientSide,
-										parsingFunction)
-								: getClientOrServerSideValues(((DslProperty<?>) v).getServerValue(), clientSide,
-										parsingFunction);
+					? getClientOrServerSideValues(((DslProperty<?>) v).getClientValue(), clientSide,
+					parsingFunction)
+					: getClientOrServerSideValues(((DslProperty<?>) v).getServerValue(), clientSide,
+					parsingFunction);
 					}
 					return v;
 				});
 			}
 			else if (val instanceof FromFileProperty) {
 				return ((FromFileProperty) val).isByte() ? ((FromFileProperty) val).asBytes()
-						: ((FromFileProperty) val).asString();
+			: ((FromFileProperty) val).asString();
 			}
 			return val;
 		}, parsingFunction);

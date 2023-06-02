@@ -36,33 +36,30 @@ public class FailFastLoanApplicationServiceTests {
 	public void shouldFailToStartContextWhenNoStubCanBeFound() {
 		// When
 		final Throwable throwable = catchThrowable(
-				() -> new SpringApplicationBuilder(Application.class, StubRunnerConfiguration.class)
-						.properties(ImmutableMap.of("stubrunner.stubsMode", "REMOTE", "stubrunner.repositoryRoot",
-								"classpath:m2repo/repository/", "stubrunner.ids",
-								new String[] {
-										"org.springframework.cloud.contract.verifier.stubs:should-not-be-found" }))
-						.run());
+	() -> new SpringApplicationBuilder(Application.class, StubRunnerConfiguration.class)
+.properties(ImmutableMap.of("stubrunner.stubsMode", "REMOTE", "stubrunner.repositoryRoot","classpath:m2repo/repository/", "stubrunner.ids",new String[]{
+										"org.springframework.cloud.contract.verifier.stubs:should-not-be-found"}))
+.run());
 
 		// Then
 		assertThat(throwable).isInstanceOf(BeanCreationException.class);
 		assertThat(throwable.getCause().getCause()).isInstanceOf(BeanInstantiationException.class).hasMessageContaining(
-				"No stubs or contracts were found for [org.springframework.cloud.contract.verifier.stubs:should-not-be-found:+:stubs] and the switch to fail on no stubs was set.");
+	"No stubs or contracts were found for [org.springframework.cloud.contract.verifier.stubs:should-not-be-found:+:stubs] and the switch to fail on no stubs was set.");
 	}
 
 	@Test
 	public void shouldNotTryAndWorkOfflineWhenRemoteModeIsOn() {
 		// When
 		final Throwable throwable = catchThrowable(
-				() -> new SpringApplicationBuilder(Application.class, StubRunnerConfiguration.class)
-						.properties(ImmutableMap.of("stubrunner.stubsMode", "CLASSPATH", "stubrunner.ids",
-								new String[] {
-										"org.springframework.cloud.contract.verifier.stubs:should-not-be-found" }))
-						.run());
+	() -> new SpringApplicationBuilder(Application.class, StubRunnerConfiguration.class)
+.properties(ImmutableMap.of("stubrunner.stubsMode", "CLASSPATH", "stubrunner.ids",new String[]{
+										"org.springframework.cloud.contract.verifier.stubs:should-not-be-found"}))
+.run());
 
 		// Then
 		assertThat(throwable).isInstanceOf(BeanCreationException.class);
 		assertThat(throwable.getCause().getCause()).isInstanceOf(BeanInstantiationException.class)
-				.hasMessageContaining("No stubs were found on classpath ");
+	.hasMessageContaining("No stubs were found on classpath ");
 	}
 
 }

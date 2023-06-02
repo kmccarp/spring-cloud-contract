@@ -98,7 +98,7 @@ class RequestMatcherFactory {
 
 	RequestMatcher pick(String tool) {
 		return this.matchers.stream().filter(m -> m.isApplicable(tool)).findFirst()
-				.orElse(new NotMatchingRequestMatcher());
+	.orElse(new NotMatchingRequestMatcher());
 	}
 
 }
@@ -160,9 +160,9 @@ class GraphQlMatcher implements RequestMatcher {
 			String operationName = (String) jsonBodyFromContract.get("operationName");
 			String operationNameFromRequest = (String) jsonBodyFromRequest.get("operationName");
 			boolean queryMatches = assertThat(
-					() -> Assertions.assertThat(query).isEqualToIgnoringWhitespace(queryFromRequest));
+		() -> Assertions.assertThat(query).isEqualToIgnoringWhitespace(queryFromRequest));
 			boolean variablesMatch = assertThat(
-					() -> JsonAssertions.assertThatJson(variables).isEqualTo(variablesFromRequest));
+		() -> JsonAssertions.assertThatJson(variables).isEqualTo(variablesFromRequest));
 			boolean operationMatches = StringUtils.equals(operationName, operationNameFromRequest);
 			return MatchResult.of(queryMatches && variablesMatch && operationMatches);
 		}

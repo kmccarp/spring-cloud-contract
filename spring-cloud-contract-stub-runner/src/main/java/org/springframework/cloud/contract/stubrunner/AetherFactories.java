@@ -79,7 +79,7 @@ final class AetherFactories {
 		String localRepositoryDirectory = localRepositoryDirectory(workOffline);
 		if (log.isDebugEnabled()) {
 			log.debug("Local Repository Directory set to [" + localRepositoryDirectory + "]. Work offline: ["
-					+ workOffline + "]");
+		+ workOffline + "]");
 		}
 		LocalRepository localRepo = new LocalRepository(localRepositoryDirectory);
 		session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
@@ -110,8 +110,8 @@ final class AetherFactories {
 	private static String readPropertyFromSystemProps(String localRepoLocationFromSettings) {
 		String mavenLocalRepo = fromSystemPropOrEnv(MAVEN_LOCAL_REPOSITORY_LOCATION);
 		return StringUtils.hasText(mavenLocalRepo) ? mavenLocalRepo
-				: localRepoLocationFromSettings != null ? localRepoLocationFromSettings
-						: System.getProperty("user.home") + File.separator + ".m2" + File.separator + "repository";
+	: localRepoLocationFromSettings != null ? localRepoLocationFromSettings
+	: System.getProperty("user.home") + File.separator + ".m2" + File.separator + "repository";
 	}
 
 	// system prop takes precedence over env var
@@ -127,7 +127,7 @@ final class AetherFactories {
 		String user = fromSystemPropOrEnv(MAVEN_USER_SETTINGS_LOCATION);
 		if (user == null) {
 			File file = new File(new File(System.getProperty("user.home")).getAbsoluteFile(),
-					File.separator + ".m2" + File.separator + "settings.xml");
+		File.separator + ".m2" + File.separator + "settings.xml");
 			if (log.isDebugEnabled()) {
 				log.debug("No custom maven user settings provided, will use [" + file + "]");
 			}

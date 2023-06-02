@@ -43,17 +43,17 @@ import org.springframework.cloud.contract.verifier.builder.handlebars.Handlebars
 public class HandlebarsTemplateProcessor implements TemplateProcessor, ContractTemplate {
 
 	private static final Pattern ESCAPED_LEGACY_JSON_PATH_PATTERN = Pattern
-			.compile("^.*\\{\\{\\{jsonpath this '(.*)'}}}.*$");
+.compile("^.*\\{\\{\\{jsonpath this '(.*)'}}}.*$");
 
 	private static final Pattern ESCAPED_JSON_PATH_PATTERN = Pattern
-			.compile("^.*\\{\\{\\{jsonPath request.body '(.*)'}}}.*$");
+.compile("^.*\\{\\{\\{jsonPath request.body '(.*)'}}}.*$");
 
 	private static final Pattern LEGACY_JSON_PATH_PATTERN = Pattern.compile("^.*\\{\\{jsonpath this '(.*)'}}.*$");
 
 	private static final Pattern JSON_PATH_PATTERN = Pattern.compile("^.*\\{\\{jsonPath request.body '(.*)'}}.*$");
 
 	private static final List<Pattern> PATTERNS = Arrays.asList(ESCAPED_LEGACY_JSON_PATH_PATTERN,
-			ESCAPED_JSON_PATH_PATTERN, LEGACY_JSON_PATH_PATTERN, JSON_PATH_PATTERN);
+ESCAPED_JSON_PATH_PATTERN, LEGACY_JSON_PATH_PATTERN, JSON_PATH_PATTERN);
 
 	private static final String LEGACY_JSON_PATH_TEMPLATE_NAME = HandlebarsJsonPathHelper.NAME;
 
@@ -73,16 +73,16 @@ public class HandlebarsTemplateProcessor implements TemplateProcessor, ContractT
 	@Override
 	public boolean containsTemplateEntry(String line) {
 		return (line.contains(contractTemplate.openingTemplate()) && line.contains(contractTemplate.closingTemplate()))
-				|| (line.contains(contractTemplate.escapedOpeningTemplate())
-						&& line.contains(contractTemplate.escapedClosingTemplate()));
+	|| (line.contains(contractTemplate.escapedOpeningTemplate())
+	&& line.contains(contractTemplate.escapedClosingTemplate()));
 	}
 
 	@Override
 	public boolean containsJsonPathTemplateEntry(String line) {
 		return line.contains(openingTemplate() + LEGACY_JSON_PATH_TEMPLATE_NAME)
-				|| line.contains(openingTemplate() + JSON_PATH_TEMPLATE_NAME)
-				|| line.contains(escapedOpeningTemplate() + LEGACY_JSON_PATH_TEMPLATE_NAME)
-				|| line.contains(escapedOpeningTemplate() + JSON_PATH_TEMPLATE_NAME);
+	|| line.contains(openingTemplate() + JSON_PATH_TEMPLATE_NAME)
+	|| line.contains(escapedOpeningTemplate() + LEGACY_JSON_PATH_TEMPLATE_NAME)
+	|| line.contains(escapedOpeningTemplate() + JSON_PATH_TEMPLATE_NAME);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class HandlebarsTemplateProcessor implements TemplateProcessor, ContractT
 			handlebars.registerHelper(HandlebarsJsonPathHelper.NAME, new HandlebarsJsonPathHelper());
 			handlebars.registerHelper(WireMockHelpers.jsonPath.name(), new HandlebarsJsonPathHelper());
 			Arrays.stream(WireMockHelpers.values()).filter(helper -> !helper.equals(WireMockHelpers.jsonPath))
-					.forEach(helper -> handlebars.registerHelper(helper.name(), helper));
+		.forEach(helper -> handlebars.registerHelper(helper.name(), helper));
 			return handlebars.compileInline(content);
 		}
 		catch (IOException e) {

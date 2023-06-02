@@ -58,7 +58,7 @@ class StreamStubMessageSender implements MessageVerifierSender<Message<?>> {
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to send a message [" + message + "] "
-					+ "to a channel with name [" + destination + "]", e);
+		+ "to a channel with name [" + destination + "]", e);
 			throw e;
 		}
 	}

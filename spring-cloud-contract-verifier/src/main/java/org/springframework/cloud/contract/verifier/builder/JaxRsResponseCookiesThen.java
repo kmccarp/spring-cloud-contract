@@ -30,7 +30,7 @@ class JaxRsResponseCookiesThen implements Then, MockMvcAcceptor, CookieElementPr
 	private final BodyParser bodyParser;
 
 	JaxRsResponseCookiesThen(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.generatedClassMetaData = generatedClassMetaData;
 		this.comparisonBuilder = comparisonBuilder;

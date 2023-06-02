@@ -11,7 +11,7 @@ import static com.toomuchcoding.jsonassert.JsonAssertion.assertThat;
 public class XmlBodyVerificationBuilderTest {
 
 	private static final String xml = "<customer>\r\n" + "      <email>customer@test.com</email>\r\n"
-			+ "    </customer>";
++ "    </customer>";
 
 	@Test
 	public void shouldAddXmlProcessingLines() {
@@ -24,9 +24,9 @@ public class XmlBodyVerificationBuilderTest {
 		// Then
 		String test = blockBuilder.toString();
 		assertThat(test).contains("DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();")
-				.contains("builderFactory.setNamespaceAware(true);")
-				.contains("DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();")
-				.contains("Document parsedXml = documentBuilder.parse(new InputSource(new StringReader(").contains(xml);
+	.contains("builderFactory.setNamespaceAware(true);")
+	.contains("DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();")
+	.contains("Document parsedXml = documentBuilder.parse(new InputSource(new StringReader(").contains(xml);
 	}
 
 }

@@ -27,15 +27,15 @@ class ArrayValueAssertion extends FieldAssertion implements XmlArrayVerifiable {
 	private final boolean checkingPrimitiveType;
 
 	ArrayValueAssertion(XmlCachedObjects cachedObjects, LinkedList<String> xPathBuffer,
-			LinkedList<String> specialCaseXPathBuffer, Object arrayName,
-			XmlAsserterConfiguration xmlAsserterConfiguration) {
+LinkedList<String> specialCaseXPathBuffer, Object arrayName,
+XmlAsserterConfiguration xmlAsserterConfiguration) {
 		super(cachedObjects, xPathBuffer, specialCaseXPathBuffer, arrayName, xmlAsserterConfiguration);
 		this.checkingPrimitiveType = true;
 	}
 
 	private ArrayValueAssertion(XmlCachedObjects cachedObjects, LinkedList<String> xPathBuffer,
-			LinkedList<String> specialCaseXPathBuffer, Object arrayName,
-			XmlAsserterConfiguration xmlAsserterConfiguration, boolean checkingPrimitiveType) {
+LinkedList<String> specialCaseXPathBuffer, Object arrayName,
+XmlAsserterConfiguration xmlAsserterConfiguration, boolean checkingPrimitiveType) {
 		super(cachedObjects, xPathBuffer, specialCaseXPathBuffer, arrayName, xmlAsserterConfiguration);
 		this.checkingPrimitiveType = checkingPrimitiveType;
 	}
@@ -48,7 +48,7 @@ class ArrayValueAssertion extends FieldAssertion implements XmlArrayVerifiable {
 	@Override
 	public XmlArrayVerifiable contains(String value) {
 		return new ArrayValueAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer, value,
-				this.xmlAsserterConfiguration, false);
+	this.xmlAsserterConfiguration, false);
 	}
 
 	@Override
@@ -62,12 +62,12 @@ class ArrayValueAssertion extends FieldAssertion implements XmlArrayVerifiable {
 		Iterator<Item> iterator = sequence.iterator();
 		if (!iterator.hasNext()) {
 			throw new IllegalStateException("Parsed XML [" + this.cachedObjects.xmlAsString
-					+ "] doesn't match the XPath <" + xPathString + ">");
+		+ "] doesn't match the XPath <" + xPathString + ">");
 		}
 		int retrievedSize = Integer.valueOf(iterator.next().getStringValue());
 		if (retrievedSize != size) {
 			throw new IllegalStateException("Parsed XML [" + this.cachedObjects.xmlAsString + "] has size ["
-					+ retrievedSize + "] and not [" + size + "] for XPath <" + xPathString + "> ");
+		+ retrievedSize + "] and not [" + size + "] for XPath <" + xPathString + "> ");
 		}
 		return verifiable;
 	}
@@ -113,7 +113,7 @@ class ArrayValueAssertion extends FieldAssertion implements XmlArrayVerifiable {
 
 	private XmlVerifiable equalityOnAPrimitive(String xPath) {
 		ReadyToCheckAsserter readyToCheck = new ReadyToCheckAsserter(this.cachedObjects, this.xPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		readyToCheck.xPathBuffer.removeLast();
 		readyToCheck.xPathBuffer.offer(xPath);
 		readyToCheck.checkBufferedXPathString();

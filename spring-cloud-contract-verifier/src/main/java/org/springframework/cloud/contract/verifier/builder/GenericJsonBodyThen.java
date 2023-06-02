@@ -58,12 +58,12 @@ class GenericJsonBodyThen implements Then {
 	private final ComparisonBuilder comparisonBuilder;
 
 	GenericJsonBodyThen(BlockBuilder blockBuilder, GeneratedClassMetaData metaData, BodyParser bodyParser,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.bodyParser = bodyParser;
 		this.comparisonBuilder = comparisonBuilder;
 		this.bodyAssertionLineCreator = new BodyAssertionLineCreator(blockBuilder, metaData,
-				this.bodyParser.byteArrayString(), this.comparisonBuilder);
+	this.bodyParser.byteArrayString(), this.comparisonBuilder);
 		this.generatedClassMetaData = metaData;
 		this.templateProcessor = new HandlebarsTemplateProcessor();
 		this.contractTemplate = new HandlebarsTemplateProcessor();
@@ -87,17 +87,17 @@ class GenericJsonBodyThen implements Then {
 	}
 
 	private void addJsonBodyVerification(SingleContractMetadata contractMetadata, Object responseBody,
-			BodyMatchers bodyMatchers) {
+BodyMatchers bodyMatchers) {
 		JsonBodyVerificationBuilder jsonBodyVerificationBuilder = new JsonBodyVerificationBuilder(
-				this.generatedClassMetaData.configProperties.getAssertJsonSize(), this.templateProcessor,
-				this.contractTemplate, contractMetadata.getContract(), Optional.of(this.blockBuilder.getLineEnding()),
-				bodyParser::postProcessJsonPath);
+	this.generatedClassMetaData.configProperties.getAssertJsonSize(), this.templateProcessor,
+	this.contractTemplate, contractMetadata.getContract(), Optional.of(this.blockBuilder.getLineEnding()),
+	bodyParser::postProcessJsonPath);
 		// TODO: Refactor spock from should comment out bdd blocks
 		Object convertedResponseBody = jsonBodyVerificationBuilder.addJsonResponseBodyCheck(this.blockBuilder,
-				responseBody, bodyMatchers, this.bodyParser.responseAsString(),
-				this.generatedClassMetaData.configProperties.getTestFramework() != TestFramework.SPOCK);
+	responseBody, bodyMatchers, this.bodyParser.responseAsString(),
+	this.generatedClassMetaData.configProperties.getTestFramework() != TestFramework.SPOCK);
 		if (!(convertedResponseBody instanceof Map || convertedResponseBody instanceof List
-				|| convertedResponseBody instanceof ExecutionProperty)) {
+	|| convertedResponseBody instanceof ExecutionProperty)) {
 			simpleTextResponseBodyCheck(contractMetadata, convertedResponseBody);
 		}
 		processBodyElement("", "", convertedResponseBody);
@@ -123,7 +123,7 @@ class GenericJsonBodyThen implements Then {
 
 	private void processBodyElement(String property, ExecutionProperty exec) {
 		this.blockBuilder.addLineWithEnding(
-				exec.insertValue(this.bodyParser.postProcessJsonPath("parsedJson.read(\"$" + property + "\")")));
+	exec.insertValue(this.bodyParser.postProcessJsonPath("parsedJson.read(\"$" + property + "\")")));
 	}
 
 	private void processBodyElement(String property, Map.Entry entry) {

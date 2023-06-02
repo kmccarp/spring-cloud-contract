@@ -26,10 +26,10 @@ class MessagingImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "javax.inject.Inject",
-			"org.springframework.cloud.contract.verifier.messaging.internal.ContractVerifierObjectMapper",
-			"org.springframework.cloud.contract.verifier.messaging.internal.ContractVerifierMessage",
-			"org.springframework.cloud.contract.verifier.messaging.internal.ContractVerifierMessaging" };
+	private static final String[] IMPORTS = {"javax.inject.Inject",
+"org.springframework.cloud.contract.verifier.messaging.internal.ContractVerifierObjectMapper",
+"org.springframework.cloud.contract.verifier.messaging.internal.ContractVerifierMessage",
+"org.springframework.cloud.contract.verifier.messaging.internal.ContractVerifierMessaging"};
 
 	MessagingImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -45,7 +45,7 @@ class MessagingImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.listOfFiles.stream().anyMatch(metadata -> metadata
-				.getConvertedContractWithMetadata().stream().anyMatch(SingleContractMetadata::isMessaging));
+	.getConvertedContractWithMetadata().stream().anyMatch(SingleContractMetadata::isMessaging));
 	}
 
 }

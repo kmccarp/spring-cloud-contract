@@ -148,13 +148,13 @@ class ContractsToYaml {
 			map.forEach((key, value) -> {
 				if (value instanceof NamedProperty) {
 					Object fileName = Optional.ofNullable(((NamedProperty) value).getName())
-							.map(DslProperty::getClientValue).orElse(null);
+				.map(DslProperty::getClientValue).orElse(null);
 					Object fileContent = Optional.ofNullable(((NamedProperty) value).getValue())
-							.map(DslProperty::getClientValue).orElse(null);
+				.map(DslProperty::getClientValue).orElse(null);
 					Object contentType = Optional.ofNullable(((NamedProperty) value).getContentType())
-							.map(DslProperty::getClientValue).orElse(null);
+				.map(DslProperty::getClientValue).orElse(null);
 					if (fileName instanceof RegexProperty || fileContent instanceof RegexProperty
-							|| contentType instanceof RegexProperty) {
+				|| contentType instanceof RegexProperty) {
 						YamlContract.MultipartNamedStubMatcher multipartNamedStubMatcher = new YamlContract.MultipartNamedStubMatcher();
 						multipartNamedStubMatcher.paramName = key;
 						multipartNamedStubMatcher.fileName = valueMatcher(fileName);
@@ -206,15 +206,15 @@ class ContractsToYaml {
 
 	private void mapRequestMatchersBody(YamlContract.Request yamlContractRequest, Request request) {
 		Optional.ofNullable(request.getBodyMatchers()).map(BodyMatchers::matchers)
-				.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
-					YamlContract.BodyStubMatcher bodyStubMatcher = new YamlContract.BodyStubMatcher();
-					bodyStubMatcher.path = bodyMatcher.path();
-					bodyStubMatcher.type = stubMatcherType(bodyMatcher.matchingType());
-					bodyStubMatcher.value = Optional.ofNullable(bodyMatcher.value()).map(Object::toString).orElse(null);
-					bodyStubMatcher.minOccurrence = bodyMatcher.minTypeOccurrence();
-					bodyStubMatcher.maxOccurrence = bodyMatcher.maxTypeOccurrence();
-					yamlContractRequest.matchers.body.add(bodyStubMatcher);
-				}));
+	.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
+		YamlContract.BodyStubMatcher bodyStubMatcher = new YamlContract.BodyStubMatcher();
+		bodyStubMatcher.path = bodyMatcher.path();
+		bodyStubMatcher.type = stubMatcherType(bodyMatcher.matchingType());
+		bodyStubMatcher.value = Optional.ofNullable(bodyMatcher.value()).map(Object::toString).orElse(null);
+		bodyStubMatcher.minOccurrence = bodyMatcher.minTypeOccurrence();
+		bodyStubMatcher.maxOccurrence = bodyMatcher.maxTypeOccurrence();
+		yamlContractRequest.matchers.body.add(bodyStubMatcher);
+	}));
 	}
 
 	private void mapRequestMultipart(YamlContract.Request yamlContractRequest, Request request) {
@@ -225,22 +225,22 @@ class ContractsToYaml {
 			map.forEach((key, value) -> {
 				if (value instanceof NamedProperty) {
 					Object fileName = Optional.ofNullable(((NamedProperty) value).getName())
-							.map(DslProperty::getServerValue).orElse(null);
+				.map(DslProperty::getServerValue).orElse(null);
 					Object contentType = Optional.ofNullable(((NamedProperty) value).getContentType())
-							.map(DslProperty::getServerValue).orElse(null);
+				.map(DslProperty::getServerValue).orElse(null);
 					Object fileContent = Optional.ofNullable(((NamedProperty) value).getValue())
-							.map(DslProperty::getServerValue).orElse(null);
+				.map(DslProperty::getServerValue).orElse(null);
 					YamlContract.Named named = new YamlContract.Named();
 					named.paramName = key;
 					named.fileName = fileName instanceof String ? Optional.ofNullable(((NamedProperty) value).getName())
-							.map(DslProperty::getServerValue).map(Object::toString).orElse(null) : null;
+				.map(DslProperty::getServerValue).map(Object::toString).orElse(null) : null;
 					named.fileContent = (String) Optional.ofNullable(fileContent).filter(f -> f instanceof String)
-							.orElse(null);
+				.orElse(null);
 					named.fileContentAsBytes = fileContent instanceof FromFileProperty
-							? new String(((FromFileProperty) fileContent).asBytes()) : null;
+				? new String(((FromFileProperty) fileContent).asBytes()) : null;
 					named.fileContentFromFileAsBytes = resolveFileNameAsBytes(fileContent);
 					named.contentType = (String) Optional.ofNullable(contentType).filter(f -> f instanceof String)
-							.orElse(null);
+				.orElse(null);
 					named.fileNameCommand = fileName instanceof ExecutionProperty ? fileName.toString() : null;
 					named.fileContentCommand = fileContent instanceof ExecutionProperty ? fileContent.toString() : null;
 					named.contentTypeCommand = contentType instanceof ExecutionProperty ? contentType.toString() : null;
@@ -271,7 +271,7 @@ class ContractsToYaml {
 
 	private void mapRequestCookies(YamlContract.Request yamlContractRequest, Request request) {
 		yamlContractRequest.cookies = Optional.ofNullable(request.getCookies()).map(Cookies::asTestSideMap)
-				.orElse(null);
+	.orElse(null);
 	}
 
 	private void mapRequestHeaders(YamlContract.Request yamlContractRequest, Request request) {
@@ -286,32 +286,32 @@ class ContractsToYaml {
 
 	private void mapRequestMatchersQueryParameters(YamlContract.Request yamlContractRequest, Url requestUrl) {
 		yamlContractRequest.matchers.queryParameters
-				.addAll(requestUrl.getQueryParameters().getParameters().stream().map(parameter -> {
-					Object stubSide = parameter.getClientValue();
-					if (stubSide instanceof RegexProperty || stubSide instanceof Pattern) {
-						YamlContract.QueryParameterMatcher queryParameterMatcher = new YamlContract.QueryParameterMatcher();
-						queryParameterMatcher.key = parameter.getName();
-						queryParameterMatcher.type = YamlContract.MatchingType.matching;
-						queryParameterMatcher.value = new RegexProperty(stubSide).pattern();
-						return queryParameterMatcher;
-					}
-					else if (stubSide instanceof MatchingStrategy) {
-						YamlContract.QueryParameterMatcher queryParameterMatcher = new YamlContract.QueryParameterMatcher();
-						queryParameterMatcher.key = parameter.getName();
-						queryParameterMatcher.type = YamlContract.MatchingType
-								.from(((MatchingStrategy) stubSide).getType().getName());
-						queryParameterMatcher.value = MapConverter.getStubSideValuesForNonBody(stubSide);
-						return queryParameterMatcher;
-					}
-					else {
-						return null;
-					}
-				}).filter(Objects::nonNull).collect(Collectors.toList()));
+	.addAll(requestUrl.getQueryParameters().getParameters().stream().map(parameter -> {
+		Object stubSide = parameter.getClientValue();
+		if (stubSide instanceof RegexProperty || stubSide instanceof Pattern) {
+			YamlContract.QueryParameterMatcher queryParameterMatcher = new YamlContract.QueryParameterMatcher();
+			queryParameterMatcher.key = parameter.getName();
+			queryParameterMatcher.type = YamlContract.MatchingType.matching;
+			queryParameterMatcher.value = new RegexProperty(stubSide).pattern();
+			return queryParameterMatcher;
+		}
+		else if (stubSide instanceof MatchingStrategy) {
+			YamlContract.QueryParameterMatcher queryParameterMatcher = new YamlContract.QueryParameterMatcher();
+			queryParameterMatcher.key = parameter.getName();
+			queryParameterMatcher.type = YamlContract.MatchingType
+		.from(((MatchingStrategy) stubSide).getType().getName());
+			queryParameterMatcher.value = MapConverter.getStubSideValuesForNonBody(stubSide);
+			return queryParameterMatcher;
+		}
+		else {
+			return null;
+		}
+	}).filter(Objects::nonNull).collect(Collectors.toList()));
 	}
 
 	private void mapRequestQueryParameters(YamlContract.Request yamlContractRequest, Url requestUrl) {
 		yamlContractRequest.queryParameters = requestUrl.getQueryParameters().getParameters().stream()
-				.collect(Collectors.toMap(QueryParameter::getName, MapConverter::getTestSideValuesForNonBody));
+	.collect(Collectors.toMap(QueryParameter::getName, MapConverter::getTestSideValuesForNonBody));
 	}
 
 	private void mapRequestMatchers(YamlContract.Request yamlContractRequest) {
@@ -320,17 +320,17 @@ class ContractsToYaml {
 
 	private void mapRequestUrlPath(YamlContract.Request yamlContractRequest, Request request) {
 		yamlContractRequest.urlPath = Optional.ofNullable(request.getUrlPath()).map(m -> m.getServerValue().toString())
-				.orElse(null);
+	.orElse(null);
 	}
 
 	private void mapRequestUrl(YamlContract.Request yamlContractRequest, Request request) {
 		yamlContractRequest.url = Optional.ofNullable(request.getUrl()).map(m -> m.getServerValue().toString())
-				.orElse(null);
+	.orElse(null);
 	}
 
 	private void mapRequestMethod(YamlContract.Request yamlContractRequest, Request request) {
 		yamlContractRequest.method = Optional.ofNullable(request.getMethod()).map(m -> m.getServerValue().toString())
-				.orElse(null);
+	.orElse(null);
 	}
 
 	protected void output(Contract contract, YamlContract yamlContract) {
@@ -338,25 +338,25 @@ class ContractsToYaml {
 		if (outputMessage != null) {
 			Optional<Response> optionalResponse = Optional.ofNullable(contract.getResponse());
 			ContentType contentType = evaluateClientSideContentType(
-					optionalResponse.map(Response::getHeaders).orElse(null),
-					optionalResponse.map(Response::getBody).orElse(null));
+		optionalResponse.map(Response::getHeaders).orElse(null),
+		optionalResponse.map(Response::getBody).orElse(null));
 			yamlContract.outputMessage = new YamlContract.OutputMessage();
 			yamlContract.outputMessage.sentTo = MapConverter.getStubSideValues(outputMessage.getSentTo()).toString();
 			yamlContract.outputMessage.headers = Optional.ofNullable(outputMessage.getHeaders())
-					.map(Headers::asStubSideMap).orElse(null);
+		.map(Headers::asStubSideMap).orElse(null);
 			yamlContract.outputMessage.body = MapConverter.getStubSideValues(outputMessage.getBody());
 			Optional.ofNullable(outputMessage.getBodyMatchers()).map(BodyMatchers::matchers)
-					.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
-						YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
-						bodyTestMatcher.path = bodyMatcher.path();
-						bodyTestMatcher.type = testMatcherType(bodyMatcher.matchingType());
-						bodyTestMatcher.value = Optional.ofNullable(bodyMatcher.value()).map(Object::toString)
-								.orElse(null);
-						bodyTestMatcher.minOccurrence = bodyMatcher.minTypeOccurrence();
-						bodyTestMatcher.maxOccurrence = bodyMatcher.maxTypeOccurrence();
-						yamlContract.outputMessage.matchers.body.add(bodyTestMatcher);
+		.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
+			YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
+			bodyTestMatcher.path = bodyMatcher.path();
+			bodyTestMatcher.type = testMatcherType(bodyMatcher.matchingType());
+			bodyTestMatcher.value = Optional.ofNullable(bodyMatcher.value()).map(Object::toString)
+		.orElse(null);
+			bodyTestMatcher.minOccurrence = bodyMatcher.minTypeOccurrence();
+			bodyTestMatcher.maxOccurrence = bodyMatcher.maxTypeOccurrence();
+			yamlContract.outputMessage.matchers.body.add(bodyTestMatcher);
 
-					}));
+		}));
 			if (XML != contentType) {
 				setOutputBodyMatchers(outputMessage.getBody(), yamlContract.outputMessage.matchers.body);
 			}
@@ -369,13 +369,13 @@ class ContractsToYaml {
 		if (input != null) {
 			yamlContract.input = new YamlContract.Input();
 			yamlContract.input.assertThat = Optional.ofNullable(input.getAssertThat())
-					.map(assertThat -> MapConverter
-							.getTestSideValues(assertThat.toString(), MapConverter.JSON_PARSING_FUNCTION).toString())
-					.orElse(null);
+		.map(assertThat -> MapConverter
+	.getTestSideValues(assertThat.toString(), MapConverter.JSON_PARSING_FUNCTION).toString())
+		.orElse(null);
 			yamlContract.input.triggeredBy = Optional.ofNullable(input.getTriggeredBy())
-					.map(triggeredBy -> MapConverter
-							.getTestSideValues(triggeredBy.toString(), MapConverter.JSON_PARSING_FUNCTION).toString())
-					.orElse(null);
+		.map(triggeredBy -> MapConverter
+	.getTestSideValues(triggeredBy.toString(), MapConverter.JSON_PARSING_FUNCTION).toString())
+		.orElse(null);
 		}
 	}
 
@@ -389,11 +389,11 @@ class ContractsToYaml {
 
 	protected YamlContract.ValueMatcher valueMatcher(Object o) {
 		return Optional.ofNullable(o).filter(object -> object instanceof RegexProperty)
-				.map(object -> (RegexProperty) object).map(regexProperty -> {
-					YamlContract.ValueMatcher valueMatcher = new YamlContract.ValueMatcher();
-					valueMatcher.regex = regexProperty.pattern();
-					return valueMatcher;
-				}).orElse(null);
+	.map(object -> (RegexProperty) object).map(regexProperty -> {
+			YamlContract.ValueMatcher valueMatcher = new YamlContract.ValueMatcher();
+			valueMatcher.regex = regexProperty.pattern();
+			return valueMatcher;
+		}).orElse(null);
 	}
 
 	protected void setInputBodyMatchers(DslProperty<?> body, List<YamlContract.BodyStubMatcher> bodyMatchers) {
@@ -422,7 +422,7 @@ class ContractsToYaml {
 		if (contract.getResponse() != null) {
 			Response contractResponse = contract.getResponse();
 			ContentType contentType = evaluateClientSideContentType(contractResponse.getHeaders(),
-					contractResponse.getBody());
+		contractResponse.getBody());
 			YamlContract.Response response = new YamlContract.Response();
 			yamlContract.response = response;
 			mapResponseAsync(contractResponse, response);
@@ -441,15 +441,15 @@ class ContractsToYaml {
 
 	private void mapResponseBodyMatchers(Response contractResponse, YamlContract.Response response) {
 		Optional.ofNullable(contractResponse.getBodyMatchers()).map(BodyMatchers::matchers)
-				.ifPresent(bodyMatchers -> bodyMatchers.forEach((bodyMatcher) -> {
-					YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
-					bodyTestMatcher.path = bodyMatcher.path();
-					bodyTestMatcher.type = testMatcherType(bodyMatcher.matchingType());
-					bodyTestMatcher.value = Optional.ofNullable(bodyMatcher.value()).map(Object::toString).orElse(null);
-					bodyTestMatcher.minOccurrence = bodyMatcher.minTypeOccurrence();
-					bodyTestMatcher.maxOccurrence = bodyMatcher.maxTypeOccurrence();
-					response.matchers.body.add(bodyTestMatcher);
-				}));
+	.ifPresent(bodyMatchers -> bodyMatchers.forEach((bodyMatcher) -> {
+		YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
+		bodyTestMatcher.path = bodyMatcher.path();
+		bodyTestMatcher.type = testMatcherType(bodyMatcher.matchingType());
+		bodyTestMatcher.value = Optional.ofNullable(bodyMatcher.value()).map(Object::toString).orElse(null);
+		bodyTestMatcher.minOccurrence = bodyMatcher.minTypeOccurrence();
+		bodyTestMatcher.maxOccurrence = bodyMatcher.maxTypeOccurrence();
+		response.matchers.body.add(bodyTestMatcher);
+	}));
 	}
 
 	private void mapResponseBody(Response contractResponse, YamlContract.Response response) {
@@ -473,18 +473,18 @@ class ContractsToYaml {
 
 	private void mapResponseHeaders(Response contractResponse, YamlContract.Response response) {
 		response.headers = Optional.ofNullable(contractResponse.getHeaders())
-				.map(headers -> headers.asMap((headerName, dslProperty) -> MapConverter.getStubSideValues(dslProperty)))
-				.orElse(null);
+	.map(headers -> headers.asMap((headerName, dslProperty) -> MapConverter.getStubSideValues(dslProperty)))
+	.orElse(null);
 	}
 
 	private void mapResponseStatus(Response contractResponse, YamlContract.Response response) {
 		response.status = Optional.ofNullable(contractResponse.getStatus()).map(DslProperty::getClientValue)
-				.map(clientValue -> (Integer) clientValue).orElse(null);
+	.map(clientValue -> (Integer) clientValue).orElse(null);
 	}
 
 	private void mapResponseFixedDelayMilliseconds(Response contractResponse, YamlContract.Response response) {
 		response.fixedDelayMilliseconds = (Integer) Optional.ofNullable(contractResponse.getDelay())
-				.map(DslProperty::getClientValue).orElse(null);
+	.map(DslProperty::getClientValue).orElse(null);
 	}
 
 	private void mapResponseAsync(Response contractResponse, YamlContract.Response response) {
@@ -513,42 +513,42 @@ class ContractsToYaml {
 
 	protected void setInputHeadersMatchers(Headers headers, List<YamlContract.KeyValueMatcher> headerMatchers) {
 		Optional.ofNullable(headers).map(Headers::asStubSideMap)
-				.ifPresent(stubSideMap -> stubSideMap.forEach((key, value) -> {
-					if (value instanceof RegexProperty || value instanceof Pattern) {
-						RegexProperty property = new RegexProperty(value);
-						YamlContract.KeyValueMatcher keyValueMatcher = new YamlContract.KeyValueMatcher();
-						keyValueMatcher.key = key;
-						keyValueMatcher.regex = property.pattern();
-						keyValueMatcher.regexType = regexType(property.clazz());
-						headerMatchers.add(keyValueMatcher);
-					}
-				}));
+	.ifPresent(stubSideMap -> stubSideMap.forEach((key, value) -> {
+		if (value instanceof RegexProperty || value instanceof Pattern) {
+			RegexProperty property = new RegexProperty(value);
+			YamlContract.KeyValueMatcher keyValueMatcher = new YamlContract.KeyValueMatcher();
+			keyValueMatcher.key = key;
+			keyValueMatcher.regex = property.pattern();
+			keyValueMatcher.regexType = regexType(property.clazz());
+			headerMatchers.add(keyValueMatcher);
+		}
+	}));
 	}
 
 	protected void setOutputHeadersMatchers(Headers headers, List<YamlContract.TestHeaderMatcher> headerMatchers) {
 		Optional.ofNullable(headers).map(Headers::asTestSideMap)
-				.ifPresent(testSideMap -> testSideMap.forEach((key, value) -> {
-					if (value instanceof RegexProperty || value instanceof Pattern) {
-						RegexProperty property = new RegexProperty(value);
-						YamlContract.TestHeaderMatcher testHeaderMatcher = new YamlContract.TestHeaderMatcher();
-						testHeaderMatcher.key = key;
-						testHeaderMatcher.regex = property.pattern();
-						testHeaderMatcher.regexType = regexType(property.clazz());
-						headerMatchers.add(testHeaderMatcher);
-					}
-					else if (value instanceof ExecutionProperty) {
-						YamlContract.TestHeaderMatcher testHeaderMatcher = new YamlContract.TestHeaderMatcher();
-						testHeaderMatcher.key = key;
-						testHeaderMatcher.command = ((ExecutionProperty) value).getExecutionCommand();
-						headerMatchers.add(testHeaderMatcher);
-					}
-					else if (value instanceof NotToEscapePattern) {
-						YamlContract.TestHeaderMatcher testHeaderMatcher = new YamlContract.TestHeaderMatcher();
-						testHeaderMatcher.key = key;
-						testHeaderMatcher.regex = (((NotToEscapePattern) value).getServerValue()).pattern();
-						headerMatchers.add(testHeaderMatcher);
-					}
-				}));
+	.ifPresent(testSideMap -> testSideMap.forEach((key, value) -> {
+		if (value instanceof RegexProperty || value instanceof Pattern) {
+			RegexProperty property = new RegexProperty(value);
+			YamlContract.TestHeaderMatcher testHeaderMatcher = new YamlContract.TestHeaderMatcher();
+			testHeaderMatcher.key = key;
+			testHeaderMatcher.regex = property.pattern();
+			testHeaderMatcher.regexType = regexType(property.clazz());
+			headerMatchers.add(testHeaderMatcher);
+		}
+		else if (value instanceof ExecutionProperty) {
+			YamlContract.TestHeaderMatcher testHeaderMatcher = new YamlContract.TestHeaderMatcher();
+			testHeaderMatcher.key = key;
+			testHeaderMatcher.command = ((ExecutionProperty) value).getExecutionCommand();
+			headerMatchers.add(testHeaderMatcher);
+		}
+		else if (value instanceof NotToEscapePattern) {
+			YamlContract.TestHeaderMatcher testHeaderMatcher = new YamlContract.TestHeaderMatcher();
+			testHeaderMatcher.key = key;
+			testHeaderMatcher.regex = (((NotToEscapePattern) value).getServerValue()).pattern();
+			headerMatchers.add(testHeaderMatcher);
+		}
+	}));
 	}
 
 	protected YamlContract.TestMatcherType testMatcherType(MatchingType matchingType) {

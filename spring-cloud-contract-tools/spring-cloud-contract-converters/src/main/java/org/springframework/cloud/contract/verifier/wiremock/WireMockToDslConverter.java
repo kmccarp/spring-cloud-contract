@@ -89,11 +89,11 @@ public class WireMockToDslConverter {
 	private String convertFromWireMockStub(String wireMockStringStub) {
 		JsonNode wireMockStub = parseStubDefinition(wireMockStringStub);
 		return buildPriority(wireMockStub) + "request {\n" + buildRequestMethod(wireMockStub)
-				+ buildRequestUrl(wireMockStub) + buildRequestUrlPattern(wireMockStub)
-				+ buildRequestUrlPathPattern(wireMockStub) + buildRequestUrlPath(wireMockStub)
-				+ buildRequestHeaders(wireMockStub) + buildRequestBody(wireMockStub) + "}\n" + "response {\n"
-				+ buildResponseStatus(wireMockStub) + buildResponseBody(wireMockStub)
-				+ buildResponseHeaders(wireMockStub) + "}" + "\n";
+	+ buildRequestUrl(wireMockStub) + buildRequestUrlPattern(wireMockStub)
+	+ buildRequestUrlPathPattern(wireMockStub) + buildRequestUrlPath(wireMockStub)
+	+ buildRequestHeaders(wireMockStub) + buildRequestBody(wireMockStub) + "}\n" + "response {\n"
+	+ buildResponseStatus(wireMockStub) + buildResponseBody(wireMockStub)
+	+ buildResponseHeaders(wireMockStub) + "}" + "\n";
 	}
 
 	private JsonNode parseStubDefinition(String wireMockStringStub) {
@@ -147,7 +147,7 @@ public class WireMockToDslConverter {
 		if (!requestUrlPatternNode.isMissingNode()) {
 			String escapedRequestUrlPatternValue = escapeJava(requestUrlPatternNode.asText());
 			requestUrlPattern = "url $(consumer(regex('" + escapedRequestUrlPatternValue + "')), producer('"
-					+ new Xeger(escapedRequestUrlPatternValue).generate() + "'))\n";
+		+ new Xeger(escapedRequestUrlPatternValue).generate() + "'))\n";
 		}
 		return requestUrlPattern;
 	}
@@ -158,7 +158,7 @@ public class WireMockToDslConverter {
 		if (!requestUrlPathPatternNode.isMissingNode()) {
 			String escapedRequestUrlPathPatternValue = escapeJava(requestUrlPathPatternNode.asText());
 			requestUrlPathPattern = "urlPath $(consumer(regex('" + escapedRequestUrlPathPatternValue + "')), producer('"
-					+ new Xeger(escapedRequestUrlPathPatternValue).generate() + "'))'\n";
+		+ new Xeger(escapedRequestUrlPathPatternValue).generate() + "'))'\n";
 		}
 		return requestUrlPathPattern;
 	}
@@ -203,16 +203,16 @@ public class WireMockToDslConverter {
 			Iterable<JsonNode> iterableFields = () -> elements;
 			List<Map.Entry<String, JsonNode>> requestBodyObjectNodes = new ArrayList<>();
 			StreamSupport.stream(iterableFields.spliterator(), false).filter(f -> f instanceof ObjectNode)
-					.map(f -> (ObjectNode) f).map(ObjectNode::fields)
-					.forEachOrdered(i -> i.forEachRemaining(requestBodyObjectNodes::add));
+		.map(f -> (ObjectNode) f).map(ObjectNode::fields)
+		.forEachOrdered(i -> i.forEachRemaining(requestBodyObjectNodes::add));
 			requestBodyObjectNodes.stream().filter(b -> b.getKey().equals("equalTo")).findFirst()
-					.ifPresent(b -> requestBody.append("body ('").append(b.getValue().asText()).append("')"));
+		.ifPresent(b -> requestBody.append("body ('").append(b.getValue().asText()).append("')"));
 			requestBodyObjectNodes.stream().filter(b -> b.getKey().equals("equalToJson")).findFirst()
-					.ifPresent(b -> requestBody.append("body ('").append(b.getValue().asText()).append("')"));
+		.ifPresent(b -> requestBody.append("body ('").append(b.getValue().asText()).append("')"));
 			requestBodyObjectNodes.stream().filter(b -> b.getKey().equals("matches")).findFirst()
-					.ifPresent(b -> requestBody.append("body $(consumer(regex('")
-							.append(escapeJava(b.getValue().asText())).append("')), producer('")
-							.append(new Xeger(escapeJava(b.getValue().asText())).generate()).append("'))"));
+		.ifPresent(b -> requestBody.append("body $(consumer(regex('")
+	.append(escapeJava(b.getValue().asText())).append("')), producer('")
+	.append(new Xeger(escapeJava(b.getValue().asText())).generate()).append("'))"));
 		}
 		return requestBody.toString();
 	}
@@ -235,7 +235,7 @@ public class WireMockToDslConverter {
 		}
 		if (responseBodyNode.isTextual()) {
 			responseBody += "body( \"" + escapeJava(buildPrettyPrintResponseBody((TextNode) responseBodyNode))
-					+ "\")\n";
+		+ "\")\n";
 		}
 		return responseBody;
 	}
@@ -250,9 +250,9 @@ public class WireMockToDslConverter {
 			Object intermediateObjectForPrettyPrinting = OBJECT_MAPPER.reader().readValue(textNode, Object.class);
 			DefaultIndenter customIndenter = new DefaultIndenter("    ", "\n");
 			return OBJECT_MAPPER
-					.writer(new PrivatePrettyPrinter().withArrayIndenter(customIndenter)
-							.withObjectIndenter(customIndenter))
-					.writeValueAsString(intermediateObjectForPrettyPrinting);
+		.writer(new PrivatePrettyPrinter().withArrayIndenter(customIndenter)
+	.withObjectIndenter(customIndenter))
+		.writeValueAsString(intermediateObjectForPrettyPrinting);
 		}
 		catch (IOException e) {
 			throw new RuntimeException("WireMock response body could not be pretty printed");
@@ -268,7 +268,7 @@ public class WireMockToDslConverter {
 			ObjectNode responseHeadersObjectNode = requestHeadersNode.deepCopy();
 			Iterator<Map.Entry<String, JsonNode>> fields = responseHeadersObjectNode.fields();
 			fields.forEachRemaining(c -> responseHeadersBuilder.append("header('").append(c.getKey()).append("',")
-					.append("'").append(c.getValue().asText()).append("')\n"));
+		.append("'").append(c.getValue().asText()).append("')\n"));
 			responseHeadersBuilder.append("}");
 		}
 		return responseHeadersBuilder.toString();

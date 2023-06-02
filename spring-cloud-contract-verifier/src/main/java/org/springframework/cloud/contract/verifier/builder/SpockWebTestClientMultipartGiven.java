@@ -20,7 +20,7 @@ public class SpockWebTestClientMultipartGiven implements Given, WebTestClientAcc
 	private final BodyParser bodyParser;
 
 	SpockWebTestClientMultipartGiven(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData,
-			BodyParser bodyParser) {
+BodyParser bodyParser) {
 		this.blockBuilder = blockBuilder;
 		this.bodyReader = new BodyReader(generatedClassMetaData);
 		this.bodyParser = bodyParser;
@@ -30,14 +30,14 @@ public class SpockWebTestClientMultipartGiven implements Given, WebTestClientAcc
 	@Override
 	public MethodVisitor<Given> apply(SingleContractMetadata metadata) {
 		getMultipartParameters(metadata).entrySet()
-				.forEach(entry -> this.blockBuilder.addLine(getMultipartParameterLine(metadata, entry)));
+	.forEach(entry -> this.blockBuilder.addLine(getMultipartParameterLine(metadata, entry)));
 		return this;
 	}
 
 	private String getMultipartParameterLine(SingleContractMetadata metadata, Map.Entry<String, Object> parameter) {
 		if (parameter.getValue() instanceof NamedProperty) {
 			return ".multiPart(" + getMultipartFileParameterContent(metadata, parameter.getKey(),
-					(NamedProperty) parameter.getValue()) + ")";
+		(NamedProperty) parameter.getValue()) + ")";
 		}
 		return getParameterString(parameter);
 	}
@@ -48,21 +48,21 @@ public class SpockWebTestClientMultipartGiven implements Given, WebTestClientAcc
 	}
 
 	private String getMultipartFileParameterContent(SingleContractMetadata metadata, String propertyName,
-			NamedProperty propertyValue) {
+NamedProperty propertyValue) {
 		return ContentUtils.getGroovyMultipartFileParameterContent(propertyName, propertyValue,
-				fileProp -> this.bodyReader.readBytesFromFileString(metadata, fileProp, CommunicationType.REQUEST));
+	fileProp -> this.bodyReader.readBytesFromFileString(metadata, fileProp, CommunicationType.REQUEST));
 	}
 
 	private String getParameterString(Map.Entry<String, Object> parameter) {
 		return ".param(" + this.bodyParser.quotedShortText(parameter.getKey()) + ", "
-				+ this.bodyParser.quotedShortText(MapConverter.getTestSideValuesForNonBody(parameter.getValue())) + ")";
+	+ this.bodyParser.quotedShortText(MapConverter.getTestSideValuesForNonBody(parameter.getValue())) + ")";
 	}
 
 	@Override
 	public boolean accept(SingleContractMetadata metadata) {
 		Request request = metadata.getContract().getRequest();
 		return request != null && request.getMultipart() != null && acceptType(this.generatedClassMetaData)
-				&& this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.SPOCK;
+	&& this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.SPOCK;
 	}
 
 }

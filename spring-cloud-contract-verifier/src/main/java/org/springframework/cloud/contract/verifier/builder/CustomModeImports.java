@@ -24,10 +24,10 @@ class CustomModeImports implements Imports, CustomModeAcceptor {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "javax.inject.Inject",
-			"org.springframework.cloud.contract.verifier.http.HttpVerifier",
-			"org.springframework.cloud.contract.verifier.http.Request",
-			"org.springframework.cloud.contract.verifier.http.Response;" };
+	private static final String[] IMPORTS = {"javax.inject.Inject",
+"org.springframework.cloud.contract.verifier.http.HttpVerifier",
+"org.springframework.cloud.contract.verifier.http.Request",
+"org.springframework.cloud.contract.verifier.http.Response;"};
 
 	CustomModeImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

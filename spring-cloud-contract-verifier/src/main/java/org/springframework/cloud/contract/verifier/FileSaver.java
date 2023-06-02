@@ -60,7 +60,7 @@ class FileSaver {
 
 	protected Path generateTestBaseDir(String basePackageClass, String includedDirectoryRelativePath) {
 		Path testBaseDir = Paths.get(targetDirectory.getAbsolutePath(), packageToDirectory(basePackageClass),
-				beforeLast(includedDirectoryRelativePath, File.separator));
+	beforeLast(includedDirectoryRelativePath, File.separator));
 		try {
 			Files.createDirectories(testBaseDir);
 		}

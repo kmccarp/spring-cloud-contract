@@ -70,7 +70,7 @@ class StubRunnerPortFieldCallback implements ReflectionUtils.FieldCallback {
 		ReflectionUtils.makeAccessible(field);
 		String stub = field.getDeclaredAnnotation(StubRunnerPort.class).value();
 		Integer port = this.environment.getProperty(
-				StubRunnerConfiguration.STUBRUNNER_PREFIX + "." + stub.replace(":", ".") + ".port", Integer.class);
+	StubRunnerConfiguration.STUBRUNNER_PREFIX + "." + stub.replace(":", ".") + ".port", Integer.class);
 		if (port != null) {
 			field.set(this.bean, port);
 		}

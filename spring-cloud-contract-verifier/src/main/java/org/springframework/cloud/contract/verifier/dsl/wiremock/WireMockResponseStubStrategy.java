@@ -71,7 +71,7 @@ class WireMockResponseStubStrategy extends BaseWireMockStubStrategy {
 			return null;
 		}
 		ResponseDefinitionBuilder builder = new ResponseDefinitionBuilder()
-				.withStatus((Integer) MapConverter.getStubSideValues(response.getStatus()));
+	.withStatus((Integer) MapConverter.getStubSideValues(response.getStatus()));
 		appendHeaders(builder);
 		appendBody(builder);
 		appendResponseDelayTime(builder);
@@ -81,19 +81,19 @@ class WireMockResponseStubStrategy extends BaseWireMockStubStrategy {
 
 	private String[] responseTransformerNames() {
 		List<WireMockExtensions> wireMockExtensions = SpringFactoriesLoader.loadFactories(WireMockExtensions.class,
-				null);
+	null);
 		if (!wireMockExtensions.isEmpty()) {
 			return wireMockExtensions.stream().map(WireMockExtensions::extensions).flatMap(Collection::stream)
-					.map(Extension::getName).toArray(String[]::new);
+		.map(Extension::getName).toArray(String[]::new);
 		}
-		return new String[] { new DefaultResponseTransformer().getName(), SpringCloudContractRequestMatcher.NAME };
+		return new String[]{new DefaultResponseTransformer().getName(), SpringCloudContractRequestMatcher.NAME};
 	}
 
 	private void appendHeaders(ResponseDefinitionBuilder builder) {
 		if (response.getHeaders() != null) {
 			HttpHeaders headers = response.getHeaders().getEntries().stream().map(
-					it -> new HttpHeader(it.getName(), MapConverter.getStubSideValues(it.getClientValue()).toString()))
-					.collect(collectingAndThen(toList(), HttpHeaders::new));
+		it -> new HttpHeader(it.getName(), MapConverter.getStubSideValues(it.getClientValue()).toString()))
+		.collect(collectingAndThen(toList(), HttpHeaders::new));
 			builder.withHeaders(headers);
 		}
 	}
@@ -124,7 +124,7 @@ class WireMockResponseStubStrategy extends BaseWireMockStubStrategy {
 
 	Function<String, Object> parsingClosureForContentType() {
 		return contractMetadata.getDefinedOutputStubContentType().contains("/stream") ? MapConverter.IDENTITY
-				: MapConverter.JSON_PARSING_FUNCTION;
+	: MapConverter.JSON_PARSING_FUNCTION;
 	}
 
 	private void appendResponseDelayTime(ResponseDefinitionBuilder builder) {

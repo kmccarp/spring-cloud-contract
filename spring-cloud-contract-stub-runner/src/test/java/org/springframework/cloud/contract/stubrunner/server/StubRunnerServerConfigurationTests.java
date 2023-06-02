@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StubRunnerServerConfigurationTests {
 
 	private ApplicationContextRunner contextRunner = new ApplicationContextRunner().withConfiguration(
-			AutoConfigurations.of(StubRunnerConfiguration.class, StubRunnerServerConfiguration.class));
+AutoConfigurations.of(StubRunnerConfiguration.class, StubRunnerServerConfiguration.class));
 
 	@Test
 	public void shouldCreateBeansByDefault() {

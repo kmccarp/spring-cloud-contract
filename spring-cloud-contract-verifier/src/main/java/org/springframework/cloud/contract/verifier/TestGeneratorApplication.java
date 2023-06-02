@@ -34,7 +34,7 @@ public final class TestGeneratorApplication {
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		ContractVerifierConfigProperties configProperties = objectMapper.readValue(args[0],
-				ContractVerifierConfigProperties.class);
+	ContractVerifierConfigProperties.class);
 
 		TestGenerator generator = new TestGenerator(configProperties);
 		generator.generate();

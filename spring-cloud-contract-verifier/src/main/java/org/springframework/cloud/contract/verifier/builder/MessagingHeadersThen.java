@@ -33,7 +33,7 @@ class MessagingHeadersThen implements Then, BodyMethodVisitor {
 	private final ComparisonBuilder comparisonBuilder;
 
 	MessagingHeadersThen(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.generatedClassMetaData = generatedClassMetaData;
 		this.comparisonBuilder = comparisonBuilder;
@@ -46,14 +46,14 @@ class MessagingHeadersThen implements Then, BodyMethodVisitor {
 		OutputMessage outputMessage = singleContractMetadata.getContract().getOutputMessage();
 		outputMessage.getHeaders().executeForEachHeader(header -> {
 			processHeaderElement(header.getName(), header.getServerValue() instanceof NotToEscapePattern
-					? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
+		? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
 		});
 		return this;
 	}
 
 	private void appendLineWithHeaderNotNull(String property) {
 		this.blockBuilder.addLineWithEnding(
-				this.comparisonBuilder.assertThatIsNotNull("response.getHeader(\"" + property + "\")"));
+	this.comparisonBuilder.assertThatIsNotNull("response.getHeader(\"" + property + "\")"));
 	}
 
 	private void processHeaderElement(String property, Object value) {
@@ -74,19 +74,19 @@ class MessagingHeadersThen implements Then, BodyMethodVisitor {
 	private void processHeaderElement(String property, String value) {
 		appendLineWithHeaderNotNull(property);
 		this.blockBuilder.addLineWithEnding(
-				this.comparisonBuilder.assertThat("response.getHeader(\"" + property + "\").toString()", value));
+	this.comparisonBuilder.assertThat("response.getHeader(\"" + property + "\").toString()", value));
 	}
 
 	private void processHeaderElement(String property, Number value) {
 		appendLineWithHeaderNotNull(property);
 		blockBuilder.addLineWithEnding(
-				this.comparisonBuilder.assertThat("response.getHeader(\"" + property + "\")", value));
+	this.comparisonBuilder.assertThat("response.getHeader(\"" + property + "\")", value));
 	}
 
 	private void processHeaderElement(String property, Pattern pattern) {
 		appendLineWithHeaderNotNull(property);
 		blockBuilder.addLineWithEnding(
-				this.comparisonBuilder.assertThat("response.getHeader(\"" + property + "\").toString()", pattern));
+	this.comparisonBuilder.assertThat("response.getHeader(\"" + property + "\").toString()", pattern));
 	}
 
 	private void processHeaderElement(String property, ExecutionProperty exec) {
@@ -97,7 +97,7 @@ class MessagingHeadersThen implements Then, BodyMethodVisitor {
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return singleContractMetadata.isMessaging()
-				&& singleContractMetadata.getContract().getOutputMessage().getHeaders() != null;
+	&& singleContractMetadata.getContract().getOutputMessage().getHeaders() != null;
 	}
 
 }

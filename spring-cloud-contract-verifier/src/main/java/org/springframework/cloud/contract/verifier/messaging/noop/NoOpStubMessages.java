@@ -24,9 +24,7 @@ import org.springframework.cloud.contract.verifier.converter.YamlContract;
 /**
  * @author Marcin Grzejszczak
  */
-public class NoOpStubMessages<U>
-		implements org.springframework.cloud.contract.verifier.messaging.MessageVerifierSender<U>,
-		org.springframework.cloud.contract.verifier.messaging.MessageVerifierReceiver<U> {
+public class NoOpStubMessages<U>implements org.springframework.cloud.contract.verifier.messaging.MessageVerifierSender<U>,org.springframework.cloud.contract.verifier.messaging.MessageVerifierReceiver<U> {
 
 	@Override
 	public void send(U message, String destination, YamlContract contract) {

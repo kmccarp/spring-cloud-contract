@@ -43,7 +43,7 @@ class StubRunnerReactiveDiscoveryClient implements ReactiveDiscoveryClient {
 	private final StubMapperProperties stubMapperProperties;
 
 	StubRunnerReactiveDiscoveryClient(ReactiveDiscoveryClient delegate, StubFinder stubFinder,
-			StubMapperProperties stubMapperProperties) {
+StubMapperProperties stubMapperProperties) {
 		this.delegate = delegate instanceof StubRunnerDiscoveryClient ? noOpDiscoveryClient() : delegate;
 		if (log.isDebugEnabled()) {
 			log.debug("Will delegate calls to discovery service [" + this.delegate + "] if a stub is not found");

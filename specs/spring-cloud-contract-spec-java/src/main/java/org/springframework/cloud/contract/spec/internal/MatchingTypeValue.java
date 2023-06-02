@@ -107,8 +107,8 @@ public class MatchingTypeValue {
 		}
 		MatchingTypeValue value1 = (MatchingTypeValue) o;
 		return type == value1.type && Objects.equals(value, value1.value)
-				&& Objects.equals(minTypeOccurrence, value1.minTypeOccurrence)
-				&& Objects.equals(maxTypeOccurrence, value1.maxTypeOccurrence);
+	&& Objects.equals(minTypeOccurrence, value1.minTypeOccurrence)
+	&& Objects.equals(maxTypeOccurrence, value1.maxTypeOccurrence);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class MatchingTypeValue {
 	@Override
 	public String toString() {
 		return "MatchingTypeValue{" + "type=" + type + ", value=" + value + ", minTypeOccurrence=" + minTypeOccurrence
-				+ ", maxTypeOccurrence=" + maxTypeOccurrence + '}';
+	+ ", maxTypeOccurrence=" + maxTypeOccurrence + '}';
 	}
 
 }

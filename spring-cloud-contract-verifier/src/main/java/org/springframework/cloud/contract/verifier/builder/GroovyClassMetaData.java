@@ -46,7 +46,7 @@ class GroovyClassMetaData implements ClassMetaData, DefaultClassMetadata {
 	@Override
 	public ClassMetaData suffix() {
 		String suffix = StringUtils.hasText(this.generatedClassMetaData.configProperties.getNameSuffixForTests())
-				? this.generatedClassMetaData.configProperties.getNameSuffixForTests() : "Spec";
+	? this.generatedClassMetaData.configProperties.getNameSuffixForTests() : "Spec";
 		if (!this.blockBuilder.endsWith(suffix)) {
 			this.blockBuilder.addAtTheEnd(suffix);
 		}
@@ -69,8 +69,8 @@ class GroovyClassMetaData implements ClassMetaData, DefaultClassMetadata {
 		ContractVerifierConfigProperties properties = generatedClassMetaData().configProperties;
 		String includedDirectoryRelativePath = generatedClassMetaData().includedDirectoryRelativePath;
 		String baseClass = baseClassProvider().retrieveBaseClass(properties.getBaseClassMappings(),
-				properties.getPackageWithBaseClasses(), properties.getBaseClassForTests(),
-				includedDirectoryRelativePath);
+	properties.getPackageWithBaseClasses(), properties.getBaseClassForTests(),
+	includedDirectoryRelativePath);
 		baseClass = StringUtils.hasText(baseClass) ? baseClass : "Specification";
 		int lastIndexOf = baseClass.lastIndexOf(".");
 		if (lastIndexOf > 0) {

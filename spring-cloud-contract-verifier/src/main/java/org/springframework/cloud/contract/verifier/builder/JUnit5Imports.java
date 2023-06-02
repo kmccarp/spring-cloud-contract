@@ -26,8 +26,8 @@ class JUnit5Imports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "org.junit.jupiter.api.Test",
-			"org.junit.jupiter.api.extension.ExtendWith" };
+	private static final String[] IMPORTS = {"org.junit.jupiter.api.Test",
+"org.junit.jupiter.api.extension.ExtendWith"};
 
 	JUnit5Imports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

@@ -48,13 +48,13 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnClass(Message.class)
 @Import(CamelAutoConfiguration.class)
 @ConditionalOnProperty(name = "stubrunner.camel.enabled", havingValue = "true", matchIfMissing = true)
-@AutoConfigureBefore({ NoOpContractVerifierAutoConfiguration.class, ContractVerifierJmsConfiguration.class })
+@AutoConfigureBefore({NoOpContractVerifierAutoConfiguration.class, ContractVerifierJmsConfiguration.class})
 public class ContractVerifierCamelConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(MessageVerifierSender.class)
 	MessageVerifierSender<Message> camelContractVerifierMessageSender(CamelContext camelContext,
-			ProducerTemplate producerTemplate, ConsumerTemplate consumerTemplate) {
+ProducerTemplate producerTemplate, ConsumerTemplate consumerTemplate) {
 		CamelStubMessages camelStubMessages = new CamelStubMessages(camelContext, producerTemplate, consumerTemplate);
 		return new MessageVerifierSender<>() {
 			@Override
@@ -64,7 +64,7 @@ public class ContractVerifierCamelConfiguration {
 
 			@Override
 			public <T> void send(T payload, Map<String, Object> headers, String destination,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				camelStubMessages.send(payload, headers, destination, contract);
 			}
 		};
@@ -73,12 +73,12 @@ public class ContractVerifierCamelConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(MessageVerifierReceiver.class)
 	MessageVerifierReceiver<Message> camelContractVerifierMessageReceiver(CamelContext camelContext,
-			ProducerTemplate producerTemplate, ConsumerTemplate consumerTemplate) {
+ProducerTemplate producerTemplate, ConsumerTemplate consumerTemplate) {
 		CamelStubMessages camelStubMessages = new CamelStubMessages(camelContext, producerTemplate, consumerTemplate);
 		return new MessageVerifierReceiver<>() {
 			@Override
 			public Message receive(String destination, long timeout, TimeUnit timeUnit,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				return camelStubMessages.receive(destination, timeout, timeUnit, contract);
 			}
 
@@ -92,7 +92,7 @@ public class ContractVerifierCamelConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(ContractVerifierMessaging.class)
 	public ContractVerifierMessaging<Message> camelContractVerifierMessaging(MessageVerifierSender<Message> sender,
-			MessageVerifierReceiver<Message> receiver) {
+MessageVerifierReceiver<Message> receiver) {
 		return new ContractVerifierCamelHelper(sender, receiver);
 	}
 

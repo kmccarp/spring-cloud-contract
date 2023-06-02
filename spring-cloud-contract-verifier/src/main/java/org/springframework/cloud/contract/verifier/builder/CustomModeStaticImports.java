@@ -24,7 +24,7 @@ class CustomModeStaticImports implements Imports, CustomModeAcceptor {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "org.springframework.cloud.contract.verifier.http.Request.given" };
+	private static final String[] IMPORTS = {"org.springframework.cloud.contract.verifier.http.Request.given"};
 
 	CustomModeStaticImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

@@ -36,16 +36,16 @@ class RestAssuredGiven implements Given, BodyMethodVisitor, RestAssuredAcceptor 
 		this.blockBuilder = blockBuilder;
 		this.generatedClassMetaData = generatedClassMetaData;
 		this.requestGivens.addAll(Arrays.asList(new MockMvcRequestGiven(blockBuilder, generatedClassMetaData),
-				new SpockMockMvcRequestGiven(blockBuilder, generatedClassMetaData),
-				new ExplicitRequestGiven(blockBuilder, generatedClassMetaData),
-				new WebTestClientRequestGiven(blockBuilder, generatedClassMetaData)));
+	new SpockMockMvcRequestGiven(blockBuilder, generatedClassMetaData),
+	new ExplicitRequestGiven(blockBuilder, generatedClassMetaData),
+	new WebTestClientRequestGiven(blockBuilder, generatedClassMetaData)));
 		this.bodyGivens
-				.addAll(Arrays.asList(new MockMvcHeadersGiven(blockBuilder), new MockMvcCookiesGiven(blockBuilder),
-						new MockMvcBodyGiven(blockBuilder, generatedClassMetaData, bodyParser),
-						new JavaMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser),
-						new SpockMockMvcMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser),
-						new SpockExplicitMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser),
-						new SpockWebTestClientMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser)));
+	.addAll(Arrays.asList(new MockMvcHeadersGiven(blockBuilder), new MockMvcCookiesGiven(blockBuilder),
+new MockMvcBodyGiven(blockBuilder, generatedClassMetaData, bodyParser),
+new JavaMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser),
+new SpockMockMvcMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser),
+new SpockExplicitMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser),
+new SpockWebTestClientMultipartGiven(blockBuilder, generatedClassMetaData, bodyParser)));
 	}
 
 	@Override
@@ -59,8 +59,8 @@ class RestAssuredGiven implements Given, BodyMethodVisitor, RestAssuredAcceptor 
 
 	private void addRequestGivenLine(SingleContractMetadata singleContractMetadata) {
 		this.requestGivens.stream().filter(given -> given.accept(singleContractMetadata)).findFirst().orElseThrow(
-				() -> new IllegalStateException("No matching request building Given implementation for Rest Assured"))
-				.apply(singleContractMetadata);
+	() -> new IllegalStateException("No matching request building Given implementation for Rest Assured"))
+	.apply(singleContractMetadata);
 	}
 
 	@Override

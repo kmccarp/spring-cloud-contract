@@ -27,7 +27,7 @@ class SpockIgnoreMethodAnnotation implements MethodAnnotations {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] ANNOTATIONS = { "@Ignore" };
+	private static final String[] ANNOTATIONS = {"@Ignore"};
 
 	SpockIgnoreMethodAnnotation(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -43,9 +43,9 @@ class SpockIgnoreMethodAnnotation implements MethodAnnotations {
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.SPOCK
-				&& (singleContractMetadata.getContractMetadata().isIgnored()
-						|| singleContractMetadata.getContract().isIgnored()
-						|| singleContractMetadata.getContract().isInProgress());
+	&& (singleContractMetadata.getContractMetadata().isIgnored()
+	|| singleContractMetadata.getContract().isIgnored()
+	|| singleContractMetadata.getContract().isInProgress());
 	}
 
 }

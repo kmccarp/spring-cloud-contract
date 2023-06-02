@@ -54,7 +54,7 @@ class Arguments {
 	@Override
 	public String toString() {
 		return "Arguments{" + "stubRunnerOptions=" + this.stubRunnerOptions + ", repositoryPath='" + this.repositoryPath
-				+ '\'' + ", stub=" + this.stub + '}';
+	+ '\'' + ", stub=" + this.stub + '}';
 	}
 
 }

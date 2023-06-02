@@ -51,8 +51,8 @@ public class Request {
 	private final Map<String, Object> cookies;
 
 	Request(ContractVerifierHttpMetaData.Protocol protocol, ContractVerifierHttpMetaData.Scheme scheme,
-			HttpMethods.HttpMethod method, String path, List<AbstractMap.SimpleEntry<String, String>> queryParameters,
-			Body body, Map<String, Object> headers, Map<String, Object> cookies) {
+HttpMethods.HttpMethod method, String path, List<AbstractMap.SimpleEntry<String, String>> queryParameters,
+Body body, Map<String, Object> headers, Map<String, Object> cookies) {
 		this.protocol = protocol;
 		this.scheme = scheme;
 		this.method = method;
@@ -68,7 +68,7 @@ public class Request {
 	 */
 	public String contentType() {
 		Object value = this.headers.entrySet().stream().filter(e -> e.getKey().toLowerCase().equals("content-type"))
-				.findFirst().orElse(new AbstractMap.SimpleEntry<>("", null)).getValue();
+	.findFirst().orElse(new AbstractMap.SimpleEntry<>("", null)).getValue();
 		if (value == null) {
 			return null;
 		}
@@ -145,8 +145,8 @@ public class Request {
 	 */
 	public static Request.Builder from(Request request) {
 		return new MethodBuilder().method(request.method.getMethodName(), request.path).scheme(request.scheme)
-				.protocol(request.protocol).queryParams(request.queryParameters).headers(request.headers)
-				.cookies(request.cookies).body(request.body);
+	.protocol(request.protocol).queryParams(request.queryParameters).headers(request.headers)
+	.cookies(request.cookies).body(request.body);
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class Request {
 		 */
 		public Request build() {
 			return new Request(this.protocol, this.scheme, this.method, this.path, this.queryParameters, this.body,
-					this.headers, this.cookies);
+		this.headers, this.cookies);
 		}
 
 	}

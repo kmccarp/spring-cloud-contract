@@ -22,10 +22,10 @@ import org.springframework.cloud.contract.verifier.file.SingleContractMetadata;
 interface RestAssuredAcceptor {
 
 	default boolean acceptType(GeneratedClassMetaData generatedClassMetaData,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		return generatedClassMetaData.configProperties.getTestMode() != TestMode.CUSTOM
-				&& generatedClassMetaData.configProperties.getTestMode() != TestMode.JAXRSCLIENT
-				&& singleContractMetadata.isHttp();
+	&& generatedClassMetaData.configProperties.getTestMode() != TestMode.JAXRSCLIENT
+	&& singleContractMetadata.isHttp();
 	}
 
 }

@@ -126,11 +126,11 @@ public class ContractVerifierDslConverter implements ContractConverter<Collectio
 		ClassLoader urlCl;
 		try {
 			urlCl = URLClassLoader.newInstance(
-					Collections.singletonList(rootFolder.toURI().toURL()).toArray(new URL[0]), classLoader);
+		Collections.singletonList(rootFolder.toURI().toURL()).toArray(new URL[0]), classLoader);
 		}
 		catch (MalformedURLException e) {
 			LOG.error("Exception occurred while trying to construct the URL from the root folder at path ["
-					+ rootFolder.getPath() + "]", e);
+		+ rootFolder.getPath() + "]", e);
 			throw new DslParseException(e);
 		}
 		updateTheThreadClassLoader(urlCl);
@@ -149,7 +149,7 @@ public class ContractVerifierDslConverter implements ContractConverter<Collectio
 			catch (Exception ex) {
 				if (LOG.isWarnEnabled()) {
 					LOG.warn("Exception occurred while trying to parse the file [" + dsl
-							+ "] as a contract. Will not parse it.", ex);
+				+ "] as a contract. Will not parse it.", ex);
 				}
 				return null;
 			}
@@ -158,7 +158,7 @@ public class ContractVerifierDslConverter implements ContractConverter<Collectio
 	}
 
 	private static Object parseJavaFile(File rootFolder, File dsl) throws IllegalAccessException,
-			InvocationTargetException, InstantiationException, IOException, NoSuchMethodException {
+InvocationTargetException, InstantiationException, IOException, NoSuchMethodException {
 		Constructor<?> constructor = classConstructor(rootFolder, dsl);
 		Object newInstance = constructor.newInstance();
 		if (!(newInstance instanceof Supplier)) {
@@ -172,7 +172,7 @@ public class ContractVerifierDslConverter implements ContractConverter<Collectio
 	}
 
 	private static Constructor<?> classConstructor(File rootFolder, File dsl)
-			throws IllegalAccessException, IOException, NoSuchMethodException {
+throws IllegalAccessException, IOException, NoSuchMethodException {
 		try (StandardJavaFileManager fileManager = COMPILER.getStandardFileManager(null, null, null)) {
 			try (Stream<String> lines = Files.lines(Paths.get(dsl.getAbsolutePath()))) {
 				String classText = lines.collect(Collectors.joining("\n"));
@@ -191,20 +191,20 @@ public class ContractVerifierDslConverter implements ContractConverter<Collectio
 				// Compile the file
 				DiagnosticCollector<Object> diagnostics = new DiagnosticCollector<>();
 				JavaCompiler.CompilationTask task = COMPILER.getTask(null, fileManager, diagnostics, null, null,
-						fileManager.getJavaFileObjectsFromFiles(List.of(dsl)));
+			fileManager.getJavaFileObjectsFromFiles(List.of(dsl)));
 				boolean success = task.call();
 				if (!success) {
 					throw new IllegalStateException("Exceptions occurred while trying to compile the file \n"
-							+ diagnostics.getDiagnostics().stream()
-									.map(d -> "Error " + d.getMessage(Locale.getDefault()) + " on line "
-											+ d.getLineNumber() + " in " + d.getSource())
-									.collect(Collectors.joining("\n")));
+				+ diagnostics.getDiagnostics().stream()
+				.map(d -> "Error " + d.getMessage(Locale.getDefault()) + " on line "
+			+ d.getLineNumber() + " in " + d.getSource())
+				.collect(Collectors.joining("\n")));
 				}
 				try {
 					// Add the folder with compiled classes to the class loader
 					URLClassLoader urlClassLoader = new URLClassLoader("contract-classloader",
-							new URL[] { new URL("file://" + directory.toAbsolutePath() + "/") },
-							Thread.currentThread().getContextClassLoader());
+				new URL[]{new URL("file://" + directory.toAbsolutePath() + "/")},
+				Thread.currentThread().getContextClassLoader());
 					Class<?> clazz = ClassUtils.forName(fqn, urlClassLoader);
 					Constructor<?> constructor = clazz.getDeclaredConstructor();
 					constructor.setAccessible(true);
@@ -305,7 +305,7 @@ public class ContractVerifierDslConverter implements ContractConverter<Collectio
 	@Override
 	public boolean isAccepted(File file) {
 		return file.getName().endsWith(".groovy") || file.getName().endsWith(".gvy")
-				|| file.getName().endsWith(".java");
+	|| file.getName().endsWith(".java");
 	}
 
 	@Override

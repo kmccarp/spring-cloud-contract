@@ -146,7 +146,7 @@ public final class NamesUtil {
 	 */
 	public static String directoryToPackage(String directory) {
 		return directory.replace('.', '_').replace(File.separatorChar, '.').replaceAll("\\.([0-9])", "._$1")
-				.replaceAll("^([0-9].*)", "_$1");
+	.replaceAll("^([0-9].*)", "_$1");
 	}
 
 	/**

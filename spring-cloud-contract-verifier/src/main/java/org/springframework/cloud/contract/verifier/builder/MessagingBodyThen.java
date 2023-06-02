@@ -40,10 +40,10 @@ class MessagingBodyThen implements Then, BodyMethodVisitor {
 		this.comparisonBuilder = comparisonBuilder;
 		this.bodyParser = comparisonBuilder.bodyParser();
 		this.thens.addAll(Arrays.asList(
-				new GenericBinaryBodyThen(blockBuilder, metaData, this.bodyParser, this.comparisonBuilder),
-				new GenericTextBodyThen(blockBuilder, metaData, this.bodyParser, this.comparisonBuilder),
-				new GenericJsonBodyThen(blockBuilder, metaData, this.bodyParser, this.comparisonBuilder),
-				new GenericXmlBodyThen(blockBuilder, this.bodyParser)));
+	new GenericBinaryBodyThen(blockBuilder, metaData, this.bodyParser, this.comparisonBuilder),
+	new GenericTextBodyThen(blockBuilder, metaData, this.bodyParser, this.comparisonBuilder),
+	new GenericJsonBodyThen(blockBuilder, metaData, this.bodyParser, this.comparisonBuilder),
+	new GenericXmlBodyThen(blockBuilder, this.bodyParser)));
 	}
 
 	@Override
@@ -51,7 +51,7 @@ class MessagingBodyThen implements Then, BodyMethodVisitor {
 		endBodyBlock(this.blockBuilder);
 		startBodyBlock(this.blockBuilder, "and:");
 		this.thens.stream().filter(then -> then.accept(singleContractMetadata))
-				.forEach(then -> then.apply(singleContractMetadata));
+	.forEach(then -> then.apply(singleContractMetadata));
 		return this;
 	}
 

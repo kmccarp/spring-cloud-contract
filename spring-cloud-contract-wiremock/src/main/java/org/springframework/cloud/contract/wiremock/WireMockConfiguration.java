@@ -141,13 +141,13 @@ public class WireMockConfiguration implements SmartLifecycle {
 
 	private void printRegistrationLog() {
 		log.debug("Registering WireMock [" + this.server + "] at http port [" + httpPort() + "] and https port ["
-				+ httpsPort() + "]");
+	+ httpsPort() + "]");
 	}
 
 	private void reRegisterServer() {
 		if (log.isTraceEnabled()) {
 			log.trace("Creating a new server at http port [" + this.wireMock.getServer().getPort() + "] and "
-					+ "https port [" + this.wireMock.getServer().getHttpsPort() + "]");
+		+ "https port [" + this.wireMock.getServer().getHttpsPort() + "]");
 		}
 		if (this.isRunning()) {
 			if (log.isDebugEnabled()) {
@@ -159,13 +159,13 @@ public class WireMockConfiguration implements SmartLifecycle {
 			this.server = new WireMockServer(this.options);
 			if (log.isDebugEnabled()) {
 				log.debug("Created new server [" + this.server + "] at http port [" + httpPort() + "] and https port ["
-						+ httpsPort() + "]");
+			+ httpsPort() + "]");
 			}
 		}
 		start();
 		if (log.isDebugEnabled()) {
 			log.debug("Started server [" + this.server + "] at http port [" + httpPort() + "] and https port ["
-					+ httpsPort() + "]");
+		+ httpsPort() + "]");
 		}
 		logRegisteredMappings();
 	}
@@ -204,7 +204,7 @@ public class WireMockConfiguration implements SmartLifecycle {
 		for (String stubs : this.wireMock.getServer().getStubs()) {
 			if (StringUtils.hasText(stubs)) {
 				PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(
-						this.resourceLoader);
+			this.resourceLoader);
 				StringBuilder pattern = new StringBuilder(stubs);
 				if (!stubs.contains("*")) {
 					if (!stubs.endsWith("/")) {
@@ -216,7 +216,7 @@ public class WireMockConfiguration implements SmartLifecycle {
 					for (Resource resource : resolver.getResources(pattern.toString())) {
 						try (InputStream inputStream = resource.getInputStream()) {
 							StubMapping stubMapping = WireMockStubMapping
-									.buildFrom(StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8));
+						.buildFrom(StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8));
 							this.server.addStubMapping(stubMapping);
 						}
 					}
@@ -233,7 +233,7 @@ public class WireMockConfiguration implements SmartLifecycle {
 		for (String files : this.wireMock.getServer().getFiles()) {
 			if (StringUtils.hasText(files)) {
 				PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(
-						this.resourceLoader);
+			this.resourceLoader);
 				for (Resource resource : resolver.getResources(files)) {
 					if (resource.exists()) {
 						resources.add(resource);
@@ -252,7 +252,7 @@ public class WireMockConfiguration implements SmartLifecycle {
 		if (isRunning()) {
 			if (log.isDebugEnabled()) {
 				log.debug("Server [" + this.server + "] is already running at http port [" + httpPort()
-						+ "] / https port [" + httpsPort() + "]");
+			+ "] / https port [" + httpsPort() + "]");
 			}
 			updateCurrentServer();
 			return;
@@ -270,13 +270,13 @@ public class WireMockConfiguration implements SmartLifecycle {
 		this.running = true;
 		if (log.isDebugEnabled() && this.server.isRunning()) {
 			log.debug("Server [" + this.server + "] is already running at http port [" + httpPort() + "] / https port ["
-					+ httpsPort() + "]. It has [" + this.server.getStubMappings().size() + "] mappings registered");
+		+ httpsPort() + "]. It has [" + this.server.getStubMappings().size() + "] mappings registered");
 		}
 	}
 
 	private int httpsPort() {
 		return this.server.isRunning() && this.server.getOptions().httpsSettings().enabled() ? this.server.httpsPort()
-				: -1;
+	: -1;
 	}
 
 	@Override
@@ -297,7 +297,7 @@ public class WireMockConfiguration implements SmartLifecycle {
 
 	private int port(WireMockServer server) {
 		return server.isRunning() ? (server.getOptions().httpsSettings().enabled() ? server.httpsPort() : server.port())
-				: -1;
+	: -1;
 	}
 
 	@Override

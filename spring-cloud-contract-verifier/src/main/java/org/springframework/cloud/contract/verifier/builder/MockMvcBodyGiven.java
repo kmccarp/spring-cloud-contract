@@ -63,8 +63,8 @@ class MockMvcBodyGiven implements Given {
 		else if (body instanceof FromFileProperty) {
 			FromFileProperty fileProperty = (FromFileProperty) body;
 			value = fileProperty.isByte()
-					? this.bodyReader.readBytesFromFileString(metadata, fileProperty, CommunicationType.REQUEST)
-					: this.bodyReader.readStringFromFileString(metadata, fileProperty, CommunicationType.REQUEST);
+		? this.bodyReader.readBytesFromFileString(metadata, fileProperty, CommunicationType.REQUEST)
+		: this.bodyReader.readStringFromFileString(metadata, fileProperty, CommunicationType.REQUEST);
 		}
 		else {
 			String escaped = escapeRequestSpecialChars(metadata, body.toString());

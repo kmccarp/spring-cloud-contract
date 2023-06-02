@@ -81,7 +81,7 @@ public class TestSideRequestTemplateModel {
 	private final String escapedBody;
 
 	private TestSideRequestTemplateModel(String url, Map<String, List<Object>> query, Path path,
-			Map<String, List<String>> headers, String body, String escapedBody) {
+Map<String, List<String>> headers, String body, String escapedBody) {
 		this.url = url;
 		this.query = query;
 		this.path = path;
@@ -134,9 +134,8 @@ public class TestSideRequestTemplateModel {
 			return new HashMap<>();
 		}
 		return new HashMap<>(request.getHeaders().getEntries().stream()
-				.collect(Collectors.groupingBy(Header::getName,
-						Collectors.mapping((Function<Object, String>) o -> MapConverter.getTestSideValues(o).toString(),
-								Collectors.toList()))));
+	.collect(Collectors.groupingBy(Header::getName,
+Collectors.mapping((Function<Object, String>) o -> MapConverter.getTestSideValues(o).toString(),Collectors.toList()))));
 	}
 
 	private static String fullUrl(String url, Map<String, List<Object>> query, boolean queryParamsPresent) {
@@ -144,8 +143,8 @@ public class TestSideRequestTemplateModel {
 			return url;
 		}
 		String joinedParams = query.entrySet().stream().map(
-				entry -> entry.getValue().stream().map(s -> entry.getKey() + "=" + s).collect(Collectors.joining("&")))
-				.collect(Collectors.joining("&"));
+	entry -> entry.getValue().stream().map(s -> entry.getKey() + "=" + s).collect(Collectors.joining("&")))
+	.collect(Collectors.joining("&"));
 		return url + "?" + joinedParams;
 	}
 
@@ -154,7 +153,7 @@ public class TestSideRequestTemplateModel {
 			return new HashMap<>();
 		}
 		return new HashMap<>(queryParameters.getParameters().stream().collect(Collectors.groupingBy(
-				QueryParameter::getName, Collectors.mapping(MapConverter::getTestSideValues, Collectors.toList()))));
+	QueryParameter::getName, Collectors.mapping(MapConverter::getTestSideValues, Collectors.toList()))));
 	}
 
 	private static List<String> buildPathsFromUrl(String url) {

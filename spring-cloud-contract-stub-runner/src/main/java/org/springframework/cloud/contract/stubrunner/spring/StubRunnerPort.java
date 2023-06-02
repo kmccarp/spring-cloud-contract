@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * @author Marcin Grzejszczak
  * @since 2.0.0
  */
-@Target({ ElementType.FIELD })
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface StubRunnerPort {

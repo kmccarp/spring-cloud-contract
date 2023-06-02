@@ -31,7 +31,7 @@ class MessagingWhen implements When, BodyMethodVisitor {
 	MessagingWhen(BlockBuilder blockBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.whens.addAll(Arrays.asList(new MessagingTriggeredByWhen(this.blockBuilder),
-				new MessagingAssertThatWhen(this.blockBuilder)));
+	new MessagingAssertThatWhen(this.blockBuilder)));
 	}
 
 	@Override

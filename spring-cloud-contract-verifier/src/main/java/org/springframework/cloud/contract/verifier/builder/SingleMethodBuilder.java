@@ -90,41 +90,41 @@ class SingleMethodBuilder {
 
 	SingleMethodBuilder restAssured() {
 		return given(new JavaRestAssuredGiven(this.blockBuilder, this.generatedClassMetaData))
-				.given(new SpockRestAssuredGiven(this.blockBuilder, this.generatedClassMetaData))
-				.when(new JavaRestAssuredWhen(this.blockBuilder, this.generatedClassMetaData))
-				.when(new SpockRestAssuredWhen(this.blockBuilder, this.generatedClassMetaData))
-				.then(new JavaRestAssuredThen(this.blockBuilder, this.generatedClassMetaData))
-				.then(new SpockRestAssuredThen(this.blockBuilder, this.generatedClassMetaData))
-				.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
+	.given(new SpockRestAssuredGiven(this.blockBuilder, this.generatedClassMetaData))
+	.when(new JavaRestAssuredWhen(this.blockBuilder, this.generatedClassMetaData))
+	.when(new SpockRestAssuredWhen(this.blockBuilder, this.generatedClassMetaData))
+	.then(new JavaRestAssuredThen(this.blockBuilder, this.generatedClassMetaData))
+	.then(new SpockRestAssuredThen(this.blockBuilder, this.generatedClassMetaData))
+	.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
 	}
 
 	SingleMethodBuilder customMode() {
 		return given(new CustomModeGiven(this.blockBuilder, this.generatedClassMetaData, CustomModeBodyParser.INSTANCE))
-				.when(new CustomModeWhen(this.blockBuilder, this.generatedClassMetaData))
-				.then(new CustomModeThen(this.blockBuilder, this.generatedClassMetaData, CustomModeBodyParser.INSTANCE,
-						ComparisonBuilder.JAVA_HTTP_INSTANCE))
-				.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
+	.when(new CustomModeWhen(this.blockBuilder, this.generatedClassMetaData))
+	.then(new CustomModeThen(this.blockBuilder, this.generatedClassMetaData, CustomModeBodyParser.INSTANCE,
+ComparisonBuilder.JAVA_HTTP_INSTANCE))
+	.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
 	}
 
 	SingleMethodBuilder jaxRs() {
 		return given(new JaxRsGiven(this.generatedClassMetaData))
-				.when(new JavaJaxRsWhen(this.blockBuilder, this.generatedClassMetaData))
-				.when(new SpockJaxRsWhen(this.blockBuilder, this.generatedClassMetaData))
-				.then(new JavaJaxRsThen(this.blockBuilder, this.generatedClassMetaData))
-				.then(new SpockJaxRsThen(this.blockBuilder, this.generatedClassMetaData))
-				.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
+	.when(new JavaJaxRsWhen(this.blockBuilder, this.generatedClassMetaData))
+	.when(new SpockJaxRsWhen(this.blockBuilder, this.generatedClassMetaData))
+	.then(new JavaJaxRsThen(this.blockBuilder, this.generatedClassMetaData))
+	.then(new SpockJaxRsThen(this.blockBuilder, this.generatedClassMetaData))
+	.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
 	}
 
 	SingleMethodBuilder messaging() {
 		// @formatter:off
 		return when(new MessagingWhen(this.blockBuilder))
-				.then(new JavaMessagingWithBodyThen(this.blockBuilder,
-						this.generatedClassMetaData))
-				.then(new SpockMessagingWithBodyThen(this.blockBuilder,
-						this.generatedClassMetaData))
-				.then(new SpockMessagingEmptyThen(this.blockBuilder,
-						this.generatedClassMetaData))
-				.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
+	.then(new JavaMessagingWithBodyThen(this.blockBuilder,
+this.generatedClassMetaData))
+	.then(new SpockMessagingWithBodyThen(this.blockBuilder,
+this.generatedClassMetaData))
+	.then(new SpockMessagingEmptyThen(this.blockBuilder,
+this.generatedClassMetaData))
+	.methodPostProcessor(new TemplateUpdatingMethodPostProcessor(this.blockBuilder));
 		// @formatter:on
 	}
 
@@ -166,7 +166,7 @@ class SingleMethodBuilder {
 			if (stopProcessing) {
 				if (log.isDebugEnabled()) {
 					log.debug("The method for meta data [" + metaData
-							+ "] will not be processed further. At least one method pre-processor declared that this method should be skipped.");
+				+ "] will not be processed further. At least one method pre-processor declared that this method should be skipped.");
 				}
 				return;
 			}
@@ -177,9 +177,9 @@ class SingleMethodBuilder {
 			// @formatter:off
 			// public void validate_foo()
 			this.blockBuilder.append(methodMetadatum::modifier)
-					.appendWithSpace(methodMetadatum::returnType)
-					.appendWithSpace(() -> methodMetadatum.name(metaData))
-					.append("() throws Exception ");
+		.appendWithSpace(methodMetadatum::returnType)
+		.appendWithSpace(() -> methodMetadatum.name(metaData))
+		.append("() throws Exception ");
 			// (space) {
 			this.blockBuilder.inBraces(() -> {
 				// (indent) given
@@ -194,9 +194,9 @@ class SingleMethodBuilder {
 			});
 			this.blockBuilder.addEmptyLine();
 			this.methodPostProcessors
-				.stream()
-				.filter(m -> m.accept(metaData))
-				.forEach(m -> m.apply(metaData));
+		.stream()
+		.filter(m -> m.accept(metaData))
+		.forEach(m -> m.apply(metaData));
 			// }
 		});
 		// @formatter:on
@@ -205,14 +205,14 @@ class SingleMethodBuilder {
 
 	private boolean shouldStopProcessing(SingleContractMetadata metaData) {
 		List<MethodPreProcessor> matchingPreProcessors = this.methodPreProcessors.stream()
-				.filter(m -> m.accept(metaData)).collect(Collectors.toCollection(LinkedList::new));
+	.filter(m -> m.accept(metaData)).collect(Collectors.toCollection(LinkedList::new));
 		matchingPreProcessors.forEach(m -> m.apply(metaData));
 		return matchingPreProcessors.stream().anyMatch(m -> !m.shouldContinue());
 	}
 
 	private MethodMetadata pickMetadatum() {
 		return this.methodMetadata.stream().filter(Acceptor::accept).findFirst()
-				.orElseThrow(() -> new IllegalStateException("No matching method metadata found"));
+	.orElseThrow(() -> new IllegalStateException("No matching method metadata found"));
 	}
 
 	private boolean visit(List<? extends MethodVisitor> list, SingleContractMetadata metaData) {
@@ -221,7 +221,7 @@ class SingleMethodBuilder {
 
 	private boolean visit(List<? extends MethodVisitor> list, SingleContractMetadata metaData, boolean addLineEnding) {
 		List<? extends MethodVisitor> visitors = list.stream().filter(o -> o.accept(metaData))
-				.collect(Collectors.toList());
+	.collect(Collectors.toList());
 		Iterator<? extends MethodVisitor> iterator = visitors.iterator();
 		while (iterator.hasNext()) {
 			MethodVisitor visitor = iterator.next();

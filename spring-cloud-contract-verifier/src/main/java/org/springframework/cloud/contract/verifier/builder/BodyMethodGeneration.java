@@ -42,7 +42,7 @@ interface BodyMethodGeneration {
 	}
 
 	default void addBodyMatchingBlock(List<BodyMatcher> matchers, BlockBuilder blockBuilder, Object responseBody,
-			boolean shouldCommentOutBDDBlocks) {
+boolean shouldCommentOutBDDBlocks) {
 		blockBuilder.endBlock();
 		blockBuilder.addLine(getAssertionJoiner(shouldCommentOutBDDBlocks));
 		blockBuilder.startBlock();

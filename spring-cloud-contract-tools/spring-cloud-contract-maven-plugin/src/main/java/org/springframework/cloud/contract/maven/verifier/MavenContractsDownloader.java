@@ -74,9 +74,9 @@ class MavenContractsDownloader {
 	private final boolean failOnNoStubs;
 
 	MavenContractsDownloader(MavenProject project, Dependency contractDependency, String contractsPath,
-			String contractsRepositoryUrl, StubRunnerProperties.StubsMode stubsMode, Log log, String repositoryUsername,
-			String repositoryPassword, String repositoryProxyHost, Integer repositoryProxyPort,
-			boolean deleteStubsAfterTest, Map<String, String> contractsProperties, boolean failOnNoContracts) {
+String contractsRepositoryUrl, StubRunnerProperties.StubsMode stubsMode, Log log, String repositoryUsername,
+String repositoryPassword, String repositoryProxyHost, Integer repositoryProxyPort,
+boolean deleteStubsAfterTest, Map<String, String> contractsProperties, boolean failOnNoContracts) {
 		this.project = project;
 		this.contractDependency = contractDependency;
 		this.contractsPath = contractsPath;
@@ -99,9 +99,9 @@ class MavenContractsDownloader {
 		// reuse downloaded contracts from another mojo
 		if (downloadedContractsDir != null && downloadedContractsDir.exists()) {
 			this.log.info("Another mojo has downloaded the contracts - will reuse them from [" + downloadedContractsDir
-					+ "]");
+		+ "]");
 			final ContractDownloader.InclusionProperties inclusionProperties = contractDownloader()
-					.createNewInclusionProperties(downloadedContractsDir);
+		.createNewInclusionProperties(downloadedContractsDir);
 			config.setIncludedContracts(inclusionProperties.getIncludedContracts());
 			config.setIncludedRootFolderAntPattern(inclusionProperties.getIncludedRootFolderAntPattern());
 			return downloadedContractsDir;
@@ -111,7 +111,7 @@ class MavenContractsDownloader {
 			final ContractDownloader contractDownloader = contractDownloader();
 			final File downloadedContracts = contractDownloader.unpackAndDownloadContracts();
 			final ContractDownloader.InclusionProperties inclusionProperties = contractDownloader
-					.createNewInclusionProperties(downloadedContracts);
+		.createNewInclusionProperties(downloadedContracts);
 			config.setIncludedContracts(inclusionProperties.getIncludedContracts());
 			config.setIncludedRootFolderAntPattern(inclusionProperties.getIncludedRootFolderAntPattern());
 			this.project.getProperties().setProperty(directoryProperty(), downloadedContracts.getAbsolutePath());
@@ -126,18 +126,18 @@ class MavenContractsDownloader {
 			return CONTRACTS_DIRECTORY_PROP;
 		}
 		return CONTRACTS_DIRECTORY_PROP + "_" + this.contractDependency.getGroupId() + ":"
-				+ this.contractDependency.getArtifactId() + ":" + this.contractDependency.getVersion() + ":"
-				+ this.contractDependency.getClassifier();
+	+ this.contractDependency.getArtifactId() + ":" + this.contractDependency.getVersion() + ":"
+	+ this.contractDependency.getClassifier();
 	}
 
 	private boolean shouldDownloadContracts() {
 		return this.contractDependency != null && StringUtils.hasText(this.contractDependency.getArtifactId())
-				|| StringUtils.hasText(this.contractsRepositoryUrl);
+	|| StringUtils.hasText(this.contractsRepositoryUrl);
 	}
 
 	ContractDownloader contractDownloader() {
 		return new ContractDownloader(stubDownloader(), stubConfiguration(), this.contractsPath,
-				this.project.getGroupId(), this.project.getArtifactId(), this.project.getVersion());
+	this.project.getGroupId(), this.project.getArtifactId(), this.project.getVersion());
 	}
 
 	private StubDownloader stubDownloader() {
@@ -147,10 +147,10 @@ class MavenContractsDownloader {
 
 	StubRunnerOptions buildOptions() {
 		StubRunnerOptionsBuilder builder = new StubRunnerOptionsBuilder()
-				.withOptions(StubRunnerOptions.fromSystemProps()).withStubsMode(this.stubsMode)
-				.withUsername(this.repositoryUsername).withPassword(this.repositoryPassword)
-				.withDeleteStubsAfterTest(this.deleteStubsAfterTest).withProperties(this.contractsProperties)
-				.withFailOnNoStubs(this.failOnNoStubs);
+	.withOptions(StubRunnerOptions.fromSystemProps()).withStubsMode(this.stubsMode)
+	.withUsername(this.repositoryUsername).withPassword(this.repositoryPassword)
+	.withDeleteStubsAfterTest(this.deleteStubsAfterTest).withProperties(this.contractsProperties)
+	.withFailOnNoStubs(this.failOnNoStubs);
 		if (StringUtils.hasText(this.contractsRepositoryUrl)) {
 			builder.withStubRepositoryRoot(this.contractsRepositoryUrl);
 		}
@@ -164,7 +164,7 @@ class MavenContractsDownloader {
 		String groupId = this.contractDependency.getGroupId();
 		String artifactId = this.contractDependency.getArtifactId();
 		String version = StringUtils.hasText(this.contractDependency.getVersion())
-				? this.contractDependency.getVersion() : LATEST_VERSION;
+	? this.contractDependency.getVersion() : LATEST_VERSION;
 		String classifier = this.contractDependency.getClassifier();
 		return new StubConfiguration(groupId, artifactId, version, classifier);
 	}

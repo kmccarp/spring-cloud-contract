@@ -22,9 +22,9 @@ import org.springframework.cloud.contract.verifier.file.SingleContractMetadata;
 interface JaxRsAcceptor {
 
 	default boolean acceptType(GeneratedClassMetaData generatedClassMetaData,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		return generatedClassMetaData.configProperties.getTestMode() == TestMode.JAXRSCLIENT
-				&& singleContractMetadata.isHttp();
+	&& singleContractMetadata.isHttp();
 	}
 
 }

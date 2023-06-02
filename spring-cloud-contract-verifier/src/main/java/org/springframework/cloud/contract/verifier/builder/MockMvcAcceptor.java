@@ -22,9 +22,9 @@ import org.springframework.cloud.contract.verifier.file.SingleContractMetadata;
 interface MockMvcAcceptor {
 
 	default boolean acceptType(GeneratedClassMetaData generatedClassMetaData,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		return generatedClassMetaData.configProperties.getTestMode() == TestMode.MOCKMVC
-				&& singleContractMetadata.isHttp();
+	&& singleContractMetadata.isHttp();
 	}
 
 }

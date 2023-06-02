@@ -51,7 +51,7 @@ import org.springframework.core.env.Environment;
  * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter({ StubRunnerConfiguration.class, EurekaClientAutoConfiguration.class })
+@AutoConfigureAfter({StubRunnerConfiguration.class, EurekaClientAutoConfiguration.class})
 @ConditionalOnClass(CloudEurekaClient.class)
 @ConditionalOnStubbedDiscoveryDisabled
 @ConditionalOnEurekaEnabled
@@ -64,11 +64,11 @@ public class StubRunnerSpringCloudEurekaAutoConfiguration {
 
 		@Bean(initMethod = "registerStubs")
 		public StubsRegistrar stubsRegistrar(StubRunning stubRunning,
-				ServiceRegistry<EurekaRegistration> serviceRegistry, ApplicationContext context,
-				StubMapperProperties stubMapperProperties, InetUtils inetUtils,
-				EurekaInstanceConfigBean eurekaInstanceConfigBean, EurekaClientConfigBean eurekaClientConfigBean) {
+	ServiceRegistry<EurekaRegistration> serviceRegistry, ApplicationContext context,
+	StubMapperProperties stubMapperProperties, InetUtils inetUtils,
+	EurekaInstanceConfigBean eurekaInstanceConfigBean, EurekaClientConfigBean eurekaClientConfigBean) {
 			return new EurekaStubsRegistrar(stubRunning, serviceRegistry, stubMapperProperties, inetUtils,
-					eurekaInstanceConfigBean, eurekaClientConfigBean, context);
+		eurekaInstanceConfigBean, eurekaClientConfigBean, context);
 		}
 
 	}
@@ -86,17 +86,17 @@ public class StubRunnerSpringCloudEurekaAutoConfiguration {
 
 		@Bean(initMethod = "registerStubs")
 		public StubsRegistrar stubsRegistrar(StubRunning stubRunning,
-				ServiceRegistry<EurekaRegistration> serviceRegistry, ApplicationContext context,
-				StubMapperProperties stubMapperProperties, InetUtils inetUtils,
-				EurekaInstanceConfigBean eurekaInstanceConfigBean, EurekaClientConfigBean eurekaClientConfigBean) {
+	ServiceRegistry<EurekaRegistration> serviceRegistry, ApplicationContext context,
+	StubMapperProperties stubMapperProperties, InetUtils inetUtils,
+	EurekaInstanceConfigBean eurekaInstanceConfigBean, EurekaClientConfigBean eurekaClientConfigBean) {
 			return new EurekaStubsRegistrar(stubRunning, serviceRegistry, stubMapperProperties, inetUtils,
-					eurekaInstanceConfigBean, eurekaClientConfigBean, context) {
+		eurekaInstanceConfigBean, eurekaClientConfigBean, context) {
 				@Override
 				protected String hostName(Map.Entry<StubConfiguration, Integer> entry) {
 					String hostname = CloudConfig.this.environment.getProperty("application.hostname") + "-"
-							+ entry.getValue() + "." + CloudConfig.this.environment.getProperty("application.domain");
+				+ entry.getValue() + "." + CloudConfig.this.environment.getProperty("application.domain");
 					log.info("Registering stub [" + entry.getKey().getArtifactId() + "] with hostname [" + hostname
-							+ "]");
+				+ "]");
 					return hostname;
 				}
 

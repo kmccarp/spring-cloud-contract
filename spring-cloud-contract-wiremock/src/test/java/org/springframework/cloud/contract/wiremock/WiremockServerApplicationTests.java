@@ -33,8 +33,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = WiremockTestsApplication.class, properties = "app.baseUrl=http://localhost:5435",
-		webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = WiremockTestsApplication.class, properties = "app.baseUrl=http://localhost:5435",webEnvironment = WebEnvironment.NONE)
 public class WiremockServerApplicationTests {
 
 	@ClassRule
@@ -46,7 +45,7 @@ public class WiremockServerApplicationTests {
 	@Test
 	public void hello() throws Exception {
 		stubFor(get(urlEqualTo("/test"))
-				.willReturn(aResponse().withHeader("Content-Type", "text/plain").withBody("Hello World!")));
+	.willReturn(aResponse().withHeader("Content-Type", "text/plain").withBody("Hello World!")));
 		assertThat(this.service.go()).isEqualTo("Hello World!");
 	}
 

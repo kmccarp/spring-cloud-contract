@@ -68,7 +68,7 @@ public final class ScmStubDownloaderBuilder implements StubDownloaderBuilder {
 	@Override
 	public StubDownloader build(StubRunnerOptions stubRunnerOptions) {
 		if (stubRunnerOptions.getStubsMode() == StubRunnerProperties.StubsMode.CLASSPATH
-				|| stubRunnerOptions.getStubRepositoryRoot() == null) {
+	|| stubRunnerOptions.getStubRepositoryRoot() == null) {
 			return null;
 		}
 		Resource resource = stubRunnerOptions.getStubRepositoryRoot();
@@ -146,7 +146,7 @@ class GitContractsRepo {
 		else {
 			if (log.isDebugEnabled()) {
 				log.debug("The project has already been cloned to [" + file
-						+ "]. Will reset any changes and pull the latest ones.");
+			+ "]. Will reset any changes and pull the latest ones.");
 			}
 			GitRepo gitRepo = new GitRepo(file, properties);
 			gitRepo.reset(file);
@@ -182,7 +182,7 @@ class GitStubDownloader implements StubDownloader {
 		try {
 			if (log.isDebugEnabled()) {
 				log.debug("Trying to find a contract for [" + stubConfiguration.toColonSeparatedDependencyNotation()
-						+ "]");
+			+ "]");
 			}
 			Resource repo = this.stubRunnerOptions.getStubRepositoryRoot();
 			File clonedRepo = this.gitContractsRepo.clonedRepo(repo);
@@ -197,14 +197,14 @@ class GitStubDownloader implements StubDownloader {
 		}
 		if (log.isWarnEnabled()) {
 			log.warn("No matching contracts were found in the repo for ["
-					+ stubConfiguration.toColonSeparatedDependencyNotation() + "]");
+		+ stubConfiguration.toColonSeparatedDependencyNotation() + "]");
 		}
 		return null;
 	}
 
 	private void registerShutdownHook() {
 		Runtime.getRuntime().addShutdownHook(
-				new Thread(() -> TemporaryFileStorage.cleanup(GitStubDownloader.this.deleteStubsAfterTest)));
+	new Thread(() -> TemporaryFileStorage.cleanup(GitStubDownloader.this.deleteStubsAfterTest)));
 	}
 
 }
@@ -256,8 +256,8 @@ class GitStubDownloaderProperties {
 
 		if (log.isDebugEnabled()) {
 			log.debug("Repo url is [" + repoUrl + "], modified url string " + "is [" + modifiedRepo + "] URL is ["
-					+ this.url + "]  branch is [" + this.branch + "] and ensureGitSuffix is [" + this.ensureGitSuffix
-					+ "]");
+		+ this.url + "]  branch is [" + this.branch + "] and ensureGitSuffix is [" + this.ensureGitSuffix
+		+ "]");
 		}
 	}
 
@@ -302,7 +302,7 @@ class FileWalker extends SimpleFileVisitor<Path> {
 
 	private String matcherGlob(StubConfiguration stubConfiguration, String groupArtifactSeparator) {
 		return "**" + stubConfiguration.groupId + groupArtifactSeparator + stubConfiguration.artifactId + "/"
-				+ (this.latestSnapshotVersion || this.latestReleaseVersion ? "**" : stubConfiguration.version);
+	+ (this.latestSnapshotVersion || this.latestReleaseVersion ? "**" : stubConfiguration.version);
 	}
 
 	@Override
@@ -334,7 +334,7 @@ class FileWalker extends SimpleFileVisitor<Path> {
 		if (versions.isEmpty()) {
 			if (log.isDebugEnabled()) {
 				log.debug("Not a single version matching semver for path [" + dir.toAbsolutePath().toString()
-						+ "] was found");
+			+ "] was found");
 			}
 			return FileVisitResult.CONTINUE;
 		}
@@ -347,13 +347,13 @@ class FileWalker extends SimpleFileVisitor<Path> {
 	}
 
 	private DefaultArtifactVersionWrapper replaceWithSnapshotIfSameVersions(
-			List<DefaultArtifactVersionWrapper> versions, final DefaultArtifactVersionWrapper latestFoundVersion) {
+List<DefaultArtifactVersionWrapper> versions, final DefaultArtifactVersionWrapper latestFoundVersion) {
 		if (versions.size() > 1 && this.latestSnapshotVersion) {
 			// 2.0.1.BUILD-SNAPSHOT, 2.0.0.BUILD-SNAPSHOT
 			// 2.0.0.BUILD-SNAPSHOT, 2.0.0.RELEASE
 			DefaultArtifactVersionWrapper sameVersionButSnapshot = versions.stream().filter(
-					w -> w.projectVersion.isSameWithoutSuffix(latestFoundVersion.projectVersion) && w.isSnapshot())
-					.findFirst().orElse(latestFoundVersion);
+		w -> w.projectVersion.isSameWithoutSuffix(latestFoundVersion.projectVersion) && w.isSnapshot())
+		.findFirst().orElse(latestFoundVersion);
 			// 2.0.0 vs 2.0.0
 			// replace the RELEASE one with SNAPSHOT
 			if (sameVersionButSnapshot != latestFoundVersion) {
@@ -366,17 +366,17 @@ class FileWalker extends SimpleFileVisitor<Path> {
 	private File folderWithPredefinedName(File[] files) {
 		if (this.latestSnapshotVersion) {
 			return Arrays.stream(files)
-					.filter(file -> LATEST.stream().anyMatch(s -> s.equals(file.getName().toLowerCase()))).findFirst()
-					.orElse(null);
+		.filter(file -> LATEST.stream().anyMatch(s -> s.equals(file.getName().toLowerCase()))).findFirst()
+		.orElse(null);
 		}
 		return Arrays.stream(files).filter(file -> RELEASE.equals(file.getName().toLowerCase())).findFirst()
-				.orElse(null);
+	.orElse(null);
 	}
 
 	private List<DefaultArtifactVersionWrapper> pickLatestVersion(File[] files) {
 		return Arrays.stream(files).map(DefaultArtifactVersionWrapper::new)
-				.filter(wrapper -> this.latestSnapshotVersion || wrapper.isNotSnapshot()).sorted()
-				.collect(Collectors.toList());
+	.filter(wrapper -> this.latestSnapshotVersion || wrapper.isNotSnapshot()).sorted()
+	.collect(Collectors.toList());
 	}
 
 }

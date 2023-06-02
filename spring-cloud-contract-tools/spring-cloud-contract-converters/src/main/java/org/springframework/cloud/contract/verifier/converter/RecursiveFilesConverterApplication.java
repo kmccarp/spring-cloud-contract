@@ -39,7 +39,7 @@ public final class RecursiveFilesConverterApplication {
 		boolean excludeBuildFolders = Boolean.parseBoolean(args[4]);
 
 		RecursiveFilesConverter converter = new RecursiveFilesConverter(stubsOutputDir, contractsDslDir, excludedFiles,
-				includedContracts, excludeBuildFolders);
+	includedContracts, excludeBuildFolders);
 		converter.processFiles();
 	}
 

@@ -27,7 +27,7 @@ class JUnit4IgnoreMethodAnnotation implements MethodAnnotations {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] ANNOTATIONS = { "@Ignore" };
+	private static final String[] ANNOTATIONS = {"@Ignore"};
 
 	JUnit4IgnoreMethodAnnotation(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -43,9 +43,9 @@ class JUnit4IgnoreMethodAnnotation implements MethodAnnotations {
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT
-				&& (singleContractMetadata.getContractMetadata().isIgnored()
-						|| singleContractMetadata.getContract().isIgnored()
-						|| singleContractMetadata.getContract().isInProgress());
+	&& (singleContractMetadata.getContractMetadata().isIgnored()
+	|| singleContractMetadata.getContract().isIgnored()
+	|| singleContractMetadata.getContract().isInProgress());
 	}
 
 }

@@ -71,24 +71,24 @@ public class DslToWireMockClientConverter extends DslToWireMockConverter {
 		}
 		if (contract.getConvertedContract().size() == 1) {
 			return Collections.singletonMap(first((List<Contract>) contract.getConvertedContract()),
-					convertASingleContract(rootName, contract,
-							first((List<Contract>) contract.getConvertedContract())));
+		convertASingleContract(rootName, contract,
+	first((List<Contract>) contract.getConvertedContract())));
 		}
 		return convertContracts(rootName, contract, httpContracts);
 	}
 
 	private List<Contract> httpContracts(ContractMetadata contract) {
 		return contract.getConvertedContract().stream().filter(c -> c.getRequest() != null)
-				.collect(Collectors.toList());
+	.collect(Collectors.toList());
 	}
 
 	private Map<Contract, String> convertContracts(String rootName, ContractMetadata contract,
-			List<Contract> contractsWithRequest) {
+List<Contract> contractsWithRequest) {
 		Map<Contract, String> convertedContracts = new LinkedHashMap<>();
 		for (int i = 0; i < contractsWithRequest.size(); i++) {
 			Contract dsl = contractsWithRequest.get(i);
 			String name = StringUtils.hasText(dsl.getName()) ? NamesUtil.convertIllegalPackageChars(dsl.getName())
-					: rootName + "_" + i;
+		: rootName + "_" + i;
 			convertedContracts.put(dsl, convertASingleContract(name, contract, dsl));
 		}
 		return convertedContracts;

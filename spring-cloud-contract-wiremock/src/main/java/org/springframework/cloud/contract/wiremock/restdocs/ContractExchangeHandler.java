@@ -56,8 +56,7 @@ import org.springframework.web.multipart.support.StandardMultipartHttpServletReq
  * @author Dave Syer
  *
  */
-public class ContractExchangeHandler extends WireMockVerifyHelper<EntityExchangeResult<?>, ContractExchangeHandler>
-		implements Consumer<EntityExchangeResult<byte[]>> {
+public class ContractExchangeHandler extends WireMockVerifyHelper<EntityExchangeResult<?>, ContractExchangeHandler>implements Consumer<EntityExchangeResult<byte[]>> {
 
 	@Override
 	public void accept(EntityExchangeResult<byte[]> result) {
@@ -67,7 +66,7 @@ public class ContractExchangeHandler extends WireMockVerifyHelper<EntityExchange
 	@Override
 	protected ResponseDefinitionBuilder getResponseDefinition(EntityExchangeResult<?> result) {
 		ResponseDefinitionBuilder definition = ResponseDefinitionBuilder.responseDefinition()
-				.withBody(result.getResponseBodyContent()).withStatus(result.getStatus().value());
+	.withBody(result.getResponseBodyContent()).withStatus(result.getStatus().value());
 		addResponseHeaders(definition, result.getResponseHeaders());
 		return definition;
 	}
@@ -85,7 +84,7 @@ public class ContractExchangeHandler extends WireMockVerifyHelper<EntityExchange
 		String index = result.getRequestHeaders().getFirst(WebTestClient.WEBTESTCLIENT_REQUEST_ID);
 		@SuppressWarnings("unchecked")
 		Map<String, Object> map = (((Map<String, Map<String, Object>>) ReflectionUtils.getField(field, null))
-				.get(index));
+	.get(index));
 		if (map == null) {
 			return new HashMap<>();
 		}
@@ -256,12 +255,12 @@ class WireMockHttpRequestAdapter implements Request {
 	// TODO: Consider caching this
 	private Collection<Part> getWireMockParts() {
 		MockHttpServletRequest request = MockMvcRequestBuilders
-				.request(this.result.getMethod(), this.result.getUriTemplate())
-				.contentType(this.result.getRequestHeaders().getContentType())
-				.content(this.result.getRequestBodyContent()).buildRequest(new MockServletContext());
+	.request(this.result.getMethod(), this.result.getUriTemplate())
+	.contentType(this.result.getRequestHeaders().getContentType())
+	.content(this.result.getRequestBodyContent()).buildRequest(new MockServletContext());
 		try {
 			return new StandardMultipartHttpServletRequest(request).getParts().stream()
-					.map(part -> partFromServletPart(part)).collect(Collectors.toList());
+		.map(part -> partFromServletPart(part)).collect(Collectors.toList());
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);

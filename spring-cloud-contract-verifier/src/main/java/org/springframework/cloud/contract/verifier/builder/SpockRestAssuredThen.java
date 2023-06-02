@@ -25,14 +25,14 @@ class SpockRestAssuredThen extends RestAssuredThen {
 
 	SpockRestAssuredThen(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		super(blockBuilder, generatedClassMetaData, SpockRestAssuredBodyParser.INSTANCE,
-				GroovyComparisonBuilder.SPOCK_HTTP_INSTANCE);
+	GroovyComparisonBuilder.SPOCK_HTTP_INSTANCE);
 		this.metaData = generatedClassMetaData;
 	}
 
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return super.accept(singleContractMetadata)
-				&& this.metaData.configProperties.getTestFramework() == TestFramework.SPOCK;
+	&& this.metaData.configProperties.getTestFramework() == TestFramework.SPOCK;
 	}
 
 }

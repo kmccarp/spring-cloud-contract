@@ -15,6 +15,9 @@
  */
 
 // tag::class[]
+
+
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,14 +52,14 @@ class contract_multipart implements Supplier<Collection<Contract>> {
 					h.contentType("multipart/form-data;boundary=AaB03x");
 				});
 				r.multipart(ContractVerifierUtil.map()
-						// key (parameter name), value (parameter value) pair
-						.entry("formParameter", r.$(r.c(r.regex("\".+\"")), r.p("\"formParameterValue\"")))
-						.entry("someBooleanParameter", r.$(r.c(r.regex(r.anyBoolean())), r.p("true")))
-						// a named parameter (e.g. with `file` name) that represents file
-						// with
-						// `name` and `content`. You can also call `named("fileName",
-						// "fileContent")`
-						.entry("file", r.named(namedProps(r))));
+			// key (parameter name), value (parameter value) pair
+			.entry("formParameter", r.$(r.c(r.regex("\".+\"")), r.p("\"formParameterValue\"")))
+			.entry("someBooleanParameter", r.$(r.c(r.regex(r.anyBoolean())), r.p("true")))
+			// a named parameter (e.g. with `file` name) that represents file
+			// with
+			// `name` and `content`. You can also call `named("fileName",
+			// "fileContent")`
+			.entry("file", r.named(namedProps(r))));
 			});
 			c.response(r -> {
 				r.status(r.OK());

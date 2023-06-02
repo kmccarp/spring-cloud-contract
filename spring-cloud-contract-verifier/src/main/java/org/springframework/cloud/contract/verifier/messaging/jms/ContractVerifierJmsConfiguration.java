@@ -52,7 +52,7 @@ import org.springframework.jms.core.JmsTemplate;
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(JmsTemplate.class)
 @ConditionalOnProperty(name = "stubrunner.jms.enabled", havingValue = "true", matchIfMissing = true)
-@AutoConfigureBefore({ ContractVerifierIntegrationConfiguration.class, NoOpContractVerifierAutoConfiguration.class })
+@AutoConfigureBefore({ContractVerifierIntegrationConfiguration.class, NoOpContractVerifierAutoConfiguration.class})
 public class ContractVerifierJmsConfiguration {
 
 	@Bean
@@ -68,7 +68,7 @@ public class ContractVerifierJmsConfiguration {
 
 			@Override
 			public <T> void send(T payload, Map<String, Object> headers, String destination,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				jmsStubMessages.send(payload, headers, destination, contract);
 			}
 		};
@@ -77,13 +77,13 @@ public class ContractVerifierJmsConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(MessageVerifierReceiver.class)
 	MessageVerifierReceiver<Message> contractVerifierJmsMessageReceiver(
-			ObjectProvider<JmsTemplate> jmsTemplateProvider) {
+ObjectProvider<JmsTemplate> jmsTemplateProvider) {
 		JmsTemplate jmsTemplate = jmsTemplateProvider.getIfAvailable(JmsTemplate::new);
 		JmsStubMessages jmsStubMessages = new JmsStubMessages(jmsTemplate);
 		return new MessageVerifierReceiver<>() {
 			@Override
 			public Message receive(String destination, long timeout, TimeUnit timeUnit,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				return jmsStubMessages.receive(destination, timeout, timeUnit, contract);
 			}
 
@@ -97,7 +97,7 @@ public class ContractVerifierJmsConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(ContractVerifierMessaging.class)
 	ContractVerifierMessaging<Message> contractVerifierJmsMessaging(MessageVerifierSender<Message> sender,
-			MessageVerifierReceiver<Message> receiver) {
+MessageVerifierReceiver<Message> receiver) {
 		return new ContractVerifierJmsHelper(sender, receiver);
 	}
 

@@ -34,8 +34,8 @@ class CustomModeStatusCodeThen implements Then {
 	public MethodVisitor<Then> apply(SingleContractMetadata metadata) {
 		Response response = metadata.getContract().getResponse();
 		this.blockBuilder.addIndented(
-				this.comparisonBuilder.assertThat("response.statusCode()", response.getStatus().getServerValue()))
-				.addEndingIfNotPresent();
+	this.comparisonBuilder.assertThat("response.statusCode()", response.getStatus().getServerValue()))
+	.addEndingIfNotPresent();
 		return this;
 	}
 

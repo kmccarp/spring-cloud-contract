@@ -21,8 +21,8 @@ import java.util.LinkedList;
 class FieldAssertion extends XmlAsserter {
 
 	FieldAssertion(XmlCachedObjects cachedObjects, LinkedList<String> xPathBuffer,
-			LinkedList<String> specialCaseXPathBuffer, Object value,
-			XmlAsserterConfiguration xmlAsserterConfiguration) {
+LinkedList<String> specialCaseXPathBuffer, Object value,
+XmlAsserterConfiguration xmlAsserterConfiguration) {
 		super(cachedObjects, xPathBuffer, specialCaseXPathBuffer, value, xmlAsserterConfiguration);
 	}
 

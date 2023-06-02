@@ -30,9 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(
-		classes = { WiremockTestsApplication.class, AutoConfigureWireMockConfigurationCustomizerTests.Config.class },
-		properties = "app.baseUrl=http://localhost:${wiremock.server.port}", webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = {WiremockTestsApplication.class, AutoConfigureWireMockConfigurationCustomizerTests.Config.class},properties = "app.baseUrl=http://localhost:${wiremock.server.port}", webEnvironment = WebEnvironment.NONE)
 @AutoConfigureWireMock(port = 0, stubs = "file:src/test/resources/io.stubs/mappings")
 public class AutoConfigureWireMockConfigurationCustomizerTests {
 
@@ -66,6 +64,7 @@ public class AutoConfigureWireMockConfigurationCustomizerTests {
 				}
 			};
 		}
+
 		// end::customizer_2[]
 
 		public boolean isExecuted() {

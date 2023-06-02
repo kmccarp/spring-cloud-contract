@@ -57,7 +57,7 @@ public class Response {
 	 */
 	public String header(String key) {
 		return this.headers.entrySet().stream().filter(e -> e.getKey().equalsIgnoreCase(key)).findFirst()
-				.map(e -> e.getValue().toString()).orElse(null);
+	.map(e -> e.getValue().toString()).orElse(null);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Response {
 	 */
 	public String cookie(String key) {
 		return this.cookies.entrySet().stream().filter(e -> e.getKey().equalsIgnoreCase(key)).findFirst()
-				.map(e -> e.getValue().toString()).orElse(null);
+	.map(e -> e.getValue().toString()).orElse(null);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class Response {
 	 */
 	public static Builder from(Response response) {
 		return new Builder().headers(response.headers).statusCode(response.statusCode).cookies(response.cookies)
-				.body(response.body);
+	.body(response.body);
 	}
 
 	/**

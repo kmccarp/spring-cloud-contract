@@ -76,7 +76,7 @@ class NameProvider {
 
 	private String camelCasedMethodFromFileName(File stubsFile) {
 		return NamesUtil.camelCase(NamesUtil.convertIllegalMethodNameChars(
-				NamesUtil.toLastDot(NamesUtil.afterLast(stubsFile.getPath(), File.separator))));
+	NamesUtil.toLastDot(NamesUtil.afterLast(stubsFile.getPath(), File.separator))));
 	}
 
 }

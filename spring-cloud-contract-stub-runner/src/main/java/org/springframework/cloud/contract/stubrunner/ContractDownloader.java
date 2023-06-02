@@ -50,7 +50,7 @@ public class ContractDownloader {
 	private final String projectVersion;
 
 	public ContractDownloader(StubDownloader stubDownloader, StubConfiguration contractsJarStubConfiguration,
-			String contractsPath, String projectGroupId, String projectArtifactId, String projectVersion) {
+String contractsPath, String projectGroupId, String projectArtifactId, String projectVersion) {
 		this.stubDownloader = stubDownloader;
 		this.contractsJarStubConfiguration = contractsJarStubConfiguration;
 		this.contractsPath = contractsPath;
@@ -69,7 +69,7 @@ public class ContractDownloader {
 			log.debug("Will download contracts for [" + this.contractsJarStubConfiguration + "]");
 		}
 		Map.Entry<StubConfiguration, File> unpackedContractStubs = this.stubDownloader
-				.downloadAndUnpackStubJar(this.contractsJarStubConfiguration);
+	.downloadAndUnpackStubJar(this.contractsJarStubConfiguration);
 		if (unpackedContractStubs == null) {
 			throw new IllegalStateException("The contracts failed to be downloaded!");
 		}
@@ -128,7 +128,7 @@ public class ContractDownloader {
 
 	private boolean hasGavInPath(File file) {
 		return hasVersionInPath(file) && hasSeparatedGroupInPath(file, File.separator)
-				|| hasSeparatedGroupInPath(file, ".");
+	|| hasSeparatedGroupInPath(file, ".");
 	}
 
 	private boolean hasVersionInPath(File file) {
@@ -145,7 +145,7 @@ public class ContractDownloader {
 
 	private String patternFromProperty(File contractsDirectory) {
 		return ("^" + contractsDirectory.getAbsolutePath() + "(" + File.separator + ")?" + ".*"
-				+ contractsPath().replace("/", File.separator) + ".*$").replace("\\", "\\\\");
+	+ contractsPath().replace("/", File.separator) + ".*$").replace("\\", "\\\\");
 	}
 
 	private String contractsPath() {
@@ -164,8 +164,8 @@ public class ContractDownloader {
 
 	private String groupArtifactToPattern(File contractsDirectory) {
 		return ("^" + contractsDirectory.getAbsolutePath() + "(" + File.separator + ")?" + ".*"
-				+ slashSeparatedGroupId() + File.separator + this.projectArtifactId + File.separator + ".*$")
-						.replace("\\", "\\\\");
+	+ slashSeparatedGroupId() + File.separator + this.projectArtifactId + File.separator + ".*$")
+	.replace("\\", "\\\\");
 	}
 
 	private String fileToPattern(File contractsDirectory) {

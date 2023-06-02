@@ -199,7 +199,7 @@ public class RegexProperty extends DslProperty implements CanBeDynamic {
 		}
 		RegexProperty that = (RegexProperty) o;
 		return Objects.equals(stringPatternIfPresent(pattern), stringPatternIfPresent(that.pattern))
-				&& Objects.equals(clazz, that.clazz);
+	&& Objects.equals(clazz, that.clazz);
 	}
 
 	private Object stringPatternIfPresent(Pattern value) {

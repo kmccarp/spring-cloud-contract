@@ -56,7 +56,7 @@ public interface StubGenerator<T> {
 	 */
 	default T postProcessStubMapping(T stubMapping, Contract contract) {
 		List<StubPostProcessor> processors = StubPostProcessor.PROCESSORS.stream().filter(p -> p.isApplicable(contract))
-				.collect(Collectors.toList());
+	.collect(Collectors.toList());
 		if (processors.isEmpty()) {
 			return defaultStubMappingPostProcessing(stubMapping, contract);
 		}

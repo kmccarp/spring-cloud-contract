@@ -45,7 +45,7 @@ class JaxRsRequestHeadersWhen implements When {
 
 	private void appendHeaders(Request request) {
 		Iterator<Header> iterator = request.getHeaders().getEntries().stream().filter(header -> !headerToIgnore(header))
-				.iterator();
+	.iterator();
 		while (iterator.hasNext()) {
 			Header header = iterator.next();
 			String text = ".header(\"" + header.getName() + "\", " + headerValue(header) + ")";
@@ -76,14 +76,14 @@ class JaxRsRequestHeadersWhen implements When {
 
 	private boolean headerOfAbsentType(Header header) {
 		return header.getServerValue() instanceof MatchingStrategy
-				&& ((MatchingStrategy) header.getServerValue()).getType() == MatchingStrategy.Type.ABSENT;
+	&& ((MatchingStrategy) header.getServerValue()).getType() == MatchingStrategy.Type.ABSENT;
 	}
 
 	@Override
 	public boolean accept(SingleContractMetadata metadata) {
 		return metadata.getContract().getRequest().getHeaders() != null
-				&& !metadata.getContract().getRequest().getHeaders().getEntries().isEmpty()
-				&& !hasHeaderOnlyContentTypeOrAccept(metadata);
+	&& !metadata.getContract().getRequest().getHeaders().getEntries().isEmpty()
+	&& !hasHeaderOnlyContentTypeOrAccept(metadata);
 	}
 
 	private boolean hasHeaderOnlyContentTypeOrAccept(SingleContractMetadata metadata) {

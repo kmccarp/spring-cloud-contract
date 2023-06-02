@@ -52,8 +52,7 @@ import org.springframework.cloud.contract.verifier.messaging.MessageVerifierSend
  * @author Olga Maciaszek-Sharma
  * @since 2.1.0
  */
-public class StubRunnerExtension implements BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback,
-		StubFinder, StubRunnerExtensionOptions {
+public class StubRunnerExtension implements BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback,StubFinder, StubRunnerExtensionOptions {
 
 	private static final String DELIMITER = ":";
 
@@ -70,7 +69,7 @@ public class StubRunnerExtension implements BeforeAllCallback, AfterAllCallback,
 	private BatchStubRunner stubFinder;
 
 	private StubRunnerOptionsBuilder stubRunnerOptionsBuilder = new StubRunnerOptionsBuilder(
-			StubRunnerOptions.fromSystemProps());
+StubRunnerOptions.fromSystemProps());
 
 	private MessageVerifierSender verifierSender = new ExceptionThrowingMessageVerifier();
 
@@ -162,7 +161,7 @@ public class StubRunnerExtension implements BeforeAllCallback, AfterAllCallback,
 		boolean result = stubFinder().trigger(ivyNotation, labelName);
 		if (!result) {
 			throw new IllegalStateException(
-					"Failed to trigger a message with notation [" + ivyNotation + "] and label [" + labelName + "]");
+		"Failed to trigger a message with notation [" + ivyNotation + "] and label [" + labelName + "]");
 		}
 		return result;
 	}
@@ -318,7 +317,7 @@ public class StubRunnerExtension implements BeforeAllCallback, AfterAllCallback,
 
 	@Override
 	public StubRunnerExtension withHttpServerStubConfigurer(
-			Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer) {
+Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer) {
 		builder().withHttpServerStubConfigurer(httpServerStubConfigurer);
 		return new PortStubRunnerExtension(this.delegate);
 	}

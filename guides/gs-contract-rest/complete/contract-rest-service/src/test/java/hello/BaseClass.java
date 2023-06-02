@@ -14,15 +14,18 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 @SpringBootTest(classes = ContractRestServiceApplication.class)
 public abstract class BaseClass {
 
-	@Autowired PersonRestController personRestController;
+	@Autowired
+	PersonRestController personRestController;
 
-	@MockBean PersonService personService;
+	@MockBean
+	PersonService personService;
 
-	@Before public void setup() {
+	@Before
+	public void setup() {
 		RestAssuredMockMvc.standaloneSetup(personRestController);
 
 		Mockito.when(personService.findPersonById(1L))
-				.thenReturn(new Person(1L, "foo", "bee"));
+	.thenReturn(new Person(1L, "foo", "bee"));
 	}
 
 }

@@ -141,12 +141,12 @@ public class StubRunnerOptions {
 	final String serverId;
 
 	StubRunnerOptions(Integer minPortValue, Integer maxPortValue, Resource stubRepositoryRoot,
-			StubRunnerProperties.StubsMode stubsMode, String stubsClassifier,
-			Collection<StubConfiguration> dependencies, Map<StubConfiguration, Integer> stubIdsToPortMapping,
-			String username, String password, final StubRunnerProxyOptions stubRunnerProxyOptions,
-			boolean stubsPerConsumer, String consumerName, String mappingsOutputFolder, boolean deleteStubsAfterTest,
-			boolean generateStubs, boolean failOnNoStubs, Map<String, String> properties,
-			Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer, String serverId) {
+StubRunnerProperties.StubsMode stubsMode, String stubsClassifier,
+Collection<StubConfiguration> dependencies, Map<StubConfiguration, Integer> stubIdsToPortMapping,
+String username, String password, final StubRunnerProxyOptions stubRunnerProxyOptions,
+boolean stubsPerConsumer, String consumerName, String mappingsOutputFolder, boolean deleteStubsAfterTest,
+boolean generateStubs, boolean failOnNoStubs, Map<String, String> properties,
+Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer, String serverId) {
 		this.minPortValue = minPortValue;
 		this.maxPortValue = maxPortValue;
 		this.stubRepositoryRoot = stubRepositoryRoot;
@@ -170,22 +170,22 @@ public class StubRunnerOptions {
 
 	public static StubRunnerOptions fromSystemProps() {
 		StubRunnerOptionsBuilder builder = new StubRunnerOptionsBuilder()
-				.withMinPort(Integer.valueOf(System.getProperty("stubrunner.port.range.min", "10000")))
-				.withMaxPort(Integer.valueOf(System.getProperty("stubrunner.port.range.max", "15000")))
-				.withStubRepositoryRoot(ResourceResolver.resource(System.getProperty("stubrunner.repository.root", "")))
-				.withStubsMode(System.getProperty("stubrunner.stubs-mode", "LOCAL"))
-				.withStubsClassifier(System.getProperty("stubrunner.classifier", "stubs"))
-				.withStubs(System.getProperty("stubrunner.ids", ""))
-				.withUsername(System.getProperty("stubrunner.username"))
-				.withPassword(System.getProperty("stubrunner.password"))
-				.withStubPerConsumer(Boolean.parseBoolean(System.getProperty("stubrunner.stubs-per-consumer", "false")))
-				.withConsumerName(System.getProperty("stubrunner.consumer-name"))
-				.withMappingsOutputFolder(System.getProperty("stubrunner.mappings-output-folder"))
-				.withDeleteStubsAfterTest(
-						Boolean.parseBoolean(System.getProperty("stubrunner.delete-stubs-after-test", "true")))
-				.withGenerateStubs(Boolean.parseBoolean(System.getProperty("stubrunner.generate-stubs", "false")))
-				.withFailOnNoStubs(Boolean.parseBoolean(System.getProperty("stubrunner.fail-on-no-stubs", "false")))
-				.withProperties(stubRunnerProps()).withServerId(System.getProperty("stubrunner.server-id", ""));
+	.withMinPort(Integer.valueOf(System.getProperty("stubrunner.port.range.min", "10000")))
+	.withMaxPort(Integer.valueOf(System.getProperty("stubrunner.port.range.max", "15000")))
+	.withStubRepositoryRoot(ResourceResolver.resource(System.getProperty("stubrunner.repository.root", "")))
+	.withStubsMode(System.getProperty("stubrunner.stubs-mode", "LOCAL"))
+	.withStubsClassifier(System.getProperty("stubrunner.classifier", "stubs"))
+	.withStubs(System.getProperty("stubrunner.ids", ""))
+	.withUsername(System.getProperty("stubrunner.username"))
+	.withPassword(System.getProperty("stubrunner.password"))
+	.withStubPerConsumer(Boolean.parseBoolean(System.getProperty("stubrunner.stubs-per-consumer", "false")))
+	.withConsumerName(System.getProperty("stubrunner.consumer-name"))
+	.withMappingsOutputFolder(System.getProperty("stubrunner.mappings-output-folder"))
+	.withDeleteStubsAfterTest(
+Boolean.parseBoolean(System.getProperty("stubrunner.delete-stubs-after-test", "true")))
+	.withGenerateStubs(Boolean.parseBoolean(System.getProperty("stubrunner.generate-stubs", "false")))
+	.withFailOnNoStubs(Boolean.parseBoolean(System.getProperty("stubrunner.fail-on-no-stubs", "false")))
+	.withProperties(stubRunnerProps()).withServerId(System.getProperty("stubrunner.server-id", ""));
 		builder = httpStubConfigurer(builder);
 		String proxyHost = System.getProperty("stubrunner.proxy.host");
 		if (proxyHost != null) {
@@ -196,7 +196,7 @@ public class StubRunnerOptions {
 
 	private static StubRunnerOptionsBuilder httpStubConfigurer(StubRunnerOptionsBuilder builder) {
 		String classProperty = System.getProperty("stubrunner.http-server-stub-configurer",
-				HttpServerStubConfigurer.NoOpHttpServerStubConfigurer.class.getName());
+	HttpServerStubConfigurer.NoOpHttpServerStubConfigurer.class.getName());
 		try {
 			Class clazz = Class.forName(classProperty);
 			return builder.withHttpServerStubConfigurer(clazz);
@@ -211,10 +211,10 @@ public class StubRunnerOptions {
 		Properties properties = System.getProperties();
 		Set<String> propertyNames = properties.stringPropertyNames();
 		propertyNames.stream()
-				// stubrunner.properties.foo.bar=baz
-				.filter(s -> s.toLowerCase().startsWith("stubrunner.properties"))
-				// foo.bar=baz
-				.forEach(s -> map.put(s.substring("stubrunner.properties".length() + 1), System.getProperty(s)));
+	// stubrunner.properties.foo.bar=baz
+	.filter(s -> s.toLowerCase().startsWith("stubrunner.properties"))
+	// foo.bar=baz
+	.forEach(s -> map.put(s.substring("stubrunner.properties".length() + 1), System.getProperty(s)));
 		return map;
 	}
 
@@ -332,13 +332,13 @@ public class StubRunnerOptions {
 	@Override
 	public String toString() {
 		return "StubRunnerOptions{" + "minPortValue=" + this.minPortValue + ", maxPortValue=" + this.maxPortValue
-				+ ", stubRepositoryRoot='" + this.stubRepositoryRoot + '\'' + ", stubsMode='" + this.stubsMode
-				+ "', stubsClassifier='" + this.stubsClassifier + '\'' + ", dependencies=" + this.dependencies
-				+ ", stubIdsToPortMapping=" + this.stubIdsToPortMapping + ", username='" + obfuscate(this.username)
-				+ '\'' + ", password='" + obfuscate(this.password) + '\'' + ", stubRunnerProxyOptions='"
-				+ this.stubRunnerProxyOptions + "', stubsPerConsumer='" + this.stubsPerConsumer + '\''
-				+ ", httpServerStubConfigurer='" + this.httpServerStubConfigurer + '\'' + ", serverId='" + this.serverId
-				+ '\'' + '}';
+	+ ", stubRepositoryRoot='" + this.stubRepositoryRoot + '\'' + ", stubsMode='" + this.stubsMode
+	+ "', stubsClassifier='" + this.stubsClassifier + '\'' + ", dependencies=" + this.dependencies
+	+ ", stubIdsToPortMapping=" + this.stubIdsToPortMapping + ", username='" + obfuscate(this.username)
+	+ '\'' + ", password='" + obfuscate(this.password) + '\'' + ", stubRunnerProxyOptions='"
+	+ this.stubRunnerProxyOptions + "', stubsPerConsumer='" + this.stubsPerConsumer + '\''
+	+ ", httpServerStubConfigurer='" + this.httpServerStubConfigurer + '\'' + ", serverId='" + this.serverId
+	+ '\'' + '}';
 	}
 
 	private String obfuscate(String string) {
@@ -370,7 +370,7 @@ public class StubRunnerOptions {
 		@Override
 		public String toString() {
 			return "StubRunnerProxyOptions{" + "proxyHost='" + this.proxyHost + '\'' + ", proxyPort=" + this.proxyPort
-					+ '}';
+		+ '}';
 		}
 
 	}

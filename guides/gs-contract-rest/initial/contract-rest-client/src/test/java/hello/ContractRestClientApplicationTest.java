@@ -14,21 +14,19 @@ import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@AutoConfigureStubRunner(
-		ids = "com.example:contract-rest-service:0.0.1:stubs:8100",
-		stubsMode = StubRunnerProperties.StubsMode.LOCAL
+@AutoConfigureStubRunner(ids = "com.example:contract-rest-service:0.0.1:stubs:8100",stubsMode = StubRunnerProperties.StubsMode.LOCAL
 )
 public class ContractRestClientApplicationTest {
 
 	@Test
 	public void get_person_from_service_contract() {
-        // given:
+		// given:
 		RestTemplate restTemplate = new RestTemplate();
-        
-        // when:
+
+		// when:
 		ResponseEntity<Person> personResponseEntity = restTemplate.getForEntity("http://localhost:8100/person/1", Person.class);
-		
-        // then:
+
+		// then:
 		BDDAssertions.then(personResponseEntity.getStatusCodeValue()).isEqualTo(200);
 		BDDAssertions.then(personResponseEntity.getBody().getId()).isEqualTo(1l);
 		BDDAssertions.then(personResponseEntity.getBody().getName()).isEqualTo("foo");

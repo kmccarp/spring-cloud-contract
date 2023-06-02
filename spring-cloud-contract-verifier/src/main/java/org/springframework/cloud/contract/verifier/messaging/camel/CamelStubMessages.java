@@ -50,7 +50,7 @@ public class CamelStubMessages implements MessageVerifierSender<Message>, Messag
 	private final ContractVerifierCamelMessageBuilder builder;
 
 	public CamelStubMessages(CamelContext context, ProducerTemplate producerTemplate,
-			ConsumerTemplate consumerTemplate) {
+ConsumerTemplate consumerTemplate) {
 		this.context = context;
 		this.producerTemplate = producerTemplate;
 		this.consumerTemplate = consumerTemplate;
@@ -63,29 +63,29 @@ public class CamelStubMessages implements MessageVerifierSender<Message>, Messag
 			Exchange exchange = new DefaultExchange(this.context);
 			exchange.setIn(message);
 			StandaloneMetadata standaloneMetadata = StandaloneMetadata
-					.fromMetadata(contract != null ? contract.metadata : null);
+		.fromMetadata(contract != null ? contract.metadata : null);
 			ContractVerifierMessageMetadata verifierMessageMetadata = ContractVerifierMessageMetadata
-					.fromMetadata(contract != null ? contract.metadata : null);
+		.fromMetadata(contract != null ? contract.metadata : null);
 			String finalDestination = finalDestination(destination,
-					additionalOptions(verifierMessageMetadata, standaloneMetadata), verifierMessageMetadata);
+		additionalOptions(verifierMessageMetadata, standaloneMetadata), verifierMessageMetadata);
 			log.info("Will send a message to URI [" + finalDestination + "]");
 			this.producerTemplate.send(finalDestination, exchange);
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to send a message [" + message + "] "
-					+ "to a channel with name [" + destination + "]", e);
+		+ "to a channel with name [" + destination + "]", e);
 			throw e;
 		}
 	}
 
 	private String additionalOptions(ContractVerifierMessageMetadata verifierMessageMetadata,
-			StandaloneMetadata metadata) {
+StandaloneMetadata metadata) {
 		return verifierMessageMetadata.getMessageType() == ContractVerifierMessageMetadata.MessageType.INPUT
-				? metadata.getInput().getAdditionalOptions() : metadata.getOutputMessage().getAdditionalOptions();
+	? metadata.getInput().getAdditionalOptions() : metadata.getOutputMessage().getAdditionalOptions();
 	}
 
 	public String finalDestination(String destination, String additionalOpts,
-			ContractVerifierMessageMetadata verifierMessageMetadata) {
+ContractVerifierMessageMetadata verifierMessageMetadata) {
 		String finalDestination = destination;
 		if (verifierMessageMetadata.getMessageType() == ContractVerifierMessageMetadata.MessageType.SETUP) {
 			return finalDestination;
@@ -105,18 +105,18 @@ public class CamelStubMessages implements MessageVerifierSender<Message>, Messag
 	public Message receive(String destination, long timeout, TimeUnit timeUnit, YamlContract contract) {
 		try {
 			StandaloneMetadata standaloneMetadata = StandaloneMetadata
-					.fromMetadata(contract != null ? contract.metadata : null);
+		.fromMetadata(contract != null ? contract.metadata : null);
 			ContractVerifierMessageMetadata verifierMessageMetadata = ContractVerifierMessageMetadata
-					.fromMetadata(contract != null ? contract.metadata : null);
+		.fromMetadata(contract != null ? contract.metadata : null);
 			String finalDestination = finalDestination(destination,
-					additionalOptions(verifierMessageMetadata, standaloneMetadata), verifierMessageMetadata);
+		additionalOptions(verifierMessageMetadata, standaloneMetadata), verifierMessageMetadata);
 			log.info("Will receive a message from URI [" + finalDestination + "]");
 			Exchange exchange = this.consumerTemplate.receive(finalDestination, timeUnit.toMillis(timeout));
 			return exchange != null ? exchange.getIn() : null;
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to read a message from " + " a channel with name [" + destination
-					+ "]", e);
+		+ "]", e);
 			throw new IllegalStateException(e);
 		}
 	}

@@ -36,7 +36,7 @@ public class CompositeStubDownloaderBuilderTests {
 		EmptyStubDownloaderBuilder emptyStubDownloaderBuilder = new EmptyStubDownloaderBuilder();
 		ImpossibleToBuildStubDownloaderBuilder impossible = new ImpossibleToBuildStubDownloaderBuilder();
 		List<StubDownloaderBuilder> builders = Arrays.asList(emptyStubDownloaderBuilder, impossible,
-				new SomeStubDownloaderBuilder());
+	new SomeStubDownloaderBuilder());
 		CompositeStubDownloaderBuilder builder = new CompositeStubDownloaderBuilder(builders);
 		StubDownloader downloader = builder.build(new StubRunnerOptionsBuilder().build());
 
@@ -60,7 +60,7 @@ public class CompositeStubDownloaderBuilderTests {
 	public void should_return_null_when_no_entries_were_found() {
 		EmptyStubDownloaderBuilder emptyStubDownloaderBuilder = new EmptyStubDownloaderBuilder();
 		CompositeStubDownloaderBuilder builder = new CompositeStubDownloaderBuilder(
-				Collections.singletonList(emptyStubDownloaderBuilder));
+	Collections.singletonList(emptyStubDownloaderBuilder));
 		StubDownloader downloader = builder.build(new StubRunnerOptionsBuilder().withFailOnNoStubs(false).build());
 
 		Map.Entry<StubConfiguration, File> entry = downloader.downloadAndUnpackStubJar(new StubConfiguration("a:b:v"));
@@ -72,11 +72,11 @@ public class CompositeStubDownloaderBuilderTests {
 	public void should_throw_exception_when_no_entries_were_found_and_a_switch_to_throw_exception_was_set() {
 		EmptyStubDownloaderBuilder emptyStubDownloaderBuilder = new EmptyStubDownloaderBuilder();
 		CompositeStubDownloaderBuilder builder = new CompositeStubDownloaderBuilder(
-				Collections.singletonList(emptyStubDownloaderBuilder));
+	Collections.singletonList(emptyStubDownloaderBuilder));
 		StubDownloader downloader = builder.build(new StubRunnerOptionsBuilder().withFailOnNoStubs(true).build());
 
 		BDDAssertions.thenThrownBy(() -> downloader.downloadAndUnpackStubJar(new StubConfiguration("a:b:v")))
-				.isInstanceOf(IllegalArgumentException.class);
+	.isInstanceOf(IllegalArgumentException.class);
 	}
 
 }

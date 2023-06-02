@@ -40,9 +40,7 @@ import org.jboss.forge.roaster.model.source.JavaDocSource;
 public class DocsFromSources {
 
 	private static final String ADOC_HEADER =
-			".Docker environment variables - read at runtime\n"
-			+ "|===\n"
-			+ "|Name | Description | Default\n";
+".Docker environment variables - read at runtime\n"+ "|===\n"+ "|Name | Description | Default\n";
 
 	private final Project project;
 
@@ -56,7 +54,7 @@ public class DocsFromSources {
 		FileVisitor<Path> fv = new SimpleFileVisitor<Path>() {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-					throws IOException {
+		throws IOException {
 				if (!file.toString().endsWith(".java")) {
 					info("Skipping [" + file.toString() + "]");
 					return FileVisitResult.CONTINUE;
@@ -139,8 +137,8 @@ class EnvVar implements Comparable<EnvVar> {
 		}
 		EnvVar envVar = (EnvVar) o;
 		return Objects.equals(name, envVar.name) &&
-				Objects.equals(description, envVar.description) &&
-				Objects.equals(defaultValue, envVar.defaultValue);
+	Objects.equals(description, envVar.description) &&
+	Objects.equals(defaultValue, envVar.defaultValue);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class MvcTest {
 	@Before
 	public void setup() {
 		RestAssuredMockMvc.standaloneSetup(
-				new org.springframework.cloud.frauddetection.FraudDetectionController());
+	new org.springframework.cloud.frauddetection.FraudDetectionController());
 	}
 
 	public void assertThatRejectionReasonIsNull(Object rejectionReason) {

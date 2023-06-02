@@ -27,8 +27,8 @@ class WebTestClientRestAssuredImports implements Imports {
 	private final GeneratedClassMetaData generatedClassMetaData;
 
 	private static final String[] REST_ASSURED_3_IMPORTS = {
-			"io.restassured.module.webtestclient.specification.WebTestClientRequestSpecification",
-			"io.restassured.module.webtestclient.response.WebTestClientResponse" };
+"io.restassured.module.webtestclient.specification.WebTestClientRequestSpecification",
+"io.restassured.module.webtestclient.response.WebTestClientResponse"};
 
 	WebTestClientRestAssuredImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -44,7 +44,7 @@ class WebTestClientRestAssuredImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestMode() == TestMode.WEBTESTCLIENT
-				&& this.generatedClassMetaData.isAnyHttp();
+	&& this.generatedClassMetaData.isAnyHttp();
 	}
 
 }

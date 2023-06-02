@@ -22,14 +22,14 @@ import org.springframework.cloud.contract.verifier.file.SingleContractMetadata;
 interface CustomModeAcceptor {
 
 	default boolean acceptType(GeneratedClassMetaData generatedClassMetaData,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		return generatedClassMetaData.configProperties.getTestMode() == TestMode.CUSTOM
-				&& acceptType(singleContractMetadata);
+	&& acceptType(singleContractMetadata);
 	}
 
 	default boolean acceptType(GeneratedClassMetaData generatedClassMetaData) {
 		return generatedClassMetaData.configProperties.getTestMode() == TestMode.CUSTOM
-				&& generatedClassMetaData.isAnyHttp();
+	&& generatedClassMetaData.isAnyHttp();
 	}
 
 	default boolean acceptType(SingleContractMetadata singleContractMetadata) {

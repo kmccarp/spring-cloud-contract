@@ -31,7 +31,7 @@ class MessagingReceiveMessageThen implements Then, BodyMethodVisitor {
 	private final BodyReader bodyReader;
 
 	MessagingReceiveMessageThen(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.generatedClassMetaData = generatedClassMetaData;
 		this.comparisonBuilder = comparisonBuilder;
@@ -43,11 +43,11 @@ class MessagingReceiveMessageThen implements Then, BodyMethodVisitor {
 		OutputMessage outputMessage = singleContractMetadata.getContract().getOutputMessage();
 		this.bodyReader.storeContractAsYaml(singleContractMetadata);
 		this.blockBuilder
-				.addIndented("ContractVerifierMessage response = contractVerifierMessaging.receive("
-						+ sentToValue(outputMessage.getSentTo().getServerValue()) + ",")
-				.addEmptyLine().indent()
-				.addIndented("contract(this, \"" + singleContractMetadata.methodName() + ".yml\"))").unindent()
-				.addEndingIfNotPresent().addEmptyLine();
+	.addIndented("ContractVerifierMessage response = contractVerifierMessaging.receive("
++ sentToValue(outputMessage.getSentTo().getServerValue()) + ",")
+	.addEmptyLine().indent()
+	.addIndented("contract(this, \"" + singleContractMetadata.methodName() + ".yml\"))").unindent()
+	.addEndingIfNotPresent().addEmptyLine();
 		this.blockBuilder.addLineWithEnding(this.comparisonBuilder.assertThatIsNotNull("response"));
 		return this;
 	}
@@ -62,7 +62,7 @@ class MessagingReceiveMessageThen implements Then, BodyMethodVisitor {
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return singleContractMetadata.isMessaging()
-				&& singleContractMetadata.getContract().getOutputMessage().getSentTo() != null;
+	&& singleContractMetadata.getContract().getOutputMessage().getSentTo() != null;
 	}
 
 }

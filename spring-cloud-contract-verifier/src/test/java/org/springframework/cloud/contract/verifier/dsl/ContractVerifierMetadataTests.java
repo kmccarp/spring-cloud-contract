@@ -29,15 +29,15 @@ class ContractVerifierMetadataTests {
 	void should_parse_the_metadata_entry() throws JsonProcessingException {
 		// @formatter:off
 		String yamlEntry = "verifier:\n"
-				+ "  tool: graphql";
+	+ "  tool: graphql";
 		// @formatter:on
 
 		ContractVerifierMetadata metadata = ContractVerifierMetadata
-				.fromMetadata(this.mapper.readerForMapOf(Object.class).readValue(yamlEntry));
+	.fromMetadata(this.mapper.readerForMapOf(Object.class).readValue(yamlEntry));
 
 		String serialized = this.mapper.writer().forType(ContractVerifierMetadata.class).writeValueAsString(metadata);
 		BDDAssertions.then(serialized)
-				.isEqualToNormalizingPunctuationAndWhitespace(yamlEntry.replace("verifier:\n", ""));
+	.isEqualToNormalizingPunctuationAndWhitespace(yamlEntry.replace("verifier:\n", ""));
 	}
 
 }

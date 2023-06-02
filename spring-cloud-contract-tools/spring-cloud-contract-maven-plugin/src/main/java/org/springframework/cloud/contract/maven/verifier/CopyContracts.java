@@ -44,7 +44,7 @@ class CopyContracts {
 	private final ContractVerifierConfigProperties config;
 
 	CopyContracts(MavenProject project, MavenSession mavenSession, MavenResourcesFiltering mavenResourcesFiltering,
-			ContractVerifierConfigProperties config) {
+ContractVerifierConfigProperties config) {
 		this.project = project;
 		this.mavenSession = mavenSession;
 		this.mavenResourcesFiltering = mavenResourcesFiltering;
@@ -53,8 +53,8 @@ class CopyContracts {
 
 	public void copy(File contractsDirectory, File outputDirectory) throws MojoExecutionException {
 		log.info("Copying Spring Cloud Contract Verifier contracts to [" + outputDirectory + "]"
-				+ ". Only files matching [" + this.config.getIncludedContracts() + "] pattern will end up in "
-				+ "the final JAR with stubs.");
+	+ ". Only files matching [" + this.config.getIncludedContracts() + "] pattern will end up in "
+	+ "the final JAR with stubs.");
 		Resource resource = new Resource();
 		String includedRootFolderAntPattern = this.config.getIncludedRootFolderAntPattern() + "*.*";
 		String slashSeparatedGroupIdAntPattern = slashSeparatedGroupIdAntPattern(includedRootFolderAntPattern);

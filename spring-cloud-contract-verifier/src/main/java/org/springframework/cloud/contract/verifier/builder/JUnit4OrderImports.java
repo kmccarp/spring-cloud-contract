@@ -26,7 +26,7 @@ class JUnit4OrderImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "org.junit.FixMethodOrder", "org.junit.runners.MethodSorters" };
+	private static final String[] IMPORTS = {"org.junit.FixMethodOrder", "org.junit.runners.MethodSorters"};
 
 	JUnit4OrderImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -42,7 +42,7 @@ class JUnit4OrderImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT
-				&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
+	&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
 	}
 
 }

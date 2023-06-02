@@ -64,7 +64,7 @@ public class RecursiveFilesConverter {
 	private final boolean excludeBuildFolders;
 
 	public RecursiveFilesConverter(File stubsOutputDir, File contractsDslDir, List<String> excludedFiles,
-			String includedContracts, boolean excludeBuildFolders, StubGeneratorProvider holder) {
+String includedContracts, boolean excludeBuildFolders, StubGeneratorProvider holder) {
 		this.outMappingsDir = stubsOutputDir;
 		this.contractsDslDir = contractsDslDir;
 		this.excludedFiles = excludedFiles;
@@ -74,14 +74,14 @@ public class RecursiveFilesConverter {
 	}
 
 	public RecursiveFilesConverter(File stubsOutputDir, File contractsDslDir, List<String> excludedFiles,
-			String includedContracts, boolean excludeBuildFolders) {
+String includedContracts, boolean excludeBuildFolders) {
 		this(stubsOutputDir, contractsDslDir, excludedFiles, includedContracts, excludeBuildFolders, null);
 	}
 
 	public void processFiles() {
 		ContractFileScanner scanner = ContractFileScanner.builder().baseDir(contractsDslDir)
-				.excluded(new HashSet<>(excludedFiles)).ignored(new HashSet<>()).included(new HashSet<>())
-				.includeMatcher(includedContracts).build();
+	.excluded(new HashSet<>(excludedFiles)).ignored(new HashSet<>()).included(new HashSet<>())
+	.includeMatcher(includedContracts).build();
 		MultiValueMap<Path, ContractMetadata> contracts = scanner.findContractsRecursively();
 		if (log.isDebugEnabled()) {
 			log.debug("Found the following contracts " + contracts);
@@ -98,7 +98,7 @@ public class RecursiveFilesConverter {
 					if (excludeBuildFolders && (matchesPath(path, "target") || matchesPath(path, "build"))) {
 						if (log.isDebugEnabled()) {
 							log.debug("Exclude build folder is set. Path [" + path
-									+ "] contains [target] or [build] in its path");
+						+ "] contains [target] or [build] in its path");
 						}
 
 						continue;
@@ -110,12 +110,12 @@ public class RecursiveFilesConverter {
 					Path entryKey = entry.getKey();
 					if (log.isDebugEnabled()) {
 						log.debug(
-								"Stub Generators [" + stubGenerators + "] will convert contents of [" + entryKey + "]");
+					"Stub Generators [" + stubGenerators + "] will convert contents of [" + entryKey + "]");
 					}
 
 					for (StubGenerator stubGenerator : stubGenerators) {
 						Map<Contract, String> convertedContent = stubGenerator
-								.convertContents(last(entryKey).toString(), contract);
+					.convertContents(last(entryKey).toString(), contract);
 						if (convertedContent == null || convertedContent.isEmpty()) {
 							continue;
 						}
@@ -129,9 +129,9 @@ public class RecursiveFilesConverter {
 							if (StringUtils.hasText(converted)) {
 								Path absoluteTargetPath = createAndReturnTargetDirectory(sourceFile);
 								File newJsonFile = createTargetFileWithProperName(stubGenerator, absoluteTargetPath,
-										sourceFile, contractsSize, index, dsl);
+							sourceFile, contractsSize, index, dsl);
 								Files.write(newJsonFile.toPath(), Collections.singletonList(converted),
-										StandardCharsets.UTF_8);
+							StandardCharsets.UTF_8);
 							}
 							index = index + 1;
 						}
@@ -141,7 +141,7 @@ public class RecursiveFilesConverter {
 				}
 				catch (Exception e) {
 					throw new ConversionContractVerifierException(
-							"Unable to make conversion of " + sourceFile.getName(), e);
+				"Unable to make conversion of " + sourceFile.getName(), e);
 				}
 
 			}
@@ -187,7 +187,7 @@ public class RecursiveFilesConverter {
 	}
 
 	private File createTargetFileWithProperName(StubGenerator stubGenerator, Path absoluteTargetPath, File sourceFile,
-			int contractsSize, int index, Contract dsl) {
+int contractsSize, int index, Contract dsl) {
 		String name = generateName(dsl, contractsSize, stubGenerator, sourceFile, index);
 		File newJsonFile = new File(absoluteTargetPath.toFile(), name);
 		log.info("Creating new stub [" + newJsonFile.getPath() + "]");

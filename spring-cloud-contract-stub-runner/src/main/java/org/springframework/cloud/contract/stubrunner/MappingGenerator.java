@@ -51,11 +51,11 @@ final class MappingGenerator {
 		Collection<Path> mappings = new LinkedList<>();
 		for (StubGenerator stubGenerator : stubGenerators) {
 			Map<Contract, String> map = stubGenerator.convertContents(contractFile.getName(),
-					new ContractMetadata(contractFile.toPath(), false, contracts.size(), null, contracts));
+		new ContractMetadata(contractFile.toPath(), false, contracts.size(), null, contracts));
 			for (Map.Entry<Contract, String> entry : map.entrySet()) {
 				String value = entry.getValue();
 				File mapping = new File(mappingsFolder, StringUtils.stripFilenameExtension(contractFile.getName()) + "_"
-						+ Math.abs(entry.getKey().hashCode()) + stubGenerator.fileExtension());
+			+ Math.abs(entry.getKey().hashCode()) + stubGenerator.fileExtension());
 				mappings.add(storeFile(mapping.toPath(), value.getBytes()));
 			}
 		}

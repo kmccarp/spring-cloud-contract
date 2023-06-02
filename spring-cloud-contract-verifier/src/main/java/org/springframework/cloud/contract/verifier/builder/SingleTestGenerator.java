@@ -39,7 +39,7 @@ public interface SingleTestGenerator {
 	 * @return contents of a single test class
 	 */
 	String buildClass(ContractVerifierConfigProperties properties, Collection<ContractMetadata> listOfFiles,
-			String includedDirectoryRelativePath, GeneratedClassData generatedClassData);
+String includedDirectoryRelativePath, GeneratedClassData generatedClassData);
 
 	class GeneratedClassData {
 

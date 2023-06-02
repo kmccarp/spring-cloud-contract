@@ -74,7 +74,7 @@ public final class ZipCategory {
 						String zipEntryName = entry.getName();
 						if (!destinationFile.toPath().normalize().startsWith(destination.toPath())) {
 							throw new ZipException("The file " + zipEntryName
-									+ " is trying to leave the target output directory of " + destination);
+						+ " is trying to leave the target output directory of " + destination);
 						}
 						if (destinationFile.getParentFile() != null) {
 							destinationFile.getParentFile().mkdirs();

@@ -150,8 +150,8 @@ class StubRepository {
 
 	private Collection<Contract> contractDescriptors() {
 		return (this.path.exists()
-				? ContractScanner.collectContractDescriptors(this.path, this::isStubPerConsumerPathMatching)
-				: Collections.<Contract>emptySet());
+	? ContractScanner.collectContractDescriptors(this.path, this::isStubPerConsumerPathMatching)
+	: Collections.<Contract>emptySet());
 	}
 
 	private boolean isStubPerConsumerPathMatching(File file) {
@@ -164,7 +164,7 @@ class StubRepository {
 		boolean stubPerConsumerMatching = absolutePath.contains(searchedConsumerName);
 		if (log.isDebugEnabled()) {
 			log.debug("Absolute path [" + absolutePath + "] contains [" + searchedConsumerName + "] in its path ["
-					+ stubPerConsumerMatching + "]");
+		+ stubPerConsumerMatching + "]");
 		}
 		return stubPerConsumerMatching;
 	}

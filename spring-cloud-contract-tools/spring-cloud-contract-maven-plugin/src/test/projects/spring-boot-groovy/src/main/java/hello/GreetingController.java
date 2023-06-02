@@ -32,21 +32,19 @@ public class GreetingController {
 
 	@GetMapping("/greeting")
 	public Greeting greeting(
-			@RequestParam(value = "name", defaultValue = "World") String name) {
+@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
 
 	@GetMapping(value = "/accounts")
 	public GreetingResponse accounts(
-			@RequestParam(value = "name", defaultValue = "World") String name) {
+@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new GreetingResponse(
-						name,
-						new ArrayList<>(
-								asList(
-										new GreetingResponse.Account("account1"),
-										new GreetingResponse.Account("account2"))
-						)
-				);
+	name,
+	new ArrayList<>(
+asList(new GreetingResponse.Account("account1"),new GreetingResponse.Account("account2"))
+	)
+		);
 	}
 
 }

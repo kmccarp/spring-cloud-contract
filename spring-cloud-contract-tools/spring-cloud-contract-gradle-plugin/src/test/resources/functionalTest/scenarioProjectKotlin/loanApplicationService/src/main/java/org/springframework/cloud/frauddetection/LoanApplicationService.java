@@ -51,19 +51,19 @@ public class LoanApplicationService {
 	}
 
 	private FraudServiceResponse sendRequestToFraudDetectionService(
-			FraudServiceRequest request) {
+FraudServiceRequest request) {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add(HttpHeaders.CONTENT_TYPE, FRAUD_SERVICE_JSON_VERSION_1);
 
 		ResponseEntity<FraudServiceResponse> response = this.restTemplate.exchange(
-				"http://localhost:" + this.port + "/fraudcheck", HttpMethod.PUT,
-				new HttpEntity<>(request, httpHeaders), FraudServiceResponse.class);
+	"http://localhost:" + this.port + "/fraudcheck", HttpMethod.PUT,
+	new HttpEntity<>(request, httpHeaders), FraudServiceResponse.class);
 
 		return response.getBody();
 	}
 
 	private LoanApplicationResult buildResponseFromFraudResult(
-			FraudServiceResponse response) {
+FraudServiceResponse response) {
 		LoanApplicationStatus applicationStatus = null;
 		if (FraudCheckStatus.OK == response.getFraudCheckStatus()) {
 			applicationStatus = LoanApplicationStatus.LOAN_APPLIED;
@@ -73,7 +73,7 @@ public class LoanApplicationService {
 		}
 
 		return new LoanApplicationResult(applicationStatus,
-				response.getRejectionReason());
+	response.getRejectionReason());
 	}
 
 	public void setPort(int port) {

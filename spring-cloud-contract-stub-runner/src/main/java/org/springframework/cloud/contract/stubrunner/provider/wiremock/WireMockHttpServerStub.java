@@ -85,7 +85,7 @@ public class WireMockHttpServerStub implements HttpServerStub {
 
 	private Extension[] responseTransformers() {
 		List<WireMockExtensions> wireMockExtensions = SpringFactoriesLoader.loadFactories(WireMockExtensions.class,
-				null);
+	null);
 		List<Extension> extensions = new ArrayList<>();
 		if (!wireMockExtensions.isEmpty()) {
 			for (WireMockExtensions wireMockExtension : wireMockExtensions) {
@@ -94,7 +94,7 @@ public class WireMockHttpServerStub implements HttpServerStub {
 		}
 		else {
 			extensions.addAll(Arrays.asList(new DefaultResponseTransformer(false, helpers()),
-					new SpringCloudContractRequestMatcher()));
+		new SpringCloudContractRequestMatcher()));
 		}
 		return extensions.toArray(new Extension[extensions.size()]);
 	}
@@ -138,7 +138,7 @@ public class WireMockHttpServerStub implements HttpServerStub {
 		this.wireMockServer.start();
 		if (log.isDebugEnabled()) {
 			log.debug("For " + configuration.toColonSeparatedDependencyNotation() + " Started WireMock at ["
-					+ (this.https ? "https" : "http") + "] port [" + port + "]");
+		+ (this.https ? "https" : "http") + "] port [" + port + "]");
 		}
 		cacheStubServer(configuration.randomPort, port);
 		return this;
@@ -271,7 +271,7 @@ public class WireMockHttpServerStub implements HttpServerStub {
 
 	private void registerHealthCheck(WireMock wireMock, String url, String body) {
 		wireMock.register(
-				WireMock.get(WireMock.urlEqualTo(url)).willReturn(WireMock.aResponse().withBody(body).withStatus(200)));
+	WireMock.get(WireMock.urlEqualTo(url)).willReturn(WireMock.aResponse().withBody(body).withStatus(200)));
 	}
 
 }
@@ -293,7 +293,7 @@ class PortAndMappings {
 	@Override
 	public String toString() {
 		return "PortAndMappings{" + "random=" + this.random + ", port=" + this.port + ", mappings=" + this.mappings
-				+ '}';
+	+ '}';
 	}
 
 }

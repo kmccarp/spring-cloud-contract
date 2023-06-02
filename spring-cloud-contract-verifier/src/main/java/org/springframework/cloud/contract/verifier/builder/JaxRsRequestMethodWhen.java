@@ -46,7 +46,7 @@ class JaxRsRequestMethodWhen implements When, JaxRsBodyParser {
 		String method = request.getMethod().getServerValue().toString().toLowerCase();
 		if (request.getBody() != null) {
 			String contentType = StringUtils.hasText(metadata.getDefinedInputTestContentType())
-					? metadata.getDefinedInputTestContentType() : type.getMimeType();
+		? metadata.getDefinedInputTestContentType() : type.getMimeType();
 			Object body = request.getBody().getServerValue();
 			String value;
 			if (body instanceof ExecutionProperty) {
@@ -55,14 +55,14 @@ class JaxRsRequestMethodWhen implements When, JaxRsBodyParser {
 			else if (body instanceof FromFileProperty) {
 				FromFileProperty fileProperty = (FromFileProperty) body;
 				value = fileProperty.isByte()
-						? this.bodyReader.readBytesFromFileString(metadata, fileProperty, CommunicationType.REQUEST)
-						: this.bodyReader.readStringFromFileString(metadata, fileProperty, CommunicationType.REQUEST);
+			? this.bodyReader.readBytesFromFileString(metadata, fileProperty, CommunicationType.REQUEST)
+			: this.bodyReader.readStringFromFileString(metadata, fileProperty, CommunicationType.REQUEST);
 			}
 			else {
 				value = "\"" + requestBodyAsString(metadata) + "\"";
 			}
 			this.blockBuilder.addIndented(
-					".build(\"" + method.toUpperCase() + "\", entity(" + value + ", \"" + contentType + "\"))");
+		".build(\"" + method.toUpperCase() + "\", entity(" + value + ", \"" + contentType + "\"))");
 		}
 		else {
 			this.blockBuilder.addIndented(".build(\"" + method.toUpperCase() + "\")");

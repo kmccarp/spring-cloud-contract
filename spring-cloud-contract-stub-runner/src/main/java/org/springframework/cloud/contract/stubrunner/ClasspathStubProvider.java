@@ -76,8 +76,8 @@ public class ClasspathStubProvider implements StubDownloaderBuilder {
 		}
 		String path = "/**/" + configuration.getGroupId() + "/" + configuration.getArtifactId();
 		return RepoRoots.asList(new RepoRoot("classpath*:/META-INF" + path, "/**/*.*"),
-				new RepoRoot("classpath*:/contracts" + path, "/**/*.*"),
-				new RepoRoot("classpath*:/mappings" + path, "/**/*.*"));
+	new RepoRoot("classpath*:/contracts" + path, "/**/*.*"),
+	new RepoRoot("classpath*:/mappings" + path, "/**/*.*"));
 	}
 
 	private Pattern gavPattern(StubConfiguration config) {

@@ -223,7 +223,7 @@ public final class WireMockRestServiceServer {
 
 	private ResponseActions responseActions(MockRestServiceServer server, StubMapping mapping) {
 		if (StringUtils.hasText(mapping.getRequest().getUrl())
-				|| StringUtils.hasText(mapping.getRequest().getUrlPath())) {
+	|| StringUtils.hasText(mapping.getRequest().getUrlPath())) {
 			return server.expect(requestTo(request(mapping.getRequest())));
 		}
 		return server.expect(requestTo(requestMatcher(mapping.getRequest())));
@@ -236,7 +236,7 @@ public final class WireMockRestServiceServer {
 		for (final ContentPattern<?> pattern : request.getBodyPatterns()) {
 			if (pattern instanceof MatchesJsonPathPattern) {
 				expect.andExpect(MockRestRequestMatchers
-						.jsonPath(((MatchesJsonPathPattern) pattern).getMatchesJsonPath()).exists());
+			.jsonPath(((MatchesJsonPathPattern) pattern).getMatchesJsonPath()).exists());
 			}
 			else if (pattern instanceof MatchesXPathPattern) {
 				expect.andExpect(xpath((MatchesXPathPattern) pattern));
@@ -253,7 +253,7 @@ public final class WireMockRestServiceServer {
 				@SuppressWarnings("unchecked")
 				MatchResult result = pattern.match(mockRequest.getBodyAsString());
 				MatcherAssert.assertThat("Request as string [" + mockRequest.getBodyAsString() + "]",
-						result.isExactMatch());
+			result.isExactMatch());
 			}
 		};
 	}
@@ -269,7 +269,7 @@ public final class WireMockRestServiceServer {
 
 	private String request(RequestPattern request) {
 		return this.baseUrl + (request.getUrlPath() == null ? (request.getUrl() == null ? "/" : request.getUrl())
-				: request.getUrlPath());
+	: request.getUrlPath());
 	}
 
 	private String withoutBaseUrl(String url) {
@@ -315,12 +315,12 @@ public final class WireMockRestServiceServer {
 
 	private StubMapping mapping(Resource resource) throws IOException {
 		return Json.read(StreamUtils.copyToString(resource.getInputStream(), Charset.defaultCharset()),
-				StubMapping.class);
+	StubMapping.class);
 	}
 
 	private DefaultResponseCreator response(ResponseDefinition response) {
 		return withStatus(HttpStatus.valueOf(response.getStatus())).body(body(response))
-				.contentType(contentType(response)).headers(responseHeaders(response));
+	.contentType(contentType(response)).headers(responseHeaders(response));
 	}
 
 	private byte[] body(ResponseDefinition response) {
@@ -371,7 +371,7 @@ public final class WireMockRestServiceServer {
 					@Override
 					public void describeTo(Description description) {
 						description.appendText("should match header: " + header + " with ")
-								.appendText(pattern.getExpected());
+					.appendText(pattern.getExpected());
 					}
 				}));
 			}
@@ -448,7 +448,7 @@ public final class WireMockRestServiceServer {
 
 		private String request(RequestPattern request) {
 			return (request.getUrlPath() == null ? (request.getUrl() == null ? "/" : request.getUrl())
-					: request.getUrlPath());
+		: request.getUrlPath());
 		}
 
 	}

@@ -74,7 +74,7 @@ public class ContractProjectUpdater {
 	public void updateContractProject(String projectName, Path rootStubsFolder) {
 		File clonedRepo = this.gitContractsRepo.clonedRepo(this.stubRunnerOptions.stubRepositoryRoot);
 		GitStubDownloaderProperties properties = new GitStubDownloaderProperties(
-				this.stubRunnerOptions.stubRepositoryRoot, this.stubRunnerOptions);
+	this.stubRunnerOptions.stubRepositoryRoot, this.stubRunnerOptions);
 		copyStubs(projectName, rootStubsFolder, clonedRepo);
 		GitRepo gitRepo = new GitRepo(clonedRepo, properties);
 		String msg = StubRunnerPropertyUtils.getProperty(this.stubRunnerOptions.getProperties(), GIT_COMMIT_MESSAGE);
@@ -84,10 +84,10 @@ public class ContractProjectUpdater {
 			return;
 		}
 		String attempts = StubRunnerPropertyUtils.getProperty(this.stubRunnerOptions.getProperties(),
-				GIT_ATTEMPTS_NO_PROP);
+	GIT_ATTEMPTS_NO_PROP);
 		int intAttempts = StringUtils.hasText(attempts) ? Integer.parseInt(attempts) : DEFAULT_ATTEMPTS_NO;
 		String wait = StubRunnerPropertyUtils.getProperty(this.stubRunnerOptions.getProperties(),
-				GIT_WAIT_BETWEEN_ATTEMPTS);
+	GIT_WAIT_BETWEEN_ATTEMPTS);
 		long longWait = StringUtils.hasText(wait) ? Long.parseLong(wait) : DEFAULT_WAIT_BETWEEN_ATTEMPTS;
 		tryToPushCurrentBranch(clonedRepo, gitRepo, intAttempts, longWait);
 	}
@@ -109,8 +109,8 @@ public class ContractProjectUpdater {
 				currentAttempt++;
 				if (currentAttempt == intAttempts) {
 					throw new IllegalStateException(
-							"Failed to push changes to the project with contracts and stubs. Exceeded number of retries ["
-									+ intAttempts + "]");
+				"Failed to push changes to the project with contracts and stubs. Exceeded number of retries ["
+			+ intAttempts + "]");
 				}
 				try {
 					Thread.sleep(longWait);
@@ -124,7 +124,7 @@ public class ContractProjectUpdater {
 
 	private String commitMessage(String projectName, String msg) {
 		return StringUtils.hasText(msg) ? replaceProject(projectName, msg)
-				: replaceProject(projectName, DEFAULT_COMMIT_MESSAGE);
+	: replaceProject(projectName, DEFAULT_COMMIT_MESSAGE);
 	}
 
 	private String replaceProject(String projectName, String msg) {
@@ -135,7 +135,7 @@ public class ContractProjectUpdater {
 		try {
 			if (log.isDebugEnabled()) {
 				log.debug("Copying stubs from [" + rootStubsFolder.toString() + "] to the cloned repo ["
-						+ clonedRepo.getAbsolutePath() + "] for project [" + projectName + "]");
+			+ clonedRepo.getAbsolutePath() + "] for project [" + projectName + "]");
 			}
 			Files.walkFileTree(rootStubsFolder, new DirectoryCopyingVisitor(rootStubsFolder, clonedRepo.toPath()));
 			if (log.isDebugEnabled()) {

@@ -103,7 +103,7 @@ public class WireMockSnippetTests {
 
 	@Test
 	public void should_use_equal_to_json_pattern_for_body_when_request_content_type_is_json_when_generating_stub()
-			throws Exception {
+throws Exception {
 		this.operation = operation(requestPostWithJsonContentType(), response(), this.context);
 		WireMockSnippet snippet = new WireMockSnippet();
 
@@ -118,7 +118,7 @@ public class WireMockSnippetTests {
 
 	@Test
 	public void should_use_equal_to_xml_pattern_for_body_when_request_content_type_is_xml_when_generating_stub()
-			throws Exception {
+throws Exception {
 		this.operation = operation(requestPostWithXmlContentType(), response(), this.context);
 		WireMockSnippet snippet = new WireMockSnippet();
 
@@ -169,16 +169,16 @@ public class WireMockSnippetTests {
 		StubMapping stubMapping = WireMockStubMapping.buildFrom(new String(Files.readAllBytes(stub.toPath())));
 		assertThat(stubMapping.getRequest().getUrlPath()).isEqualTo("/bar");
 		assertThat(stubMapping.getRequest().getQueryParameters())
-				.containsOnly(Assertions.entry("myParam", MultiValuePattern.of(equalTo(("myValue")))));
+	.containsOnly(Assertions.entry("myParam", MultiValuePattern.of(equalTo(("myValue")))));
 	}
 
 	private Operation operation(OperationRequest request, OperationResponse response,
-			RestDocumentationContext context) {
+RestDocumentationContext context) {
 		return operation("foo", request, response, context);
 	}
 
 	private Operation operation(String name, OperationRequest request, OperationResponse response,
-			RestDocumentationContext context) {
+RestDocumentationContext context) {
 		return new Operation() {
 
 			Map<String, Object> map = new HashMap<>();

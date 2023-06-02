@@ -22,7 +22,7 @@ class SuppressWarningsClassAnnotation implements ClassAnnotation {
 
 	private final BlockBuilder blockBuilder;
 
-	private static final String[] ANNOTATIONS = { "@SuppressWarnings(\"rawtypes\")" };
+	private static final String[] ANNOTATIONS = {"@SuppressWarnings(\"rawtypes\")"};
 
 	SuppressWarningsClassAnnotation(BlockBuilder blockBuilder) {
 		this.blockBuilder = blockBuilder;

@@ -41,7 +41,7 @@ class GeneratedClassMetaData {
 	final SingleTestGenerator.GeneratedClassData generatedClassData;
 
 	GeneratedClassMetaData(ContractVerifierConfigProperties configProperties, Collection<ContractMetadata> listOfFiles,
-			String includedDirectoryRelativePath, SingleTestGenerator.GeneratedClassData generatedClassData) {
+String includedDirectoryRelativePath, SingleTestGenerator.GeneratedClassData generatedClassData) {
 		this.configProperties = configProperties;
 		this.listOfFiles = listOfFiles;
 		this.includedDirectoryRelativePath = includedDirectoryRelativePath;
@@ -50,7 +50,7 @@ class GeneratedClassMetaData {
 
 	Collection<SingleContractMetadata> toSingleContractMetadata() {
 		return this.listOfFiles.stream().flatMap(metadata -> metadata.getConvertedContractWithMetadata().stream())
-				.collect(Collectors.toList());
+	.collect(Collectors.toList());
 	}
 
 	boolean isAnyJson() {

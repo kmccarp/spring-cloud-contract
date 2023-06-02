@@ -74,7 +74,7 @@ public class ContractVerifierMessaging<M> {
 
 	private void setMessageType(YamlContract contract, ContractVerifierMessageMetadata.MessageType output) {
 		contract.metadata.put(ContractVerifierMessageMetadata.METADATA_KEY,
-				new ContractVerifierMessageMetadata(output));
+	new ContractVerifierMessageMetadata(output));
 	}
 
 	public ContractVerifierMessage receive(String destination) {

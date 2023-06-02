@@ -37,10 +37,10 @@ public class BlockBuilderTests {
 		blockBuilder = blockBuilder();
 
 		blockBuilder.append(
-				"DocumentContext parsedJson = JsonPath.parse(contractVerifierObjectMapper.writeValueAsString(response.getPayload()))\n")
-				.addEndingIfNotPresent();
+	"DocumentContext parsedJson = JsonPath.parse(contractVerifierObjectMapper.writeValueAsString(response.getPayload()))\n")
+	.addEndingIfNotPresent();
 		BDDAssertions.then(blockBuilder.toString()).isEqualTo(
-				"DocumentContext parsedJson = JsonPath.parse(contractVerifierObjectMapper.writeValueAsString(response.getPayload()));\n");
+	"DocumentContext parsedJson = JsonPath.parse(contractVerifierObjectMapper.writeValueAsString(response.getPayload()));\n");
 	}
 
 	@Test

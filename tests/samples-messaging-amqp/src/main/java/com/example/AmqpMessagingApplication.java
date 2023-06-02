@@ -43,7 +43,7 @@ public class AmqpMessagingApplication {
 		final Jackson2JsonMessageConverter jsonMessageConverter = new Jackson2JsonMessageConverter(new ObjectMapper());
 		jsonMessageConverter.setCreateMessageIds(true);
 		final ContentTypeDelegatingMessageConverter messageConverter = new ContentTypeDelegatingMessageConverter(
-				jsonMessageConverter);
+	jsonMessageConverter);
 		messageConverter.addDelegate(CONTENT_TYPE_JSON, jsonMessageConverter);
 		return messageConverter;
 	}

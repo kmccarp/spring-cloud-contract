@@ -45,7 +45,7 @@ class RestAssuredHeadersThen implements Then, RestAssuredAcceptor {
 		while (iterator.hasNext()) {
 			Header header = iterator.next();
 			String text = processHeaderElement(header.getName(), header.getServerValue() instanceof NotToEscapePattern
-					? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
+		? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
 			if (iterator.hasNext()) {
 				this.blockBuilder.addLineWithEnding(text);
 			}
@@ -60,7 +60,7 @@ class RestAssuredHeadersThen implements Then, RestAssuredAcceptor {
 	private String processHeaderElement(String property, Object value) {
 		if (value instanceof NotToEscapePattern) {
 			return this.comparisonBuilder.assertThat("response.header(\"" + property + "\")")
-					+ matchesManuallyEscapedPattern((NotToEscapePattern) value);
+		+ matchesManuallyEscapedPattern((NotToEscapePattern) value);
 		}
 		else if (value instanceof ExecutionProperty) {
 			return ((ExecutionProperty) value).insertValue("response.header(\"" + property + "\")");

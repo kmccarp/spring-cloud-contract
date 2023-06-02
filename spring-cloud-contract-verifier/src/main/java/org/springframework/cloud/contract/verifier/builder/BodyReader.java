@@ -53,10 +53,10 @@ class BodyReader {
 	}
 
 	String readStringFromFileString(SingleContractMetadata metadata, FromFileProperty property,
-			CommunicationType side) {
+CommunicationType side) {
 		if (!Charset.defaultCharset().toString().equals(property.getCharset())) {
 			return "new String(" + readBytesFromFileString(metadata, property, side) + ", \"" + property.getCharset()
-					+ "\")";
+		+ "\")";
 		}
 		return "new String(" + readBytesFromFileString(metadata, property, side) + ")";
 	}
@@ -69,10 +69,10 @@ class BodyReader {
 	}
 
 	private String byteBodyToAFileForTestMethod(SingleContractMetadata metadata, FromFileProperty property,
-			CommunicationType side) {
+CommunicationType side) {
 		GeneratedClassDataForMethod classDataForMethod = classDataForMethod(metadata);
 		String newFileName = classDataForMethod.getMethodName() + "_" + side.name().toLowerCase() + "_"
-				+ property.fileName();
+	+ property.fileName();
 		writeFileForBothIdeAndBuildTool(metadata, property.asBytes(), newFileName);
 		return newFileName;
 	}
@@ -108,18 +108,18 @@ class BodyReader {
 
 	private void generatedTestResourcesFileBytes(byte[] bytes, File newFile) throws IOException {
 		Assert.notNull(this.generatedClassMetaData.configProperties.getGeneratedTestSourcesDir(),
-				"No generated test sources directory set");
+	"No generated test sources directory set");
 		Assert.notNull(this.generatedClassMetaData.configProperties.getGeneratedTestResourcesDir(),
-				"No generated test resources directory set");
+	"No generated test resources directory set");
 		Path path = this.generatedClassMetaData.configProperties.getGeneratedTestSourcesDir().toPath();
 		Path relativePath = path.relativize(newFile.toPath());
 		File newFileInGeneratedTestSources = new File(
-				this.generatedClassMetaData.configProperties.getGeneratedTestResourcesDir(), relativePath.toString());
+	this.generatedClassMetaData.configProperties.getGeneratedTestResourcesDir(), relativePath.toString());
 		newFileInGeneratedTestSources.getParentFile().mkdirs();
 		Path generatedTestSourceFilePath = newFileInGeneratedTestSources.toPath();
 		if (log.isDebugEnabled()) {
 			log.debug("Writing file for [" + generatedTestSourceFilePath
-					+ "] for body reading in generated test (Build tool)");
+		+ "] for body reading in generated test (Build tool)");
 		}
 		Files.write(generatedTestSourceFilePath, bytes);
 	}

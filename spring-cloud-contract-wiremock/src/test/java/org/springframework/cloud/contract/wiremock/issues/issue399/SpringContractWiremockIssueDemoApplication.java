@@ -46,7 +46,7 @@ public class SpringContractWiremockIssueDemoApplication {
 				ClientHttpRequestInterceptor emptyInterceptor = new ClientHttpRequestInterceptor() {
 					@Override
 					public ClientHttpResponse intercept(HttpRequest request, byte[] body,
-							ClientHttpRequestExecution execution) throws IOException {
+				ClientHttpRequestExecution execution) throws IOException {
 						return execution.execute(request, body);
 					}
 				};
@@ -63,7 +63,7 @@ public class SpringContractWiremockIssueDemoApplication {
 				ClientHttpRequestInterceptor emptyInterceptor = new ClientHttpRequestInterceptor() {
 					@Override
 					public ClientHttpResponse intercept(HttpRequest request, byte[] body,
-							ClientHttpRequestExecution execution) throws IOException {
+				ClientHttpRequestExecution execution) throws IOException {
 						return execution.execute(request, body);
 					}
 				};
@@ -81,7 +81,7 @@ public class SpringContractWiremockIssueDemoApplication {
 				ClientHttpRequestInterceptor emptyInterceptor = new ClientHttpRequestInterceptor() {
 					@Override
 					public ClientHttpResponse intercept(HttpRequest request, byte[] body,
-							ClientHttpRequestExecution execution) throws IOException {
+				ClientHttpRequestExecution execution) throws IOException {
 						return execution.execute(request, body);
 					}
 				};

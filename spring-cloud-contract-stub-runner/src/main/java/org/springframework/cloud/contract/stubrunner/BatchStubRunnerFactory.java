@@ -47,7 +47,7 @@ public class BatchStubRunnerFactory {
 	}
 
 	public BatchStubRunnerFactory(StubRunnerOptions stubRunnerOptions, StubDownloader stubDownloader,
-			MessageVerifierSender<?> contractVerifierMessaging) {
+MessageVerifierSender<?> contractVerifierMessaging) {
 		this.stubRunnerOptions = stubRunnerOptions;
 		this.stubDownloader = stubDownloader;
 		this.contractVerifierMessaging = contractVerifierMessaging;
@@ -60,7 +60,7 @@ public class BatchStubRunnerFactory {
 
 	public BatchStubRunner buildBatchStubRunner() {
 		StubRunnerFactory stubRunnerFactory = new StubRunnerFactory(this.stubRunnerOptions, this.stubDownloader,
-				this.contractVerifierMessaging);
+	this.contractVerifierMessaging);
 		return new BatchStubRunner(stubRunnerFactory.createStubsFromServiceConfiguration());
 	}
 

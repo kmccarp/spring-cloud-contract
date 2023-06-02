@@ -105,27 +105,27 @@ public class PushStubsToScmMojo extends AbstractMojo {
 	public void execute() {
 		if (this.skip || this.taskSkip) {
 			getLog().info("Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip="
-					+ this.skip + ", spring.cloud.contract.verifier.publish-stubs-to-scm.skip=" + this.taskSkip);
+		+ this.skip + ", spring.cloud.contract.verifier.publish-stubs-to-scm.skip=" + this.taskSkip);
 			return;
 		}
 		if (!StringUtils.hasText(this.contractsRepositoryUrl)
-				|| !ScmStubDownloaderBuilder.isProtocolAccepted(this.contractsRepositoryUrl)) {
+	|| !ScmStubDownloaderBuilder.isProtocolAccepted(this.contractsRepositoryUrl)) {
 			getLog().info("Skipping pushing stubs to scm since your "
-					+ "[contractsRepositoryUrl] property doesn't match any of the accepted protocols");
+		+ "[contractsRepositoryUrl] property doesn't match any of the accepted protocols");
 			return;
 		}
 		String projectName = this.project.getGroupId() + ":" + this.project.getArtifactId() + ":"
-				+ this.project.getVersion();
+	+ this.project.getVersion();
 		getLog().info("Pushing Stubs to SCM for project [" + projectName + "]");
 		new ContractProjectUpdater(buildOptions()).updateContractProject(projectName, this.outputDirectory.toPath());
 	}
 
 	StubRunnerOptions buildOptions() {
 		StubRunnerOptionsBuilder builder = new StubRunnerOptionsBuilder()
-				.withOptions(StubRunnerOptions.fromSystemProps()).withStubRepositoryRoot(this.contractsRepositoryUrl)
-				.withStubsMode(this.contractsMode).withUsername(this.contractsRepositoryUsername)
-				.withPassword(this.contractsRepositoryPassword).withDeleteStubsAfterTest(this.deleteStubsAfterTest)
-				.withProperties(this.contractsProperties);
+	.withOptions(StubRunnerOptions.fromSystemProps()).withStubRepositoryRoot(this.contractsRepositoryUrl)
+	.withStubsMode(this.contractsMode).withUsername(this.contractsRepositoryUsername)
+	.withPassword(this.contractsRepositoryPassword).withDeleteStubsAfterTest(this.deleteStubsAfterTest)
+	.withProperties(this.contractsProperties);
 		return builder.build();
 	}
 

@@ -316,8 +316,8 @@ public class OutputMessage extends Common implements RegexCreatingProperty<Serve
 		}
 		OutputMessage that = (OutputMessage) o;
 		return Objects.equals(sentTo, that.sentTo) && Objects.equals(headers, that.headers)
-				&& Objects.equals(body, that.body) && Objects.equals(assertThat, that.assertThat)
-				&& Objects.equals(bodyMatchers, that.bodyMatchers);
+	&& Objects.equals(body, that.body) && Objects.equals(assertThat, that.assertThat)
+	&& Objects.equals(bodyMatchers, that.bodyMatchers);
 	}
 
 	@Override
@@ -328,7 +328,7 @@ public class OutputMessage extends Common implements RegexCreatingProperty<Serve
 	@Override
 	public String toString() {
 		return "OutputMessage{" + "\n\tsentTo=" + sentTo + ", \n\theaders=" + headers + ", \n\tbody=" + body
-				+ ", \n\tassertThat=" + assertThat + ", \n\tbodyMatchers=" + bodyMatchers + "} \n\t" + super.toString();
+	+ ", \n\tassertThat=" + assertThat + ", \n\tbodyMatchers=" + bodyMatchers + "} \n\t" + super.toString();
 	}
 
 	private class ServerPatternValueDslProperty extends PatternValueDslProperty<ServerDslProperty> {

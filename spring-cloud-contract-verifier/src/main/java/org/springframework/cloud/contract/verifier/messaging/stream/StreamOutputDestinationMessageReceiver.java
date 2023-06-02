@@ -45,7 +45,7 @@ class StreamOutputDestinationMessageReceiver implements MessageVerifierReceiver<
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to read a message from " + " a channel with name [" + destination
-					+ "]", e);
+		+ "]", e);
 			throw new IllegalStateException(e);
 		}
 	}

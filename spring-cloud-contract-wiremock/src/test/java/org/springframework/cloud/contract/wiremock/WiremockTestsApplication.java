@@ -66,7 +66,7 @@ public class WiremockTestsApplication {
 	@Bean
 	public RestTemplate apacheHttpClientWithInterceptor(RestTemplateBuilder builder) {
 		return builder.requestFactory(() -> new HttpComponentsClientHttpRequestFactory())
-				.additionalInterceptors(new BasicAuthenticationInterceptor("u", "p")).build();
+	.additionalInterceptors(new BasicAuthenticationInterceptor("u", "p")).build();
 	}
 
 }
@@ -86,7 +86,7 @@ class Service {
 	private RestTemplate apacheHttpClientWithInterceptor;
 
 	Service(RestTemplate restTemplate, @Qualifier("apacheHttpClient") RestTemplate apacheHttpClient,
-			@Qualifier("apacheHttpClientWithInterceptor") RestTemplate apacheHttpClientWithInterceptor) {
+@Qualifier("apacheHttpClientWithInterceptor") RestTemplate apacheHttpClientWithInterceptor) {
 		this.restTemplate = restTemplate;
 		this.apacheHttpClient = apacheHttpClient;
 		this.apacheHttpClientWithInterceptor = apacheHttpClientWithInterceptor;
@@ -120,13 +120,13 @@ class Service {
 		String requestUrl = this.base + "/pom.xml";
 		log.info("Will send a request to [" + requestUrl + "]");
 		return this.restTemplate
-				.exchange(RequestEntity.get(URI.create(requestUrl)).accept(mediaTypes()).build(), String.class)
-				.getBody();
+	.exchange(RequestEntity.get(URI.create(requestUrl)).accept(mediaTypes()).build(), String.class)
+	.getBody();
 	}
 
 	private MediaType[] mediaTypes() {
 		return Stream.of("text/plain", "text/plain", "application/json", "application/json", "application/*+json",
-				"application/*+json", "*/*", "*/*").map(MediaType::valueOf).toArray(MediaType[]::new);
+	"application/*+json", "*/*", "*/*").map(MediaType::valueOf).toArray(MediaType[]::new);
 	}
 
 	public String go2() {

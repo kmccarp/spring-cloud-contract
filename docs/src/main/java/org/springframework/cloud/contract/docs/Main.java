@@ -109,19 +109,19 @@ public class Main {
 			List<Class> additionalClasses = classesToLookAt(metadatum, newInstance);
 			// @formatter:off
 			sb
-					.append("[[metadata-").append(key).append("]]\n")
-					.append("##### Metadata `").append(key).append("`\n\n")
-					.append("* key: `").append(key).append("`").append("\n")
-					.append("* description:\n\n").append(description).append("\n\n")
-					.append("Example:\n\n")
-					.append("```yaml\n").append(mapper.writeValueAsString(newInstance)).append("\n```\n\n")
-					// To make the schema collapsable
-					.append("+++ <details><summary> +++\nClick here to expand the JSON schema:\n+++ </summary><div> +++\n")
-					.append("```json\n").append(generateJsonSchemaForClass(metadatum)).append("\n```\n")
-					.append("+++ </div></details> +++\n\n")
-					.append("If you are interested in learning more about the types and its properties, check out the following classes:\n\n")
-					.append(additionalClasses.stream().map(aClass -> "* `" + aClass.getName() + "`").collect(Collectors.joining("\n")))
-					.append("\n\n");
+		.append("[[metadata-").append(key).append("]]\n")
+		.append("##### Metadata `").append(key).append("`\n\n")
+		.append("* key: `").append(key).append("`").append("\n")
+		.append("* description:\n\n").append(description).append("\n\n")
+		.append("Example:\n\n")
+		.append("```yaml\n").append(mapper.writeValueAsString(newInstance)).append("\n```\n\n")
+		// To make the schema collapsable
+		.append("+++ <details><summary> +++\nClick here to expand the JSON schema:\n+++ </summary><div> +++\n")
+		.append("```json\n").append(generateJsonSchemaForClass(metadatum)).append("\n```\n")
+		.append("+++ </div></details> +++\n\n")
+		.append("If you are interested in learning more about the types and its properties, check out the following classes:\n\n")
+		.append(additionalClasses.stream().map(aClass -> "* `" + aClass.getName() + "`").collect(Collectors.joining("\n")))
+		.append("\n\n");
 			// @formatter:on
 		}
 		return sb;

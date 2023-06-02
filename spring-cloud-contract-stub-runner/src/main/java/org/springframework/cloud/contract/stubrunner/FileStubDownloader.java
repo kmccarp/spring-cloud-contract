@@ -58,7 +58,7 @@ public class FileStubDownloader implements StubDownloaderBuilder {
 	public StubDownloader build(StubRunnerOptions stubRunnerOptions) {
 		// should work only in remote and local option
 		if (stubRunnerOptions.getStubsMode() == StubRunnerProperties.StubsMode.CLASSPATH
-				|| stubRunnerOptions.getStubRepositoryRoot() == null) {
+	|| stubRunnerOptions.getStubRepositoryRoot() == null) {
 			return null;
 		}
 		Resource resource = stubRunnerOptions.getStubRepositoryRoot();
@@ -152,14 +152,14 @@ class StubsStubDownloader implements StubDownloader {
 			String schemeSpecific = schemeSpecificPart();
 			log.info("Stubs are present under [" + schemeSpecific + "]. Will copy them to a temporary directory.");
 			return new ResourceResolvingStubDownloader(stubRunnerOptions, this::repoRootForSchemeSpecificPart,
-					this::anyPattern).downloadAndUnpackStubJar(stubConfiguration);
+		this::anyPattern).downloadAndUnpackStubJar(stubConfiguration);
 		}
 		return new ResourceResolvingStubDownloader(stubRunnerOptions, this::repoRoot, this::gavPattern)
-				.downloadAndUnpackStubJar(stubConfiguration);
+	.downloadAndUnpackStubJar(stubConfiguration);
 	}
 
 	private RepoRoots repoRootForSchemeSpecificPart(StubRunnerOptions stubRunnerOptions,
-			StubConfiguration configuration) {
+StubConfiguration configuration) {
 		String specificPart = schemeSpecificPart();
 		specificPart = specificPart.endsWith("/") ? specificPart : (specificPart + "/");
 		specificPart = specificPart + "**/*.*";
@@ -190,18 +190,18 @@ class StubsStubDownloader implements StubDownloader {
 	private RepoRoots repoRoot(StubRunnerOptions stubRunnerOptions, StubConfiguration configuration) {
 		String pathWithGroupAndArtifactId = "/" + configuration.getGroupId() + "/" + configuration.getArtifactId();
 		String pathWithGroupAndArtifactIdSlashSeparated = "/" + configuration.getGroupId().replace(".", File.separator)
-				+ "/" + configuration.getArtifactId();
+	+ "/" + configuration.getArtifactId();
 		String anyFileSuffix = "/**/*.*";
 		RepoRoots roots = RepoRoots.asList(
-				new RepoRoot(schemeSpecificPart() + pathWithGroupAndArtifactId, anyFileSuffix),
-				new RepoRoot(schemeSpecificPart() + pathWithGroupAndArtifactIdSlashSeparated, anyFileSuffix),
-				new RepoRoot(schemeSpecificPart() + anyFileSuffix));
+	new RepoRoot(schemeSpecificPart() + pathWithGroupAndArtifactId, anyFileSuffix),
+	new RepoRoot(schemeSpecificPart() + pathWithGroupAndArtifactIdSlashSeparated, anyFileSuffix),
+	new RepoRoot(schemeSpecificPart() + anyFileSuffix));
 		if (!latestVersionIsSet(configuration)) {
 			String pathWithGAV = pathWithGroupAndArtifactId + "/" + configuration.getVersion();
 			String pathWithSlashSeparatedGAV = pathWithGroupAndArtifactIdSlashSeparated + "/"
-					+ configuration.getVersion();
+		+ configuration.getVersion();
 			roots.addAll(RepoRoots.asList(new RepoRoot(schemeSpecificPart() + pathWithGAV, anyFileSuffix),
-					new RepoRoot(schemeSpecificPart() + pathWithSlashSeparatedGAV, anyFileSuffix)));
+		new RepoRoot(schemeSpecificPart() + pathWithSlashSeparatedGAV, anyFileSuffix)));
 		}
 		return roots;
 	}

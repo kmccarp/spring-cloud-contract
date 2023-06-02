@@ -31,7 +31,7 @@ class CustomModeBodyGiven implements Given {
 	private final BodyParser bodyParser;
 
 	CustomModeBodyGiven(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData,
-			BodyParser bodyParser) {
+BodyParser bodyParser) {
 		this.blockBuilder = blockBuilder;
 		this.bodyReader = new BodyReader(generatedClassMetaData);
 		this.bodyParser = bodyParser;
@@ -64,8 +64,8 @@ class CustomModeBodyGiven implements Given {
 		else if (body instanceof FromFileProperty) {
 			FromFileProperty fileProperty = (FromFileProperty) body;
 			value = fileProperty.isByte()
-					? this.bodyReader.readBytesFromFileString(metadata, fileProperty, CommunicationType.REQUEST)
-					: this.bodyReader.readStringFromFileString(metadata, fileProperty, CommunicationType.REQUEST);
+		? this.bodyReader.readBytesFromFileString(metadata, fileProperty, CommunicationType.REQUEST)
+		: this.bodyReader.readStringFromFileString(metadata, fileProperty, CommunicationType.REQUEST);
 		}
 		else {
 			String escaped = escapeRequestSpecialChars(metadata, body.toString());

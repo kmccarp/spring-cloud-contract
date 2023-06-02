@@ -54,7 +54,7 @@ public class FirstTests {
 	@Test
 	public void shouldBeRejectedDueToAbnormalLoanAmount() throws Exception {
 		server.addStubMapping(StubMapping
-				.buildFrom(StreamUtils.copyToString(markClientAsFraud.getInputStream(), Charset.forName("UTF-8"))));
+	.buildFrom(StreamUtils.copyToString(markClientAsFraud.getInputStream(), Charset.forName("UTF-8"))));
 		// given:
 		LoanApplication loanApplication = new LoanApplication(new Client("1234567890"), 99999);
 
@@ -63,8 +63,8 @@ public class FirstTests {
 		httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/vnd.fraud.v1+json");
 
 		ResponseEntity<FraudServiceResponse> response = new RestTemplate().exchange(
-				"http://localhost:" + server.port() + "/fraudcheck", HttpMethod.PUT,
-				new HttpEntity<>(new FraudServiceRequest(loanApplication), httpHeaders), FraudServiceResponse.class);
+	"http://localhost:" + server.port() + "/fraudcheck", HttpMethod.PUT,
+	new HttpEntity<>(new FraudServiceRequest(loanApplication), httpHeaders), FraudServiceResponse.class);
 		// then:
 		assertThat(response.getBody().getFraudCheckStatus()).isEqualTo(FraudCheckStatus.FRAUD);
 		assertThat(response.getBody().getRejectionReason()).isEqualTo("Amount too high");

@@ -49,9 +49,9 @@ public class ContractVerifierIntegrationConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(MessageVerifierSender.class)
 	public MessageVerifierSender<Message<?>> integrationContractVerifierMessageSender(
-			ApplicationContext applicationContext) {
+ApplicationContext applicationContext) {
 		SpringIntegrationStubMessages springIntegrationStubMessages = new SpringIntegrationStubMessages(
-				applicationContext);
+	applicationContext);
 		return new MessageVerifierSender<>() {
 			@Override
 			public void send(Message<?> message, String destination, @Nullable YamlContract contract) {
@@ -60,7 +60,7 @@ public class ContractVerifierIntegrationConfiguration {
 
 			@Override
 			public <T> void send(T payload, Map<String, Object> headers, String destination,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				springIntegrationStubMessages.send(payload, headers, destination, contract);
 			}
 		};
@@ -69,13 +69,13 @@ public class ContractVerifierIntegrationConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(MessageVerifierReceiver.class)
 	public MessageVerifierReceiver<Message<?>> integrationContractVerifierMessageReceiver(
-			ApplicationContext applicationContext) {
+ApplicationContext applicationContext) {
 		SpringIntegrationStubMessages springIntegrationStubMessages = new SpringIntegrationStubMessages(
-				applicationContext);
+	applicationContext);
 		return new MessageVerifierReceiver<>() {
 			@Override
 			public Message<?> receive(String destination, long timeout, TimeUnit timeUnit,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				return springIntegrationStubMessages.receive(destination, timeout, timeUnit, contract);
 			}
 
@@ -89,7 +89,7 @@ public class ContractVerifierIntegrationConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(ContractVerifierMessaging.class)
 	public ContractVerifierMessaging<Message<?>> integrationContractVerifierMessaging(
-			MessageVerifierSender<Message<?>> sender, MessageVerifierReceiver<Message<?>> receiver) {
+MessageVerifierSender<Message<?>> sender, MessageVerifierReceiver<Message<?>> receiver) {
 		return new ContractVerifierHelper(sender, receiver);
 	}
 

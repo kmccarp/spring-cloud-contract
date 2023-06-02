@@ -111,7 +111,7 @@ public final class XmlAssertion {
 
 	private XmlVerifiable root() {
 		return new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer, "",
-				this.xmlAsserterConfiguration).node("");
+	this.xmlAsserterConfiguration).node("");
 	}
 
 }

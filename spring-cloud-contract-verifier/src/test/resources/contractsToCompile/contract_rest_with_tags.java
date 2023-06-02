@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2013-2020 the original author or authors.
  *
@@ -17,6 +16,8 @@
 
 // tag::class[]
 
+
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Supplier;
@@ -29,43 +30,43 @@ import org.springframework.cloud.contract.verifier.util.MetadataUtil;
 class contract_rest_with_tags implements Supplier<Collection<Contract>> {
 
 	static Object description = Collections.singletonList(
-			// tag::description[]
-			Contract.make(c -> {
-				c.description("Some description");
-			}));
+// tag::description[]
+Contract.make(c -> {
+	c.description("Some description");
+}));
 
 	// end::description[]
 
 	static Object name = Collections.singletonList(
-			// tag::name[]
-			Contract.make(c -> {
-				c.name("some name");
-			}));
+// tag::name[]
+Contract.make(c -> {
+	c.name("some name");
+}));
 
 	// end::name[]
 
 	static Object ignored = Collections.singletonList(
-			// tag::ignored[]
-			Contract.make(c -> {
-				c.ignored();
-			}));
+// tag::ignored[]
+Contract.make(c -> {
+	c.ignored();
+}));
 
 	// end::ignored[]
 
 	static Object in_progress = Collections.singletonList(
-			// tag::in_progress[]
-			Contract.make(c -> {
-				c.inProgress();
-			}));
+// tag::in_progress[]
+Contract.make(c -> {
+	c.inProgress();
+}));
 
 	// end::in_progress[]
 
 	static Object metadata = Collections.singletonList(
-			// tag::metadata[]
-			Contract.make(c -> {
-				c.metadata(MetadataUtil.map().entry("wiremock", ContractVerifierUtil.map().entry("stubMapping",
-						"{ \"response\" : { \"fixedDelayMilliseconds\" : 2000 } }")));
-			}));
+// tag::metadata[]
+Contract.make(c -> {
+	c.metadata(MetadataUtil.map().entry("wiremock", ContractVerifierUtil.map().entry("stubMapping",
+"{ \"response\" : { \"fixedDelayMilliseconds\" : 2000 } }")));
+}));
 
 	// end::metadata[]
 

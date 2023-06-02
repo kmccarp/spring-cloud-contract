@@ -297,9 +297,9 @@ public class StubRunnerProperties {
 	@Override
 	public String toString() {
 		return "StubRunnerProperties{" + "minPort=" + this.minPort + ", maxPort=" + this.maxPort + ", repositoryRoot="
-				+ this.repositoryRoot + ", ids=" + Arrays.toString(this.ids) + ", classifier='" + this.classifier + '\''
-				+ ", setStubsPerConsumer='" + this.stubsPerConsumer + "', consumerName='" + this.consumerName + '\''
-				+ ", stubsMode='" + this.stubsMode + '\'' + ", size of properties=" + this.properties.size() + '}';
+	+ this.repositoryRoot + ", ids=" + Arrays.toString(this.ids) + ", classifier='" + this.classifier + '\''
+	+ ", setStubsPerConsumer='" + this.stubsPerConsumer + "', consumerName='" + this.consumerName + '\''
+	+ ", stubsMode='" + this.stubsMode + '\'' + ", size of properties=" + this.properties.size() + '}';
 	}
 
 	/**

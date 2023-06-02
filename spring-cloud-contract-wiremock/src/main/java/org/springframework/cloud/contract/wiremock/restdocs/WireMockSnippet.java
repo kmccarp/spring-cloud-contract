@@ -136,7 +136,7 @@ public class WireMockSnippet implements Snippet {
 
 	private boolean hasContentType(Operation operation, MediaType mediaType) {
 		return operation.getRequest().getHeaders().getContentType() != null
-				&& (operation.getRequest().getHeaders().getContentType().isCompatibleWith(mediaType));
+	&& (operation.getRequest().getHeaders().getContentType().isCompatibleWith(mediaType));
 	}
 
 	private ResponseDefinitionBuilder response(Operation operation) {

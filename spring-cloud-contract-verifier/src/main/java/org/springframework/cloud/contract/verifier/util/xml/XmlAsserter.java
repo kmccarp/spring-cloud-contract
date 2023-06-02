@@ -48,8 +48,8 @@ class XmlAsserter implements XmlVerifiable {
 	final XmlAsserterConfiguration xmlAsserterConfiguration;
 
 	XmlAsserter(XmlCachedObjects cachedObjects, LinkedList<String> xPathBuffer,
-			LinkedList<String> specialCaseXPathBuffer, Object fieldName,
-			XmlAsserterConfiguration xmlAsserterConfiguration) {
+LinkedList<String> specialCaseXPathBuffer, Object fieldName,
+XmlAsserterConfiguration xmlAsserterConfiguration) {
 		this.cachedObjects = cachedObjects;
 		this.xPathBuffer = new LinkedList<>(xPathBuffer);
 		this.specialCaseXPathBuffer = new LinkedList<>(specialCaseXPathBuffer);
@@ -113,7 +113,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public FieldAssertion node(final String value) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
-				value, this.xmlAsserterConfiguration);
+	value, this.xmlAsserterConfiguration);
 		asserter.xPathBuffer.offer(String.valueOf(value));
 		asserter.xPathBuffer.offer("/");
 		return asserter;
@@ -122,7 +122,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public FieldAssertion nodeWithDefaultNamespace(final String value, String defaultNamespace) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
-				value, this.xmlAsserterConfiguration);
+	value, this.xmlAsserterConfiguration);
 		String path = String.format("*[local-name()='%s'", value);
 		if (StringUtils.hasText(defaultNamespace)) {
 			path += String.format(" and namespace-uri()='%s'", defaultNamespace);
@@ -136,7 +136,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public XmlVerifiable withAttribute(String attribute, String attributeValue) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		if (asserter.xPathBuffer.peekLast().equals("/")) {
 			asserter.xPathBuffer.removeLast();
 		}
@@ -152,7 +152,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public XmlVerifiable withAttribute(String attribute) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		String path = "@" + attribute;
 		if (attribute.startsWith("xmlns:")) {
 			path = "namespace::" + attribute.substring("xmlns:".length());
@@ -166,7 +166,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public XmlVerifiable text() {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		asserter.xPathBuffer.offer("text()");
 		return asserter;
 	}
@@ -174,7 +174,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public XmlVerifiable index(int index) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		if (asserter.xPathBuffer.peekLast().equals("/")) {
 			asserter.xPathBuffer.removeLast();
 		}
@@ -195,7 +195,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public XmlArrayVerifiable array(final String value) {
 		ArrayValueAssertion asserter = new ArrayValueAssertion(this.cachedObjects, this.xPathBuffer,
-				this.specialCaseXPathBuffer, value, this.xmlAsserterConfiguration);
+	this.specialCaseXPathBuffer, value, this.xmlAsserterConfiguration);
 		asserter.xPathBuffer.offer(String.valueOf(value));
 		asserter.xPathBuffer.offer("/");
 		return asserter;
@@ -207,7 +207,7 @@ class XmlAsserter implements XmlVerifiable {
 			return isNull();
 		}
 		ReadyToCheckAsserter readyToCheck = new ReadyToCheckAsserter(this.cachedObjects, this.xPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		removeLastFieldElement(readyToCheck);
 		readyToCheck.xPathBuffer.offer("[" + this.fieldName + "=" + escapeText(value) + "]");
 		updateCurrentBuffer(readyToCheck);
@@ -247,7 +247,7 @@ class XmlAsserter implements XmlVerifiable {
 
 	private XmlVerifiable xmlVerifiableFromObject(Object value) {
 		ReadyToCheckAsserter readyToCheck = new ReadyToCheckAsserter(this.cachedObjects, this.xPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		removeLastFieldElement(readyToCheck);
 		readyToCheck.xPathBuffer.offer("[" + this.fieldName + "=" + String.valueOf(value) + "]");
 		// and finally '/foo/bar[baz='sth']
@@ -270,7 +270,7 @@ class XmlAsserter implements XmlVerifiable {
 	@Override
 	public XmlVerifiable isNull() {
 		ReadyToCheckAsserter readyToCheck = new ReadyToCheckAsserter(this.cachedObjects, this.xPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		String xpath = createXPathString();
 		readyToCheck.xPathBuffer.clear();
 		readyToCheck.xPathBuffer.offer("not(boolean(" + xpath + "/text()[1]))");
@@ -285,7 +285,7 @@ class XmlAsserter implements XmlVerifiable {
 			return isNull();
 		}
 		ReadyToCheckAsserter readyToCheck = new ReadyToCheckAsserter(this.cachedObjects, this.xPathBuffer,
-				this.fieldName, this.xmlAsserterConfiguration);
+	this.fieldName, this.xmlAsserterConfiguration);
 		removeLastFieldElement(readyToCheck);
 		readyToCheck.xPathBuffer.offer("[matches(" + this.fieldName + ", " + escapeText(escapeRegex(value)) + ")]");
 		updateCurrentBuffer(readyToCheck);
@@ -310,14 +310,14 @@ class XmlAsserter implements XmlVerifiable {
 	protected void check(String xPathString) {
 		if (this.xmlAsserterConfiguration.ignoreXPathException) {
 			log.trace(
-					"WARNING!!! Overriding verification of the XPath. Your tests may pass even though they shouldn't");
+		"WARNING!!! Overriding verification of the XPath. Your tests may pass even though they shouldn't");
 			return;
 		}
 		ResultSequence expr = resultSequence(xPathString);
 		boolean xpathMatched = !expr.empty();
 		if (!xpathMatched) {
 			throw new IllegalStateException("Parsed XML [" + this.cachedObjects.xmlAsString
-					+ "] doesn't match the XPath <" + xPathString + ">");
+		+ "] doesn't match the XPath <" + xPathString + ">");
 		}
 	}
 
@@ -329,7 +329,7 @@ class XmlAsserter implements XmlVerifiable {
 		try {
 			XPath2Expression expr = new Engine().parseExpression(xPathString, this.cachedObjects.xpathBuilder);
 			return expr.evaluate(new DynamicContextBuilder(this.cachedObjects.xpathBuilder),
-					new Object[] { this.cachedObjects.document });
+		new Object[]{this.cachedObjects.document});
 		}
 		catch (Exception e) {
 			throw new XmlAsserterXpathException(xPath(), this.cachedObjects.xmlAsString, e);
@@ -432,12 +432,12 @@ class XmlAsserter implements XmlVerifiable {
 
 		XmlAsserterXpathException(String xPath, String xmlAsString) {
 			super("Exception occurred while trying to evaluate " + "XPath [" + xPath + "] from XML [" + xmlAsString
-					+ "]");
+		+ "]");
 		}
 
 		XmlAsserterXpathException(String xPath, String xmlAsString, Exception e) {
 			super("Exception occurred while trying to evaluate " + "XPath [" + xPath + "] from XML [" + xmlAsString
-					+ "]", e);
+		+ "]", e);
 		}
 
 	}

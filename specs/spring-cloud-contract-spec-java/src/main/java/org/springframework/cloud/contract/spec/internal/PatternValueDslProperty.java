@@ -36,7 +36,7 @@ abstract class PatternValueDslProperty<T extends DslProperty> implements RegexCr
 			boolean matches = pattern.matcher(generatedValue).matches();
 			if (!matches) {
 				throw new IllegalStateException("The generated value [" + generatedValue
-						+ "] doesn't match the pattern [" + pattern.pattern() + "]");
+			+ "] doesn't match the pattern [" + pattern.pattern() + "]");
 			}
 
 			return createProperty(pattern, object);
@@ -106,7 +106,7 @@ abstract class PatternValueDslProperty<T extends DslProperty> implements RegexCr
 	@Override
 	public T anyHostname() {
 		return createAndValidateProperty(RegexPatterns.HOSTNAME_PATTERN,
-				"https://foo" + this.random.nextInt() + ".com");
+	"https://foo" + this.random.nextInt() + ".com");
 	}
 
 	@Override
@@ -133,14 +133,14 @@ abstract class PatternValueDslProperty<T extends DslProperty> implements RegexCr
 	public T anyDate() {
 		int d = this.random.nextInt(8) + 1;
 		return createAndValidateProperty(RegexPatterns.ANY_DATE,
-				"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d));
+	"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d));
 	}
 
 	@Override
 	public T anyDateTime() {
 		final int d = this.random.nextInt(8) + 1;
 		return createAndValidateProperty(RegexPatterns.ANY_DATE_TIME,
-				"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d) + "T12:23:34");
+	"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d) + "T12:23:34");
 	}
 
 	@Override
@@ -153,7 +153,7 @@ abstract class PatternValueDslProperty<T extends DslProperty> implements RegexCr
 	public T anyIso8601WithOffset() {
 		final int d = this.random.nextInt(8) + 1;
 		return createAndValidateProperty(RegexPatterns.ISO8601_WITH_OFFSET,
-				"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d) + "T12:23:34.123Z");
+	"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d) + "T12:23:34.123Z");
 	}
 
 	@Override

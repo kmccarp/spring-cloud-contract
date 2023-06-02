@@ -222,7 +222,7 @@ public class Input extends Common implements RegexCreatingProperty<ClientDslProp
 	@Override
 	public String toString() {
 		return "Input{\n\t" + ", \n\ttriggeredBy=" + triggeredBy + ", \n\tassertThat=" + assertThat + "} \n\t"
-				+ super.toString();
+	+ super.toString();
 	}
 
 	private class ClientPatternValueDslProperty extends PatternValueDslProperty<ClientDslProperty> {

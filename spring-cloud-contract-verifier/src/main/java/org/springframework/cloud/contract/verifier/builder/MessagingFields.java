@@ -26,8 +26,8 @@ class MessagingFields implements Field {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] FIELDS = { "@Inject ContractVerifierMessaging contractVerifierMessaging",
-			"@Inject ContractVerifierObjectMapper contractVerifierObjectMapper" };
+	private static final String[] FIELDS = {"@Inject ContractVerifierMessaging contractVerifierMessaging",
+"@Inject ContractVerifierObjectMapper contractVerifierObjectMapper"};
 
 	MessagingFields(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -43,7 +43,7 @@ class MessagingFields implements Field {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.listOfFiles.stream().anyMatch(metadata -> metadata
-				.getConvertedContractWithMetadata().stream().anyMatch(SingleContractMetadata::isMessaging));
+	.getConvertedContractWithMetadata().stream().anyMatch(SingleContractMetadata::isMessaging));
 	}
 
 }

@@ -58,7 +58,7 @@ class CustomModeQueryParamsGiven implements Given, CustomModeAcceptor, QueryPara
 
 	private void addQueryParameters(Url buildUrl) {
 		List<QueryParameter> queryParameters = buildUrl.getQueryParameters().getParameters().stream()
-				.filter(this::allowedQueryParameter).collect(Collectors.toList());
+	.filter(this::allowedQueryParameter).collect(Collectors.toList());
 		Iterator<QueryParameter> iterator = queryParameters.iterator();
 		while (iterator.hasNext()) {
 			QueryParameter parameter = iterator.next();
@@ -84,13 +84,13 @@ class CustomModeQueryParamsGiven implements Given, CustomModeAcceptor, QueryPara
 
 	private String addQueryParameter(QueryParameter queryParam) {
 		return "." + "queryParam(" + this.bodyParser.quotedLongText(queryParam.getName()) + "," + this.bodyParser
-				.quotedLongText(resolveParamValue(MapConverter.getTestSideValuesForNonBody(queryParam))) + ")";
+	.quotedLongText(resolveParamValue(MapConverter.getTestSideValuesForNonBody(queryParam))) + ")";
 	}
 
 	@Override
 	public boolean accept(SingleContractMetadata metadata) {
 		return acceptType(metadata) && metadata.getContract().getRequest() != null
-				&& getUrl(metadata.getContract().getRequest()).getQueryParameters() != null;
+	&& getUrl(metadata.getContract().getRequest()).getQueryParameters() != null;
 	}
 
 }

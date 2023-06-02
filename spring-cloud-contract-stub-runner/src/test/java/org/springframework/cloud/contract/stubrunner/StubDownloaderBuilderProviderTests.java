@@ -43,7 +43,7 @@ public class StubDownloaderBuilderProviderTests {
 	@Test
 	public void should_get_providers_from_factories_default_and_additional_ones() {
 		StubDownloaderBuilderProvider provider = new StubDownloaderBuilderProvider(
-				Collections.singletonList(this.one)) {
+	Collections.singletonList(this.one)) {
 			@Override
 			List<StubDownloaderBuilder> defaultStubDownloaderBuilders() {
 				return Collections.singletonList(StubDownloaderBuilderProviderTests.this.two);

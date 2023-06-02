@@ -72,9 +72,8 @@ class GenerateClientStubsFromDslTask extends DefaultTask {
 
 	@Inject
 	public GenerateClientStubsFromDslTask(
-			final ObjectFactory objects,
-			final ExecOperations executors
-	) {
+final ObjectFactory objects,
+final ExecOperations executors) {
 		this.executors = executors;
 
 		contractsDslDir = objects.directoryProperty();
@@ -94,7 +93,8 @@ class GenerateClientStubsFromDslTask extends DefaultTask {
 		OutputStream os;
 		if (getLogger().isDebugEnabled()) {
 			os = new ByteArrayOutputStream();
-		} else {
+		}
+		else {
 			os = NullOutputStream.INSTANCE;
 		}
 		try {
@@ -102,7 +102,7 @@ class GenerateClientStubsFromDslTask extends DefaultTask {
 				exec.getMainClass().set("org.springframework.cloud.contract.verifier.converter.RecursiveFilesConverterApplication");
 				exec.classpath(classpath);
 				exec.args(quoteAndEscape(output.getAbsolutePath()), quoteAndEscape(contractsDslDir.get().getAsFile().getAbsolutePath()),
-						quoteAndEscape(StringUtils.collectionToCommaDelimitedString(excludedFiles.get())), quoteAndEscape(".*"), excludeBuildFolders.get());
+			quoteAndEscape(StringUtils.collectionToCommaDelimitedString(excludedFiles.get())), quoteAndEscape(".*"), excludeBuildFolders.get());
 				exec.setStandardOutput(os);
 				exec.setErrorOutput(os);
 			});

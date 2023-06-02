@@ -77,7 +77,7 @@ public @interface AutoConfigureWireMock {
 	 * </p>
 	 * @return locations to read WireMock mappings from
 	 */
-	String[] stubs() default { "" };
+	String[] stubs() default {""};
 
 	/**
 	 * The resource locations to use for loading WireMock response bodies.
@@ -90,6 +90,6 @@ public @interface AutoConfigureWireMock {
 	 * </p>
 	 * @return locations to read WireMock response bodies from
 	 */
-	String[] files() default { "" };
+	String[] files() default {""};
 
 }

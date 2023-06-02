@@ -25,14 +25,14 @@ class SpockJaxRsThen extends JaxRsThen {
 
 	SpockJaxRsThen(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		super(blockBuilder, generatedClassMetaData, SpockJaxRsBodyParser.INSTANCE,
-				GroovyComparisonBuilder.JAXRS_HTTP_INSTANCE);
+	GroovyComparisonBuilder.JAXRS_HTTP_INSTANCE);
 		this.metaData = generatedClassMetaData;
 	}
 
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return super.accept(singleContractMetadata)
-				&& this.metaData.configProperties.getTestFramework() == TestFramework.SPOCK;
+	&& this.metaData.configProperties.getTestFramework() == TestFramework.SPOCK;
 	}
 
 }

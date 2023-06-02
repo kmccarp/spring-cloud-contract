@@ -75,7 +75,7 @@ public class ContractFileScanner {
 	private final String includeMatcher;
 
 	public ContractFileScanner(File baseDir, Set<String> excluded, Set<String> ignored, Set<String> included,
-			String includeMatcher) {
+String includeMatcher) {
 		this.baseDir = baseDir;
 		this.excludeMatchers = processPatterns(excluded != null ? excluded : Collections.emptySet());
 		this.ignoreMatchers = processPatterns(ignored != null ? ignored : Collections.emptySet());
@@ -123,11 +123,11 @@ public class ContractFileScanner {
 			if (!excluded) {
 				boolean contractFile = isContractFile(file);
 				boolean included = !StringUtils.hasText(includeMatcher)
-						|| file.getAbsolutePath().matches(includeMatcher);
+			|| file.getAbsolutePath().matches(includeMatcher);
 				included = !CollectionUtils.isEmpty(includeMatchers) ? matchesPattern(file, includeMatchers) : included;
 				if (contractFile && included) {
 					addContractToTestGeneration(result, files, file, i,
-							ContractVerifierDslConverter.convertAsCollection(baseDir, file));
+				ContractVerifierDslConverter.convertAsCollection(baseDir, file));
 				}
 				if (!contractFile && included) {
 					addContractToTestGeneration(converters, result, files, file, i);
@@ -136,7 +136,7 @@ public class ContractFileScanner {
 					appendRecursively(file, result);
 					if (LOG.isDebugEnabled()) {
 						LOG.debug("File [" + file + "] is ignored. Is a contract file? [" + contractFile
-								+ "]. Should be included by pattern? [" + included + "]");
+					+ "]. Should be included by pattern? [" + included + "]");
 					}
 				}
 			}
@@ -160,7 +160,7 @@ public class ContractFileScanner {
 	}
 
 	private void addContractToTestGeneration(List<ContractConverter> converters,
-			MultiValueMap<Path, ContractMetadata> result, File[] files, File file, int index) {
+MultiValueMap<Path, ContractMetadata> result, File[] files, File file, int index) {
 		boolean converted = false;
 		if (!file.isDirectory()) {
 			for (ContractConverter converter : converters) {
@@ -176,8 +176,8 @@ public class ContractFileScanner {
 			appendRecursively(file, result);
 			if (LOG.isDebugEnabled()) {
 				LOG.debug(
-						"File [" + file + "] wasn't ignored but no converter was applicable. The file is a directory ["
-								+ file.isDirectory() + "]");
+			"File [" + file + "] wasn't ignored but no converter was applicable. The file is a directory ["
+		+ file.isDirectory() + "]");
 			}
 		}
 	}
@@ -196,7 +196,7 @@ public class ContractFileScanner {
 	}
 
 	private void addContractToTestGeneration(MultiValueMap<Path, ContractMetadata> result, File[] files, File file,
-			int index, Collection<Contract> convertedContract) {
+int index, Collection<Contract> convertedContract) {
 		Path path = file.toPath();
 		Integer order = null;
 		if (hasScenarioFilenamePattern(path)) {
@@ -204,7 +204,7 @@ public class ContractFileScanner {
 		}
 		Path parent = file.getParentFile().toPath();
 		ContractMetadata metadata = new ContractMetadata(path, matchesPattern(file, ignoreMatchers), files.length,
-				order, convertedContract);
+	order, convertedContract);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Creating a contract entry for path [" + path + "] and metadata [" + metadata + "]");
 		}
@@ -296,7 +296,7 @@ public class ContractFileScanner {
 
 		public ContractFileScanner build() {
 			return new ContractFileScanner(this.baseDir, this.excluded, this.ignored, this.included,
-					this.includeMatcher);
+		this.includeMatcher);
 		}
 
 	}

@@ -127,10 +127,10 @@ class GeneratedTestClassBuilder {
 	GeneratedTestClass build() {
 		// picks a matching class meta data
 		ClassMetaData classMetaData = this.metaData.stream().filter(Acceptor::accept).findFirst()
-				.orElseThrow(() -> new IllegalStateException("There is no matching class meta data"));
+	.orElseThrow(() -> new IllegalStateException("There is no matching class meta data"));
 		classMetaData.setupLineEnding().setupLabelPrefix()
-				// package com.example
-				.packageDefinition();
+	// package com.example
+	.packageDefinition();
 		// \n
 		this.blockBuilder.addEmptyLine();
 		// import ... \n
@@ -142,15 +142,15 @@ class GeneratedTestClassBuilder {
 		// @formatter:off
 		// public
 		this.blockBuilder.append(classMetaData::modifier)
-				.addAtTheEndIfEndsWithAChar(" ")
-				// class
-				.append("class")
-				// Foo
-				.appendWithSpace(classMetaData::className)
-				// Spec
-				.append(classMetaData::suffix)
-				// extends Parent
-				.appendWithSpace(classMetaData::parentClass);
+	.addAtTheEndIfEndsWithAChar(" ")
+	// class
+	.append("class")
+	// Foo
+	.appendWithSpace(classMetaData::className)
+	// Spec
+	.append(classMetaData::suffix)
+	// extends Parent
+	.appendWithSpace(classMetaData::parentClass);
 		// public class FooSpec extends Parent
 		// @formatter:on
 		this.classBodyBuilder.build();

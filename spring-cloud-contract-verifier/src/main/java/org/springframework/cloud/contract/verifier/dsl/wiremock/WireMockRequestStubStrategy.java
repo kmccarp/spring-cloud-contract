@@ -133,7 +133,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 	}
 
 	private void appendSpringCloudContractMatcher(ContractVerifierMetadata metadata,
-			RequestPatternBuilder requestPatternBuilder) {
+RequestPatternBuilder requestPatternBuilder) {
 		Parameters parameters = Parameters.one("tool", metadata.getTool() != null ? metadata.getTool() : "unknown");
 		YamlContractConverter converter = new YamlContractConverter();
 		List<YamlContract> contracts = converter.convertTo(Collections.singleton(contract));
@@ -147,7 +147,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 			return null;
 		}
 		RequestMethod requestMethod = RequestMethod.fromString(
-				Optional.ofNullable(request.getMethod().getClientValue()).map(c -> c.toString()).orElse(null));
+	Optional.ofNullable(request.getMethod().getClientValue()).map(c -> c.toString()).orElse(null));
 		UrlPattern urlPattern = urlPattern();
 		return RequestPatternBuilder.newRequestPattern(requestMethod, urlPattern);
 	}
@@ -166,19 +166,19 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 			}
 			else if (clientSideBody instanceof Pattern || clientSideBody instanceof RegexProperty) {
 				requestPattern.withRequestBody(
-						convertToValuePattern(appendBodyRegexpMatchPattern(request.getBody(), contentType)));
+			convertToValuePattern(appendBodyRegexpMatchPattern(request.getBody(), contentType)));
 			}
 			else {
 				Object body = JsonToJsonPathsConverter.removeMatchingJsonPaths(originalBody, request.getBodyMatchers());
 				JsonPaths values = JsonToJsonPathsConverter
-						.transformToJsonPathWithStubsSideValuesAndNoArraySizeCheck(body);
+			.transformToJsonPathWithStubsSideValuesAndNoArraySizeCheck(body);
 				if ((values.isEmpty() && request.getBodyMatchers() != null && !request.getBodyMatchers().hasMatchers())
-						|| onlySizeAssertionsArePresent(values)) {
+			|| onlySizeAssertionsArePresent(values)) {
 					try {
 						requestPattern.withRequestBody(WireMock.equalToJson(
-								new ObjectMapper().writeValueAsString(
-										getMatchingStrategy(request.getBody().getClientValue()).getClientValue()),
-								false, false));
+					new ObjectMapper().writeValueAsString(
+				getMatchingStrategy(request.getBody().getClientValue()).getClientValue()),
+					false, false));
 					}
 					catch (JsonProcessingException e) {
 						throw new IllegalArgumentException("The MatchingStrategy could not be serialized", e);
@@ -186,15 +186,15 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 				}
 				else {
 					values.stream().filter(v -> !v.assertsSize()).forEach(it -> requestPattern
-							.withRequestBody(WireMock.matchingJsonPath(it.jsonPath().replace("\\\\", "\\"))));
+				.withRequestBody(WireMock.matchingJsonPath(it.jsonPath().replace("\\\\", "\\"))));
 				}
 			}
 			Optional.ofNullable(request.getBodyMatchers()).map(BodyMatchers::matchers)
-					.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
-						String newPath = JsonToJsonPathsConverter.convertJsonPathAndRegexToAJsonPath(bodyMatcher,
-								originalBody);
-						requestPattern.withRequestBody(WireMock.matchingJsonPath(newPath.replace("\\\\", "\\")));
-					}));
+		.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
+			String newPath = JsonToJsonPathsConverter.convertJsonPathAndRegexToAJsonPath(bodyMatcher,
+		originalBody);
+			requestPattern.withRequestBody(WireMock.matchingJsonPath(newPath.replace("\\\\", "\\")));
+		}));
 		}
 		else if (contentType == ContentType.XML) {
 			Object originalBody = Optional.ofNullable(matchingStrategy).map(DslProperty::getClientValue).orElse(null);
@@ -205,11 +205,11 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 				Object body = XmlToXPathsConverter.removeMatchingXPaths(originalBody, request.getBodyMatchers());
 				List<BodyMatcher> byEqualityMatchersFromXml = XmlToXPathsConverter.mapToMatchers(body);
 				byEqualityMatchersFromXml.forEach(
-						bodyMatcher -> addWireMockStubMatchingSection(bodyMatcher, requestPattern, originalBody));
+			bodyMatcher -> addWireMockStubMatchingSection(bodyMatcher, requestPattern, originalBody));
 			}
 			Optional.ofNullable(request.getBodyMatchers()).map(BodyMatchers::matchers)
-					.ifPresent(bodyMatchers -> bodyMatchers.forEach(
-							bodyMatcher -> addWireMockStubMatchingSection(bodyMatcher, requestPattern, originalBody)));
+		.ifPresent(bodyMatchers -> bodyMatchers.forEach(
+	bodyMatcher -> addWireMockStubMatchingSection(bodyMatcher, requestPattern, originalBody)));
 		}
 		else if (containsPattern(request.getBody())) {
 			requestPattern.withRequestBody(convertToValuePattern(appendBodyRegexpMatchPattern(request.getBody())));
@@ -228,13 +228,13 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 
 	private RequestPatternBuilder requestBodyGuessedFromMatchingStrategy(RequestPatternBuilder requestPattern) {
 		return requestPattern
-				.withRequestBody(convertToValuePattern(getMatchingStrategy(request.getBody().getClientValue())));
+	.withRequestBody(convertToValuePattern(getMatchingStrategy(request.getBody().getClientValue())));
 	}
 
 	private static void addWireMockStubMatchingSection(BodyMatcher matcher, RequestPatternBuilder requestPattern,
-			Object body) {
+Object body) {
 		Set<MatchingType> matchingTypesUnsupportedForRequest = new HashSet<>(
-				Arrays.asList(MatchingType.NULL, MatchingType.COMMAND, MatchingType.TYPE));
+	Arrays.asList(MatchingType.NULL, MatchingType.COMMAND, MatchingType.TYPE));
 		if (!(matcher instanceof PathBodyMatcher)) {
 			throw new IllegalArgumentException("Only jsonPath and XPath matchers can be processed.");
 		}
@@ -251,14 +251,14 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 		});
 		PathBodyMatcher pathMatcher = (PathBodyMatcher) matcher;
 		requestPattern.withRequestBody(
-				WireMock.matchingXPath(pathMatcher.path(), XPathBodyMatcherToWireMockValuePatternConverter
-						.mapToPattern(pathMatcher.matchingType(), String.valueOf(retrievedValue))));
+	WireMock.matchingXPath(pathMatcher.path(), XPathBodyMatcherToWireMockValuePatternConverter
+.mapToPattern(pathMatcher.matchingType(), String.valueOf(retrievedValue))));
 	}
 
 	private boolean onlySizeAssertionsArePresent(JsonPaths values) {
 		return !CollectionUtils.isEmpty(values)
-				&& (request.getBodyMatchers() == null || !request.getBodyMatchers().hasMatchers())
-				&& this.every(values.iterator(), MethodBufferingJsonVerifiable::assertsSize);
+	&& (request.getBodyMatchers() == null || !request.getBodyMatchers().hasMatchers())
+	&& this.every(values.iterator(), MethodBufferingJsonVerifiable::assertsSize);
 	}
 
 	private <T> boolean every(Iterator<T> self, Function<T, Boolean> function) {
@@ -276,18 +276,18 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 		}
 		if (request.getMultipart().getClientValue() instanceof Map) {
 			List<StringValuePattern> multipartPattern = ((Map<?, ?>) request.getMultipart()
-					.getClientValue())
-							.entrySet().stream().map(
-									it -> it.getValue() instanceof NamedProperty
-											? WireMock.matching(RegexPatterns.multipartFile(it.getKey(),
-													((NamedProperty) it.getValue()).getName().getClientValue(),
-													((NamedProperty) it.getValue()).getValue().getClientValue(),
-													Optional.ofNullable(
-															((NamedProperty) it.getValue()).getContentType())
-															.map(DslProperty::getClientValue).orElse(null)))
-											: WireMock.matching(RegexPatterns.multipartParam(it.getKey(),
-													MapConverter.getStubSideValuesForNonBody(it.getValue()))))
-							.collect(Collectors.toList());
+		.getClientValue())
+		.entrySet().stream().map(
+		it -> it.getValue() instanceof NamedProperty
+	? WireMock.matching(RegexPatterns.multipartFile(it.getKey(),
+	((NamedProperty) it.getValue()).getName().getClientValue(),
+	((NamedProperty) it.getValue()).getValue().getClientValue(),
+	Optional.ofNullable(
+((NamedProperty) it.getValue()).getContentType())
+.map(DslProperty::getClientValue).orElse(null)))
+	: WireMock.matching(RegexPatterns.multipartParam(it.getKey(),
+	MapConverter.getStubSideValuesForNonBody(it.getValue()))))
+		.collect(Collectors.toList());
 			multipartPattern.forEach(requestPattern::withRequestBody);
 
 		}
@@ -297,7 +297,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 	private void appendHeaders(RequestPatternBuilder requestPattern) {
 		if (request.getHeaders() != null) {
 			request.getHeaders().getEntries().forEach(header -> requestPattern.withHeader(header.getName(),
-					(StringValuePattern) convertToValuePattern(header.getClientValue())));
+		(StringValuePattern) convertToValuePattern(header.getClientValue())));
 		}
 	}
 
@@ -306,7 +306,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 			return;
 		}
 		request.getCookies().getEntries().forEach(cookie -> requestPattern.withCookie(cookie.getKey(),
-				(StringValuePattern) convertToValuePattern(cookie.getClientValue())));
+	(StringValuePattern) convertToValuePattern(cookie.getClientValue())));
 	}
 
 	private UrlPattern urlPattern() {
@@ -331,9 +331,9 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 
 	private Object urlPathOrUrlIfQueryPresent() {
 		Object urlPath = Optional.ofNullable(request).map(Request::getUrlPath).map(DslProperty::getClientValue)
-				.orElse(null);
+	.orElse(null);
 		Object queryParamsFromUrl = Optional.ofNullable(request).map(Request::getUrl).map(Url::getQueryParameters)
-				.map(QueryParameters::getParameters).orElse(null);
+	.map(QueryParameters::getParameters).orElse(null);
 		if (urlPath != null) {
 			return urlPath;
 		}
@@ -361,12 +361,12 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 
 	private void appendQueryParameters(RequestPatternBuilder requestPattern) {
 		QueryParameters queryParameters = Optional.ofNullable(request).map(Request::getUrlPath)
-				.map(Url::getQueryParameters).orElseGet(() -> Optional.ofNullable(request).map(Request::getUrl)
-						.map(Url::getQueryParameters).orElse(null));
+	.map(Url::getQueryParameters).orElseGet(() -> Optional.ofNullable(request).map(Request::getUrl)
+	.map(Url::getQueryParameters).orElse(null));
 
 		Optional.ofNullable(queryParameters).map(QueryParameters::getParameters).ifPresent(
-				parameters -> parameters.forEach(parameter -> requestPattern.withQueryParam(parameter.getName(),
-						(StringValuePattern) convertToValuePattern(parameter.getClientValue()))));
+	parameters -> parameters.forEach(parameter -> requestPattern.withQueryParam(parameter.getName(),
+(StringValuePattern) convertToValuePattern(parameter.getClientValue()))));
 	}
 
 	protected ContentPattern<?> convertToValuePattern(Object object) {
@@ -413,18 +413,18 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 			if (bodyValue instanceof Map) {
 				// [a:3, b:4] == "a=3&b=4"
 				return ((Map<?, ?>) bodyValue).entrySet().stream()
-						.map(e -> StringEscapeUtils.unescapeEcmaScript(e.getKey().toString() + "=" + e.getValue()))
-						.collect(Collectors.joining("&"));
+			.map(e -> StringEscapeUtils.unescapeEcmaScript(e.getKey().toString() + "=" + e.getValue()))
+			.collect(Collectors.joining("&"));
 			}
 			else if (bodyValue instanceof List) {
 				// ["a=3", "b=4"] == "a=3&b=4"
 				return ((List<?>) bodyValue).stream().map(it -> StringEscapeUtils.unescapeEcmaScript(it.toString()))
-						.collect(Collectors.joining("&"));
+			.collect(Collectors.joining("&"));
 			}
 		}
 		else if (bodyValue instanceof FromFileProperty) {
 			return ((FromFileProperty) bodyValue).isByte() ? ((FromFileProperty) bodyValue).asBytes()
-					: ((FromFileProperty) bodyValue).asString();
+		: ((FromFileProperty) bodyValue).asString();
 		}
 		else if (JSON == contentType) {
 			return parseBody(bodyValue, contentType);
@@ -467,7 +467,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 			return new MatchingStrategy("", MatchingStrategy.Type.EQUAL_TO);
 		}
 		Object extractedValue = ContentUtils.extractValue(gString,
-				it -> it instanceof DslProperty ? ((DslProperty<?>) it).getClientValue() : getStringFromGString(it));
+	it -> it instanceof DslProperty ? ((DslProperty<?>) it).getClientValue() : getStringFromGString(it));
 
 		Object value = getStringFromGString(extractedValue);
 		return getMatchingStrategy(value);
@@ -479,7 +479,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 
 	private MatchingStrategy tryToFindMachingStrategy(Object bodyValue) {
 		return new MatchingStrategy(MapConverter.transformToClientValues(bodyValue),
-				getEqualsTypeFromContentType(contentType));
+	getEqualsTypeFromContentType(contentType));
 	}
 
 	private MatchingStrategy getMatchingStrategyIncludingContentType(MatchingStrategy matchingStrategy) {
@@ -531,7 +531,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 		}
 		else if (o instanceof Collection) {
 			List<Boolean> result = (List<Boolean>) ((Collection) o).stream().map(this::containsPattern)
-					.collect(Collectors.toList());
+		.collect(Collectors.toList());
 			return result.stream().reduce(false, (a, b) -> a || b);
 		}
 		else if (o instanceof Object[]) {

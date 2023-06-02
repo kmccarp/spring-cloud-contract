@@ -70,10 +70,10 @@ public final class RegexpBuilders {
 	 */
 	static String buildGStringRegexpForStubSide(GString gString) {
 		return new GStringImpl(
-				Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForStubSide).map(s -> (Object) s)
-						.toArray(),
-				Stream.of(gString.getStrings()).map(RegexpBuilders::escapeSpecialRegexChars).toArray(String[]::new))
-						.toString();
+	Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForStubSide).map(s -> (Object) s)
+.toArray(),
+	Stream.of(gString.getStrings()).map(RegexpBuilders::escapeSpecialRegexChars).toArray(String[]::new))
+	.toString();
 	}
 
 	/**
@@ -98,10 +98,10 @@ public final class RegexpBuilders {
 	 */
 	public static String buildGStringRegexpForTestSide(GString gString) {
 		return new GStringImpl(
-				Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForTestSide).map(s -> (Object) s)
-						.toArray(),
-				Stream.of(gString.getStrings()).map(RegexpBuilders::escapeSpecialRegexChars).toArray(String[]::new))
-						.toString();
+	Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForTestSide).map(s -> (Object) s)
+.toArray(),
+	Stream.of(gString.getStrings()).map(RegexpBuilders::escapeSpecialRegexChars).toArray(String[]::new))
+	.toString();
 	}
 
 	/**
@@ -122,13 +122,13 @@ public final class RegexpBuilders {
 
 	public static String buildJSONRegexpMatch(Map<String, Object> jsonMap) {
 		return WS + "\\{"
-				+ jsonMap.entrySet().stream().map(RegexpBuilders::buildJSONRegexpMatch).collect(Collectors.joining(","))
-				+ "\\}" + WS;
+	+ jsonMap.entrySet().stream().map(RegexpBuilders::buildJSONRegexpMatch).collect(Collectors.joining(","))
+	+ "\\}" + WS;
 	}
 
 	public static String buildJSONRegexpMatch(List<?> jsonList) {
 		return WS + "\\[" + jsonList.stream().map(RegexpBuilders::buildJSONRegexpMatch).collect(Collectors.joining(","))
-				+ "\\]" + WS;
+	+ "\\]" + WS;
 	}
 
 	/**

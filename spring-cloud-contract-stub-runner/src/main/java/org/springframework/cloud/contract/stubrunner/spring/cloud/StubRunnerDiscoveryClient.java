@@ -49,7 +49,7 @@ class StubRunnerDiscoveryClient implements DiscoveryClient {
 	private final StubMapperProperties stubMapperProperties;
 
 	StubRunnerDiscoveryClient(DiscoveryClient delegate, StubFinder stubFinder,
-			StubMapperProperties stubMapperProperties) {
+StubMapperProperties stubMapperProperties) {
 		this.delegate = delegate instanceof StubRunnerDiscoveryClient ? noOpDiscoveryClient() : delegate;
 		if (log.isDebugEnabled()) {
 			log.debug("Will delegate calls to discovery service [" + this.delegate + "] if a stub is not found");
@@ -90,12 +90,12 @@ class StubRunnerDiscoveryClient implements DiscoveryClient {
 		String serviceToFind = StringUtils.hasText(ivyNotation) ? ivyNotation : serviceId;
 		URL stubUrl = this.stubFinder.findStubUrl(serviceToFind);
 		log.info("Resolved from ivy [" + ivyNotation + "] service to find [" + serviceToFind
-				+ "]. Found stub is available under URL [" + stubUrl + "]");
+	+ "]. Found stub is available under URL [" + stubUrl + "]");
 		if (stubUrl == null) {
 			return getInstancesFromDelegate(serviceId);
 		}
 		return Collections.singletonList(
-				new StubRunnerServiceInstance(serviceId, stubUrl.getHost(), stubUrl.getPort(), toUri(stubUrl)));
+	new StubRunnerServiceInstance(serviceId, stubUrl.getHost(), stubUrl.getPort(), toUri(stubUrl)));
 	}
 
 	private List<ServiceInstance> getInstancesFromDelegate(String serviceId) {

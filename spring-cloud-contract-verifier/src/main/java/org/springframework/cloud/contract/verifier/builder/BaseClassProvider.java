@@ -32,7 +32,7 @@ class BaseClassProvider {
 	private static final String SEPARATOR = "_REPLACEME_";
 
 	String retrieveBaseClass(Map<String, String> baseClassMappings, String packageWithBaseClasses,
-			String baseClassForTests, String includedDirectoryRelativePath) {
+String baseClassForTests, String includedDirectoryRelativePath) {
 		String contractPathAsPackage = includedDirectoryRelativePath.replace(File.separator, ".");
 		String contractPackage = includedDirectoryRelativePath.replace(File.separator, SEPARATOR);
 		// package mapping takes super precedence
@@ -43,7 +43,7 @@ class BaseClassProvider {
 			}).findFirst();
 			if (log.isDebugEnabled()) {
 				log.debug("Matching pattern for contract package [" + contractPathAsPackage + "] with setup "
-						+ baseClassMappings + " is [" + mapping + "]");
+			+ baseClassMappings + " is [" + mapping + "]");
 			}
 			if (mapping.isPresent()) {
 				return mapping.get().getValue();

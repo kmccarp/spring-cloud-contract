@@ -34,29 +34,30 @@ class DefaultWireMockStubPostProcessorTests {
 
 	// @formatter:off
 	private static final String STUB_MAPPING = "{\n" + "    \"request\": {\n"
-			+ "        \"method\": \"GET\",\n" + "        \"url\": \"/ping\"\n"
-			+ "    },\n" + "    \"response\": {\n" + "        \"status\": 200,\n"
-			+ "        \"body\": \"pong\",\n" + "        \"headers\": {\n"
-			+ "            \"Content-Type\": \"text/plain\"\n" + "        }\n" + "    }\n"
-			+ "}";
++ "        \"method\": \"GET\",\n" + "        \"url\": \"/ping\"\n"
++ "    },\n" + "    \"response\": {\n" + "        \"status\": 200,\n"
++ "        \"body\": \"pong\",\n" + "        \"headers\": {\n"
++ "            \"Content-Type\": \"text/plain\"\n" + "        }\n" + "    }\n"
++ "}";
 
 	private static final String POST_SERVE_ACTION = "{ \"postServeActions\": {\n"
-			+ "      \"webhook\": {\n" + "        \"headers\": {\n"
-			+ "          \"Content-Type\": \"application/json\"\n" + "        },\n"
-			+ "        \"method\": \"POST\",\n"
-			+ "        \"body\": \"{ \\\"result\\\": \\\"SUCCESS\\\" }\",\n"
-			+ "        \"url\": \"http://localhost:56299/callback\"\n" + "      }\n"
-			+ "    } }";
++ "      \"webhook\": {\n" + "        \"headers\": {\n"
++ "          \"Content-Type\": \"application/json\"\n" + "        },\n"
++ "        \"method\": \"POST\",\n"
++ "        \"body\": \"{ \\\"result\\\": \\\"SUCCESS\\\" }\",\n"
++ "        \"url\": \"http://localhost:56299/callback\"\n" + "      }\n"
++ "    } }";
 
 	private static final String RESPONSE_DELAY = "{\n"
-			+ "    \"response\": {\n"
-			+ "            \"delayDistribution\": {\n"
-			+ "                    \"type\": \"lognormal\",\n"
-			+ "                    \"median\": 80,\n"
-			+ "                    \"sigma\": 0.4\n"
-			+ "            }\n"
-			+ "    }\n"
-			+ "}\n";
++ "    \"response\": {\n"
++ "            \"delayDistribution\": {\n"
++ "                    \"type\": \"lognormal\",\n"
++ "                    \"median\": 80,\n"
++ "                    \"sigma\": 0.4\n"
++ "            }\n"
++ "    }\n"
++ "}\n";
+
 	// @formatter:on
 
 	@Test
@@ -153,10 +154,10 @@ class DefaultWireMockStubPostProcessorTests {
 		then(result.getResponse().getStatus()).isEqualTo(200);
 		then(result.getResponse().getBody()).isEqualTo("pong");
 		then(result.getPostServeActions().stream().map(a -> a.getName()).collect(Collectors.toList()))
-				.contains("webhook");
+	.contains("webhook");
 		PostServeActionDefinition definition = result.getPostServeActions().stream()
-				.filter(a -> a.getName().equals("webhook")).findFirst()
-				.orElseThrow(() -> new AssertionError("No webhook action found"));
+	.filter(a -> a.getName().equals("webhook")).findFirst()
+	.orElseThrow(() -> new AssertionError("No webhook action found"));
 		then(definition.getParameters().getString("method")).isEqualTo("POST");
 	}
 

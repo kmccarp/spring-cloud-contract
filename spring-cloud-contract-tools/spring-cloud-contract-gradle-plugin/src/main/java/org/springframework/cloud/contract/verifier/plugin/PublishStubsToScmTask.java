@@ -80,9 +80,8 @@ class PublishStubsToScmTask extends DefaultTask {
 
 	@Inject
 	public PublishStubsToScmTask(
-			final ObjectFactory objects,
-			final ProviderFactory providers
-	) {
+final ObjectFactory objects,
+final ProviderFactory providers) {
 		this.contractRepository = objects.newInstance(Repository.class);
 		this.contractsMode = objects.property(StubRunnerProperties.StubsMode.class);
 		this.deleteStubsAfterTest = objects.property(Boolean.class);
@@ -98,8 +97,8 @@ class PublishStubsToScmTask extends DefaultTask {
 			String contractRepoUrl = contractRepository.repositoryUrl.getOrElse("");
 			if (!StringUtils.hasText(contractRepoUrl) || !ScmStubDownloaderBuilder.isProtocolAccepted(contractRepoUrl)) {
 				getLogger().warn(
-						"Skipping pushing stubs to scm since your contracts repository URL [{}] doesn't match any of the accepted protocols for SCM stub downloader",
-						contractRepoUrl);
+			"Skipping pushing stubs to scm since your contracts repository URL [{}] doesn't match any of the accepted protocols for SCM stub downloader",
+			contractRepoUrl);
 				return false;
 			}
 			return true;
@@ -112,7 +111,7 @@ class PublishStubsToScmTask extends DefaultTask {
 		getLogger().info("Pushing Stubs to SCM for project [{}]", projectGroupNameVersion);
 		StubRunnerOptions stubRunnerOptions = createStubRunnerOptions();
 		new ContractProjectUpdater(stubRunnerOptions).updateContractProject(projectGroupNameVersion,
-				stubsDir.get().getAsFile().toPath());
+	stubsDir.get().getAsFile().toPath());
 	}
 
 	@Nested
@@ -201,19 +200,30 @@ class PublishStubsToScmTask extends DefaultTask {
 
 	private StubRunnerOptions createStubRunnerOptions() {
 		StubRunnerOptionsBuilder options = new StubRunnerOptionsBuilder()
-				.withOptions(StubRunnerOptions.fromSystemProps())
-				.withStubRepositoryRoot(contractRepository.repositoryUrl.getOrNull()).withStubsMode(contractsMode.get())
-				.withUsername(contractRepository.username.getOrNull())
-				.withPassword(contractRepository.password.getOrNull())
-				.withDeleteStubsAfterTest(deleteStubsAfterTest.get()).withProperties(contractsProperties.getOrNull())
-				.withFailOnNoStubs(failOnNoContracts.get());
+	.withOptions(StubRunnerOptions.fromSystemProps())
+	.withStubRepositoryRoot(contractRepository.repositoryUrl.getOrNull()).withStubsMode(contractsMode.get())
+	.withUsername(contractRepository.username.getOrNull())
+	.withPassword(contractRepository.password.getOrNull())
+	.withDeleteStubsAfterTest(deleteStubsAfterTest.get()).withProperties(contractsProperties.getOrNull())
+	.withFailOnNoStubs(failOnNoContracts.get());
 		if (contractRepository.proxyPort.isPresent()) {
 			options = options.withProxy(contractRepository.proxyHost.getOrNull(), contractRepository.proxyPort.get());
 		}
 		return options.build();
 	}
 
-	@Input protected Property<String> getProjectGroup() { return projectGroup; }
-	@Input protected Property<String> getProjectName() { return projectName; }
-	@Input protected Property<String> getProjectVersion() { return projectVersion; }
+	@Input
+	protected Property<String> getProjectGroup() {
+		return projectGroup;
+	}
+
+	@Input
+	protected Property<String> getProjectName() {
+		return projectName;
+	}
+
+	@Input
+	protected Property<String> getProjectVersion() {
+		return projectVersion;
+	}
 }

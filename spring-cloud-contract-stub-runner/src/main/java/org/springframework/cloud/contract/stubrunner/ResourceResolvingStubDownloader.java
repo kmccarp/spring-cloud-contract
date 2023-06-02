@@ -52,11 +52,11 @@ class ResourceResolvingStubDownloader implements StubDownloader {
 	private final Function<StubConfiguration, Pattern> gavPattern;
 
 	private final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(
-			new DefaultResourceLoader());
+new DefaultResourceLoader());
 
 	ResourceResolvingStubDownloader(StubRunnerOptions stubRunnerOptions,
-			BiFunction<StubRunnerOptions, StubConfiguration, RepoRoots> repoRootFunction,
-			Function<StubConfiguration, Pattern> gavPattern) {
+BiFunction<StubRunnerOptions, StubConfiguration, RepoRoots> repoRootFunction,
+Function<StubConfiguration, Pattern> gavPattern) {
 		this.stubRunnerOptions = stubRunnerOptions;
 		this.repoRootFunction = repoRootFunction;
 		this.gavPattern = gavPattern;
@@ -73,7 +73,7 @@ class ResourceResolvingStubDownloader implements StubDownloader {
 		}
 		if (resources.isEmpty() && this.stubRunnerOptions.isFailOnNoStubs()) {
 			throw new IllegalStateException("No stubs were found on classpath for [" + config.getGroupId() + ":"
-					+ config.getArtifactId() + "]");
+		+ config.getArtifactId() + "]");
 		}
 		final File tmp = TemporaryFileStorage.createTempDir("classpath-stubs");
 		if (stubRunnerOptions.isDeleteStubsAfterTest()) {
@@ -103,14 +103,14 @@ class ResourceResolvingStubDownloader implements StubDownloader {
 			return null;
 		}
 		log.info("Unpacked files for [" + config.getGroupId() + ":" + config.getArtifactId() + ":" + config.getVersion()
-				+ "] to folder [" + tmp + "]");
+	+ "] to folder [" + tmp + "]");
 		return new AbstractMap.SimpleEntry<>(new StubConfiguration(config.getGroupId(), config.getArtifactId(),
-				config.getVersion(), config.getClassifier()), tmp);
+	config.getVersion(), config.getClassifier()), tmp);
 	}
 
 	private void registerShutdownHook() {
 		Runtime.getRuntime().addShutdownHook(
-				new Thread(() -> TemporaryFileStorage.cleanup(stubRunnerOptions.isDeleteStubsAfterTest())));
+	new Thread(() -> TemporaryFileStorage.cleanup(stubRunnerOptions.isDeleteStubsAfterTest())));
 	}
 
 	private void copyTheFoundFiles(File tmp, Resource resource, String relativePath) throws IOException {

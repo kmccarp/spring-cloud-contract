@@ -40,7 +40,7 @@ class StubServer {
 	private final HttpServerStub httpServerStub;
 
 	StubServer(StubConfiguration stubConfiguration, Collection<File> mappings, Collection<Contract> contracts,
-			HttpServerStub httpServerStub) {
+HttpServerStub httpServerStub) {
 		this.stubConfiguration = stubConfiguration;
 		this.mappings = mappings;
 		this.httpServerStub = httpServerStub;
@@ -55,10 +55,10 @@ class StubServer {
 	private StubServer stubServer() {
 		this.httpServerStub.registerMappings(this.mappings);
 		log.info("Started stub server for project [" + this.stubConfiguration.toColonSeparatedDependencyNotation()
-				+ "] on port " + this.httpServerStub.port() + " with [" + this.mappings.size() + "] mappings");
+	+ "] on port " + this.httpServerStub.port() + " with [" + this.mappings.size() + "] mappings");
 		if (this.mappings.isEmpty() && getPort() != -1) {
 			log.warn(
-					"There are no HTTP mappings registered, if your contracts are not messaging based then something went wrong");
+		"There are no HTTP mappings registered, if your contracts are not messaging based then something went wrong");
 		}
 		return this;
 	}
@@ -85,7 +85,7 @@ class StubServer {
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("The HTTP Server stub is not running... That means that the "
-					+ "artifact is running a messaging module. Returning back -1 value of the port.");
+		+ "artifact is running a messaging module. Returning back -1 value of the port.");
 		}
 		return -1;
 	}
@@ -130,7 +130,7 @@ class StubServer {
 		}
 		StubServer that = (StubServer) o;
 		return Objects.equals(this.stubConfiguration, that.stubConfiguration)
-				&& Objects.equals(this.contracts, that.contracts);
+	&& Objects.equals(this.contracts, that.contracts);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ class StubServer {
 	@Override
 	public String toString() {
 		return "StubServer{" + "stubConfiguration=" + this.stubConfiguration + ", mappingsSize=" + this.mappings.size()
-				+ '}';
+	+ '}';
 	}
 
 }

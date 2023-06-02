@@ -120,7 +120,7 @@ public abstract class ContractTestsBase {
 		AmqpMetadata amqpMetadata = AmqpMetadata.fromMetadata(contract.metadata);
 		if (isMessagingType("rabbit") && hasDeclaredOutputQueue(amqpMetadata) || isMessagingType("kafka")) {
 			log.info("First will try to receive a message to setup the connection with the broker");
-			if (contract.outputMessage != null && StringUtils.hasText(contract.outputMessage.sentTo)){
+			if (contract.outputMessage != null && StringUtils.hasText(contract.outputMessage.sentTo)) {
 				setupConnection(contract.outputMessage.sentTo, contract);
 			}
 		}
@@ -136,9 +136,9 @@ public abstract class ContractTestsBase {
 	}
 
 	private void setMessageType(YamlContract contract,
-			ContractVerifierMessageMetadata.MessageType output) {
+ContractVerifierMessageMetadata.MessageType output) {
 		contract.metadata.put(ContractVerifierMessageMetadata.METADATA_KEY,
-				new ContractVerifierMessageMetadata(output));
+	new ContractVerifierMessageMetadata(output));
 	}
 
 	private void setupConnection(String destination, YamlContract contract) {
@@ -165,8 +165,8 @@ public abstract class ContractTestsBase {
 
 	private RestTemplate restTemplate() {
 		RestTemplateBuilder builder = new RestTemplateBuilder()
-				.setConnectTimeout(Duration.ofMillis(this.connectTimeout))
-				.setReadTimeout(Duration.ofMillis(this.readTimeout));
+	.setConnectTimeout(Duration.ofMillis(this.connectTimeout))
+	.setReadTimeout(Duration.ofMillis(this.readTimeout));
 		if (StringUtils.hasText(this.username)) {
 			builder = builder.basicAuthentication(this.username, this.password);
 		}

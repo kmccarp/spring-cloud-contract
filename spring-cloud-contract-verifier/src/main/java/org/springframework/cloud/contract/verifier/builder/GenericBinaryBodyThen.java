@@ -30,11 +30,11 @@ class GenericBinaryBodyThen implements Then {
 	private final ComparisonBuilder comparisonBuilder;
 
 	GenericBinaryBodyThen(BlockBuilder blockBuilder, GeneratedClassMetaData metaData, BodyParser bodyParser,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.comparisonBuilder = comparisonBuilder;
 		this.bodyAssertionLineCreator = new BodyAssertionLineCreator(blockBuilder, metaData,
-				bodyParser.byteArrayString(), this.comparisonBuilder);
+	bodyParser.byteArrayString(), this.comparisonBuilder);
 		this.bodyParser = bodyParser;
 	}
 

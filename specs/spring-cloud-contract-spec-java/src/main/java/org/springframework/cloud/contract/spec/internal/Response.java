@@ -661,9 +661,9 @@ public class Response extends Common implements RegexCreatingProperty<ServerDslP
 		}
 		Response response = (Response) o;
 		return async == response.async && Objects.equals(status, response.status)
-				&& Objects.equals(delay, response.delay) && Objects.equals(headers, response.headers)
-				&& Objects.equals(cookies, response.cookies) && Objects.equals(body, response.body)
-				&& Objects.equals(bodyMatchers, response.bodyMatchers);
+	&& Objects.equals(delay, response.delay) && Objects.equals(headers, response.headers)
+	&& Objects.equals(cookies, response.cookies) && Objects.equals(body, response.body)
+	&& Objects.equals(bodyMatchers, response.bodyMatchers);
 	}
 
 	@Override
@@ -674,8 +674,8 @@ public class Response extends Common implements RegexCreatingProperty<ServerDslP
 	@Override
 	public String toString() {
 		return "Response{" + "\nstatus=" + status + ", \n\tdelay=" + delay + ", \n\theaders=" + headers
-				+ ", \n\tcookies=" + cookies + ", \n\tbody=" + body + ", \n\tasync=" + async + ", \n\tbodyMatchers="
-				+ bodyMatchers + '}';
+	+ ", \n\tcookies=" + cookies + ", \n\tbody=" + body + ", \n\tasync=" + async + ", \n\tbodyMatchers="
+	+ bodyMatchers + '}';
 	}
 
 	/**
@@ -742,9 +742,9 @@ public class Response extends Common implements RegexCreatingProperty<ServerDslP
 		@Override
 		public DslProperty matching(final String value) {
 			return this.common.$(
-					this.common.p(
-							notEscaped(Pattern.compile(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*"))),
-					this.common.c(value));
+		this.common.p(
+	notEscaped(Pattern.compile(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*"))),
+		this.common.c(value));
 		}
 
 	}
@@ -756,8 +756,8 @@ public class Response extends Common implements RegexCreatingProperty<ServerDslP
 		@Override
 		public DslProperty matching(final String value) {
 			return this.common.$(
-					this.common.p(this.common.regex(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*")),
-					this.common.c(value));
+		this.common.p(this.common.regex(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*")),
+		this.common.c(value));
 		}
 
 	}

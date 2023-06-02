@@ -111,7 +111,7 @@ class AvailablePortScanner {
 
 		InvalidPortRange(int lowerBound, int upperBound) {
 			super("Invalid bounds exceptions, min port [" + lowerBound + "] is greater to max port [" + upperBound
-					+ "]");
+		+ "]");
 		}
 
 	}

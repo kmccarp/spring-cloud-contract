@@ -34,8 +34,8 @@ public class StubRunnerJUnit5ExtensionExceptionThrowingTests {
 
 	@RegisterExtension
 	static StubRunnerExtension stubRunnerExtension = new StubRunnerExtension()
-			.stubsMode(StubRunnerProperties.StubsMode.REMOTE).repoRoot(repoRoot())
-			.downloadStub("org.springframework.cloud.contract.verifier.stubs", "bootService");
+.stubsMode(StubRunnerProperties.StubsMode.REMOTE).repoRoot(repoRoot())
+.downloadStub("org.springframework.cloud.contract.verifier.stubs", "bootService");
 
 	@BeforeAll
 	@AfterAll
@@ -56,11 +56,11 @@ public class StubRunnerJUnit5ExtensionExceptionThrowingTests {
 	@Test
 	void should_throw_exception_when_no_message_verifier_was_passed_and_message_related_method_was_triggered() {
 		UnsupportedOperationException emptyTriggerException = assertThrows(UnsupportedOperationException.class,
-				() -> stubRunnerExtension.trigger());
+	() -> stubRunnerExtension.trigger());
 		UnsupportedOperationException wrongLabelException = assertThrows(UnsupportedOperationException.class,
-				() -> stubRunnerExtension.trigger("return_book_1"));
+	() -> stubRunnerExtension.trigger("return_book_1"));
 		UnsupportedOperationException wrongLabelWithIvyNotation = assertThrows(UnsupportedOperationException.class,
-				() -> stubRunnerExtension.trigger("bootService", "return_book_1"));
+	() -> stubRunnerExtension.trigger("bootService", "return_book_1"));
 	}
 
 }

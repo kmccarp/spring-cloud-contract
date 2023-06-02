@@ -44,7 +44,7 @@ interface BodyMethodVisitor {
 	 * @param singleContractMetadata
 	 */
 	default void indentedBodyBlock(BlockBuilder blockBuilder, List<? extends MethodVisitor> methodVisitors,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		List<MethodVisitor> visitors = filterVisitors(methodVisitors, singleContractMetadata);
 		if (visitors.isEmpty()) {
 			blockBuilder.addEndingIfNotPresent().addEmptyLine();
@@ -63,9 +63,9 @@ interface BodyMethodVisitor {
 	 * @return
 	 */
 	default List<MethodVisitor> filterVisitors(List<? extends MethodVisitor> methodVisitors,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		return methodVisitors.stream().filter(given -> given.accept(singleContractMetadata))
-				.collect(Collectors.toList());
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -76,7 +76,7 @@ interface BodyMethodVisitor {
 	 * @param singleContractMetadata
 	 */
 	default void bodyBlock(BlockBuilder blockBuilder, List<? extends MethodVisitor> methodVisitors,
-			SingleContractMetadata singleContractMetadata) {
+SingleContractMetadata singleContractMetadata) {
 		List<MethodVisitor> visitors = filterVisitors(methodVisitors, singleContractMetadata);
 		if (visitors.isEmpty()) {
 			blockBuilder.addEndingIfNotPresent().addEmptyLine();
@@ -93,7 +93,7 @@ interface BodyMethodVisitor {
 	 * @param visitors
 	 */
 	default void applyVisitors(BlockBuilder blockBuilder, SingleContractMetadata singleContractMetadata,
-			List<MethodVisitor> visitors) {
+List<MethodVisitor> visitors) {
 		Iterator<MethodVisitor> iterator = visitors.iterator();
 		while (iterator.hasNext()) {
 			MethodVisitor visitor = iterator.next();
@@ -112,7 +112,7 @@ interface BodyMethodVisitor {
 	 * @param visitors
 	 */
 	default void applyVisitorsWithEnding(BlockBuilder blockBuilder, SingleContractMetadata singleContractMetadata,
-			List<MethodVisitor> visitors) {
+List<MethodVisitor> visitors) {
 		Iterator<MethodVisitor> iterator = visitors.iterator();
 		while (iterator.hasNext()) {
 			MethodVisitor visitor = iterator.next();

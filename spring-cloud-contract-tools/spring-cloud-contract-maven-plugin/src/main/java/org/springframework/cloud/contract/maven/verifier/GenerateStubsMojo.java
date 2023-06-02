@@ -108,17 +108,17 @@ public class GenerateStubsMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		if (this.skip || this.jarSkip) {
 			getLog().info("Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip="
-					+ this.skip + ", spring.cloud.contract.verifier.jar.skip=" + this.jarSkip);
+		+ this.skip + ", spring.cloud.contract.verifier.jar.skip=" + this.jarSkip);
 			return;
 		}
 		else if (stubsOutputMissing(this.stubsDirectory) && !this.failOnNoContracts) {
 			getLog().warn(
-					"The stubs output directory is missing, the flag to fail on no stubs if off - will continue without throwing an exception");
+		"The stubs output directory is missing, the flag to fail on no stubs if off - will continue without throwing an exception");
 			return;
 		}
 		else if (stubsOutputMissing(this.stubsDirectory) && this.failOnNoContracts) {
 			throw new MojoExecutionException("Stubs could not be found: [" + this.stubsDirectory.getAbsolutePath()
-					+ "] .\nPlease make sure that spring-cloud-contract:convert was invoked");
+		+ "] .\nPlease make sure that spring-cloud-contract:convert was invoked");
 		}
 		File stubsJarFile = getStubJarDestFile();
 		if (this.incrementalContractStubsJar && !inputFilesChangeDetected(stubsDirectory, mojoExecution, session)) {
@@ -138,10 +138,10 @@ public class GenerateStubsMojo extends AbstractMojo {
 	private void fillStubJar(File stubsOutputDir, File stubsJarFile) throws MojoFailureException {
 		String[] excludes = excludes();
 		getLog().info(
-				"Files matching this pattern will be excluded from " + "stubs generation " + Arrays.toString(excludes));
+	"Files matching this pattern will be excluded from " + "stubs generation " + Arrays.toString(excludes));
 		try {
-			this.archiver.addDirectory(stubsOutputDir, new String[] { "**/*.*" },
-					excludedFilesEmpty() ? new String[0] : this.excludedFiles);
+			this.archiver.addDirectory(stubsOutputDir, new String[]{"**/*.*"},
+		excludedFilesEmpty() ? new String[0] : this.excludedFiles);
 			this.archiver.setCompress(true);
 			this.archiver.setDestFile(stubsJarFile);
 			this.archiver.addConfiguredManifest(ManifestCreator.createManifest(this.project));

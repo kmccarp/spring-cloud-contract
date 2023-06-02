@@ -29,16 +29,16 @@ class KafkaMetadataTests {
 	void should_parse_the_metadata_entry() throws JsonProcessingException {
 		// @formatter:off
 		String yamlEntry = "kafka:\n"
-				+ "  input:\n"
-				+ "      connectToBroker:\n"
-				+ "        additionalOptions: foo\n"
-				+ "  outputMessage:\n"
-				+ "      connectToBroker:\n"
-				+ "        additionalOptions: bar";
+	+ "  input:\n"
+	+ "      connectToBroker:\n"
+	+ "        additionalOptions: foo\n"
+	+ "  outputMessage:\n"
+	+ "      connectToBroker:\n"
+	+ "        additionalOptions: bar";
 		// @formatter:on
 
 		KafkaMetadata metadata = KafkaMetadata
-				.fromMetadata(this.mapper.readerForMapOf(Object.class).readValue(yamlEntry));
+	.fromMetadata(this.mapper.readerForMapOf(Object.class).readValue(yamlEntry));
 
 		String serialized = this.mapper.writer().forType(KafkaMetadata.class).writeValueAsString(metadata);
 		BDDAssertions.then(serialized).isEqualToNormalizingPunctuationAndWhitespace(yamlEntry.replace("kafka:\n", ""));

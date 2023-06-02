@@ -49,15 +49,14 @@ import org.springframework.util.StringUtils;
  *
  * @author Mariusz Smykula
  */
-@Mojo(name = "generateTests", defaultPhase = LifecyclePhase.GENERATE_TEST_SOURCES,
-		requiresDependencyResolution = ResolutionScope.TEST)
+@Mojo(name = "generateTests", defaultPhase = LifecyclePhase.GENERATE_TEST_SOURCES,requiresDependencyResolution = ResolutionScope.TEST)
 public class GenerateTestsMojo extends AbstractMojo {
 
 	@Parameter(defaultValue = "${repositorySystemSession}", readonly = true)
 	private RepositorySystemSession repoSession;
 
 	@Parameter(property = "spring.cloud.contract.verifier.contractsDirectory",
-			defaultValue = "${project.basedir}/src/test/resources/contracts")
+defaultValue = "${project.basedir}/src/test/resources/contracts")
 	private File contractsDirectory;
 
 	@Parameter(defaultValue = "${project.build.directory}/generated-test-sources/contracts")
@@ -251,11 +250,11 @@ public class GenerateTestsMojo extends AbstractMojo {
 		if (this.skip || this.mavenTestSkip) {
 			if (this.skip) {
 				getLog().info("Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip="
-						+ this.skip);
+			+ this.skip);
 			}
 			if (this.mavenTestSkip) {
 				getLog().info(
-						"Skipping Spring Cloud Contract Verifier execution: maven.test.skip=" + this.mavenTestSkip);
+			"Skipping Spring Cloud Contract Verifier execution: maven.test.skip=" + this.mavenTestSkip);
 			}
 			return;
 		}
@@ -264,15 +263,15 @@ public class GenerateTestsMojo extends AbstractMojo {
 		config.setFailOnInProgress(this.failOnInProgress);
 		// download contracts, unzip them and pass as output directory
 		File contractsDirectory = new MavenContractsDownloader(this.project, this.contractDependency,
-				this.contractsPath, this.contractsRepositoryUrl, this.contractsMode, getLog(),
-				this.contractsRepositoryUsername, this.contractsRepositoryPassword, this.contractsRepositoryProxyHost,
-				this.contractsRepositoryProxyPort, this.deleteStubsAfterTest, this.contractsProperties,
-				this.failOnNoContracts).downloadAndUnpackContractsIfRequired(config, this.contractsDirectory);
+	this.contractsPath, this.contractsRepositoryUrl, this.contractsMode, getLog(),
+	this.contractsRepositoryUsername, this.contractsRepositoryPassword, this.contractsRepositoryProxyHost,
+	this.contractsRepositoryProxyPort, this.deleteStubsAfterTest, this.contractsProperties,
+	this.failOnNoContracts).downloadAndUnpackContractsIfRequired(config, this.contractsDirectory);
 		getLog().info("Directory with contract is present at [" + contractsDirectory + "]");
 		throwExceptionWhenFailOnNoContracts(contractsDirectory, this.contractsRepositoryUrl);
 
 		if (this.incrementalContractTests
-				&& !ChangeDetector.inputFilesChangeDetected(contractsDirectory, mojoExecution, session)) {
+	&& !ChangeDetector.inputFilesChangeDetected(contractsDirectory, mojoExecution, session)) {
 			getLog().info("Nothing to generate - all classes are up to date");
 			return;
 		}
@@ -285,13 +284,13 @@ public class GenerateTestsMojo extends AbstractMojo {
 		if (getLog().isInfoEnabled()) {
 			getLog().info("Test Source directory: " + this.generatedTestSourcesDir.getAbsolutePath() + " added.");
 			getLog().info("Using [" + config.getBaseClassForTests() + "] as base class for test classes, ["
-					+ config.getBasePackageForTests() + "] as base " + "package for tests, ["
-					+ config.getPackageWithBaseClasses() + "] as package with " + "base classes, base class mappings "
-					+ this.baseClassMappings);
+		+ config.getBasePackageForTests() + "] as base " + "package for tests, ["
+		+ config.getPackageWithBaseClasses() + "] as package with " + "base classes, base class mappings "
+		+ this.baseClassMappings);
 		}
 		try {
 			LeftOverPrevention leftOverPrevention = new LeftOverPrevention(this.generatedTestSourcesDir, mojoExecution,
-					session);
+		session);
 			TestGenerator generator = new TestGenerator(config);
 			int generatedClasses = generator.generate();
 			getLog().info("Generated " + generatedClasses + " test classes.");
@@ -299,23 +298,23 @@ public class GenerateTestsMojo extends AbstractMojo {
 		}
 		catch (ContractVerifierException e) {
 			throw new MojoExecutionException(
-					String.format("Spring Cloud Contract Verifier Plugin exception: %s", e.getMessage()), e);
+		String.format("Spring Cloud Contract Verifier Plugin exception: %s", e.getMessage()), e);
 		}
 	}
 
 	private void throwExceptionWhenFailOnNoContracts(File file, String contractsRepository)
-			throws MojoExecutionException {
+throws MojoExecutionException {
 		if (StringUtils.hasText(contractsRepository)) {
 			if (getLog().isDebugEnabled()) {
 				getLog().debug(
-						"Contracts repository is set, will not throw an exception that the contracts are not found");
+			"Contracts repository is set, will not throw an exception that the contracts are not found");
 			}
 			return;
 		}
 		if (this.failOnNoContracts && (!file.exists() || file.listFiles().length == 0)) {
 			String path = file.getAbsolutePath();
 			throw new MojoExecutionException("Contracts could not be found: [" + path
-					+ "]\nPlease make sure that the contracts were defined, or set the [failOnNoContracts] property to [false]");
+		+ "]\nPlease make sure that the contracts were defined, or set the [failOnNoContracts] property to [false]");
 		}
 	}
 

@@ -39,7 +39,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter({ StubRunnerConfiguration.class, ConsulServiceRegistryAutoConfiguration.class })
+@AutoConfigureAfter({StubRunnerConfiguration.class, ConsulServiceRegistryAutoConfiguration.class})
 @ConditionalOnClass(ConsulClient.class)
 @ConditionalOnStubbedDiscoveryDisabled
 @ConditionalOnProperty(value = "stubrunner.cloud.consul.enabled", matchIfMissing = true)
@@ -47,10 +47,10 @@ public class StubRunnerSpringCloudConsulAutoConfiguration {
 
 	@Bean(initMethod = "registerStubs")
 	public StubsRegistrar stubsRegistrar(StubRunning stubRunning, ConsulClient consulClient,
-			StubMapperProperties stubMapperProperties, ConsulDiscoveryProperties consulDiscoveryProperties,
-			InetUtils inetUtils) {
+StubMapperProperties stubMapperProperties, ConsulDiscoveryProperties consulDiscoveryProperties,
+InetUtils inetUtils) {
 		return new ConsulStubsRegistrar(stubRunning, consulClient, stubMapperProperties, consulDiscoveryProperties,
-				inetUtils);
+	inetUtils);
 	}
 
 }

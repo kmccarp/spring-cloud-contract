@@ -70,19 +70,19 @@ public class ContractMetadata {
 	}
 
 	public ContractMetadata(Path path, boolean ignored, int groupSize, Integer order,
-			Collection<Contract> convertedContract) {
+Collection<Contract> convertedContract) {
 		this.groupSize = groupSize;
 		this.path = path;
 		this.ignored = ignored;
 		this.order = order;
 		this.convertedContract.addAll(convertedContract);
 		this.convertedContractWithMetadata.addAll(this.convertedContract.stream().filter(Objects::nonNull)
-				.map(it -> new SingleContractMetadata(it, this)).collect(toList()));
+	.map(it -> new SingleContractMetadata(it, this)).collect(toList()));
 	}
 
 	public SingleContractMetadata forContract(Contract contract) {
 		return this.convertedContractWithMetadata.stream().filter(it -> it.getContract().equals(contract)).findFirst()
-				.orElse(null);
+	.orElse(null);
 	}
 
 	public boolean anyInProgress() {
@@ -120,7 +120,7 @@ public class ContractMetadata {
 	@Override
 	public String toString() {
 		return "ContractMetadata{" + "path=" + path + ", ignored=" + ignored + ", groupSize=" + groupSize + ", order="
-				+ order + '}';
+	+ order + '}';
 	}
 
 }

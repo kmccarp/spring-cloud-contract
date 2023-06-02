@@ -26,7 +26,7 @@ class SpockOrderImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "spock.lang.Stepwise" };
+	private static final String[] IMPORTS = {"spock.lang.Stepwise"};
 
 	SpockOrderImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -42,7 +42,7 @@ class SpockOrderImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.SPOCK
-				&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
+	&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
 	}
 
 }

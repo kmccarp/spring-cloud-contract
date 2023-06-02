@@ -30,10 +30,10 @@ public class JavaTestGenerator implements SingleTestGenerator {
 
 	@Override
 	public String buildClass(ContractVerifierConfigProperties properties, Collection<ContractMetadata> listOfFiles,
-			String includedDirectoryRelativePath, GeneratedClassData generatedClassData) {
+String includedDirectoryRelativePath, GeneratedClassData generatedClassData) {
 		BlockBuilder builder = new BlockBuilder("\t");
 		GeneratedClassMetaData metaData = new GeneratedClassMetaData(properties, listOfFiles,
-				includedDirectoryRelativePath, generatedClassData);
+	includedDirectoryRelativePath, generatedClassData);
 		return classAsString(builder, metaData);
 	}
 
@@ -45,67 +45,67 @@ public class JavaTestGenerator implements SingleTestGenerator {
 	}
 
 	GeneratedTestClass generatedTestClass(BlockBuilder builder, GeneratedClassMetaData metaData,
-			ClassBodyBuilder bodyBuilder) {
+ClassBodyBuilder bodyBuilder) {
 		// @formatter:off
 		return GeneratedTestClassBuilder.builder(builder, metaData)
-				.classBodyBuilder(bodyBuilder)
-					.metaData()
-						.java()
-						.groovy()
-						.build()
-					.imports()
-						.defaultImports()
-						.userImports()
-						.customMode()
-						.json()
-						.jUnit4()
-						.jUnit5()
-						.testNG()
-						.spock()
-					.xml()
-					.messaging()
-					.restAssured()
-					.jaxRs()
-					.build()
-				.classAnnotations()
-					.defaultAnnotations()
-					.jUnit4()
-					.jUnit5()
-					.spock()
-					.build()
-				.build();
+	.classBodyBuilder(bodyBuilder)
+	.metaData()
+	.java()
+	.groovy()
+	.build()
+	.imports()
+	.defaultImports()
+	.userImports()
+	.customMode()
+	.json()
+	.jUnit4()
+	.jUnit5()
+	.testNG()
+	.spock()
+	.xml()
+	.messaging()
+	.restAssured()
+	.jaxRs()
+	.build()
+	.classAnnotations()
+	.defaultAnnotations()
+	.jUnit4()
+	.jUnit5()
+	.spock()
+	.build()
+	.build();
 		// @formatter:on
 	}
 
 	ClassBodyBuilder classBodyBuilder(BlockBuilder builder, GeneratedClassMetaData metaData,
-			SingleMethodBuilder methodBuilder) {
+SingleMethodBuilder methodBuilder) {
 		// @formatter:off
 		return ClassBodyBuilder.builder(builder, metaData)
-				.field()
-					.messaging()
-					.customMode()
-					.build()
-				.methodBuilder(methodBuilder);
+	.field()
+	.messaging()
+	.customMode()
+	.build()
+	.methodBuilder(methodBuilder);
 		// @formatter:on
 	}
 
 	SingleMethodBuilder singleMethodBuilder(BlockBuilder builder, GeneratedClassMetaData metaData) {
 		// @formatter:off
 		return SingleMethodBuilder.builder(builder, metaData)
-				.methodAnnotation()
-					.jUnit4()
-					.jUnit5()
-					.testNG()
-					.spock()
-					.build()
-				.methodMetadata()
-					.jUnit()
-					.spock()
-					.build()
-				.restAssured()
-				.customMode()
-				.jaxRs()
-				.messaging();
+	.methodAnnotation()
+	.jUnit4()
+	.jUnit5()
+	.testNG()
+	.spock()
+	.build()
+	.methodMetadata()
+	.jUnit()
+	.spock()
+	.build()
+	.restAssured()
+	.customMode()
+	.jaxRs()
+	.messaging();
 		// @formatter:on
 	}
 

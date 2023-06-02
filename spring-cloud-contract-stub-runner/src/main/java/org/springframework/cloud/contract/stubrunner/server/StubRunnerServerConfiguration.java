@@ -30,7 +30,7 @@ class StubRunnerServerConfiguration {
 
 	@ConditionalOnProperty(name = "stubrunner.messaging.enabled", havingValue = "true", matchIfMissing = true)
 	@AutoConfigureMessageVerifier
-	@Import({ TriggerController.class })
+	@Import({TriggerController.class})
 	static class StubRunnerMessagingAutoConfiguration {
 
 	}

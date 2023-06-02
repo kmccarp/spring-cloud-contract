@@ -27,7 +27,7 @@ class XmlBodyVerificationBuilder implements BodyMethodGeneration {
 	}
 
 	void addXmlResponseBodyCheck(BlockBuilder blockBuilder, Object responseBody, BodyMatchers bodyMatchers,
-			String responseString, boolean shouldCommentOutBDDBlocks) {
+String responseString, boolean shouldCommentOutBDDBlocks) {
 		addXmlProcessingLines(blockBuilder, responseString);
 		Object processedBody = XmlToXPathsConverter.removeMatchingXPaths(responseBody, bodyMatchers);
 		List<BodyMatcher> matchers = new XmlToXPathsConverter().mapToMatchers(processedBody);
@@ -40,13 +40,13 @@ class XmlBodyVerificationBuilder implements BodyMethodGeneration {
 
 	private void addXmlProcessingLines(final BlockBuilder blockBuilder, String responseString) {
 		Arrays.asList("DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance()",
-				"builderFactory.setNamespaceAware(true)",
-				"DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder()",
-				"Document parsedXml = documentBuilder.parse(new InputSource(new StringReader(" + responseString + ")))")
-				.forEach(it -> {
-					blockBuilder.addLine(it);
-					addColonIfRequired(lineSuffix, blockBuilder);
-				});
+	"builderFactory.setNamespaceAware(true)",
+	"DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder()",
+	"Document parsedXml = documentBuilder.parse(new InputSource(new StringReader(" + responseString + ")))")
+	.forEach(it -> {
+		blockBuilder.addLine(it);
+		addColonIfRequired(lineSuffix, blockBuilder);
+	});
 	}
 
 	@Override
@@ -62,7 +62,7 @@ class XmlBodyVerificationBuilder implements BodyMethodGeneration {
 		Object retrievedValue = quotedAndEscaped(XmlToXPathsConverter.retrieveValue(bodyMatcher, body));
 		String comparisonMethod = bodyMatcher.matchingType().equals(MatchingType.EQUALITY) ? "isEqualTo" : "matches";
 		String method = "assertThat(valueFromXPath(parsedXml, " + quotedAndEscaped(bodyMatcher.path()) + "))."
-				+ comparisonMethod + "(" + retrievedValue + ")";
+	+ comparisonMethod + "(" + retrievedValue + ")";
 		bb.addLine(method.replace("$", "\\$"));
 		addColonIfRequired(lineSuffix, bb);
 	}
@@ -78,7 +78,7 @@ class XmlBodyVerificationBuilder implements BodyMethodGeneration {
 	@Override
 	public void methodForTypeCheck(BodyMatcher bodyMatcher, BlockBuilder bb, Object copiedBody) {
 		throw new UnsupportedOperationException(
-				"The `getNodeValue()` method in `org.w3c.dom.Node` always returns String.");
+	"The `getNodeValue()` method in `org.w3c.dom.Node` always returns String.");
 	}
 
 }

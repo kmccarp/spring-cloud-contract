@@ -63,11 +63,11 @@ import org.springframework.util.StringUtils;
  * @since 2.2.3
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({ LoadBalancerClient.class, LoadBalancerClientFactory.class })
+@ConditionalOnClass({LoadBalancerClient.class, LoadBalancerClientFactory.class})
 @ConditionalOnProperty(value = "stubrunner.cloud.loadbalancer.enabled", matchIfMissing = true)
 @ConditionalOnBean(StubMapperProperties.class)
 @AutoConfigureBefore(LoadBalancerAutoConfiguration.class)
-@AutoConfigureAfter({ LoadBalancerClientConfiguration.class, StubRunnerSpringCloudAutoConfiguration.class })
+@AutoConfigureAfter({LoadBalancerClientConfiguration.class, StubRunnerSpringCloudAutoConfiguration.class})
 @ConditionalOnStubbedDiscoveryEnabled
 @EnableConfigurationProperties(LoadBalancerClientsProperties.class)
 public class SpringCloudLoadBalancerAutoConfiguration {
@@ -75,7 +75,7 @@ public class SpringCloudLoadBalancerAutoConfiguration {
 	@Bean
 	@Primary
 	LoadBalancerClientFactory stubRunnerLoadBalancerClientFactory(BeanFactory beanFactory,
-			LoadBalancerClientsProperties properties) {
+LoadBalancerClientsProperties properties) {
 		return new StubRunnerLoadBalancerClientFactory(beanFactory, properties);
 	}
 
@@ -151,8 +151,8 @@ class StubbedServiceInstance implements ServiceInstance {
 		}
 		RunningStubs runningStubs = this.stubFinder.findAllRunningStubs();
 		String mappedServiceName = StringUtils
-				.hasText(this.stubMapperProperties.fromServiceIdToIvyNotation(this.serviceId))
-						? this.stubMapperProperties.fromServiceIdToIvyNotation(this.serviceId) : this.serviceId;
+	.hasText(this.stubMapperProperties.fromServiceIdToIvyNotation(this.serviceId))
+	? this.stubMapperProperties.fromServiceIdToIvyNotation(this.serviceId) : this.serviceId;
 		entry = runningStubs.getEntry(mappedServiceName);
 		CACHE.put(this.serviceId, entry);
 		return entry;
@@ -228,7 +228,7 @@ class ContractReactorServiceInstanceLoadBalancer implements ReactorServiceInstan
 	@Override
 	public Mono<Response<ServiceInstance>> choose(Request request) {
 		return Mono.just(
-				new DefaultResponse(new StubbedServiceInstance(stubFinder(), stubMapperProperties(), this.serviceId)));
+	new DefaultResponse(new StubbedServiceInstance(stubFinder(), stubMapperProperties(), this.serviceId)));
 	}
 
 	private StubFinder stubFinder() {

@@ -54,7 +54,7 @@ class JaxRsRequestWhen implements When, JaxRsAcceptor, QueryParamsResolver {
 			return "";
 		}
 		Header foundHeader = request.getHeaders().getEntries().stream().filter(header -> name.equals(header.getName()))
-				.findFirst().orElse(null);
+	.findFirst().orElse(null);
 		if (foundHeader == null) {
 			return "";
 		}

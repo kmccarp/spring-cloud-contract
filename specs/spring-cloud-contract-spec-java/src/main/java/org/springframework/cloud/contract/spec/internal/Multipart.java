@@ -30,7 +30,7 @@ public class Multipart extends DslProperty {
 
 	public Multipart(List<DslProperty> multipartAsList) {
 		super(multipartAsList.stream().map(DslProperty::getClientValue).collect(Collectors.toList()),
-				multipartAsList.stream().map(DslProperty::getServerValue).collect(Collectors.toList()));
+	multipartAsList.stream().map(DslProperty::getServerValue).collect(Collectors.toList()));
 	}
 
 	public Multipart(Object value) {

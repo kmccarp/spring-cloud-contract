@@ -28,39 +28,40 @@ class GraphQLRequestMatcherTests {
 
 	// @formatter:off
 	private static final String YAML_WITH_INVALID_VARIABLES = "---\n"
-			+ "request:\n"
-			+ "  method: \"POST\"\n"
-			+ "  url: \"/graphql\"\n"
-			+ "  headers:\n"
-			+ "    Content-Type: \"application/json\"\n"
-			+ "  body:\n"
-			+ "    query: \"query queryName($personName: String!) {\\n  personToCheck(name: $personName)\\\n"
-			+ "      \\ {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\"\n"
-			+ "    variables: This should actually be a map not a string\n"
-			+ "    operationName: \"queryName\"\n"
-			+ "  matchers:\n"
-			+ "    headers:\n"
-			+ "      - key: \"Content-Type\"\n"
-			+ "        regex: \"application/json.*\"\n"
-			+ "        regexType: \"as_string\"\n"
-			+ "response:\n"
-			+ "  status: 200\n"
-			+ "  headers:\n"
-			+ "    Content-Type: \"application/json\"\n"
-			+ "  body:\n"
-			+ "    data:\n"
-			+ "      personToCheck:\n"
-			+ "        name: \"Old Enough\"\n"
-			+ "        age: \"40\"\n"
-			+ "  matchers:\n"
-			+ "    headers:\n"
-			+ "      - key: \"Content-Type\"\n"
-			+ "        regex: \"application/json.*\"\n"
-			+ "        regexType: \"as_string\"\n"
-			+ "name: \"shouldRetrieveOldEnoughPerson\"\n"
-			+ "metadata:\n"
-			+ "  verifier:\n"
-			+ "    tool: \"graphql\"\n";
++ "request:\n"
++ "  method: \"POST\"\n"
++ "  url: \"/graphql\"\n"
++ "  headers:\n"
++ "    Content-Type: \"application/json\"\n"
++ "  body:\n"
++ "    query: \"query queryName($personName: String!) {\\n  personToCheck(name: $personName)\\\n"
++ "      \\ {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\"\n"
++ "    variables: This should actually be a map not a string\n"
++ "    operationName: \"queryName\"\n"
++ "  matchers:\n"
++ "    headers:\n"
++ "      - key: \"Content-Type\"\n"
++ "        regex: \"application/json.*\"\n"
++ "        regexType: \"as_string\"\n"
++ "response:\n"
++ "  status: 200\n"
++ "  headers:\n"
++ "    Content-Type: \"application/json\"\n"
++ "  body:\n"
++ "    data:\n"
++ "      personToCheck:\n"
++ "        name: \"Old Enough\"\n"
++ "        age: \"40\"\n"
++ "  matchers:\n"
++ "    headers:\n"
++ "      - key: \"Content-Type\"\n"
++ "        regex: \"application/json.*\"\n"
++ "        regexType: \"as_string\"\n"
++ "name: \"shouldRetrieveOldEnoughPerson\"\n"
++ "metadata:\n"
++ "  verifier:\n"
++ "    tool: \"graphql\"\n";
+
 	// @formatter:on
 
 	@Test
@@ -68,7 +69,7 @@ class GraphQLRequestMatcherTests {
 		GraphQlMatcher matcher = new GraphQlMatcher();
 
 		MatchResult result = matcher.match(YamlContractConverter.INSTANCE.read(YAML_WITH_INVALID_VARIABLES.getBytes()),
-				BDDMockito.mock(Request.class), null);
+	BDDMockito.mock(Request.class), null);
 
 		BDDAssertions.then(result.isExactMatch()).isFalse();
 	}
@@ -78,47 +79,48 @@ class GraphQLRequestMatcherTests {
 		GraphQlMatcher matcher = new GraphQlMatcher();
 
 		MatchResult result = matcher.match(YamlContractConverter.INSTANCE.read(YAML_WITH_INVALID_VARIABLES.getBytes()),
-				request(), null);
+	request(), null);
 
 		BDDAssertions.then(result.isExactMatch()).isFalse();
 	}
 
 	// @formatter:off
 	private static final String PROPER_YAML = "---\n"
-			+ "request:\n"
-			+ "  method: \"POST\"\n"
-			+ "  url: \"/graphql\"\n"
-			+ "  headers:\n"
-			+ "    Content-Type: \"application/json\"\n"
-			+ "  body:\n"
-			+ "    query: \"query queryName($personName: String!) { personToCheck(name: $personName)"
-			+ "      {         name    age  } }\"\n"
-			+ "    variables:\n"
-			+ "      personName: \"Old Enough\"\n"
-			+ "    operationName: \"queryName\"\n"
-			+ "  matchers:\n"
-			+ "    headers:\n"
-			+ "      - key: \"Content-Type\"\n"
-			+ "        regex: \"application/json.*\"\n"
-			+ "        regexType: \"as_string\"\n"
-			+ "response:\n"
-			+ "  status: 200\n"
-			+ "  headers:\n"
-			+ "    Content-Type: \"application/json\"\n"
-			+ "  body:\n"
-			+ "    data:\n"
-			+ "      personToCheck:\n"
-			+ "        name: \"Old Enough\"\n"
-			+ "        age: \"40\"\n"
-			+ "  matchers:\n"
-			+ "    headers:\n"
-			+ "      - key: \"Content-Type\"\n"
-			+ "        regex: \"application/json.*\"\n"
-			+ "        regexType: \"as_string\"\n"
-			+ "name: \"shouldRetrieveOldEnoughPerson\"\n"
-			+ "metadata:\n"
-			+ "  verifier:\n"
-			+ "    tool: \"graphql\"\n";
++ "request:\n"
++ "  method: \"POST\"\n"
++ "  url: \"/graphql\"\n"
++ "  headers:\n"
++ "    Content-Type: \"application/json\"\n"
++ "  body:\n"
++ "    query: \"query queryName($personName: String!) { personToCheck(name: $personName)"
++ "      {         name    age  } }\"\n"
++ "    variables:\n"
++ "      personName: \"Old Enough\"\n"
++ "    operationName: \"queryName\"\n"
++ "  matchers:\n"
++ "    headers:\n"
++ "      - key: \"Content-Type\"\n"
++ "        regex: \"application/json.*\"\n"
++ "        regexType: \"as_string\"\n"
++ "response:\n"
++ "  status: 200\n"
++ "  headers:\n"
++ "    Content-Type: \"application/json\"\n"
++ "  body:\n"
++ "    data:\n"
++ "      personToCheck:\n"
++ "        name: \"Old Enough\"\n"
++ "        age: \"40\"\n"
++ "  matchers:\n"
++ "    headers:\n"
++ "      - key: \"Content-Type\"\n"
++ "        regex: \"application/json.*\"\n"
++ "        regexType: \"as_string\"\n"
++ "name: \"shouldRetrieveOldEnoughPerson\"\n"
++ "metadata:\n"
++ "  verifier:\n"
++ "    tool: \"graphql\"\n";
+
 	// @formatter:on
 
 	@Test
@@ -131,17 +133,18 @@ class GraphQLRequestMatcherTests {
 		GraphQlMatcher matcher = new GraphQlMatcher();
 
 		MatchResult result = matcher.match(YamlContractConverter.INSTANCE.read(PROPER_YAML.getBytes()), request(),
-				null);
+	null);
 
 		BDDAssertions.then(result.isExactMatch()).isTrue();
 	}
 
 	// @formatter:off
 	private static final String NOT_MATCHING_QUERY_BODY = "{\n"
-			+ "\"query\":\"this should not match\",\n"
-			+ "\"variables\":{\"personName\":\"Old Enough\"},\n"
-			+ "\"operationName\":\"queryName\"\n"
-			+ "}";
++ "\"query\":\"this should not match\",\n"
++ "\"variables\":{\"personName\":\"Old Enough\"},\n"
++ "\"operationName\":\"queryName\"\n"
++ "}";
+
 	// @formatter:on
 
 	@Test
@@ -149,17 +152,18 @@ class GraphQLRequestMatcherTests {
 		GraphQlMatcher matcher = new GraphQlMatcher();
 
 		MatchResult result = matcher.match(YamlContractConverter.INSTANCE.read(PROPER_YAML.getBytes()),
-				request(NOT_MATCHING_QUERY_BODY), null);
+	request(NOT_MATCHING_QUERY_BODY), null);
 
 		BDDAssertions.then(result.isExactMatch()).isFalse();
 	}
 
 	// @formatter:off
 	private static final String NOT_MATCHING_VARIABLES_BODY = "{\n"
-			+ "\"query\":\"query queryName($personName: String!) {\\n  personToCheck(name: $personName) {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\",\n"
-			+ "\"variables\":{\"Not matching key\":\"Not matching value\"},\n"
-			+ "\"operationName\":\"queryName\"\n"
-			+ "}";
++ "\"query\":\"query queryName($personName: String!) {\\n  personToCheck(name: $personName) {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\",\n"
++ "\"variables\":{\"Not matching key\":\"Not matching value\"},\n"
++ "\"operationName\":\"queryName\"\n"
++ "}";
+
 	// @formatter:on
 
 	@Test
@@ -167,17 +171,18 @@ class GraphQLRequestMatcherTests {
 		GraphQlMatcher matcher = new GraphQlMatcher();
 
 		MatchResult result = matcher.match(YamlContractConverter.INSTANCE.read(PROPER_YAML.getBytes()),
-				request(NOT_MATCHING_VARIABLES_BODY), null);
+	request(NOT_MATCHING_VARIABLES_BODY), null);
 
 		BDDAssertions.then(result.isExactMatch()).isFalse();
 	}
 
 	// @formatter:off
 	private static final String NOT_MATCHING_OPERATION_NAME_BODY = "{\n"
-			+ "\"query\":\"query queryName($personName: String!) {\\n  personToCheck(name: $personName) {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\",\n"
-			+ "\"variables\":{\"personName\":\"Old Enough\"},\n"
-			+ "\"operationName\":\"not matching operation name\"\n"
-			+ "}";
++ "\"query\":\"query queryName($personName: String!) {\\n  personToCheck(name: $personName) {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\",\n"
++ "\"variables\":{\"personName\":\"Old Enough\"},\n"
++ "\"operationName\":\"not matching operation name\"\n"
++ "}";
+
 	// @formatter:on
 
 	@Test
@@ -185,17 +190,18 @@ class GraphQLRequestMatcherTests {
 		GraphQlMatcher matcher = new GraphQlMatcher();
 
 		MatchResult result = matcher.match(YamlContractConverter.INSTANCE.read(PROPER_YAML.getBytes()),
-				request(NOT_MATCHING_OPERATION_NAME_BODY), null);
+	request(NOT_MATCHING_OPERATION_NAME_BODY), null);
 
 		BDDAssertions.then(result.isExactMatch()).isFalse();
 	}
 
 	// @formatter:off
 	private static final String REQUEST_BODY = "{\n"
-			+ "\"query\":\"query queryName($personName: String!) {\\n  personToCheck(name: $personName) {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\",\n"
-			+ "\"variables\":{\"personName\":\"Old Enough\"},\n"
-			+ "\"operationName\":\"queryName\"\n"
-			+ "}";
++ "\"query\":\"query queryName($personName: String!) {\\n  personToCheck(name: $personName) {\\n    name\\n    age\\n  }\\n}\\n\\n\\n\\n\",\n"
++ "\"variables\":{\"personName\":\"Old Enough\"},\n"
++ "\"operationName\":\"queryName\"\n"
++ "}";
+
 	// @formatter:on
 
 	private Request request() {

@@ -30,22 +30,22 @@ class AmqpMetadataTests {
 	void should_parse_the_metadata_entry() throws JsonProcessingException {
 		// @formatter:off
 		String yamlEntry = "amqp:\n"
-				+ "  input:\n"
-				+ "      connectToBroker:\n"
-				+ "        additionalOptions: \"foo1\"\n"
-				+ "        declareQueueWithName: \"foo2\"\n"
-				+ "      messageProperties:\n"
-				+ "        replyTo: \"foo3\"\n"
-				+ "  outputMessage:\n"
-				+ "      connectToBroker:\n"
-				+ "        additionalOptions: \"bar1\"\n"
-				+ "        declareQueueWithName: \"bar2\"\n"
-				+ "      messageProperties:\n"
-				+ "        replyTo: \"bar3\"\n";
+	+ "  input:\n"
+	+ "      connectToBroker:\n"
+	+ "        additionalOptions: \"foo1\"\n"
+	+ "        declareQueueWithName: \"foo2\"\n"
+	+ "      messageProperties:\n"
+	+ "        replyTo: \"foo3\"\n"
+	+ "  outputMessage:\n"
+	+ "      connectToBroker:\n"
+	+ "        additionalOptions: \"bar1\"\n"
+	+ "        declareQueueWithName: \"bar2\"\n"
+	+ "      messageProperties:\n"
+	+ "        replyTo: \"bar3\"\n";
 		// @formatter:on
 
 		AmqpMetadata metadata = AmqpMetadata
-				.fromMetadata(this.mapper.readerForMapOf(Object.class).readValue(yamlEntry));
+	.fromMetadata(this.mapper.readerForMapOf(Object.class).readValue(yamlEntry));
 
 		then(metadata.getInput().getConnectToBroker().getAdditionalOptions()).isEqualTo("foo1");
 		then(metadata.getInput().getConnectToBroker().getDeclareQueueWithName()).isEqualTo("foo2");

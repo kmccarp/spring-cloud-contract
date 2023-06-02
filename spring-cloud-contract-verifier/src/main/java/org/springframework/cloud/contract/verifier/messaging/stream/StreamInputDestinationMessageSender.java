@@ -55,7 +55,7 @@ class StreamInputDestinationMessageSender implements MessageVerifierSender<Messa
 		}
 		catch (Exception e) {
 			log.error("Exception occurred while trying to send a message [" + message + "] "
-					+ "to a destination with name [" + destination + "]", e);
+		+ "to a destination with name [" + destination + "]", e);
 			throw e;
 		}
 	}

@@ -40,7 +40,7 @@ public final class ValidateUtils {
 	 * Allowed matching types on the server side.
 	 */
 	public static List<MatchingStrategy.Type> ALLOWED_MATCHING_TYPES_ON_SERVER_SIDE = new ArrayList<>(
-			Arrays.asList(MatchingStrategy.Type.EQUAL_TO, MatchingStrategy.Type.ABSENT));
+Arrays.asList(MatchingStrategy.Type.EQUAL_TO, MatchingStrategy.Type.ABSENT));
 
 	/**
 	 * Validates if for given object the server value is present.
@@ -76,7 +76,7 @@ public final class ValidateUtils {
 	public static void validateServerValue(MatchingStrategy matchingStrategy, String msg) {
 		if (!ALLOWED_MATCHING_TYPES_ON_SERVER_SIDE.contains(matchingStrategy.getType())) {
 			throw new IllegalStateException(msg + " can\'t be of a matching type: "
-					+ String.valueOf(matchingStrategy.getType()) + " for the server side");
+		+ String.valueOf(matchingStrategy.getType()) + " for the server side");
 		}
 
 		validateServerValue(matchingStrategy.getServerValue(), msg);

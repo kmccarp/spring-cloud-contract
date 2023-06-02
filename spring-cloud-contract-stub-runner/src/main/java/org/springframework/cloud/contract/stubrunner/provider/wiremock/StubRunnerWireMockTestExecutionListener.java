@@ -39,17 +39,17 @@ public final class StubRunnerWireMockTestExecutionListener extends AbstractTestE
 		if (testContext.getTestClass().getAnnotationsByType(AutoConfigureStubRunner.class).length == 0) {
 			if (log.isDebugEnabled()) {
 				log.debug("No @AutoConfigureStubRunner annotation found on [" + testContext.getTestClass()
-						+ "]. Skipping");
+			+ "]. Skipping");
 			}
 			return;
 		}
 		if (!WireMockHttpServerStub.SERVERS.isEmpty()
-				&& WireMockHttpServerStub.SERVERS.values().stream().noneMatch(p -> p.random)) {
+	&& WireMockHttpServerStub.SERVERS.values().stream().noneMatch(p -> p.random)) {
 			if (log.isWarnEnabled()) {
 				log.warn("You've used fixed ports for WireMock setup - "
-						+ "will mark context as dirty. Please use random ports, as much "
-						+ "as possible. Your tests will be faster and more reliable and this "
-						+ "warning will go away");
+			+ "will mark context as dirty. Please use random ports, as much "
+			+ "as possible. Your tests will be faster and more reliable and this "
+			+ "warning will go away");
 			}
 			testContext.markApplicationContextDirty(DirtiesContext.HierarchyMode.EXHAUSTIVE);
 		}

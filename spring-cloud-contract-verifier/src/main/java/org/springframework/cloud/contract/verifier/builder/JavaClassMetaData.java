@@ -41,7 +41,7 @@ class JavaClassMetaData implements ClassMetaData, DefaultClassMetadata {
 	@Override
 	public ClassMetaData suffix() {
 		String suffix = StringUtils.hasText(this.generatedClassMetaData.configProperties.getNameSuffixForTests())
-				? this.generatedClassMetaData.configProperties.getNameSuffixForTests() : "Test";
+	? this.generatedClassMetaData.configProperties.getNameSuffixForTests() : "Test";
 		if (!this.blockBuilder.endsWith(suffix)) {
 			this.blockBuilder.addAtTheEnd(suffix);
 		}
@@ -91,8 +91,8 @@ class JavaClassMetaData implements ClassMetaData, DefaultClassMetadata {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT
-				|| this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT5
-				|| this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.TESTNG;
+	|| this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT5
+	|| this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.TESTNG;
 	}
 
 }

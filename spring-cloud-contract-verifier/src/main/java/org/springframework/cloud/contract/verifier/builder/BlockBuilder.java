@@ -224,8 +224,8 @@ public class BlockBuilder {
 			return false;
 		}
 		return character.equals("{") || (character.equals(spacer) && toAdd.equals(spacer))
-				|| (character.equals(spacer) && toAdd.equals(" ")) || character.equals(toAdd)
-				|| (endsWithNewLine(character) && StringUtils.equalsAny(toAdd, "\n", " ", lineEnding));
+	|| (character.equals(spacer) && toAdd.equals(" ")) || character.equals(toAdd)
+	|| (endsWithNewLine(character) && StringUtils.equalsAny(toAdd, "\n", " ", lineEnding));
 	}
 
 	/**

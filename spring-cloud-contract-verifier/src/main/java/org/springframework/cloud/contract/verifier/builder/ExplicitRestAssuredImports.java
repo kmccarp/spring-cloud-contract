@@ -26,8 +26,8 @@ class ExplicitRestAssuredImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] REST_ASSURED_3_IMPORTS = { "io.restassured.specification.RequestSpecification",
-			"io.restassured.response.Response" };
+	private static final String[] REST_ASSURED_3_IMPORTS = {"io.restassured.specification.RequestSpecification",
+"io.restassured.response.Response"};
 
 	ExplicitRestAssuredImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -43,7 +43,7 @@ class ExplicitRestAssuredImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestMode() == TestMode.EXPLICIT
-				&& this.generatedClassMetaData.isAnyHttp();
+	&& this.generatedClassMetaData.isAnyHttp();
 	}
 
 }

@@ -38,7 +38,7 @@ interface CookieElementProcessor {
 		while (iterator.hasNext()) {
 			Cookie cookie = iterator.next();
 			String text = processCookieElement(cookie.getKey(), cookie.getServerValue() instanceof NotToEscapePattern
-					? cookie.getServerValue() : MapConverter.getTestSideValues(cookie.getServerValue()));
+		? cookie.getServerValue() : MapConverter.getTestSideValues(cookie.getServerValue()));
 			if (iterator.hasNext()) {
 				blockBuilder().addLine(text).addEndingIfNotPresent();
 			}
@@ -54,7 +54,7 @@ interface CookieElementProcessor {
 		if (value instanceof NotToEscapePattern) {
 			verifyCookieNotNull(property);
 			return comparisonBuilder().assertThat(cookieValue(property)) + comparisonBuilder()
-					.matches(((NotToEscapePattern) value).getServerValue().pattern().replace("\\", "\\\\"));
+		.matches(((NotToEscapePattern) value).getServerValue().pattern().replace("\\", "\\\\"));
 		}
 		else if (value instanceof String || value instanceof Pattern) {
 			verifyCookieNotNull(property);

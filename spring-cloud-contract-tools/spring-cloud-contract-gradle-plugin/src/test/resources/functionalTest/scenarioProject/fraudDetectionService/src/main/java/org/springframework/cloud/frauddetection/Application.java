@@ -28,7 +28,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(org.springframework.cloud.frauddetection.Application.class,
-				args);
+	args);
 	}
 
 }

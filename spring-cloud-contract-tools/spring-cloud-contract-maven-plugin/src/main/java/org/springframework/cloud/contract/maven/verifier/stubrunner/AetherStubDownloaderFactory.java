@@ -65,8 +65,8 @@ public class AetherStubDownloaderFactory {
 			public StubDownloader build(StubRunnerOptions stubRunnerOptions) {
 				log.info("Will download contracts using current build's Maven repository setup");
 				return new AetherStubDownloader(AetherStubDownloaderFactory.this.repoSystem,
-						AetherStubDownloaderFactory.this.project.getRemoteProjectRepositories(), repoSession,
-						AetherStubDownloaderFactory.this.settings);
+			AetherStubDownloaderFactory.this.project.getRemoteProjectRepositories(), repoSession,
+			AetherStubDownloaderFactory.this.settings);
 			}
 
 			@Override

@@ -580,9 +580,9 @@ public class Request extends Common implements RegexCreatingProperty<ClientDslPr
 		}
 		Request request = (Request) o;
 		return Objects.equals(method, request.method) && Objects.equals(url, request.url)
-				&& Objects.equals(urlPath, request.urlPath) && Objects.equals(headers, request.headers)
-				&& Objects.equals(cookies, request.cookies) && Objects.equals(body, request.body)
-				&& Objects.equals(multipart, request.multipart) && Objects.equals(bodyMatchers, request.bodyMatchers);
+	&& Objects.equals(urlPath, request.urlPath) && Objects.equals(headers, request.headers)
+	&& Objects.equals(cookies, request.cookies) && Objects.equals(body, request.body)
+	&& Objects.equals(multipart, request.multipart) && Objects.equals(bodyMatchers, request.bodyMatchers);
 	}
 
 	@Override
@@ -593,8 +593,8 @@ public class Request extends Common implements RegexCreatingProperty<ClientDslPr
 	@Override
 	public String toString() {
 		return "Request{" + "\nmethod=" + method + ", \n\turl=" + url + ", \n\turlPath=" + urlPath + ", \n\theaders="
-				+ headers + ", \n\tcookies=" + cookies + ", \n\tbody=" + body + ", \n\tmultipart=" + multipart
-				+ ", \n\tbodyMatchers=" + bodyMatchers + '}';
+	+ headers + ", \n\tcookies=" + cookies + ", \n\tbody=" + body + ", \n\tmultipart=" + multipart
+	+ ", \n\tbodyMatchers=" + bodyMatchers + '}';
 	}
 
 	/**
@@ -751,8 +751,8 @@ public class Request extends Common implements RegexCreatingProperty<ClientDslPr
 		@Override
 		public DslProperty matching(String value) {
 			return this.common.$(
-					this.common.c(this.common.regex(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*")),
-					this.common.p(value));
+		this.common.c(this.common.regex(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*")),
+		this.common.p(value));
 		}
 
 	}
@@ -764,8 +764,8 @@ public class Request extends Common implements RegexCreatingProperty<ClientDslPr
 		@Override
 		public DslProperty matching(String value) {
 			return this.common.$(
-					this.common.c(this.common.regex(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*")),
-					this.common.p(value));
+		this.common.c(this.common.regex(RegexpUtils.escapeSpecialRegexWithSingleEscape(value) + ".*")),
+		this.common.p(value));
 		}
 
 	}

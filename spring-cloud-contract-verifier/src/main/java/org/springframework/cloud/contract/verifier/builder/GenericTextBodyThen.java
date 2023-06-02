@@ -34,12 +34,12 @@ class GenericTextBodyThen implements Then {
 	private final ComparisonBuilder comparisonBuilder;
 
 	GenericTextBodyThen(BlockBuilder blockBuilder, GeneratedClassMetaData metaData, BodyParser bodyParser,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.bodyParser = bodyParser;
 		this.comparisonBuilder = comparisonBuilder;
 		this.bodyAssertionLineCreator = new BodyAssertionLineCreator(blockBuilder, metaData,
-				this.bodyParser.byteArrayString(), this.comparisonBuilder);
+	this.bodyParser.byteArrayString(), this.comparisonBuilder);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ class GenericTextBodyThen implements Then {
 	public boolean accept(SingleContractMetadata metadata) {
 		ContentType outputTestContentType = metadata.getOutputTestContentType();
 		return outputTestContentType != JSON && outputTestContentType != XML
-				&& this.bodyParser.responseBody(metadata) != null
-				&& !(this.bodyParser.responseBody(metadata).getServerValue() instanceof FromFileProperty);
+	&& this.bodyParser.responseBody(metadata) != null
+	&& !(this.bodyParser.responseBody(metadata).getServerValue() instanceof FromFileProperty);
 	}
 
 }

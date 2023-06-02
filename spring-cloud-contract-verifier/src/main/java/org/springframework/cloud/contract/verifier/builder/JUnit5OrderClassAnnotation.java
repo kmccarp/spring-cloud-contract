@@ -26,7 +26,7 @@ class JUnit5OrderClassAnnotation implements ClassAnnotation {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] ANNOTATIONS = { "@TestMethodOrder(MethodOrderer.Alphanumeric.class)" };
+	private static final String[] ANNOTATIONS = {"@TestMethodOrder(MethodOrderer.Alphanumeric.class)"};
 
 	JUnit5OrderClassAnnotation(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -42,7 +42,7 @@ class JUnit5OrderClassAnnotation implements ClassAnnotation {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT5
-				&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
+	&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
 	}
 
 }

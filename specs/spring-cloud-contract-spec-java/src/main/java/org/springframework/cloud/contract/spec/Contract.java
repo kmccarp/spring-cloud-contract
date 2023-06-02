@@ -151,7 +151,7 @@ public class Contract {
 		if (dsl.getRequest() != null) {
 			if (dsl.request.getUrl() == null && dsl.request.getUrlPath() == null) {
 				throw new IllegalStateException(
-						"URL is missing for HTTP contract(exclude = { TraceWebClientAutoConfiguration.class })");
+			"URL is missing for HTTP contract(exclude = { TraceWebClientAutoConfiguration.class })");
 			}
 			if (dsl.request.getMethod() == null) {
 				throw new IllegalStateException("Method is missing for HTTP contract");
@@ -392,24 +392,24 @@ public class Contract {
 		}
 		Contract contract = (Contract) o;
 		return ignored == contract.ignored && Objects.equals(priority, contract.priority)
-				&& Objects.equals(request, contract.request) && Objects.equals(response, contract.response)
-				&& Objects.equals(label, contract.label) && Objects.equals(description, contract.description)
-				&& Objects.equals(name, contract.name) && Objects.equals(input, contract.input)
-				&& Objects.equals(metadata, contract.metadata) && Objects.equals(outputMessage, contract.outputMessage);
+	&& Objects.equals(request, contract.request) && Objects.equals(response, contract.response)
+	&& Objects.equals(label, contract.label) && Objects.equals(description, contract.description)
+	&& Objects.equals(name, contract.name) && Objects.equals(input, contract.input)
+	&& Objects.equals(metadata, contract.metadata) && Objects.equals(outputMessage, contract.outputMessage);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(priority, request, response, label, description, name, input, outputMessage, metadata,
-				ignored);
+	ignored);
 	}
 
 	@Override
 	public String toString() {
 		return "Contract{" + "\npriority=" + priority + ", \n\trequest=" + request + ", \n\tresponse=" + response
-				+ ", \n\tlabel='" + label + '\'' + ", \n\tdescription='" + description + '\'' + ", \n\tname='" + name
-				+ '\'' + ", \n\tinput=" + input + ", \n\toutputMessage=" + outputMessage + ", \n\tignored=" + ignored
-				+ '}';
+	+ ", \n\tlabel='" + label + '\'' + ", \n\tdescription='" + description + '\'' + ", \n\tname='" + name
+	+ '\'' + ", \n\tinput=" + input + ", \n\toutputMessage=" + outputMessage + ", \n\tignored=" + ignored
+	+ '}';
 	}
 
 }

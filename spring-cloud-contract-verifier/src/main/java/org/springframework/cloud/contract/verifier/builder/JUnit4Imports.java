@@ -26,7 +26,7 @@ class JUnit4Imports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "org.junit.Test", "org.junit.Rule" };
+	private static final String[] IMPORTS = {"org.junit.Test", "org.junit.Rule"};
 
 	JUnit4Imports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

@@ -56,7 +56,7 @@ public class NoOpContractVerifierAutoConfiguration {
 
 			@Override
 			public <T> void send(T payload, Map<String, Object> headers, String destination,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				noOpStubMessages.send(payload, headers, destination, contract);
 			}
 		};
@@ -70,7 +70,7 @@ public class NoOpContractVerifierAutoConfiguration {
 
 			@Override
 			public Object receive(String destination, long timeout, TimeUnit timeUnit,
-					@Nullable YamlContract contract) {
+		@Nullable YamlContract contract) {
 				return noOpStubMessages.receive(destination, timeout, timeUnit, contract);
 			}
 

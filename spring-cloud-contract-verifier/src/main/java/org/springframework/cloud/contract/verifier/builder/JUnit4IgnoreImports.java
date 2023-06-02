@@ -38,9 +38,9 @@ class JUnit4IgnoreImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT
-				&& this.generatedClassMetaData.listOfFiles.stream()
-						.anyMatch(metadata -> metadata.isIgnored() || metadata.getConvertedContractWithMetadata()
-								.stream().anyMatch(m -> m.isIgnored() || m.isInProgress()));
+	&& this.generatedClassMetaData.listOfFiles.stream()
+	.anyMatch(metadata -> metadata.isIgnored() || metadata.getConvertedContractWithMetadata()
+.stream().anyMatch(m -> m.isIgnored() || m.isInProgress()));
 	}
 
 }

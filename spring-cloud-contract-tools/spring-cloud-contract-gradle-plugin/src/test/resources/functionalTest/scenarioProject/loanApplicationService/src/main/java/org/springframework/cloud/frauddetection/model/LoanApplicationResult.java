@@ -26,7 +26,7 @@ public class LoanApplicationResult {
 	}
 
 	public LoanApplicationResult(LoanApplicationStatus loanApplicationStatus,
-			String rejectionReason) {
+String rejectionReason) {
 		this.loanApplicationStatus = loanApplicationStatus;
 		this.rejectionReason = rejectionReason;
 	}

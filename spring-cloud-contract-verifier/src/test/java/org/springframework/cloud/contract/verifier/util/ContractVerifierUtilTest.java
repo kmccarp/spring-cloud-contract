@@ -40,9 +40,9 @@ public class ContractVerifierUtilTest {
 	private final String unnamedXml = "<customer>\n" + "<email>customer@test.com</email>\n" + "</customer>";
 
 	private final String namedComplexXml = "<ns1:customer xmlns:ns1=\"http://demo.com/customer\" xmlns:addr=\"http://demo.com/address\">\n"
-			+ "<email>customer@test.com</email>\n" + "<contact-info xmlns=\"http://demo.com/contact-info\">\n"
-			+ "<name>Krombopulous</name>" + "<address>" + "<addr:gps>" + "<lat>51</lat>" + "<addr:lon>50</addr:lon>"
-			+ "</addr:gps>" + "</address>" + "</contact-info>\n" + "</ns1:customer>";
++ "<email>customer@test.com</email>\n" + "<contact-info xmlns=\"http://demo.com/contact-info\">\n"
++ "<name>Krombopulous</name>" + "<address>" + "<addr:gps>" + "<lat>51</lat>" + "<addr:lon>50</addr:lon>"
++ "</addr:gps>" + "</address>" + "</contact-info>\n" + "</ns1:customer>";
 
 	@Test
 	public void shouldGetValueFromXPath() {
@@ -98,7 +98,7 @@ public class ContractVerifierUtilTest {
 		Document parsedXml = parsedXml(namedComplexXml);
 		// When
 		String value = ContractVerifierUtil.valueFromXPath(parsedXml,
-				"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/*[local-name()='name']/text()");
+	"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/*[local-name()='name']/text()");
 		// Then
 		assertThat(value).isEqualTo("Krombopulous");
 	}
@@ -109,7 +109,7 @@ public class ContractVerifierUtilTest {
 		Document parsedXml = parsedXml(namedComplexXml);
 		// When
 		String value = ContractVerifierUtil.valueFromXPath(parsedXml,
-				"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/*[local-name()='address']/addr:gps/*[local-name()='lat']/text()");
+	"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/*[local-name()='address']/addr:gps/*[local-name()='lat']/text()");
 		// Then
 		assertThat(value).isEqualTo("51");
 	}
@@ -120,7 +120,7 @@ public class ContractVerifierUtilTest {
 		Document parsedXml = parsedXml(namedComplexXml);
 		// When
 		String value = ContractVerifierUtil.valueFromXPath(parsedXml,
-				"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/*[local-name()='address']/addr:gps/addr:lon/text()");
+	"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/*[local-name()='address']/addr:gps/addr:lon/text()");
 		// Then
 		assertThat(value).isEqualTo("50");
 	}
@@ -141,7 +141,7 @@ public class ContractVerifierUtilTest {
 		Document parsedXml = parsedXml(namedComplexXml);
 		// When
 		String value = ContractVerifierUtil.valueFromXPath(parsedXml,
-				"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/name/text()");
+	"/ns1:customer/*[local-name()='contact-info' and namespace-uri()='http://demo.com/contact-info']/name/text()");
 		// Then
 		assertThat(value).isEqualTo("");
 	}

@@ -233,13 +233,13 @@ public class ContractVerifierExtension implements Serializable {
 		this.imports = objects.listProperty(String.class).convention(new ArrayList<>());
 		this.staticImports = objects.listProperty(String.class).convention(new ArrayList<>());
 		this.contractsDslDir = objects.directoryProperty()
-				.convention(layout.getProjectDirectory().dir("src/contractTest/resources/contracts"));
+	.convention(layout.getProjectDirectory().dir("src/contractTest/resources/contracts"));
 		this.generatedTestJavaSourcesDir = objects.directoryProperty()
-				.convention(layout.getBuildDirectory().dir("generated-test-sources/contractTest/java"));
+	.convention(layout.getBuildDirectory().dir("generated-test-sources/contractTest/java"));
 		this.generatedTestGroovySourcesDir = objects.directoryProperty()
-				.convention(layout.getBuildDirectory().dir("generated-test-sources/contractTest/groovy"));
+	.convention(layout.getBuildDirectory().dir("generated-test-sources/contractTest/groovy"));
 		this.generatedTestResourcesDir = objects.directoryProperty()
-				.convention(layout.getBuildDirectory().dir("generated-test-resources/contractTest"));
+	.convention(layout.getBuildDirectory().dir("generated-test-resources/contractTest"));
 		this.stubsOutputDir = objects.directoryProperty().convention(layout.getBuildDirectory().dir("stubs"));
 		this.stubsSuffix = objects.property(String.class).convention("stubs");
 		this.assertJsonSize = objects.property(Boolean.class).convention(false);
@@ -250,7 +250,7 @@ public class ContractVerifierExtension implements Serializable {
 		this.contractDependency = objects.newInstance(Dependency.class);
 		this.contractsPath = objects.property(String.class);
 		this.contractsMode = objects.property(StubRunnerProperties.StubsMode.class)
-				.convention(StubRunnerProperties.StubsMode.CLASSPATH);
+	.convention(StubRunnerProperties.StubsMode.CLASSPATH);
 		this.packageWithBaseClasses = objects.property(String.class);
 		this.baseClassMappings = objects.newInstance(BaseClassMapping.class);
 		this.excludeBuildFolders = objects.property(Boolean.class).convention(false);
@@ -596,8 +596,8 @@ public class ContractVerifierExtension implements Serializable {
 		@Override
 		public String toString() {
 			return "Dependency{" + "groupId=" + groupId.getOrNull() + ", artifactId=" + artifactId.getOrNull()
-					+ ", classifier=" + classifier.getOrNull() + ", version=" + version.getOrNull()
-					+ ", stringNotation=" + stringNotation.getOrNull() + '}';
+		+ ", classifier=" + classifier.getOrNull() + ", version=" + version.getOrNull()
+		+ ", stringNotation=" + stringNotation.getOrNull() + '}';
 		}
 
 	}
@@ -692,8 +692,8 @@ public class ContractVerifierExtension implements Serializable {
 		@Override
 		public String toString() {
 			return "ContractRepository{" + "repositoryUrl=" + repositoryUrl.getOrNull() + ", username="
-					+ username.getOrNull() + ", password=" + password.getOrNull() + ", proxyPort="
-					+ proxyPort.getOrNull() + ", proxyHost=" + proxyHost.getOrNull() + '}';
+		+ username.getOrNull() + ", password=" + password.getOrNull() + ", proxyPort="
+		+ proxyPort.getOrNull() + ", proxyHost=" + proxyHost.getOrNull() + '}';
 		}
 
 	}
@@ -732,7 +732,7 @@ public class ContractVerifierExtension implements Serializable {
 		@Override
 		public String toString() {
 			return "PublishStubsToScm{" + "contractDependency=" + contractDependency + ", contractRepository="
-					+ contractRepository + '}';
+		+ contractRepository + '}';
 		}
 
 	}

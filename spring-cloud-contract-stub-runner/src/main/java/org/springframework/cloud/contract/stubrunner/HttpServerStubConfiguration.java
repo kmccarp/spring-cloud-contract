@@ -50,12 +50,12 @@ public final class HttpServerStubConfiguration {
 	public boolean randomPort;
 
 	public HttpServerStubConfiguration(HttpServerStubConfigurer configurer, StubRunnerOptions stubRunnerOptions,
-			StubConfiguration stubConfiguration, Integer port) {
+StubConfiguration stubConfiguration, Integer port) {
 		this(configurer, stubRunnerOptions, stubConfiguration, port, randomPort(port));
 	}
 
 	public HttpServerStubConfiguration(HttpServerStubConfigurer configurer, StubRunnerOptions stubRunnerOptions,
-			StubConfiguration stubConfiguration, Integer port, boolean randomPort) {
+StubConfiguration stubConfiguration, Integer port, boolean randomPort) {
 		this.configurer = configurer;
 		this.stubRunnerOptions = stubRunnerOptions;
 		this.stubConfiguration = stubConfiguration;

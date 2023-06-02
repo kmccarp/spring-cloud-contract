@@ -39,8 +39,8 @@ public class RegexMatchingTypeValue extends MatchingTypeValue {
 		}
 		RegexProperty regexProperty = (RegexProperty) this.getValue();
 		return new RegexMatchingTypeValue(this.getType(),
-				new RegexProperty(regexProperty.getClientValue(), regexProperty.getServerValue(), clazz),
-				this.getMinTypeOccurrence(), this.getMaxTypeOccurrence());
+	new RegexProperty(regexProperty.getClientValue(), regexProperty.getServerValue(), clazz),
+	this.getMinTypeOccurrence(), this.getMaxTypeOccurrence());
 	}
 
 	public RegexMatchingTypeValue asDouble() {

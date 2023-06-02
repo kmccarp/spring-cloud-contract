@@ -51,7 +51,7 @@ public class StubRunnerRule implements TestRule, StubFinder, StubRunnerRuleOptio
 	private static final String LATEST_VERSION = "+";
 
 	StubRunnerOptionsBuilder stubRunnerOptionsBuilder = new StubRunnerOptionsBuilder(
-			StubRunnerOptions.fromSystemProps());
+StubRunnerOptions.fromSystemProps());
 
 	BatchStubRunner stubFinder;
 
@@ -213,7 +213,7 @@ public class StubRunnerRule implements TestRule, StubFinder, StubRunnerRuleOptio
 
 	@Override
 	public StubRunnerRule withHttpServerStubConfigurer(
-			Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer) {
+Class<? extends HttpServerStubConfigurer> httpServerStubConfigurer) {
 		builder().withHttpServerStubConfigurer(httpServerStubConfigurer);
 		return this.delegate;
 	}
@@ -243,7 +243,7 @@ public class StubRunnerRule implements TestRule, StubFinder, StubRunnerRuleOptio
 		boolean result = this.stubFinder().trigger(ivyNotation, labelName);
 		if (!result) {
 			throw new IllegalStateException(
-					"Failed to trigger a message with notation [" + ivyNotation + "] and label [" + labelName + "]");
+		"Failed to trigger a message with notation [" + ivyNotation + "] and label [" + labelName + "]");
 		}
 		return result;
 	}

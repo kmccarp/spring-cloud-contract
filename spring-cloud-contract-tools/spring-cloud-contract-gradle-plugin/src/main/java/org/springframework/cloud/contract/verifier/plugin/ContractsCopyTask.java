@@ -126,11 +126,10 @@ class ContractsCopyTask extends DefaultTask {
 
 	@Inject
 	public ContractsCopyTask(
-			final ObjectFactory objects,
-			final ProviderFactory providers,
-			final ExecOperations executors,
-			final FileSystemOperations files
-	) {
+final ObjectFactory objects,
+final ProviderFactory providers,
+final ExecOperations executors,
+final FileSystemOperations files) {
 		this.executors = executors;
 		this.files = files;
 
@@ -163,7 +162,7 @@ class ContractsCopyTask extends DefaultTask {
 		projectVersion = objects.property(String.class).convention(providers.provider(() -> getProject().getVersion().toString()));
 
 		this.getOutputs().upToDateWhen(task -> !(this.shouldDownloadContracts()
-				&& this.getContractDependency().toStubConfiguration().isVersionChanging()));
+	&& this.getContractDependency().toStubConfiguration().isVersionChanging()));
 	}
 
 	@TaskAction
@@ -181,7 +180,7 @@ class ContractsCopyTask extends DefaultTask {
 			antPattern = "**/";
 		}
 		getLogger().info("For project [{}] will use contracts provided in the folder [{}]", projectName.get(),
-				contractsDirectory);
+	contractsDirectory);
 		final String contractsRepository = this.contractRepository.getRepositoryUrl().getOrElse("");
 		throwExceptionWhenFailOnNoContracts(contractsDirectory, contractsRepository);
 
@@ -189,22 +188,23 @@ class ContractsCopyTask extends DefaultTask {
 		final String dotSeparatedAntPattern = antPattern.replace(slashSeparatedGroupId, projectGroup.get());
 		File output = copiedContractsFolder.get().getAsFile();
 		getLogger().info(
-				"Downloading and unpacking files from [{}] to [{}]. The inclusion ant patterns are [{}] and [{}]",
-				contractsDirectory, output, antPattern, dotSeparatedAntPattern);
+	"Downloading and unpacking files from [{}] to [{}]. The inclusion ant patterns are [{}] and [{}]",
+	contractsDirectory, output, antPattern, dotSeparatedAntPattern);
 		sync(contractsDirectory, antPattern, dotSeparatedAntPattern, excludeBuildFolders.get(), output);
 		if (convertToYaml.get()) {
 			convertContractsToYaml(contractsDirectory, antPattern, dotSeparatedAntPattern, output,
-					excludeBuildFolders.get());
+		excludeBuildFolders.get());
 		}
 	}
 
 	private void convertContractsToYaml(File file, String antPattern, String slashSeparatedAntPattern,
-			File outputContractsFolder, boolean excludeBuildFolders) {
+File outputContractsFolder, boolean excludeBuildFolders) {
 		sync(file, antPattern, slashSeparatedAntPattern, excludeBuildFolders, backupContractsFolder.get().getAsFile());
 		OutputStream os;
 		if (getLogger().isDebugEnabled()) {
 			os = new ByteArrayOutputStream();
-		} else {
+		}
+		else {
 			os = NullOutputStream.INSTANCE;
 		}
 		try {
@@ -226,7 +226,7 @@ class ContractsCopyTask extends DefaultTask {
 	}
 
 	private void sync(File file, String antPattern, String dotSeparatedAntPattern, boolean excludeBuildFolders,
-			File outputContractsFolder) {
+File outputContractsFolder) {
 		files.sync(spec -> {
 			spec.from(file);
 			// by default group id is slash separated...
@@ -252,10 +252,10 @@ class ContractsCopyTask extends DefaultTask {
 
 		final StubDownloader downloader = new StubDownloaderBuilderProvider().get(createStubRunnerOptions());
 		final ContractDownloader contractDownloader = new ContractDownloader(downloader, configuration,
-				contractsPath.getOrNull(), groupId, artifactId, projectVersion.get());
+	contractsPath.getOrNull(), groupId, artifactId, projectVersion.get());
 		final File downloadedContracts = contractDownloader.unpackAndDownloadContracts();
 		final ContractDownloader.InclusionProperties inclusionProperties = contractDownloader
-				.createNewInclusionProperties(downloadedContracts);
+	.createNewInclusionProperties(downloadedContracts);
 
 		// TODO: inclusionProperties.includedContracts is never used eventually. Review
 		// this:
@@ -266,14 +266,14 @@ class ContractsCopyTask extends DefaultTask {
 		if (StringUtils.hasText(contractsRepository)) {
 			if (getLogger().isDebugEnabled()) {
 				getLogger().debug(
-						"Contracts repository is set, will not throw an exception that the contracts are not found");
+			"Contracts repository is set, will not throw an exception that the contracts are not found");
 			}
 			return;
 		}
 		if (failOnNoContracts.get() && (file == null || !file.exists() || file.listFiles().length == 0)) {
 			String path = file != null ? file.getAbsolutePath() : "";
 			throw new GradleException("Contracts could not be found: [" + path
-					+ "]\nPlease make sure that the contracts were defined, or set the [failOnNoContracts] flag to [false]");
+		+ "]\nPlease make sure that the contracts were defined, or set the [failOnNoContracts] flag to [false]");
 		}
 	}
 
@@ -301,9 +301,20 @@ class ContractsCopyTask extends DefaultTask {
 
 	}
 
-	@Input protected Property<String> getProjectGroup() { return projectGroup; }
-	@Input protected Property<String> getProjectName() { return projectName; }
-	@Input protected Property<String> getProjectVersion() { return projectVersion; }
+	@Input
+	protected Property<String> getProjectGroup() {
+		return projectGroup;
+	}
+
+	@Input
+	protected Property<String> getProjectName() {
+		return projectName;
+	}
+
+	@Input
+	protected Property<String> getProjectVersion() {
+		return projectVersion;
+	}
 
 	@Input
 	Property<Boolean> getConvertToYaml() {
@@ -503,18 +514,18 @@ class ContractsCopyTask extends DefaultTask {
 
 	private boolean shouldDownloadContracts() {
 		return StringUtils.hasText(contractDependency.getArtifactId().getOrNull())
-				|| StringUtils.hasText(contractDependency.getStringNotation().getOrNull())
-				|| StringUtils.hasText(contractRepository.getRepositoryUrl().getOrNull());
+	|| StringUtils.hasText(contractDependency.getStringNotation().getOrNull())
+	|| StringUtils.hasText(contractRepository.getRepositoryUrl().getOrNull());
 	}
 
 	private StubRunnerOptions createStubRunnerOptions() {
 		StubRunnerOptionsBuilder options = new StubRunnerOptionsBuilder()
-				.withOptions(StubRunnerOptions.fromSystemProps())
-				.withStubRepositoryRoot(contractRepository.repositoryUrl.getOrNull()).withStubsMode(contractsMode.get())
-				.withUsername(contractRepository.username.getOrNull())
-				.withPassword(contractRepository.password.getOrNull())
-				.withDeleteStubsAfterTest(deleteStubsAfterTest.get()).withProperties(allContractsProperties.getOrNull())
-				.withFailOnNoStubs(failOnNoContracts.get());
+	.withOptions(StubRunnerOptions.fromSystemProps())
+	.withStubRepositoryRoot(contractRepository.repositoryUrl.getOrNull()).withStubsMode(contractsMode.get())
+	.withUsername(contractRepository.username.getOrNull())
+	.withPassword(contractRepository.password.getOrNull())
+	.withDeleteStubsAfterTest(deleteStubsAfterTest.get()).withProperties(allContractsProperties.getOrNull())
+	.withFailOnNoStubs(failOnNoContracts.get());
 		if (contractRepository.proxyPort.isPresent()) {
 			options = options.withProxy(contractRepository.proxyHost.getOrNull(), contractRepository.proxyPort.get());
 		}
@@ -530,7 +541,7 @@ class ContractsCopyTask extends DefaultTask {
 			UsernamePasswordCredentialsProvider provider = null;
 			if (StringUtils.hasText(contractRepository.getUsername().getOrNull())) {
 				provider = new UsernamePasswordCredentialsProvider(contractRepository.getUsername().get(),
-						contractRepository.getPassword().get());
+			contractRepository.getPassword().get());
 			}
 			try {
 				String repoUrl;
@@ -543,10 +554,10 @@ class ContractsCopyTask extends DefaultTask {
 					repoUrl = part.startsWith("//") ? part.substring(2) : part;
 				}
 				Collection<Ref> refs = Git.lsRemoteRepository().setRemote(repoUrl).setCredentialsProvider(provider)
-						.call();
+			.call();
 				for (Ref ref : refs) {
 					if (ref.getName().equals(branch) || ref.getName().equals("refs/heads/" + branch)
-							|| ref.getName().equals("refs/tags/" + branch)) {
+				|| ref.getName().equals("refs/tags/" + branch)) {
 						return ref.getObjectId().name();
 					}
 				}

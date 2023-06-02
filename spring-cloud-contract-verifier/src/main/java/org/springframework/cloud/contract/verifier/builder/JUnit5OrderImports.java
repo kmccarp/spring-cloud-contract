@@ -26,8 +26,8 @@ class JUnit5OrderImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "org.junit.jupiter.api.TestMethodOrder",
-			"org.junit.jupiter.api.MethodOrderer" };
+	private static final String[] IMPORTS = {"org.junit.jupiter.api.TestMethodOrder",
+"org.junit.jupiter.api.MethodOrderer"};
 
 	JUnit5OrderImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -43,7 +43,7 @@ class JUnit5OrderImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.JUNIT5
-				&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
+	&& this.generatedClassMetaData.listOfFiles.stream().anyMatch(meta -> meta.getOrder() != null);
 	}
 
 }

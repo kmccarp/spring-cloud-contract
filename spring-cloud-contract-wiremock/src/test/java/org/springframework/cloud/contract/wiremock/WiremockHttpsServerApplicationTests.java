@@ -37,7 +37,7 @@ public class WiremockHttpsServerApplicationTests {
 
 	@ClassRule
 	public static WireMockClassRule wiremock = new WireMockClassRule(
-			WireMockSpring.options().port(5433).httpsPort(8443));
+WireMockSpring.options().port(5433).httpsPort(8443));
 
 	@Autowired
 	private Service service;
@@ -45,7 +45,7 @@ public class WiremockHttpsServerApplicationTests {
 	@Test
 	public void contextLoads() throws Exception {
 		stubFor(get(urlEqualTo("/test"))
-				.willReturn(aResponse().withHeader("Content-Type", "text/plain").withBody("Hello World!")));
+	.willReturn(aResponse().withHeader("Content-Type", "text/plain").withBody("Hello World!")));
 		assertThat(this.service.go()).isEqualTo("Hello World!");
 	}
 

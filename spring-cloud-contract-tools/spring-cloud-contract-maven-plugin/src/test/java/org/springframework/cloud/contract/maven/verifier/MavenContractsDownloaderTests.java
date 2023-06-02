@@ -48,30 +48,30 @@ class MavenContractsDownloaderTests {
 
 		Dependency one = dependency(1);
 		MavenContractsDownloader mavenContractsDownloader = contractsDownloader(mavenProject, one,
-				this.fileForDependencyOne);
+	this.fileForDependencyOne);
 		File dependencyOneFile = mavenContractsDownloader
-				.downloadAndUnpackContractsIfRequired(new ContractVerifierConfigProperties(), this.defaultFolder);
+	.downloadAndUnpackContractsIfRequired(new ContractVerifierConfigProperties(), this.defaultFolder);
 		BDDAssertions.then(dependencyOneFile).as("Location for dependency 1 should be computed since it's not cached")
-				.isEqualTo(this.fileForDependencyOne);
+	.isEqualTo(this.fileForDependencyOne);
 
 		mavenContractsDownloader = contractsDownloader(mavenProject, one, this.fileForDependencyOne);
 		File fileForDependencyOneAgain = mavenContractsDownloader
-				.downloadAndUnpackContractsIfRequired(new ContractVerifierConfigProperties(), this.defaultFolder);
+	.downloadAndUnpackContractsIfRequired(new ContractVerifierConfigProperties(), this.defaultFolder);
 		BDDAssertions.then(dependencyOneFile).as("Location for dependency 1 should be taken from cache")
-				.isEqualTo(fileForDependencyOneAgain);
+	.isEqualTo(fileForDependencyOneAgain);
 
 		Dependency two = dependency(2);
 		mavenContractsDownloader = contractsDownloader(mavenProject, two, this.fileForDependencyTwo);
 		File dependencyTwoFile = mavenContractsDownloader
-				.downloadAndUnpackContractsIfRequired(new ContractVerifierConfigProperties(), this.defaultFolder);
+	.downloadAndUnpackContractsIfRequired(new ContractVerifierConfigProperties(), this.defaultFolder);
 
 		BDDAssertions.then(dependencyTwoFile).as("Location for dependency 2 should be computed again")
-				.isNotEqualTo(dependencyOneFile).isEqualTo(this.fileForDependencyTwo);
+	.isNotEqualTo(dependencyOneFile).isEqualTo(this.fileForDependencyTwo);
 	}
 
 	private MavenContractsDownloader contractsDownloader(MavenProject mavenProject, Dependency one, File file) {
 		return new MavenContractsDownloader(mavenProject, one, "", "", StubRunnerProperties.StubsMode.LOCAL,
-				new SilentLog(), "", "", "", null, false, new HashMap<>(), false) {
+	new SilentLog(), "", "", "", null, false, new HashMap<>(), false) {
 			@Override
 			ContractDownloader contractDownloader() {
 				return new ContractDownloader(null, null, null, null, null, null) {

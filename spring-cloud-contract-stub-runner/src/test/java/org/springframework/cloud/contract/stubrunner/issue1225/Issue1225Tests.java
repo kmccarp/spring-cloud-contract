@@ -39,9 +39,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Biju Kunjummen
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = { "ping.url=http://localhost:${stubrunner.runningstubs.loanIssuance.port}" })
-@AutoConfigureStubRunner(ids = { "org.springframework.cloud.contract.verifier.stubs:loanIssuance:+:stubs",
-		"org.springframework.cloud.contract.verifier.stubs:fraudDetectionServer:+:stubs" })
+@SpringBootTest(properties = {"ping.url=http://localhost:${stubrunner.runningstubs.loanIssuance.port}"})
+@AutoConfigureStubRunner(ids = {"org.springframework.cloud.contract.verifier.stubs:loanIssuance:+:stubs","org.springframework.cloud.contract.verifier.stubs:fraudDetectionServer:+:stubs"})
 @ActiveProfiles("test")
 public class Issue1225Tests {
 

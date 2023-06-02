@@ -35,7 +35,7 @@ class JaxRsResponseHeadersThen implements Then {
 	private final ComparisonBuilder comparisonBuilder;
 
 	JaxRsResponseHeadersThen(BlockBuilder blockBuilder, GeneratedClassMetaData metaData,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.generatedClassMetaData = metaData;
 		this.comparisonBuilder = comparisonBuilder;
@@ -54,7 +54,7 @@ class JaxRsResponseHeadersThen implements Then {
 		while (iterator.hasNext()) {
 			Header header = iterator.next();
 			String text = processHeaderElement(header.getName(), header.getServerValue() instanceof NotToEscapePattern
-					? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
+		? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
 			if (iterator.hasNext()) {
 				this.blockBuilder.addLineWithEnding(text);
 			}
@@ -67,7 +67,7 @@ class JaxRsResponseHeadersThen implements Then {
 	private String processHeaderElement(String property, Object value) {
 		if (value instanceof NotToEscapePattern) {
 			return this.comparisonBuilder.assertThat("response.getHeaderString(\"" + property + "\")")
-					+ this.comparisonBuilder.createComparison(((NotToEscapePattern) value).getServerValue());
+		+ this.comparisonBuilder.createComparison(((NotToEscapePattern) value).getServerValue());
 		}
 		else if (value instanceof Number) {
 			return this.comparisonBuilder.assertThat("response.getHeaderString(\"" + property + "\")", value);
@@ -77,7 +77,7 @@ class JaxRsResponseHeadersThen implements Then {
 		}
 		else {
 			return this.comparisonBuilder.assertThat("response.getHeaderString(\"" + property + "\")")
-					+ this.comparisonBuilder.createComparison(value);
+		+ this.comparisonBuilder.createComparison(value);
 		}
 	}
 

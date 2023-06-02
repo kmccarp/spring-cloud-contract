@@ -34,7 +34,7 @@ public class BookRouteConfiguration {
 
 	@Bean
 	RoutesBuilder myRouter(final BookService bookService, CamelContext context,
-			@Value("${spring.rabbitmq.port}") int port) {
+@Value("${spring.rabbitmq.port}") int port) {
 		return new RouteBuilder() {
 
 			@Override
@@ -44,7 +44,7 @@ public class BookRouteConfiguration {
 
 				// scenario 1 - from bean to output
 				from("direct:start").unmarshal().json(JsonLibrary.Jackson, BookReturned.class).bean(bookService)
-						.marshal().json(JsonLibrary.Jackson, BookReturned.class).to("rabbitmq:output?queue=output");
+			.marshal().json(JsonLibrary.Jackson, BookReturned.class).to("rabbitmq:output?queue=output");
 			}
 
 		};

@@ -51,7 +51,7 @@ public class ContractVerifierStreamAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(ContractVerifierMessaging.class)
 	public ContractVerifierMessaging<?> streamContractVerifierMessaging(MessageVerifierSender<Message<?>> sender,
-			MessageVerifierReceiver<Message<?>> receiver) {
+MessageVerifierReceiver<Message<?>> receiver) {
 		return new ContractVerifierHelper(sender, receiver);
 	}
 
@@ -62,9 +62,9 @@ public class ContractVerifierStreamAutoConfiguration {
 		@Bean
 		@ConditionalOnMissingBean(MessageVerifierSender.class)
 		MessageVerifierSender<Message<?>> streamContractVerifierMessageSenderExchangeWithDestinations(
-				ApplicationContext context) {
+	ApplicationContext context) {
 			StreamStubMessages stubMessages = new StreamStubMessages(new StreamInputDestinationMessageSender(context),
-					new StreamOutputDestinationMessageReceiver(context));
+		new StreamOutputDestinationMessageReceiver(context));
 			return new MessageVerifierSender<>() {
 				@Override
 				public void send(Message<?> message, String destination, @Nullable YamlContract contract) {
@@ -73,7 +73,7 @@ public class ContractVerifierStreamAutoConfiguration {
 
 				@Override
 				public <T> void send(T payload, Map<String, Object> headers, String destination,
-						@Nullable YamlContract contract) {
+			@Nullable YamlContract contract) {
 					stubMessages.send(payload, headers, destination, contract);
 				}
 			};
@@ -82,13 +82,13 @@ public class ContractVerifierStreamAutoConfiguration {
 		@Bean
 		@ConditionalOnMissingBean(MessageVerifierReceiver.class)
 		MessageVerifierReceiver<Message<?>> streamContractVerifierMessageReceiverExchangeWithDestinations(
-				ApplicationContext context) {
+	ApplicationContext context) {
 			StreamStubMessages stubMessages = new StreamStubMessages(new StreamInputDestinationMessageSender(context),
-					new StreamOutputDestinationMessageReceiver(context));
+		new StreamOutputDestinationMessageReceiver(context));
 			return new MessageVerifierReceiver<>() {
 				@Override
 				public Message<?> receive(String destination, long timeout, TimeUnit timeUnit,
-						@Nullable YamlContract contract) {
+			@Nullable YamlContract contract) {
 					return stubMessages.receive(destination, timeout, timeUnit, contract);
 				}
 

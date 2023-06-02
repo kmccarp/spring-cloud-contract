@@ -43,7 +43,7 @@ public class DslProperty<T> implements Serializable {
 
 	public boolean isSingleValue() {
 		return this.clientValue.equals(this.serverValue) || (this.clientValue != null && this.serverValue == null)
-				|| (this.serverValue != null && this.clientValue == null);
+	|| (this.serverValue != null && this.clientValue == null);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class DslProperty<T> implements Serializable {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "{" + "\nclientValue=" + clientValue + ", \n\tserverValue=" + serverValue
-				+ '}';
+	+ '}';
 	}
 
 	public final T getClientValue() {

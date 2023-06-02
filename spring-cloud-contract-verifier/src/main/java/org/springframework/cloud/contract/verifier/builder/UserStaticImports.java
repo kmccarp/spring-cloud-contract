@@ -32,14 +32,14 @@ class UserStaticImports implements Imports {
 	@Override
 	public Imports call() {
 		Arrays.stream(this.generatedClassMetaData.configProperties.getStaticImports())
-				.forEach(s -> this.blockBuilder.addLineWithEnding("import static " + s));
+	.forEach(s -> this.blockBuilder.addLineWithEnding("import static " + s));
 		return this;
 	}
 
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.configProperties.getStaticImports() != null
-				&& this.generatedClassMetaData.configProperties.getStaticImports().length > 0;
+	&& this.generatedClassMetaData.configProperties.getStaticImports().length > 0;
 	}
 
 }

@@ -23,8 +23,8 @@ class DefaultStaticImports implements Imports {
 	private final BlockBuilder blockBuilder;
 
 	private static final String[] IMPORTS = {
-			"org.springframework.cloud.contract.verifier.assertion.SpringCloudContractAssertions.assertThat",
-			"org.springframework.cloud.contract.verifier.util.ContractVerifierUtil.*" };
+"org.springframework.cloud.contract.verifier.assertion.SpringCloudContractAssertions.assertThat",
+"org.springframework.cloud.contract.verifier.util.ContractVerifierUtil.*"};
 
 	DefaultStaticImports(BlockBuilder blockBuilder) {
 		this.blockBuilder = blockBuilder;

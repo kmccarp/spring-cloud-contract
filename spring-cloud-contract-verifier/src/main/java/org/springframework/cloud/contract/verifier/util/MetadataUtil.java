@@ -95,8 +95,8 @@ public final class MetadataUtil {
 		}
 		catch (Exception e) {
 			if (e.getClass().toString().contains("InaccessibleObjectException")
-					|| (e instanceof InvalidDefinitionException
-							&& e.getMessage().contains("InaccessibleObjectException"))) {
+		|| (e instanceof InvalidDefinitionException
+		&& e.getMessage().contains("InaccessibleObjectException"))) {
 				// JDK 16 workaround - ObjectMapper seems not be JDK16 compatible
 				// with the setup present in Spring Cloud Contract. So we will not
 				// allow patching but we will just copy values from the patch to
@@ -106,10 +106,10 @@ public final class MetadataUtil {
 					yamlProcessor.setResources(new ByteArrayResource(bytes));
 					Properties properties = yamlProcessor.getObject();
 					T props = (T) new Binder(
-							new MapConfigurationPropertySource(properties.entrySet().stream()
-									.collect(Collectors.toMap(entry -> entry.getKey().toString(),
-											entry -> entry.getValue().toString())))).bind("", objectToMerge.getClass())
-													.get();
+				new MapConfigurationPropertySource(properties.entrySet().stream()
+			.collect(Collectors.toMap(entry -> entry.getKey().toString(),
+		entry -> entry.getValue().toString())))).bind("", objectToMerge.getClass())
+				.get();
 					BeanUtils.copyProperties(props, objectToMerge);
 					return objectToMerge;
 				}
@@ -212,9 +212,9 @@ class VerifierObjectMapper extends ObjectMapper {
 
 	VerifierObjectMapper() {
 		setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL)
-				.setDefaultPropertyInclusion(JsonInclude.Include.NON_DEFAULT)
-				.setDefaultPropertyInclusion(JsonInclude.Include.NON_EMPTY)
-				.setDefaultPropertyInclusion(JsonInclude.Include.NON_ABSENT);
+	.setDefaultPropertyInclusion(JsonInclude.Include.NON_DEFAULT)
+	.setDefaultPropertyInclusion(JsonInclude.Include.NON_EMPTY)
+	.setDefaultPropertyInclusion(JsonInclude.Include.NON_ABSENT);
 		configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		FilterProvider filters = new SimpleFilterProvider().addFilter("non default properties", new MyFilter());
 		addMixIn(Object.class, PropertyFilterMixIn.class);
@@ -234,14 +234,14 @@ class MyFilter extends SimpleBeanPropertyFilter implements Serializable {
 
 	@Override
 	public void serializeAsField(Object pojo, JsonGenerator jgen, SerializerProvider provider, PropertyWriter writer)
-			throws Exception {
+throws Exception {
 		if (pojo instanceof Map || pojo instanceof Collection) {
 			writer.serializeAsField(pojo, jgen, provider);
 			return;
 		}
 		Object defaultInstance = defaultInstance(pojo);
 		if (defaultInstance instanceof CantInstantiateThisClass
-				|| !valueSameAsDefault(pojo, defaultInstance, writer.getName())) {
+	|| !valueSameAsDefault(pojo, defaultInstance, writer.getName())) {
 			writer.serializeAsField(pojo, jgen, provider);
 		}
 	}

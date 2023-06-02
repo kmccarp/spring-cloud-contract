@@ -43,8 +43,8 @@ class ProjectVersion implements Comparable<ProjectVersion>, Serializable {
 	private static final String SR_REGEX = "^.*[\\.|\\-]SR[0-9]+.*$";
 
 	private static final List<Pattern> VALID_PATTERNS = Arrays.asList(SNAPSHOT_PATTERN,
-			Pattern.compile(MILESTONE_REGEX), Pattern.compile(RC_REGEX), Pattern.compile(RELEASE_REGEX),
-			Pattern.compile(SR_REGEX));
+Pattern.compile(MILESTONE_REGEX), Pattern.compile(RC_REGEX), Pattern.compile(RELEASE_REGEX),
+Pattern.compile(SR_REGEX));
 
 	/**
 	 * Version of the project.
@@ -202,7 +202,7 @@ class ProjectVersion implements Comparable<ProjectVersion>, Serializable {
 		SplitVersion thisSplit = assertVersion();
 		SplitVersion thatSplit = that.assertVersion();
 		return thisSplit.major.equals(thatSplit.major) && thisSplit.minor.equals(thatSplit.minor)
-				&& thisSplit.patch.equals(thatSplit.patch);
+	&& thisSplit.patch.equals(thatSplit.patch);
 	}
 
 	@Override
@@ -303,7 +303,7 @@ class ProjectVersion implements Comparable<ProjectVersion>, Serializable {
 		private void assertIfValid() {
 			if (isInvalid()) {
 				throw new IllegalStateException(
-						"Version is invalid. Should be of format [1.2.3.A] / [1.2.3-A] or [A.B] / [A-B]");
+			"Version is invalid. Should be of format [1.2.3.A] / [1.2.3-A] or [A.B] / [A-B]");
 			}
 		}
 
@@ -339,7 +339,7 @@ class ProjectVersion implements Comparable<ProjectVersion>, Serializable {
 			// either major and suffix (release train)
 			// major, minor, patch and suffix
 			return isNumeric(major) && (!StringUtils.hasText(minor) || !StringUtils.hasText(patch)
-					|| !StringUtils.hasText(suffix) || !StringUtils.hasText(delimiter));
+		|| !StringUtils.hasText(suffix) || !StringUtils.hasText(delimiter));
 		}
 
 		private boolean wrongReleaseTrainVersion() {

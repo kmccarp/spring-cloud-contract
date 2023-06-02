@@ -41,7 +41,7 @@ public final class WireMockTestExecutionListener extends AbstractTestExecutionLi
 	@Override
 	public void beforeTestClass(TestContext testContext) throws Exception {
 		if (applicationContextBroken(testContext) || wireMockConfigurationMissing(testContext)
-				|| annotationMissing(testContext)) {
+	|| annotationMissing(testContext)) {
 			return;
 		}
 		if (!portIsFixed(testContext)) {
@@ -56,22 +56,22 @@ public final class WireMockTestExecutionListener extends AbstractTestExecutionLi
 	@Override
 	public void afterTestClass(TestContext testContext) {
 		if (applicationContextBroken(testContext) || wireMockConfigurationMissing(testContext)
-				|| annotationMissing(testContext)) {
+	|| annotationMissing(testContext)) {
 			return;
 		}
 		if (portIsFixed(testContext)) {
 			if (log.isWarnEnabled()) {
 				log.warn("You've used fixed ports for WireMock setup - "
-						+ "will mark context as dirty. Please use random ports, as much "
-						+ "as possible. Your tests will be faster and more reliable and this "
-						+ "warning will go away");
+			+ "will mark context as dirty. Please use random ports, as much "
+			+ "as possible. Your tests will be faster and more reliable and this "
+			+ "warning will go away");
 			}
 			testContext.markApplicationContextDirty(DirtiesContext.HierarchyMode.EXHAUSTIVE);
 		}
 		else {
 			if (log.isDebugEnabled()) {
 				log.debug("Resetting mappings for the next test to restart them. That's necessary when"
-						+ " reusing the same context with new servers running on random ports");
+			+ " reusing the same context with new servers running on random ports");
 			}
 			wireMockConfig(testContext).reRegisterServerWithResetMappings();
 		}
@@ -80,7 +80,7 @@ public final class WireMockTestExecutionListener extends AbstractTestExecutionLi
 	@Override
 	public void afterTestMethod(TestContext testContext) throws Exception {
 		if (applicationContextBroken(testContext) || wireMockConfigurationMissing(testContext)
-				|| annotationMissing(testContext)) {
+	|| annotationMissing(testContext)) {
 			return;
 		}
 		WireMockConfiguration wireMockConfiguration = wireMockConfig(testContext);
@@ -96,7 +96,7 @@ public final class WireMockTestExecutionListener extends AbstractTestExecutionLi
 		if (!TestContextAnnotationUtils.hasAnnotation(testContext.getTestClass(), AutoConfigureWireMock.class)) {
 			if (log.isDebugEnabled()) {
 				log.debug(
-						"No @AutoConfigureWireMock annotation found on [" + testContext.getTestClass() + "]. Skipping");
+			"No @AutoConfigureWireMock annotation found on [" + testContext.getTestClass() + "]. Skipping");
 			}
 			return true;
 		}
@@ -140,7 +140,7 @@ public final class WireMockTestExecutionListener extends AbstractTestExecutionLi
 			int httpPort = wireMockProperties.wireMock.getServer().getPort();
 			int httpsPort = wireMockProperties.wireMock.getServer().getHttpsPort();
 			log.debug("Http port [" + httpPort + "] dynamic [" + httpPortDynamic + "]" + " https port [" + httpsPort
-					+ "] dynamic [" + httpsPortDynamic + "]");
+		+ "] dynamic [" + httpsPortDynamic + "]");
 		}
 		return !httpPortDynamic || !httpsPortDynamic;
 	}

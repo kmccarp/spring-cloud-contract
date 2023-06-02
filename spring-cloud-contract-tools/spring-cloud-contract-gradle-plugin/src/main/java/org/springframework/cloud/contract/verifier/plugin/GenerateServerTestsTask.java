@@ -102,9 +102,8 @@ class GenerateServerTestsTask extends DefaultTask {
 
 	@Inject
 	public GenerateServerTestsTask(
-			final ObjectFactory objects,
-			final ExecOperations executors
-	) {
+final ObjectFactory objects,
+final ExecOperations executors) {
 		this.executors = executors;
 
 		this.contractsDslDir = objects.directoryProperty();
@@ -142,7 +141,8 @@ class GenerateServerTestsTask extends DefaultTask {
 		OutputStream os;
 		if (getLogger().isDebugEnabled()) {
 			os = new ByteArrayOutputStream();
-		} else {
+		}
+		else {
 			os = NullOutputStream.INSTANCE;
 		}
 		try {
@@ -261,7 +261,7 @@ class GenerateServerTestsTask extends DefaultTask {
 	}
 
 	private ContractVerifierConfigProperties toConfigProperties(File contractsDslDir, String includedContracts,
-			File generatedTestSources, File generatedTestResources) {
+File generatedTestSources, File generatedTestResources) {
 		List<String> excludedFiles = this.excludedFiles.get();
 		List<String> ignoredFiles = this.ignoredFiles.get();
 		List<String> includedFiles = this.includedFiles.get();

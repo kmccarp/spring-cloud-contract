@@ -52,20 +52,20 @@ public class TriggerController {
 		}
 		catch (Exception e) {
 			throw new RuntimeException("Exception occurred while trying to return [" + label
-					+ "] label. \n\nAvailable labels are [" + this.stubFinder.labels() + " ]", e);
+		+ "] label. \n\nAvailable labels are [" + this.stubFinder.labels() + " ]", e);
 		}
 	}
 
 	@PostMapping("/{ivyNotation:.*}/{label:.*}")
 	public ResponseEntity<Map<String, Collection<String>>> triggerByArtifact(@PathVariable String ivyNotation,
-			@PathVariable String label) {
+@PathVariable String label) {
 		try {
 			this.stubFinder.trigger(ivyNotation, label);
 			return ResponseEntity.ok().body(Collections.<String, Collection<String>>emptyMap());
 		}
 		catch (Exception e) {
 			throw new RuntimeException("Exception occurred while trying to return [" + label
-					+ "] label. \n\nAvailable labels are [" + this.stubFinder.labels() + " ]", e);
+		+ "] label. \n\nAvailable labels are [" + this.stubFinder.labels() + " ]", e);
 		}
 	}
 

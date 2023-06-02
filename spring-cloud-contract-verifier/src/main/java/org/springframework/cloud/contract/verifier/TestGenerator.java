@@ -71,7 +71,7 @@ public class TestGenerator {
 
 	public TestGenerator(ContractVerifierConfigProperties configProperties) {
 		this(configProperties, singleTestGenerator(), new FileSaver(configProperties.getGeneratedTestSourcesDir(),
-				configProperties.getTestFramework().getClassExtension()));
+	configProperties.getTestFramework().getClassExtension()));
 	}
 
 	private static SingleTestGenerator singleTestGenerator() {
@@ -83,11 +83,11 @@ public class TestGenerator {
 	}
 
 	public TestGenerator(ContractVerifierConfigProperties configProperties, SingleTestGenerator generator,
-			FileSaver saver) {
+FileSaver saver) {
 		this(configProperties, generator, saver, ContractFileScanner.builder()
-				.baseDir(configProperties.getContractsDslDir()).excluded(toSet(configProperties.getExcludedFiles()))
-				.ignored(toSet(configProperties.getIgnoredFiles())).included(toSet(configProperties.getIncludedFiles()))
-				.includeMatcher(configProperties.getIncludedContracts()).build());
+	.baseDir(configProperties.getContractsDslDir()).excluded(toSet(configProperties.getExcludedFiles()))
+	.ignored(toSet(configProperties.getIgnoredFiles())).included(toSet(configProperties.getIncludedFiles()))
+	.includeMatcher(configProperties.getIncludedContracts()).build());
 	}
 
 	private static Set<String> toSet(List<String> files) {
@@ -95,11 +95,11 @@ public class TestGenerator {
 	}
 
 	protected TestGenerator(ContractVerifierConfigProperties configProperties, SingleTestGenerator generator,
-			FileSaver saver, ContractFileScanner contractFileScanner) {
+FileSaver saver, ContractFileScanner contractFileScanner) {
 		this.configProperties = configProperties;
 		if (configProperties.getContractsDslDir() == null) {
 			throw new ContractVerifierException(
-					"Stubs directory not found under " + configProperties.getContractsDslDir());
+		"Stubs directory not found under " + configProperties.getContractsDslDir());
 		}
 
 		this.generator = generator;
@@ -134,22 +134,22 @@ public class TestGenerator {
 		Set<Map.Entry<Path, List<ContractMetadata>>> inProgress = inProgress(contracts);
 		if (!inProgress.isEmpty() && configProperties.isFailOnInProgress()) {
 			String inProgressContractsPaths = inProgress.stream().map(Map.Entry::getKey).map(Path::toString)
-					.collect(Collectors.joining(","));
+		.collect(Collectors.joining(","));
 			throw new IllegalStateException("In progress contracts found in paths [" + inProgressContractsPaths
-					+ "] and the switch [failOnInProgress] is set to [true]. Either unmark those contracts as in progress, or set the switch to [false].");
+		+ "] and the switch [failOnInProgress] is set to [true]. Either unmark those contracts as in progress, or set the switch to [false].");
 		}
 		processAll(contracts, basePackageName);
 	}
 
 	private Set<Map.Entry<Path, List<ContractMetadata>>> inProgress(MultiValueMap<Path, ContractMetadata> contracts) {
 		return contracts.entrySet().stream()
-				.filter(entry -> entry.getValue().stream().anyMatch(ContractMetadata::anyInProgress))
-				.collect(Collectors.toSet());
+	.filter(entry -> entry.getValue().stream().anyMatch(ContractMetadata::anyInProgress))
+	.collect(Collectors.toSet());
 	}
 
 	void processAll(MultiValueMap<Path, ContractMetadata> contracts, final String basePackageName) {
 		contracts.entrySet().stream().forEach(
-				entry -> processIncludedDirectory(relativizeContractPath(entry), entry.getValue(), basePackageName));
+	entry -> processIncludedDirectory(relativizeContractPath(entry), entry.getValue(), basePackageName));
 	}
 
 	private String relativizeContractPath(Map.Entry<Path, List<ContractMetadata>> entry) {
@@ -158,20 +158,20 @@ public class TestGenerator {
 	}
 
 	private void processIncludedDirectory(final String includedDirectoryRelativePath,
-			final Collection<ContractMetadata> contracts, final String basePackageNameForClass) {
+final Collection<ContractMetadata> contracts, final String basePackageNameForClass) {
 		log.debug("Collected contracts with metadata {} relative path is [{}]", contracts,
-				includedDirectoryRelativePath);
+	includedDirectoryRelativePath);
 		if (!contracts.isEmpty()) {
 			String className = afterLast(includedDirectoryRelativePath, File.separator) + resolveNameSuffix();
 			String convertedClassName = ensureNameDoesNotStartWithNumber(convertIllegalPackageChars(className));
 			String packageName = buildPackage(basePackageNameForClass, includedDirectoryRelativePath);
 			Path dir = saver.generateTestBaseDir(basePackageNameForClass,
-					convertIllegalPackageChars(includedDirectoryRelativePath));
+		convertIllegalPackageChars(includedDirectoryRelativePath));
 			Path classPath = saver.pathToClass(dir, convertedClassName);
 			byte[] classBytes = generator
-					.buildClass(configProperties, contracts, includedDirectoryRelativePath,
-							new SingleTestGenerator.GeneratedClassData(convertedClassName, packageName, classPath))
-					.getBytes(StandardCharsets.UTF_8);
+		.buildClass(configProperties, contracts, includedDirectoryRelativePath,
+	new SingleTestGenerator.GeneratedClassData(convertedClassName, packageName, classPath))
+		.getBytes(StandardCharsets.UTF_8);
 			saver.saveClassFile(classPath, classBytes);
 			counter.incrementAndGet();
 		}
@@ -183,7 +183,7 @@ public class TestGenerator {
 
 	private String resolveNameSuffix() {
 		return StringUtils.defaultIfEmpty(configProperties.getNameSuffixForTests(),
-				configProperties.getTestFramework().getClassNameSuffix());
+	configProperties.getTestFramework().getClassNameSuffix());
 	}
 
 	protected static String buildPackage(final String packageNameForClass, final String includedDirectoryRelativePath) {

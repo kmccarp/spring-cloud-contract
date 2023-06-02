@@ -134,13 +134,13 @@ public class ResourcesFileSource implements FileSource {
 			catch (RuntimeException e) {
 				if (log.isDebugEnabled()) {
 					log.debug("Caught exception while trying to create file handle for file " + name
-							+ ", trying next FileSource", e);
+				+ ", trying next FileSource", e);
 				}
 			}
 			catch (IOException e) {
 				if (log.isDebugEnabled()) {
 					log.debug("Caught exception while trying to create file handle for file " + name
-							+ ", trying next FileSource", e);
+				+ ", trying next FileSource", e);
 				}
 			}
 		}
@@ -189,7 +189,7 @@ public class ResourcesFileSource implements FileSource {
 			catch (IOException e) {
 				if (log.isDebugEnabled()) {
 					log.debug("Caught exception while trying to create file source for " + subDirectoryName
-							+ ", continuing with next source", e);
+				+ ", continuing with next source", e);
 				}
 			}
 		}
@@ -214,7 +214,7 @@ public class ResourcesFileSource implements FileSource {
 			catch (IOException e) {
 				if (log.isDebugEnabled()) {
 					log.debug("Caught exception while trying to create URL file handler for " + resource.getPath()
-							+ ", continuing with next source", e);
+				+ ", continuing with next source", e);
 				}
 			}
 		}
@@ -236,7 +236,7 @@ public class ResourcesFileSource implements FileSource {
 			catch (IOException e) {
 				if (log.isDebugEnabled()) {
 					log.debug("Caught exception while trying to create URL file handler for " + resource.getPath()
-							+ ", continuing with next source", e);
+				+ ", continuing with next source", e);
 				}
 			}
 		}

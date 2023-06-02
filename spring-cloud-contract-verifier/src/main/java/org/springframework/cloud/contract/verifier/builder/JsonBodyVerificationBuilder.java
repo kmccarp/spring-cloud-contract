@@ -70,8 +70,8 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 	// major
 	// refactoring of this module for Hoxton release, leaving it this way for now
 	JsonBodyVerificationBuilder(boolean assertJsonSize, TemplateProcessor templateProcessor,
-			ContractTemplate contractTemplate, Contract contract, Optional<String> lineSuffix,
-			Function<String, String> postProcessJsonPathCall) {
+ContractTemplate contractTemplate, Contract contract, Optional<String> lineSuffix,
+Function<String, String> postProcessJsonPathCall) {
 		this.assertJsonSize = assertJsonSize;
 		this.templateProcessor = templateProcessor;
 		this.contractTemplate = contractTemplate;
@@ -81,20 +81,20 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 	}
 
 	Object addJsonResponseBodyCheck(BlockBuilder bb, Object convertedResponseBody, BodyMatchers bodyMatchers,
-			String responseString, boolean shouldCommentOutBDDBlocks) {
+String responseString, boolean shouldCommentOutBDDBlocks) {
 		appendJsonPath(bb, responseString);
 		DocumentContext parsedRequestBody = null;
 		boolean dontParseStrings = convertedResponseBody instanceof Map;
 		Function<String, Object> parsingFunction = dontParseStrings ? MapConverter.IDENTITY
-				: MapConverter.JSON_PARSING_FUNCTION;
+	: MapConverter.JSON_PARSING_FUNCTION;
 		if (hasRequestBody()) {
 			Object testSideRequestBody = MapConverter.getTestSideValues(contract.getRequest().getBody(),
-					parsingFunction);
+		parsingFunction);
 			parsedRequestBody = JsonPath.parse(testSideRequestBody);
 			if (convertedResponseBody instanceof String
-					&& !textContainsJsonPathTemplate(convertedResponseBody.toString())) {
+		&& !textContainsJsonPathTemplate(convertedResponseBody.toString())) {
 				convertedResponseBody = templateProcessor.transform(contract.getRequest(),
-						convertedResponseBody.toString());
+			convertedResponseBody.toString());
 			}
 		}
 		Object copiedBody = cloneBody(convertedResponseBody);
@@ -106,18 +106,18 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 
 		// remove quotes from fromRequest objects before picking json paths
 		TestSideRequestTemplateModel templateModel = hasRequestBody()
-				? TestSideRequestTemplateModel.from(contract.getRequest()) : null;
+	? TestSideRequestTemplateModel.from(contract.getRequest()) : null;
 		convertedResponseBody = MapConverter.transformValues(convertedResponseBody,
-				returnReferencedEntries(templateModel), parsingFunction);
+	returnReferencedEntries(templateModel), parsingFunction);
 		JsonPaths jsonPaths = new JsonToJsonPathsConverter(assertJsonSize)
-				.transformToJsonPathWithTestsSideValues(convertedResponseBody, parsingFunction, includeEmptyCheck);
+	.transformToJsonPathWithTestsSideValues(convertedResponseBody, parsingFunction, includeEmptyCheck);
 
 		DocumentContext finalParsedRequestBody = parsedRequestBody;
 		jsonPaths.forEach(it -> {
 			String method = it.method();
 			method = processIfTemplateIsPresent(method, finalParsedRequestBody);
 			String postProcessedMethod = templateProcessor.containsJsonPathTemplateEntry(method) ? method
-					: postProcessJsonPathCall.apply(method);
+		: postProcessJsonPathCall.apply(method);
 			bb.addLine("assertThatJson(parsedJson)" + postProcessedMethod);
 			addColonIfRequired(lineSuffix, bb);
 		});
@@ -142,7 +142,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 
 	private void checkType(BlockBuilder bb, BodyMatcher it, Object elementFromBody) {
 		String method = "assertThat((Object) parsedJson.read(" + quotedAndEscaped(it.path()) + ")).isInstanceOf("
-				+ classToCheck(elementFromBody).getName() + ".class)";
+	+ classToCheck(elementFromBody).getName() + ".class)";
 		bb.addLine(postProcessJsonPathCall.apply(method));
 		addColonIfRequired(lineSuffix, bb);
 	}
@@ -164,7 +164,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 
 	protected void buildCustomMatchingConditionForEachElement(BlockBuilder bb, String path, String valueAsParam) {
 		String method = "assertThat((java.lang.Iterable) parsedJson.read(" + path + ", java.util.Collection.class)).as("
-				+ path + ").allElementsMatch(" + valueAsParam + ")";
+	+ path + ").allElementsMatch(" + valueAsParam + ")";
 		bb.addLine(postProcessJsonPathCall.apply(method));
 	}
 
@@ -173,9 +173,9 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 		String path = quotedAndEscaped(bodyMatcher.path());
 		Object retrievedValue = value(copiedBody, bodyMatcher);
 		retrievedValue = retrievedValue instanceof RegexProperty
-				? ((RegexProperty) retrievedValue).getPattern().pattern() : retrievedValue;
+	? ((RegexProperty) retrievedValue).getPattern().pattern() : retrievedValue;
 		String valueAsParam = retrievedValue instanceof String ? quotedAndEscaped(retrievedValue.toString())
-				: objectToString(retrievedValue);
+	: objectToString(retrievedValue);
 		if (arrayRelated(path) && MatchingType.regexRelated(bodyMatcher.matchingType())) {
 			buildCustomMatchingConditionForEachElement(bb, path, valueAsParam);
 		}
@@ -183,7 +183,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 			String comparisonMethod = bodyMatcher.matchingType() == MatchingType.EQUALITY ? "isEqualTo" : "matches";
 			String classToCastTo = className(retrievedValue) + ".class";
 			String method = "assertThat(parsedJson.read(" + path + ", " + classToCastTo + "))." + comparisonMethod + "("
-					+ valueAsParam + ")";
+		+ valueAsParam + ")";
 			bb.addLine(postProcessJsonPathCall.apply(method));
 		}
 		addColonIfRequired(lineSuffix, bb);
@@ -191,7 +191,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 
 	private String className(Object retrievedValue) {
 		return retrievedValue.getClass().getName().startsWith("java.lang") ? retrievedValue.getClass().getSimpleName()
-				: retrievedValue.getClass().getName();
+	: retrievedValue.getClass().getName();
 	}
 
 	private String objectToString(Object value) {
@@ -214,12 +214,12 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 			Object object = parsedRequestBody.read(jsonPathEntry);
 			if (!(object instanceof String)) {
 				return method
-						.replace('"' + contractTemplate.escapedOpeningTemplate(),
-								contractTemplate.escapedOpeningTemplate())
-						.replace(contractTemplate.escapedClosingTemplate() + '"',
-								contractTemplate.escapedClosingTemplate())
-						.replace('"' + contractTemplate.openingTemplate(), contractTemplate.openingTemplate())
-						.replace(contractTemplate.closingTemplate() + '"', contractTemplate.closingTemplate());
+			.replace('"' + contractTemplate.escapedOpeningTemplate(),
+		contractTemplate.escapedOpeningTemplate())
+			.replace(contractTemplate.escapedClosingTemplate() + '"',
+		contractTemplate.escapedClosingTemplate())
+			.replace('"' + contractTemplate.openingTemplate(), contractTemplate.openingTemplate())
+			.replace(contractTemplate.closingTemplate() + '"', contractTemplate.closingTemplate());
 			}
 		}
 		return method;
@@ -254,7 +254,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 			checkType(bb, bodyMatcher, elementFromBody);
 			String quotedAndEscaptedPath = quotedAndEscaped(bodyMatcher.path());
 			String method = "assertThat((java.lang.Iterable) parsedJson.read(" + quotedAndEscaptedPath
-					+ ", java.util.Collection.class))." + sizeCheckMethod(bodyMatcher, quotedAndEscaptedPath);
+		+ ", java.util.Collection.class))." + sizeCheckMethod(bodyMatcher, quotedAndEscaptedPath);
 			bb.addLine(postProcessJsonPathCall.apply(method));
 			addColonIfRequired(lineSuffix, bb);
 		}
@@ -276,7 +276,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 		}
 		catch (PathNotFoundException e) {
 			throw new IllegalStateException("Entry for the provided JSON path <" + path
-					+ "> doesn't exist in the body <" + JsonOutput.toJson(body) + ">", e);
+		+ "> doesn't exist in the body <" + JsonOutput.toJson(body) + ">", e);
 		}
 	}
 
@@ -287,7 +287,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 			}
 			String entryAsString = (String) entry;
 			if (this.templateProcessor.containsTemplateEntry(entryAsString)
-					&& !this.templateProcessor.containsJsonPathTemplateEntry(entryAsString)) {
+		&& !this.templateProcessor.containsJsonPathTemplateEntry(entryAsString)) {
 				// TODO: HANDLEBARS LEAKING VIA request.
 				String justEntry = minus(entryAsString, contractTemplate.escapedOpeningTemplate());
 				justEntry = minus(justEntry, contractTemplate.openingTemplate());
@@ -297,7 +297,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 				if (FROM_REQUEST_BODY.equalsIgnoreCase(justEntry)) {
 					// the body should be transformed by standard mechanism
 					return contractTemplate.escapedOpeningTemplate() + FROM_REQUEST_PREFIX + "escapedBody"
-							+ contractTemplate.escapedClosingTemplate();
+				+ contractTemplate.escapedClosingTemplate();
 				}
 				try {
 					Object result = new PropertyUtilsBean().getProperty(templateModel, justEntry);
@@ -332,7 +332,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 
 	private boolean textContainsJsonPathTemplate(String method) {
 		return templateProcessor.containsTemplateEntry(method)
-				&& templateProcessor.containsJsonPathTemplateEntry(method);
+	&& templateProcessor.containsJsonPathTemplateEntry(method);
 	}
 
 	/**
@@ -353,7 +353,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 	}
 
 	private void doBodyMatchingIfPresent(BodyMatchers bodyMatchers, BlockBuilder bb, Object responseBody,
-			boolean shouldCommentOutBDDBlocks) {
+boolean shouldCommentOutBDDBlocks) {
 		if (bodyMatchers != null && bodyMatchers.hasMatchers()) {
 			bb.addEmptyLine();
 			addBodyMatchingBlock(bodyMatchers.matchers(), bb, responseBody, shouldCommentOutBDDBlocks);

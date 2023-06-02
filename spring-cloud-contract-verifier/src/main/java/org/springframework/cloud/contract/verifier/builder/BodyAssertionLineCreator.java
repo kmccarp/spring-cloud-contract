@@ -34,7 +34,7 @@ class BodyAssertionLineCreator {
 	private final ComparisonBuilder comparisonBuilder;
 
 	BodyAssertionLineCreator(BlockBuilder blockBuilder, GeneratedClassMetaData metaData, String byteArrayString,
-			ComparisonBuilder comparisonBuilder) {
+ComparisonBuilder comparisonBuilder) {
 		this.blockBuilder = blockBuilder;
 		this.bodyReader = new BodyReader(metaData);
 		this.byteArrayString = byteArrayString;
@@ -56,7 +56,7 @@ class BodyAssertionLineCreator {
 	 * Object {@code value}
 	 */
 	private String getResponseBodyPropertyComparisonString(SingleContractMetadata singleContractMetadata,
-			String property, Object value) {
+String property, Object value) {
 		if (value instanceof FromFileProperty) {
 			return getResponseBodyPropertyComparisonString(singleContractMetadata, property, (FromFileProperty) value);
 		}
@@ -68,7 +68,7 @@ class BodyAssertionLineCreator {
 		}
 		else if (value instanceof DslProperty) {
 			return getResponseBodyPropertyComparisonString(singleContractMetadata, property,
-					((DslProperty) value).getServerValue());
+		((DslProperty) value).getServerValue());
 		}
 		return getResponseBodyPropertyComparisonString(property, value.toString());
 	}
@@ -78,10 +78,10 @@ class BodyAssertionLineCreator {
 	 * byte[] {@code value}
 	 */
 	private String getResponseBodyPropertyComparisonString(SingleContractMetadata singleContractMetadata,
-			String property, FromFileProperty value) {
+String property, FromFileProperty value) {
 		if (value.isByte()) {
 			return this.comparisonBuilder.assertThat(this.byteArrayString) + this.comparisonBuilder.isEqualToUnquoted(
-					this.bodyReader.readBytesFromFileString(singleContractMetadata, value, CommunicationType.RESPONSE));
+		this.bodyReader.readBytesFromFileString(singleContractMetadata, value, CommunicationType.RESPONSE));
 		}
 		return getResponseBodyPropertyComparisonString(property, value.asString());
 	}

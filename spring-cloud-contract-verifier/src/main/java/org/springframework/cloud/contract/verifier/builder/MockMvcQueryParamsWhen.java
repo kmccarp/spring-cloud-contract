@@ -61,7 +61,7 @@ class MockMvcQueryParamsWhen implements When, MockMvcAcceptor, QueryParamsResolv
 
 	private void addQueryParameters(Url buildUrl) {
 		List<QueryParameter> queryParameters = buildUrl.getQueryParameters().getParameters().stream()
-				.filter(this::allowedQueryParameter).collect(Collectors.toList());
+	.filter(this::allowedQueryParameter).collect(Collectors.toList());
 		Iterator<QueryParameter> iterator = queryParameters.iterator();
 		while (iterator.hasNext()) {
 			QueryParameter parameter = iterator.next();
@@ -88,7 +88,7 @@ class MockMvcQueryParamsWhen implements When, MockMvcAcceptor, QueryParamsResolv
 	private String addQueryParameter(QueryParameter queryParam) {
 		String queryParamValue = getQueryParamValue(queryParam);
 		return "." + QUERY_PARAM_METHOD + "(" + this.bodyParser.quotedLongText(queryParam.getName()) + ","
-				+ queryParamValue + ")";
+	+ queryParamValue + ")";
 	}
 
 	private String getQueryParamValue(QueryParameter queryParam) {

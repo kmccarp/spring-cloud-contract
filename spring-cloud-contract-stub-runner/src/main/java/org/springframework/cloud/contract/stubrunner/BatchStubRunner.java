@@ -109,8 +109,8 @@ public class BatchStubRunner implements StubRunning {
 		}
 		if (!success) {
 			throw new IllegalArgumentException("No label with name [" + labelName + "] for " + "dependency ["
-					+ ivyNotation + "] was found. Here you have the list of dependencies " + "and their labels ["
-					+ ivyToLabels() + "]");
+		+ ivyNotation + "] was found. Here you have the list of dependencies " + "and their labels ["
+		+ ivyToLabels() + "]");
 		}
 		return success;
 	}
@@ -136,7 +136,7 @@ public class BatchStubRunner implements StubRunning {
 		}
 		if (!success) {
 			throw new IllegalArgumentException("No label with name [" + labelName + "] was found. "
-					+ "Here you have the list of dependencies and their labels [" + ivyToLabels() + "]");
+		+ "Here you have the list of dependencies and their labels [" + ivyToLabels() + "]");
 		}
 		return success;
 	}

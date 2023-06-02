@@ -39,7 +39,7 @@ class MessagingSpockNoMessageThen implements Then, BodyMethodVisitor {
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return singleContractMetadata.isMessaging() && singleContractMetadata.getContract().getOutputMessage() == null
-				&& this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.SPOCK;
+	&& this.generatedClassMetaData.configProperties.getTestFramework() == TestFramework.SPOCK;
 	}
 
 }

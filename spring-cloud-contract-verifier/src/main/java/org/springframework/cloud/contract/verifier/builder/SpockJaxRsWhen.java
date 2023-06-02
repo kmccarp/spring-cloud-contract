@@ -31,7 +31,7 @@ class SpockJaxRsWhen extends JaxRsWhen {
 	@Override
 	public boolean accept(SingleContractMetadata singleContractMetadata) {
 		return super.accept(singleContractMetadata)
-				&& this.metaData.configProperties.getTestFramework() == TestFramework.SPOCK;
+	&& this.metaData.configProperties.getTestFramework() == TestFramework.SPOCK;
 	}
 
 }

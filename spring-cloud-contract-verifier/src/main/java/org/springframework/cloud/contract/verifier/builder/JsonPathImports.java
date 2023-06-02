@@ -26,7 +26,7 @@ class JsonPathImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "com.jayway.jsonpath.DocumentContext", "com.jayway.jsonpath.JsonPath" };
+	private static final String[] IMPORTS = {"com.jayway.jsonpath.DocumentContext", "com.jayway.jsonpath.JsonPath"};
 
 	JsonPathImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;
@@ -42,7 +42,7 @@ class JsonPathImports implements Imports {
 	@Override
 	public boolean accept() {
 		return this.generatedClassMetaData.listOfFiles.stream().anyMatch(metadata -> metadata
-				.getConvertedContractWithMetadata().stream().anyMatch(SingleContractMetadata::isJson));
+	.getConvertedContractWithMetadata().stream().anyMatch(SingleContractMetadata::isJson));
 	}
 
 }

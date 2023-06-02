@@ -64,7 +64,7 @@ public class ConvertMojo extends AbstractMojo {
 	 * GroovyDSL.
 	 */
 	@Parameter(property = "spring.cloud.contract.verifier.contractsDirectory",
-			defaultValue = "${project.basedir}/src/test/resources/contracts")
+defaultValue = "${project.basedir}/src/test/resources/contracts")
 	private File contractsDirectory;
 
 	/**
@@ -198,8 +198,8 @@ public class ConvertMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException {
 		if (this.skip) {
 			getLog().info(String.format(
-					"Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip=%s",
-					this.skip));
+		"Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip=%s",
+		this.skip));
 			return;
 		}
 		String groupId = this.project.getGroupId();
@@ -229,33 +229,33 @@ public class ConvertMojo extends AbstractMojo {
 		config.setStubsOutputDir(stubsOutputDir(rootPath));
 		logSetup(config, contractsDslDir);
 		RecursiveFilesConverter converter = new RecursiveFilesConverter(config.getStubsOutputDir(),
-				config.getContractsDslDir(), config.getExcludedFiles(), config.getIncludedContracts(),
-				config.isExcludeBuildFolders());
+	config.getContractsDslDir(), config.getExcludedFiles(), config.getIncludedContracts(),
+	config.isExcludeBuildFolders());
 		converter.processFiles();
 		leftOverPrevention.deleteLeftOvers();
 	}
 
 	private void convertBackedUpDslsToYaml(String rootPath, ContractVerifierConfigProperties config,
-			File contractsDirectory, File contractsDslDir) throws MojoExecutionException {
+File contractsDirectory, File contractsDslDir) throws MojoExecutionException {
 		copyOriginals(rootPath, config, contractsDirectory);
 		ToYamlConverter.replaceContractWithYaml(contractsDslDir);
 		getLog().info("Replaced DSL files with their YAML representation at [" + contractsDslDir + "]");
 	}
 
 	private File copyOriginals(String rootPath, ContractVerifierConfigProperties config, File contractsDirectory)
-			throws MojoExecutionException {
+throws MojoExecutionException {
 		File outputFolderWithOriginals = new File(this.stubsDirectory, rootPath + ORIGINAL_PATH);
 		new CopyContracts(this.project, this.mavenSession, this.mavenResourcesFiltering, config)
-				.copy(contractsDirectory, outputFolderWithOriginals);
+	.copy(contractsDirectory, outputFolderWithOriginals);
 		return outputFolderWithOriginals;
 	}
 
 	private File copyContracts(String rootPath, ContractVerifierConfigProperties config, File contractsDirectory)
-			throws MojoExecutionException {
+throws MojoExecutionException {
 		File outputFolderWithContracts = this.stubsDirectory.getPath().endsWith("contracts") ? this.stubsDirectory
-				: new File(this.stubsDirectory, rootPath + CONTRACTS_PATH);
+	: new File(this.stubsDirectory, rootPath + CONTRACTS_PATH);
 		new CopyContracts(this.project, this.mavenSession, this.mavenResourcesFiltering, config)
-				.copy(contractsDirectory, outputFolderWithContracts);
+	.copy(contractsDirectory, outputFolderWithContracts);
 		return outputFolderWithContracts;
 	}
 
@@ -265,7 +265,7 @@ public class ConvertMojo extends AbstractMojo {
 		}
 		getLog().info("Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings");
 		getLog().info(String.format("     Spring Cloud Contract Verifier contracts directory: %s",
-				config.getContractsDslDir()));
+	config.getContractsDslDir()));
 		getLog().info(String.format("Stub Server stubs mappings directory: %s", config.getStubsOutputDir()));
 	}
 
@@ -282,10 +282,10 @@ public class ConvertMojo extends AbstractMojo {
 
 	private File locationOfContracts(ContractVerifierConfigProperties config) {
 		return new MavenContractsDownloader(this.project, this.contractDependency, this.contractsPath,
-				this.contractsRepositoryUrl, this.contractsMode, getLog(), this.contractsRepositoryUsername,
-				this.contractsRepositoryPassword, this.contractsRepositoryProxyHost, this.contractsRepositoryProxyPort,
-				this.deleteStubsAfterTest, this.contractsProperties, this.failOnNoContracts)
-						.downloadAndUnpackContractsIfRequired(config, this.contractsDirectory);
+	this.contractsRepositoryUrl, this.contractsMode, getLog(), this.contractsRepositoryUsername,
+	this.contractsRepositoryPassword, this.contractsRepositoryProxyHost, this.contractsRepositoryProxyPort,
+	this.deleteStubsAfterTest, this.contractsProperties, this.failOnNoContracts)
+	.downloadAndUnpackContractsIfRequired(config, this.contractsDirectory);
 	}
 
 	private File stubsOutputDir(String rootPath) {

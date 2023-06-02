@@ -52,8 +52,7 @@ import org.springframework.util.StringUtils;
  *
  * @author Dave Syer
  */
-public class ContractResultHandler extends WireMockVerifyHelper<MvcResult, ContractResultHandler>
-		implements ResultHandler {
+public class ContractResultHandler extends WireMockVerifyHelper<MvcResult, ContractResultHandler>implements ResultHandler {
 
 	static final String ATTRIBUTE_NAME_CONFIGURATION = "org.springframework.restdocs.configuration";
 
@@ -68,7 +67,7 @@ public class ContractResultHandler extends WireMockVerifyHelper<MvcResult, Contr
 		ResponseDefinitionBuilder definition;
 		try {
 			definition = ResponseDefinitionBuilder.responseDefinition().withBody(response.getContentAsString())
-					.withStatus(response.getStatus());
+		.withStatus(response.getStatus());
 			addResponseHeaders(definition, response);
 			return definition;
 		}

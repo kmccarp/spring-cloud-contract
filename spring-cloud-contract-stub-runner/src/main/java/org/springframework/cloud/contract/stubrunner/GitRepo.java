@@ -220,7 +220,7 @@ class GitRepo {
 			log.debug("Project git url [" + projectGitUrl + "]");
 		}
 		CloneCommand command = this.gitFactory.getCloneCommandByCloneRepository().setURI(projectGitUrl)
-				.setDirectory(destinationFolder);
+	.setDirectory(destinationFolder);
 		try {
 			Git git = command.call();
 			if (git.getRepository().getRemoteNames().isEmpty()) {
@@ -279,7 +279,7 @@ class GitRepo {
 
 	private void trackBranch(CheckoutCommand checkout, String label) {
 		checkout.setCreateBranch(true).setName(label).setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK)
-				.setStartPoint("origin/" + label);
+	.setStartPoint("origin/" + label);
 	}
 
 	private boolean isBranch(Git git, String label) throws GitAPIException {
@@ -346,7 +346,7 @@ class GitRepo {
 				}
 				catch (AgentProxyException e) {
 					log.error("Exception occurred while trying to connect to agent. Will create"
-							+ "the default JSch connection", e);
+				+ "the default JSch connection", e);
 					return super.createDefaultJSch(fs);
 				}
 				final JSch jsch = super.createDefaultJSch(fs);
@@ -390,7 +390,7 @@ class GitRepo {
 
 		CloneCommand getCloneCommandByCloneRepository() {
 			return Git.cloneRepository().setCredentialsProvider(this.provider)
-					.setTransportConfigCallback(this.callback);
+		.setTransportConfigCallback(this.callback);
 		}
 
 		PushCommand push(Git git) {

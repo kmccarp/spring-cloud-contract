@@ -26,7 +26,7 @@ class TestNGImports implements Imports {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] IMPORTS = { "org.testng.annotations.Test" };
+	private static final String[] IMPORTS = {"org.testng.annotations.Test"};
 
 	TestNGImports(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

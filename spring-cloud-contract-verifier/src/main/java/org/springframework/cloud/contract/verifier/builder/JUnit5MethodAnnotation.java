@@ -27,7 +27,7 @@ class JUnit5MethodAnnotation implements MethodAnnotations {
 
 	private final GeneratedClassMetaData generatedClassMetaData;
 
-	private static final String[] ANNOTATIONS = { "@Test" };
+	private static final String[] ANNOTATIONS = {"@Test"};
 
 	JUnit5MethodAnnotation(BlockBuilder blockBuilder, GeneratedClassMetaData generatedClassMetaData) {
 		this.blockBuilder = blockBuilder;

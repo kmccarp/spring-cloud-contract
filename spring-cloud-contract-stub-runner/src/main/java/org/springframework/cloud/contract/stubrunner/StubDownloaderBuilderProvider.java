@@ -60,7 +60,7 @@ public class StubDownloaderBuilderProvider {
 
 	List<StubDownloaderBuilder> defaultStubDownloaderBuilders() {
 		return Arrays.asList(new ScmStubDownloaderBuilder(), new ClasspathStubProvider(), new FileStubDownloader(),
-				new AetherStubDownloaderBuilder());
+	new AetherStubDownloaderBuilder());
 	}
 
 }

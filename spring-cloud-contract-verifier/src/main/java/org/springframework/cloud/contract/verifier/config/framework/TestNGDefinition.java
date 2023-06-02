@@ -38,13 +38,13 @@ public class TestNGDefinition implements TestFrameworkDefinition {
 	@Override
 	public String getIgnoreClass() {
 		throw new UnsupportedOperationException(
-				"There is no @Ignore annotation for TestNG. A test can be disabled directly in the @Test annotation");
+	"There is no @Ignore annotation for TestNG. A test can be disabled directly in the @Test annotation");
 	}
 
 	@Override
 	public String getIgnoreAnnotation() {
 		throw new UnsupportedOperationException(
-				"There is no @Ignore annotation for TestNG. A test can be disabled directly in the @Test annotation");
+	"There is no @Ignore annotation for TestNG. A test can be disabled directly in the @Test annotation");
 	}
 
 }
