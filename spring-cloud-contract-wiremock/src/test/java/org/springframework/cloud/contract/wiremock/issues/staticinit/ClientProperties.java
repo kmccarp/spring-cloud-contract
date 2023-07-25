@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.staticInit;
+package org.springframework.cloud.contract.wiremock.issues.staticinit;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@SpringBootApplication
-public class TimeoutApplication {
+@ConfigurationProperties(prefix = "my-client")
+public class ClientProperties {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TimeoutApplication.class, args);
+	private String url;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

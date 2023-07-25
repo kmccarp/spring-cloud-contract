@@ -14,28 +14,20 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.staticInit;
+package org.springframework.cloud.contract.wiremock.issues.staticinit;
 
-import java.net.URI;
-
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@Component
-public class WebClient {
+@Configuration
+@EnableConfigurationProperties(ClientProperties.class)
+public class RestTemplateConfiguration {
 
-	private final RestTemplate restTemplate;
-
-	private final ClientProperties clientProperties;
-
-	public WebClient(RestTemplate restTemplate, ClientProperties clientProperties) {
-		this.restTemplate = restTemplate;
-		this.clientProperties = clientProperties;
-	}
-
-	public String get() {
-		URI url = URI.create(clientProperties.getUrl());
-		return restTemplate.getForObject(url, String.class);
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.staticInit;
+package org.springframework.cloud.contract.wiremock.issues.staticinit;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.assertj.core.api.BDDAssertions;

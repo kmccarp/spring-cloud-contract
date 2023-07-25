@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.sameConfigsDifferentTests;
+package org.springframework.cloud.contract.wiremock.issues.sameconfigsdifferenttests;
 
 import java.math.BigDecimal;
 

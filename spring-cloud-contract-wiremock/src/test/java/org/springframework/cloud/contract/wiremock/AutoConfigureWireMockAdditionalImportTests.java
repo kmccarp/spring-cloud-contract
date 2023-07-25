@@ -116,7 +116,7 @@ class TestController {
 	public Mono<List<TestItem>> findAll() {
 		System.out.println("Will send a request to [" + this.baseUrl + "] HASH [" + this.hashCode() + "]");
 		return webClient.get().uri(baseUrl + "/find-all").retrieve()
-				.bodyToMono(new ParameterizedTypeReference<List<TestItem>>() {
+				.bodyToMono(new ParameterizedTypeReference<>() {
 				});
 	}
 

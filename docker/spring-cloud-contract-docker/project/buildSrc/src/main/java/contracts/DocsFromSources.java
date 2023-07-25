@@ -53,7 +53,7 @@ public class DocsFromSources {
 	public void buildApplicationEnvVars() {
 		Path path = new File(rootDir(), sourcePath()).toPath();
 		List<EnvVar> envVars = new ArrayList<>();
-		FileVisitor<Path> fv = new SimpleFileVisitor<Path>() {
+		FileVisitor<Path> fv = new SimpleFileVisitor<>() {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 					throws IOException {

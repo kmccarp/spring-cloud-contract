@@ -31,7 +31,7 @@ import java.util.Set;
  */
 public class RunningStubs {
 
-	final private Map<StubConfiguration, Integer> namesAndPorts = new LinkedHashMap<>();
+	private final Map<StubConfiguration, Integer> namesAndPorts = new LinkedHashMap<>();
 
 	public RunningStubs(Map<StubConfiguration, Integer> map) {
 		this.namesAndPorts.putAll(map);

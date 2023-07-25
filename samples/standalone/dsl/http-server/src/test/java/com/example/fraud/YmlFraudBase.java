@@ -29,12 +29,11 @@ public class YmlFraudBase {
 
 	private StatsProvider stubbedStatsProvider() {
 		return fraudType -> {
-			switch (fraudType) {
-			case DRUNKS:
-				return 100;
-			case ALL:
-				return 200;
-			}
+            if (fraudType == FraudType.DRUNKS) {
+                return 100;
+            } else if (fraudType == FraudType.ALL) {
+                return 200;
+            }
 			return 0;
 		};
 	}

@@ -65,7 +65,7 @@ class StubRunnerJUnit5ExtensionCustomMessageVerifierTests {
 	@Test
 	void should_use_provided_message_verifier_in_junit5_extension() {
 		IllegalStateException emptyTriggerException = assertThrows(IllegalStateException.class,
-				() -> stubRunnerExtension.trigger());
+				stubRunnerExtension::trigger);
 		assertThat(emptyTriggerException.getMessage()).contains("Failed to send a message with headers");
 		IllegalStateException wrongLabelException = assertThrows(IllegalStateException.class,
 				() -> stubRunnerExtension.trigger("return_book_1"));

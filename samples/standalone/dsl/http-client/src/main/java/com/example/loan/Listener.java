@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Component("listener")
 class Listener implements Consumer<SensorData> {
 
-	int count = 0;
+	int count;
 
 	public void logSensorData(SensorData data) {
 		System.out.println(data);

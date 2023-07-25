@@ -14,25 +14,10 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.sameConfigsDifferentTests;
+package org.springframework.cloud.contract.wiremock.issues.sameconfigsdifferenttests;
 
-public class Client {
+public enum FraudCheckStatus {
 
-	private String pesel;
-
-	public Client() {
-	}
-
-	public Client(String pesel) {
-		this.pesel = pesel;
-	}
-
-	public String getPesel() {
-		return pesel;
-	}
-
-	public void setPesel(String pesel) {
-		this.pesel = pesel;
-	}
+	OK, FRAUD
 
 }
