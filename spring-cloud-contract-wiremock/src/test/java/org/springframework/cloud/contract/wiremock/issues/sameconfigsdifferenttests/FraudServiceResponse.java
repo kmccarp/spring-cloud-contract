@@ -14,21 +14,31 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.staticInit;
+package org.springframework.cloud.contract.wiremock.issues.sameconfigsdifferenttests;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+public class FraudServiceResponse {
 
-@ConfigurationProperties(prefix = "my-client")
-public class ClientProperties {
+	private FraudCheckStatus fraudCheckStatus;
 
-	private String url;
+	private String rejectionReason;
 
-	public String getUrl() {
-		return url;
+	public FraudServiceResponse() {
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public FraudCheckStatus getFraudCheckStatus() {
+		return fraudCheckStatus;
+	}
+
+	public void setFraudCheckStatus(FraudCheckStatus fraudCheckStatus) {
+		this.fraudCheckStatus = fraudCheckStatus;
+	}
+
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
 	}
 
 }

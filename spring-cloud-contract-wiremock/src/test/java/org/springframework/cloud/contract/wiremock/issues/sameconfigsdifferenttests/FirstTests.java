@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.sameConfigsDifferentTests;
+package org.springframework.cloud.contract.wiremock.issues.sameconfigsdifferenttests;
 
 import java.nio.charset.Charset;
 
@@ -41,12 +41,12 @@ import org.springframework.web.client.RestTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = "service.port=${wiremock.server.port}", classes = SecondTests.Config.class)
+@SpringBootTest(properties = "service.port=${wiremock.server.port}", classes = FirstTests.Config.class)
 @AutoConfigureWireMock(port = 0)
-public class SecondTests {
+public class FirstTests {
 
-	@Value("classpath:example-mappings/shouldMarkClientAsNotFraud.json")
-	private Resource markClientAsNotFraud;
+	@Value("classpath:example-mappings/shouldMarkClientAsFraud.json")
+	private Resource markClientAsFraud;
 
 	@Autowired
 	private WireMockServer server;
@@ -54,9 +54,9 @@ public class SecondTests {
 	@Test
 	public void shouldBeRejectedDueToAbnormalLoanAmount() throws Exception {
 		server.addStubMapping(StubMapping
-				.buildFrom(StreamUtils.copyToString(markClientAsNotFraud.getInputStream(), Charset.forName("UTF-8"))));
+				.buildFrom(StreamUtils.copyToString(markClientAsFraud.getInputStream(), Charset.forName("UTF-8"))));
 		// given:
-		LoanApplication loanApplication = new LoanApplication(new Client("1234567890"), 123.123);
+		LoanApplication loanApplication = new LoanApplication(new Client("1234567890"), 99999);
 
 		// when:
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -66,7 +66,8 @@ public class SecondTests {
 				"http://localhost:" + server.port() + "/fraudcheck", HttpMethod.PUT,
 				new HttpEntity<>(new FraudServiceRequest(loanApplication), httpHeaders), FraudServiceResponse.class);
 		// then:
-		assertThat(response.getBody().getFraudCheckStatus()).isEqualTo(FraudCheckStatus.OK);
+		assertThat(response.getBody().getFraudCheckStatus()).isEqualTo(FraudCheckStatus.FRAUD);
+		assertThat(response.getBody().getRejectionReason()).isEqualTo("Amount too high");
 	}
 
 	@EnableAutoConfiguration

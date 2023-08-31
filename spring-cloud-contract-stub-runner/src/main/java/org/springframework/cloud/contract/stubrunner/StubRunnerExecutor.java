@@ -299,7 +299,7 @@ class StubRunnerExecutor implements StubFinder {
 					.start(configuration);
 		}
 		else {
-			this.stubServer = this.portScanner.tryToExecuteWithFreePort(new PortCallback<StubServer>() {
+			this.stubServer = this.portScanner.tryToExecuteWithFreePort(new PortCallback<>() {
 				@Override
 				public StubServer call(int availablePort) {
 					return new StubServer(stubConfiguration, mappings, contracts, httpServerStub())

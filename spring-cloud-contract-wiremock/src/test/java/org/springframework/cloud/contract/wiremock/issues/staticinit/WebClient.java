@@ -14,10 +14,28 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.contract.wiremock.issues.sameConfigsDifferentTests;
+package org.springframework.cloud.contract.wiremock.issues.staticinit;
 
-public enum FraudCheckStatus {
+import java.net.URI;
 
-	OK, FRAUD
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+@Component
+public class WebClient {
+
+	private final RestTemplate restTemplate;
+
+	private final ClientProperties clientProperties;
+
+	public WebClient(RestTemplate restTemplate, ClientProperties clientProperties) {
+		this.restTemplate = restTemplate;
+		this.clientProperties = clientProperties;
+	}
+
+	public String get() {
+		URI url = URI.create(clientProperties.getUrl());
+		return restTemplate.getForObject(url, String.class);
+	}
 
 }

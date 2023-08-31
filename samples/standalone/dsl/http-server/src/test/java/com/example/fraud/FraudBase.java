@@ -29,12 +29,11 @@ public class FraudBase {
 
 	private StatsProvider stubbedStatsProvider() {
 		return fraudType -> {
-			switch (fraudType) {
-			case DRUNKS:
-				return 100;
-			case ALL:
-				return 200;
-			}
+            if (fraudType == com.example.fraud.FraudType.DRUNKS) {
+                return 100;
+            } else if (fraudType == com.example.fraud.FraudType.ALL) {
+                return 200;
+            }
 			return 0;
 		};
 	}
