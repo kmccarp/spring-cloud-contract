@@ -288,7 +288,7 @@ class ContractsCopyTask extends DefaultTask {
 		return contractsDirectory;
 	}
 
-	private class DownloadedData {
+    private final class DownloadedData {
 
 		final File downloadedContracts;
 
