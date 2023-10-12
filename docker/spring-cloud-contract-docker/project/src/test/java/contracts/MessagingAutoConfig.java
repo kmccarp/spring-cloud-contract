@@ -91,7 +91,7 @@ public class MessagingAutoConfig {
 			}
 
 			private String messagingType() {
-				if (messagingType.equalsIgnoreCase("kafka")) {
+				if ("kafka".equalsIgnoreCase(messagingType)) {
 					return "kafka";
 				}
 				return "rabbitmq";
@@ -101,7 +101,7 @@ public class MessagingAutoConfig {
 				if (contract == null) {
 					return "";
 				}
-				if (messagingType.equalsIgnoreCase("kafka")) {
+				if ("kafka".equalsIgnoreCase(messagingType)) {
 					return setKafkaOpts(contract);
 				}
 				return setRabbitOpts(contract);

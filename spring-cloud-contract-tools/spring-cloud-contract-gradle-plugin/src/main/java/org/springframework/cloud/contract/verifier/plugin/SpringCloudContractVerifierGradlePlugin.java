@@ -321,7 +321,7 @@ public class SpringCloudContractVerifierGradlePlugin implements Plugin<Project> 
 
 	private TaskProvider<GenerateClientStubsFromDslTask> registerGenerateClientStubsTask(
 			ContractVerifierExtension extension, TaskProvider<ContractsCopyTask> copyContracts) {
-		TaskProvider<GenerateClientStubsFromDslTask> task = project.getTasks().register(
+		return project.getTasks().register(
 				GenerateClientStubsFromDslTask.TASK_NAME, GenerateClientStubsFromDslTask.class, generateClientStubs -> {
 					generateClientStubs.setGroup(GROUP_NAME);
 					generateClientStubs.setDescription("Generate client stubs from the contracts");
@@ -338,7 +338,6 @@ public class SpringCloudContractVerifierGradlePlugin implements Plugin<Project> 
 
 					generateClientStubs.dependsOn(copyContracts);
 				});
-		return task;
 	}
 
 	private void registerStubsJarTask(ContractVerifierExtension extension,
@@ -359,7 +358,7 @@ public class SpringCloudContractVerifierGradlePlugin implements Plugin<Project> 
 	}
 
 	private TaskProvider<ContractsCopyTask> registerCopyContractsTask(ContractVerifierExtension extension) {
-		TaskProvider<ContractsCopyTask> task = project.getTasks().register(ContractsCopyTask.TASK_NAME,
+		return project.getTasks().register(ContractsCopyTask.TASK_NAME,
 				ContractsCopyTask.class, contractsCopyTask -> {
 					contractsCopyTask.setGroup(GROUP_NAME);
 					contractsCopyTask.setDescription("Copies contracts to the output folder");
@@ -367,8 +366,7 @@ public class SpringCloudContractVerifierGradlePlugin implements Plugin<Project> 
 					contractsCopyTask.getConvertToYaml().convention(extension.getConvertToYaml());
 					contractsCopyTask.getFailOnNoContracts().convention(extension.getFailOnNoContracts());
 					contractsCopyTask.getContractsDirectory()
-							.convention(extension.getContractsDslDir().flatMap(contractsDslDir -> {
-								return providers.provider(() -> {
+							.convention(extension.getContractsDslDir().flatMap(contractsDslDir -> providers.provider(() -> {
 									if (contractsDslDir.getAsFile().exists()) {
 										return contractsDslDir;
 									}
@@ -384,8 +382,7 @@ public class SpringCloudContractVerifierGradlePlugin implements Plugin<Project> 
 											return null;
 										}
 									}
-								});
-							}));
+								})));
 					contractsCopyTask.getContractDependency().getGroupId()
 							.convention(extension.getContractDependency().getGroupId());
 					contractsCopyTask.getContractDependency().getArtifactId()
@@ -419,7 +416,6 @@ public class SpringCloudContractVerifierGradlePlugin implements Plugin<Project> 
 					contractsCopyTask.getBackupContractsFolder()
 							.convention(extension.getStubsOutputDir().dir(buildRootPath(ContractsCopyTask.BACKUP)));
 				});
-		return task;
 	}
 
 	private Provider<String> buildRootPath(String path) {
